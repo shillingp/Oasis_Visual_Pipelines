@@ -1,0 +1,49 @@
+﻿<Window
+	x:Class="ExampleApplication.MainWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:data="clr-namespace:System.Data;assembly=System.Data"
+	xmlns:local="clr-namespace:ExampleApplication"
+	xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:oasis_controls="clr-namespace:Oasis_Visual_Pipelines.Controls;assembly=Oasis_Visual_Pipelines"
+	xmlns:oasis_operations="clr-namespace:Oasis_Visual_Pipelines.Operations;assembly=Oasis_Visual_Pipelines"
+	Title="MainWindow"
+	Width="1000"
+	Height="700"
+	mc:Ignorable="d">
+	<Window.Resources>
+		<local:CalculateBlockResultConverter x:Key="CalculateBlockResultConverter" />
+	</Window.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="3*" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<oasis_controls:BlockDiagramControl x:Name="MainBlockDiagram" />
+
+		<material:Card
+			Grid.Row="1"
+			Margin="5"
+			Padding="5">
+			<DockPanel>
+				<Button
+					HorizontalAlignment="Left"
+					Click="PreviewRefreshButton_Click"
+					Content="{material:PackIcon Kind=Refresh}"
+					DockPanel.Dock="Left"
+					Style="{StaticResource MaterialDesignToolButton}" />
+
+				<ContentControl x:Name="ResultsPreviewControl" Content="{Binding ElementName=MainBlockDiagram, Path=SelectedBlock, Converter={StaticResource CalculateBlockResultConverter}}">
+					<ContentControl.Resources>
+						<DataTemplate DataType="{x:Type data:DataTable}">
+							<DataGrid ItemsSource="{Binding}" ScrollViewer.CanContentScroll="False" />
+						</DataTemplate>
+					</ContentControl.Resources>
+				</ContentControl>
+			</DockPanel>
+		</material:Card>
+	</Grid>
+</Window>

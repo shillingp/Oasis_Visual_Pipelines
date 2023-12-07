@@ -1,0 +1,44 @@
+﻿<UserControl
+	x:Class="Oasis_Visual_Pipelines.Controls.BlockDiagramControl"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:controls="clr-namespace:Oasis_Visual_Pipelines.Controls"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:interfaces="clr-namespace:Oasis_Visual_Pipelines.Interfaces"
+	xmlns:local="clr-namespace:Oasis_Visual_Pipelines.Controls"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:operations="clr-namespace:Oasis_Visual_Pipelines.Operations"
+	d:DesignHeight="450"
+	d:DesignWidth="800"
+	mc:Ignorable="d">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="../Styles/Theme.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+	<ItemsControl ItemsSource="{Binding Path=BlockDiagramItems, RelativeSource={RelativeSource AncestorType=local:BlockDiagramControl}}">
+		<ItemsControl.ItemsPanel>
+			<ItemsPanelTemplate>
+				<Canvas
+					x:Name="BlockDiagramCanvas"
+					Background="{StaticResource MaterialDesignPaper}"
+					ClipToBounds="True"
+					Loaded="BlockDiagramCanvas_Loaded"
+					MouseLeftButtonDown="BlockDiagramCanvas_MouseLeftButtonDown" />
+			</ItemsPanelTemplate>
+		</ItemsControl.ItemsPanel>
+		<ItemsControl.ItemContainerStyle>
+			<Style TargetType="ContentPresenter">
+				<Setter Property="Canvas.Left" Value="{Binding Position.X}" />
+				<Setter Property="Canvas.Top" Value="{Binding Position.Y}" />
+			</Style>
+		</ItemsControl.ItemContainerStyle>
+		<ItemsControl.ItemTemplate>
+			<DataTemplate DataType="{x:Type interfaces:IBlockDiagramObject}">
+				<ContentControl Content="{Binding CanvasElement}" />
+			</DataTemplate>
+		</ItemsControl.ItemTemplate>
+	</ItemsControl>
+</UserControl>

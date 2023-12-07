@@ -1,0 +1,16 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:controls="clr-namespace:Oasis_Visual_Pipelines.Controls"
+	xmlns:local="clr-namespace:Oasis_Visual_Pipelines.Operations"
+	xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
+	<DataTemplate DataType="{x:Type local:DefaultBlockDiagramOperation}">
+		<Button
+			HorizontalAlignment="Center"
+			VerticalAlignment="Center"
+			Command="{Binding ChooseBlockTypeCommand}"
+			CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=controls:BlockControl}}"
+			Content="Choose Block"
+			Style="{StaticResource MaterialDesignRaisedAccentButton}" />
+	</DataTemplate>
+</ResourceDictionary>
