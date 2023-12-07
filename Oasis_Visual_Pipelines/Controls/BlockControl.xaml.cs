@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Messaging;
 using Oasis_Visual_Pipelines.Classes.Messages;
 using Oasis_Visual_Pipelines.Enums;
 using Oasis_Visual_Pipelines.Functions;
-using Oasis_Visual_Pipelines.Interfaces;
 using Oasis_Visual_Pipelines.Models;
 using System.Globalization;
 using System.Windows;
@@ -132,7 +131,7 @@ namespace Oasis_Visual_Pipelines.Controls
                 return;
             }
 
-            Block.BlockDiagram.BlockDiagramItems.Add((IBlockDiagramObject)drawingLooseConnection);
+            Block.BlockDiagram.BlockDiagramItems.Add(drawingLooseConnection);
         }
 
         private void ConnectorNode_DragDelta(object sender, DragDeltaEventArgs e)
@@ -157,7 +156,7 @@ namespace Oasis_Visual_Pipelines.Controls
 
         private void ConnectorNode_DragCompleted(object sender, DragCompletedEventArgs e)
         {
-            Block.BlockDiagram.BlockDiagramItems.Remove((IBlockDiagramObject)drawingLooseConnection);
+            Block.BlockDiagram.BlockDiagramItems.Remove(drawingLooseConnection);
             drawingLooseConnection = null;
 
             ConnectorNodeControl targetConnectionNode = FindConnectorNodeUnderCursor();

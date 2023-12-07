@@ -136,7 +136,7 @@ namespace Oasis_Visual_Pipelines.Models
             this.RightConnections.Add(newConnection);
             secondBlock.LeftConnections.Add(newConnection);
 
-            BlockDiagram.BlockDiagramItems.Add((IBlockDiagramObject)newConnection);
+            BlockDiagram.BlockDiagramItems.Add(newConnection);
 
             Application.Current.Dispatcher.Invoke(
                 newConnection.LeftBlock.RedrawAnyConnections,
@@ -163,7 +163,7 @@ namespace Oasis_Visual_Pipelines.Models
             connectionToRemove.LeftBlock.RightConnections.Remove(connectionToRemove);
             connectionToRemove.RightBlock.LeftConnections.Remove(connectionToRemove);
 
-            BlockDiagram.BlockDiagramItems.Remove((IBlockDiagramObject)connectionToRemove);
+            BlockDiagram.BlockDiagramItems.Remove(connectionToRemove);
 
             Application.Current.Dispatcher.Invoke(
                 connectionToRemove.LeftBlock.RedrawAnyConnections,

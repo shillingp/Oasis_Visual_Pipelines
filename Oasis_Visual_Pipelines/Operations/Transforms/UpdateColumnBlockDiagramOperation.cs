@@ -6,7 +6,6 @@ using Oasis_Visual_Pipelines.Globals;
 using Oasis_Visual_Pipelines.Interfaces;
 using PropertyChanged;
 using System.Data;
-using System.Windows.Documents;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
@@ -26,11 +25,11 @@ namespace Oasis_Visual_Pipelines.Operations
         {
             BlockOperationResult? dataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
             BlockOperationResult? updateFunctionInput = inputOperations.FirstOrDefault(operation => operation.Result() is not DataTable);
-            if (dataTableInput?.Result() is not DataTable dataTable) 
+            if (dataTableInput?.Result() is not DataTable dataTable)
                 return Statics.NullOperation;
 
             ValidColumns = HelperFunctions.ExtractColumnNamesFromTable(dataTable);
-            
+
             return new BlockOperationResult(additionalOperations =>
             {
                 if (updateFunctionInput is null || ColumnName is null)
