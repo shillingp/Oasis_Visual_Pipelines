@@ -13,9 +13,43 @@
 			<material:Card Margin="5" VerticalAlignment="Center">
 				<TextBox
 					Margin="5"
-					Padding="2"
 					VerticalAlignment="Center"
 					Text="{Binding ColumnName, UpdateSourceTrigger=PropertyChanged}" />
+			</material:Card>
+		</DockPanel>
+	</DataTemplate>
+
+	<DataTemplate DataType="{x:Type local:ReplaceStringBlockDiagramOperation}">
+		<DockPanel>
+			<TextBlock
+				DockPanel.Dock="Top"
+				Text="{Binding OperationTitle}"
+				TextWrapping="Wrap" />
+
+			<material:Card>
+				<StackPanel Margin="5">
+					<TextBox
+						material:HintAssist.Hint="Search"
+						material:HintAssist.IsFloating="True"
+						Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+					<TextBox
+						material:HintAssist.Hint="Replace"
+						material:HintAssist.IsFloating="True"
+						Text="{Binding ReplaceText, UpdateSourceTrigger=PropertyChanged}" />
+				</StackPanel>
+			</material:Card>
+		</DockPanel>
+	</DataTemplate>
+
+	<DataTemplate DataType="{x:Type local:SplitStringBlockDiagramOperation}">
+		<DockPanel>
+			<TextBlock
+				DockPanel.Dock="Top"
+				Text="{Binding OperationTitle}"
+				TextWrapping="Wrap" />
+
+			<material:Card>
+				<TextBox Margin="5" Text="{Binding SplitString, UpdateSourceTrigger=PropertyChanged}" />
 			</material:Card>
 		</DockPanel>
 	</DataTemplate>
@@ -66,7 +100,6 @@
 			<material:Card>
 				<ComboBox
 					Margin="5"
-					Padding="2"
 					VerticalAlignment="Center"
 					ItemsSource="{Binding ValidColumns}"
 					SelectedItem="{Binding ColumnName}" />

@@ -6,9 +6,15 @@
     {
         public ParamsFunc Result;
 
+        public BlockOperationResult(object data)
+            : this(new BlockOperationResult(additionalInputs => data)) { }
+
         public BlockOperationResult(ParamsFunc executionFunction)
         {
             Result = executionFunction;
         }
+
+        public static BlockOperationResult NullOperation = 
+            new BlockOperationResult((additionalOperations) => null);
     }
 }

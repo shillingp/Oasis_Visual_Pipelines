@@ -15,8 +15,14 @@ namespace Oasis_Visual_Pipelines.Operations
 
         public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
-            return new BlockOperationResult(additionalOperations =>
-                inputOperations[0].Result() is string text ? text.Trim() : "");
+            return new BlockOperationResult(additionalOperations => {
+                BlockOperationResult? firstOperationResult = inputOperations
+                    .Concat(additionalOperations)
+                    .FirstOrDefault();
+
+                return firstOperationResult?.Result() is string text
+                    ? text.Trim() : "";
+            });
         }
     }
 }

@@ -2,6 +2,7 @@
 using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Enums;
 using Oasis_Visual_Pipelines.Interfaces;
+using System.Data;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
@@ -16,25 +17,28 @@ namespace Oasis_Visual_Pipelines.Operations
 
         public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
+            BlockOperationResult? dataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
+            BlockOperationResult? insertValueInput = inputOperations.FirstOrDefault(operation => operation != dataTableInput);
+
+            if (dataTableInput?.Result() is not DataTable dataTable)
+                return BlockOperationResult.NullOperation;
+
             return new BlockOperationResult(additionalOperations =>
             {
-                //if (inputOperations.Length < 1
-                //    || inputOperations[0].Result() is not DataTable inputTable)
-                //    return null;
+                DataTable inputTable = dataTable.Copy();
 
-                //inputTable = inputTable.Copy();
+                if (ColumnName is null)
+                    return inputTable;
 
-                //if (inputOperations.Length == 1)
-                //    inputTable.Columns.Add(ColumnName);
+                DataColumn insertedColumn = inputTable.Columns.Add(ColumnName);
 
-                //if (inputOperations.Length == 2)
-                //    inputTable.Columns
-                //        .Add(ColumnName, inputOperations[1].GetType())
-                //        .DefaultValue = inputOperations[1];
+                if (insertValueInput is null)
+                    return inputTable;
 
-                //return inputTable;
+                foreach (DataRow tableRow in inputTable.Rows)
+                    tableRow[insertedColumn] = insertValueInput.Result();
 
-                return null;
+                return inputTable;
             });
         }
     }

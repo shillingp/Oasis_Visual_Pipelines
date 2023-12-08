@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Text.RegularExpressions;
 
 namespace Oasis_Visual_Pipelines.Functions
 {
@@ -14,12 +15,28 @@ namespace Oasis_Visual_Pipelines.Functions
             return ConvertNumberToLetters(div) + ConvertNumberToLetters(mod);
         }
 
-        public static string[] ExtractColumnNamesFromTable(DataTable dataTable)
+        internal static string[] ExtractColumnNamesFromTable(DataTable dataTable)
         {
             return dataTable.Columns
                 .Cast<DataColumn>()
                 .Select(column => column.ColumnName)
                 .ToArray();
+        }
+
+        internal static bool IsValidRegex(string pattern)
+        {
+            if (string.IsNullOrWhiteSpace(pattern)) return false;
+
+            try
+            {
+                Regex.Match("", pattern);
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

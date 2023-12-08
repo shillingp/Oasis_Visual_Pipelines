@@ -2,7 +2,6 @@
 using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Enums;
 using Oasis_Visual_Pipelines.Functions;
-using Oasis_Visual_Pipelines.Globals;
 using Oasis_Visual_Pipelines.Interfaces;
 using PropertyChanged;
 using System.Data;
@@ -24,9 +23,10 @@ namespace Oasis_Visual_Pipelines.Operations
         public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             BlockOperationResult? dataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
-            BlockOperationResult? updateFunctionInput = inputOperations.FirstOrDefault(operation => operation.Result() is not DataTable);
+            BlockOperationResult? updateFunctionInput = inputOperations.FirstOrDefault(operation => operation != dataTableInput);
+
             if (dataTableInput?.Result() is not DataTable dataTable)
-                return Statics.NullOperation;
+                return BlockOperationResult.NullOperation;
 
             ValidColumns = HelperFunctions.ExtractColumnNamesFromTable(dataTable);
 
@@ -38,10 +38,8 @@ namespace Oasis_Visual_Pipelines.Operations
                 DataTable inputTable = dataTable.Copy();
 
                 foreach (DataRow tableRow in inputTable.Rows)
-                {
-                    tableRow[ColumnName] = updateFunctionInput.Result(new BlockOperationResult(
-                        data => tableRow[ColumnName]));
-                }
+                    tableRow[ColumnName] = updateFunctionInput.Result(
+                        new BlockOperationResult(tableRow[ColumnName]);
 
                 return inputTable;
             });
