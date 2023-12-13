@@ -22,6 +22,7 @@ namespace Oasis_Visual_Pipelines.Operations
     public class DefaultBlockDiagramOperation : IBlockDiagramOperation
     {
         public int MaxInputs => 0;
+        public int MaxOutputs => 0;
         public string OperationTitle => "Select Block";
 
         public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)

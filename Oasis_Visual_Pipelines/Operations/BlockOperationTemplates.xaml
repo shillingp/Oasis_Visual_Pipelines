@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="Aggregations/BlockDiagramTemplates.xaml" />
-		<ResourceDictionary Source="Joins/BlockDiagramTemplates.xaml" />
-		<ResourceDictionary Source="Others/BlockDiagramTemplates.xaml" />
-		<ResourceDictionary Source="Sources/BlockDiagramTemplates.xaml" />
-		<ResourceDictionary Source="Transforms/BlockDiagramTemplates.xaml" />
+		<ResourceDictionary Source="Aggregations/AggregationOperationsTemplates.xaml" />
+		<ResourceDictionary Source="Joins/JoinOperationsTemplates.xaml" />
+		<ResourceDictionary Source="Others/OtherOperationsTemplates.xaml" />
+		<ResourceDictionary Source="Sources/SourceOperationsTemplates.xaml" />
+		<ResourceDictionary Source="Transforms/TransformOperationsTemplates.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

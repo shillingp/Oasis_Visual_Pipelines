@@ -11,10 +11,22 @@
 
         public BlockOperationResult(ParamsFunc executionFunction)
         {
-            Result = executionFunction;
+            Result = (params BlockOperationResult[] operationArguments) =>
+            {
+                try
+                {
+                    return executionFunction(operationArguments);
+                }
+                catch (Exception exception)
+                {
+                    return new FailedOperation(exception);
+                }
+            };
         }
 
         public static BlockOperationResult NullOperation = 
             new BlockOperationResult((additionalOperations) => null);
     }
+
+    public record struct FailedOperation(Exception error);
 }

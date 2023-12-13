@@ -39,47 +39,10 @@ namespace Oasis_Visual_Pipelines.Operations
 
                 foreach (DataRow tableRow in inputTable.Rows)
                     tableRow[ColumnName] = updateFunctionInput.Result(
-                        new BlockOperationResult(tableRow[ColumnName]);
+                        new BlockOperationResult(tableRow[ColumnName]));
 
                 return inputTable;
             });
         }
-
-        //public object Operation(object[] operationInputs, IBlockDiagramOperation[] inputOperations, Block block)
-        //{
-        //	DataTable dataTable = GetObjectsOfType<DataTable>(operationInputs)
-        //		.FirstOrDefault();
-        //	IBlockDiagramOperation blockOperation = GetObjectsOfType<IBlockDiagramOperation>(operationInputs)
-        //		.FirstOrDefault();
-
-        //	if (dataTable is not DataTable inputTable)
-        //		return null;
-
-        //	ValidColumns = inputTable.Columns
-        //		.Cast<DataColumn>()
-        //		.Select(column => column.ColumnName)
-        //		.ToArray();
-
-        //	inputTable = inputTable.Copy();
-
-        //	if (operationInputs.Length == 1 || ColumnName.IsNullOrEmpty())
-        //		return inputTable;
-
-        //	foreach (DataRow tableRow in inputTable.Rows)
-        //	{
-        //		block.GetLeftInputs();
-
-        //		//tableRow[ColumnName] = blockOperation.Operation(
-        //		//	block.Ope)
-        //		//tableRow[ColumnName] = blockOperation.Operation([tableRow[ColumnName]], [null], block);
-        //	}
-
-        //	return inputTable;
-        //}
-
-        //public T[] GetObjectsOfType<T>(object[] inputs)
-        //{
-        //	return inputs.OfType<T>().ToArray();
-        //}
     }
 }

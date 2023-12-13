@@ -195,7 +195,7 @@
 			<ItemsControl.ItemsSource>
 				<MultiBinding Converter="{StaticResource AddItemToEndConverter}" ConverterParameter="Left">
 					<Binding Path="RightConnections" />
-					<Binding Path="{x:Null}" />
+					<Binding Path="Data.MaxOutputs" TargetNullValue="{x:Null}" />
 					<Binding Path="RightConnections.Count" />
 				</MultiBinding>
 			</ItemsControl.ItemsSource>

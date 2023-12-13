@@ -1,6 +1,7 @@
 ﻿using Oasis_Visual_Pipelines.Controls;
 using Oasis_Visual_Pipelines.Functions;
 using Oasis_Visual_Pipelines.Interfaces;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -45,8 +46,7 @@ namespace Oasis_Visual_Pipelines.Models
 
         public void UpdateCanvasElementVector()
         {
-            int connectorNodeOffset = 10;
-            int bezierExtentFromBlock = 50;
+            
 
             ConnectorNodeControl leftNode = LeftBlock.GetConnectionNode(this);
             ConnectorNodeControl rightNode = RightBlock.GetConnectionNode(this);
@@ -56,8 +56,11 @@ namespace Oasis_Visual_Pipelines.Models
             Point start = UIHelperFunctions.GetFrameworkElementCenter(leftNode);
             Point finish = UIHelperFunctions.GetFrameworkElementCenter(rightNode);
 
-            start.X += connectorNodeOffset / 2;
-            finish.X -= connectorNodeOffset / 2;
+            start.X += ConnectorNodeControl.ConnectorNodeSize / 2;
+            finish.X -= ConnectorNodeControl.ConnectorNodeSize / 2;
+
+            double horizontalOffset = Math.Abs((finish - start).X);
+            int bezierExtentFromBlock = (int)horizontalOffset / 2;
 
             Point[] points = [
                 start,

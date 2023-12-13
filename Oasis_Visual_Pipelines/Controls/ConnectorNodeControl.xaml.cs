@@ -11,6 +11,8 @@ namespace Oasis_Visual_Pipelines.Controls
     /// </summary>
     public partial class ConnectorNodeControl : UserControl
     {
+        public static int ConnectorNodeSize = 10;
+
         public ConnectorNodeControl()
         {
             InitializeComponent();

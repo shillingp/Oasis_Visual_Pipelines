@@ -19,6 +19,38 @@
 		</DockPanel>
 	</DataTemplate>
 
+	<DataTemplate DataType="{x:Type local:MapArrayBlockDiagramOperation}">
+		<DockPanel>
+			<TextBlock
+				DockPanel.Dock="Top"
+				Text="{Binding OperationTitle}"
+				TextWrapping="Wrap" />
+
+			<UniformGrid VerticalAlignment="Center" Columns="5">
+				<material:PackIcon
+					Grid.Column="0"
+					HorizontalAlignment="Center"
+					Kind="ApplicationArrayOutline" />
+				<material:PackIcon
+					Grid.Column="1"
+					HorizontalAlignment="Center"
+					Kind="ArrowRight" />
+				<material:PackIcon
+					Grid.Column="2"
+					HorizontalAlignment="Center"
+					Kind="SourceMerge" />
+				<material:PackIcon
+					Grid.Column="3"
+					HorizontalAlignment="Center"
+					Kind="ArrowRight" />
+				<material:PackIcon
+					Grid.Column="4"
+					HorizontalAlignment="Center"
+					Kind="ApplicationArrayOutline" />
+			</UniformGrid>
+		</DockPanel>
+	</DataTemplate>
+
 	<DataTemplate DataType="{x:Type local:ReplaceStringBlockDiagramOperation}">
 		<DockPanel>
 			<TextBlock
@@ -29,12 +61,12 @@
 			<material:Card>
 				<StackPanel Margin="5">
 					<TextBox
-						material:HintAssist.Hint="Search"
-						material:HintAssist.IsFloating="True"
+						material:HintAssist.Hint="Search:"
+						material:TextFieldAssist.PrefixText="Replace:"
 						Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
 					<TextBox
-						material:HintAssist.Hint="Replace"
-						material:HintAssist.IsFloating="True"
+						material:HintAssist.Hint="With:"
+						material:TextFieldAssist.PrefixText="With:"
 						Text="{Binding ReplaceText, UpdateSourceTrigger=PropertyChanged}" />
 				</StackPanel>
 			</material:Card>
@@ -61,15 +93,11 @@
 				Text="{Binding OperationTitle}"
 				TextWrapping="Wrap" />
 
-			<Grid VerticalAlignment="Center">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto" />
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="Auto" />
-				</Grid.ColumnDefinitions>
-				<TextBlock Grid.Column="0" Text="Input" />
+			<UniformGrid VerticalAlignment="Center" Columns="5">
+				<material:PackIcon
+					Grid.Column="2"
+					HorizontalAlignment="Center"
+					Kind="FormatQuoteClose" />
 				<material:PackIcon
 					Grid.Column="1"
 					HorizontalAlignment="Center"
@@ -82,11 +110,11 @@
 					Grid.Column="3"
 					HorizontalAlignment="Center"
 					Kind="ArrowRight" />
-				<TextBlock
-					Grid.Column="4"
+				<material:PackIcon
+					Grid.Column="2"
 					HorizontalAlignment="Center"
-					Text="Output" />
-			</Grid>
+					Kind="FormatQuoteClose" />
+			</UniformGrid>
 		</DockPanel>
 	</DataTemplate>
 
