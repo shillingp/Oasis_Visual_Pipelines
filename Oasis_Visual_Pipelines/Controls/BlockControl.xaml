@@ -25,6 +25,14 @@
 			<local:AddItemToEndConverter x:Key="AddItemToEndConverter" />
 			<local:HeightExpanderButtonVisibilityConverter x:Key="HeightExpanderButtonVisibilityConverter" />
 
+			<Style TargetType="Control">
+				<Setter Property="SnapsToDevicePixels" Value="True" />
+				<Setter Property="UseLayoutRounding" Value="True" />
+				<Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
+				<Setter Property="SnapsToDevicePixels" Value="True" />
+				<Setter Property="RenderOptions.ClearTypeHint" Value="Enabled" />
+			</Style>
+
 			<Style x:Key="NonEditableTextBox" TargetType="TextBox">
 				<Setter Property="Template">
 					<Setter.Value>
@@ -51,7 +59,8 @@
 			x:Name="TopLevelCard"
 			Grid.ColumnSpan="3"
 			Margin="15,0"
-			PreviewMouseDown="TopLevelCard_PreviewMouseDown">
+			PreviewMouseDown="TopLevelCard_PreviewMouseDown"
+			SnapsToDevicePixels="True">
 			<material:Card.Style>
 				<Style TargetType="material:Card">
 					<Style.Triggers>
