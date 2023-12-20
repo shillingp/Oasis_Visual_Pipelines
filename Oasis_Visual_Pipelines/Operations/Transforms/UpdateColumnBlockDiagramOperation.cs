@@ -5,6 +5,7 @@ using Oasis_Visual_Pipelines.Functions;
 using Oasis_Visual_Pipelines.Interfaces;
 using PropertyChanged;
 using System.Data;
+using System.Diagnostics;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
@@ -32,8 +33,11 @@ namespace Oasis_Visual_Pipelines.Operations
 
             return new BlockOperationResult(additionalOperations =>
             {
-                if (updateFunctionInput is null || ColumnName is null)
+                if (updateFunctionInput is null || ColumnName is null || !dataTable.Columns.Contains(ColumnName))
                     return dataTable;
+
+                if (dataTable.Rows[0][ColumnName] is Array)
+                    Debugger.Break();
 
                 DataTable inputTable = dataTable.Copy();
 

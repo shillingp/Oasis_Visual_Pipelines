@@ -47,7 +47,7 @@ namespace Oasis_Visual_Pipelines.Controls
                 typeof(BlockDiagramControl),
                 new PropertyMetadata(typeof(DefaultBlockDiagramOperation)));
 
-        public Block SelectedBlock
+        public Block? SelectedBlock
         {
             get { return (Block)GetValue(SelectedBlockProperty); }
             set { SetValue(SelectedBlockProperty, value); }
@@ -67,7 +67,7 @@ namespace Oasis_Visual_Pipelines.Controls
             InitializeComponent();
         }
 
-        public event RoutedEventHandler CanvasLoaded;
+        public event RoutedEventHandler? CanvasLoaded;
         private void BlockDiagramCanvas_Loaded(object sender, RoutedEventArgs e)
         {
             CanvasLoaded?.Invoke(sender, e);
@@ -85,19 +85,21 @@ namespace Oasis_Visual_Pipelines.Controls
 
             Type contextType = typeof(Block<>).MakeGenericType(BlockDataType);
             BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
-            object newBlockToAdd = Activator.CreateInstance(
+            object? newBlockToAdd = Activator.CreateInstance(
                 type: contextType,
                 bindingAttr: flags,
                 binder: null,
                 args: [pointRelativeToCanvas, this],
                 culture: CultureInfo.CurrentCulture);
 
-            ((Block)newBlockToAdd).Title = "New Block";
+            if (newBlockToAdd is not Block blockToAdd) return;
+
+            blockToAdd.Title = "New Block";
 
             BlockDiagramItems.Add((IBlockDiagramObject)newBlockToAdd);
         }
 
-        public Block<T> AddBlock<T>(Point position, string title = null, T data = null)
+        public Block<T> AddBlock<T>(Point position, string? title = null, T? data = null)
             where T : class, new()
         {
             Block<T> newBlockToAdd = new Block<T>(position, this)

@@ -22,23 +22,4 @@ namespace ExampleApplication
             ResultsPreviewControl.GetBindingExpression(ContentProperty)?.UpdateTarget();
         }
     }
-
-    public class CalculateBlockResultConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is Block block && block.GetType().IsGenericType
-                && block.GetType().GetGenericArguments()[0].GetInterface(nameof(IBlockDiagramOperation)) is Type)
-            {
-                return ((dynamic)block).CalculateFlowPathResult().Result();
-            }
-
-            return null;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
 }

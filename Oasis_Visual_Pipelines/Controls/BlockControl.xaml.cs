@@ -4,11 +4,9 @@ using Oasis_Visual_Pipelines.Classes.Messages;
 using Oasis_Visual_Pipelines.Enums;
 using Oasis_Visual_Pipelines.Functions;
 using Oasis_Visual_Pipelines.Models;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -213,44 +211,5 @@ namespace Oasis_Visual_Pipelines.Controls
             IsSelected = message.NewSelection == this;
         }
         #endregion
-    }
-
-    public class AddItemToEndConverter : IMultiValueConverter
-    {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (values[0] is not ICollection<Connection> connections)
-                return Enumerable.Empty<Connection>();
-
-            if (values[1] is int maximumNodes && connections.Count >= maximumNodes)
-                return connections;
-
-            return connections.Append(null);
-        }
-
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class HeightExpanderButtonVisibilityConverter : IMultiValueConverter
-    {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (values.Length < 2) return Visibility.Collapsed;
-
-            double.TryParse(values[0]?.ToString(), out double actualHeight);
-            double.TryParse(values[1]?.ToString(), out double maxHeight);
-
-            if (maxHeight is double.PositiveInfinity) return Visibility.Visible;
-
-            return actualHeight >= maxHeight ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
