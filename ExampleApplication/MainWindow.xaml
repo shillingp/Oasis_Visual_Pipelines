@@ -3,6 +3,7 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:collections="clr-namespace:System.Collections;assembly=mscorlib"
+	xmlns:converters="clr-namespace:Oasis_Visual_Pipelines.Converters;assembly=Oasis_Visual_Pipelines"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:data="clr-namespace:System.Data;assembly=System.Data"
 	xmlns:local="clr-namespace:ExampleApplication"
@@ -15,7 +16,7 @@
 	Height="700"
 	mc:Ignorable="d">
 	<Window.Resources>
-		<local:CalculateBlockResultConverter x:Key="CalculateBlockResultConverter" />
+		<converters:CalculateBlockResultConverter x:Key="CalculateBlockResultConverter" />
 	</Window.Resources>
 	<Grid>
 		<Grid.RowDefinitions>
@@ -40,7 +41,11 @@
 				<ContentControl x:Name="ResultsPreviewControl" Content="{Binding ElementName=MainBlockDiagram, Path=SelectedBlock, Converter={StaticResource CalculateBlockResultConverter}}">
 					<ContentControl.Resources>
 						<DataTemplate DataType="{x:Type data:DataTable}">
-							<DataGrid ItemsSource="{Binding}" ScrollViewer.CanContentScroll="False" />
+							<DataGrid
+								CanUserSortColumns="False"
+								IsReadOnly="True"
+								ItemsSource="{Binding}"
+								ScrollViewer.CanContentScroll="False" />
 						</DataTemplate>
 						<DataTemplate DataType="{x:Type sys:Array}">
 							<ItemsControl ItemsSource="{Binding}" />

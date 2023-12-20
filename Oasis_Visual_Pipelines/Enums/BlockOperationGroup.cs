@@ -6,7 +6,8 @@
         Aggregation = 3,
         Join = 4,
         Other = 0,
+        Select = 5,
         Sources = 1,
-        Transforms = 2
+        Transforms = 2,
     }
 }

@@ -1,11 +1,6 @@
 ﻿using Oasis_Visual_Pipelines.Interfaces;
 using Oasis_Visual_Pipelines.Models;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace Oasis_Visual_Pipelines.Converters

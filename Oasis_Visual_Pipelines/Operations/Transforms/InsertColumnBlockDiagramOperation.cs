@@ -30,13 +30,16 @@ namespace Oasis_Visual_Pipelines.Operations
                 if (ColumnName is null)
                     return inputTable;
 
-                DataColumn insertedColumn = inputTable.Columns.Add(ColumnName);
 
                 if (insertValueInput is null)
                     return inputTable;
 
+                dynamic insertData = insertValueInput.Result();
+                Type insertDataType = insertData.GetType();
+                DataColumn insertedColumn = inputTable.Columns.Add(ColumnName, insertDataType);
+
                 foreach (DataRow tableRow in inputTable.Rows)
-                    tableRow[insertedColumn] = insertValueInput.Result();
+                    tableRow[insertedColumn] = insertData;
 
                 return inputTable;
             });

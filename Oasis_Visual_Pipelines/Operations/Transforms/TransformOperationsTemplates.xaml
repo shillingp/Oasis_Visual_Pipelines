@@ -61,7 +61,7 @@
 			<material:Card>
 				<StackPanel Margin="5">
 					<TextBox
-						material:HintAssist.Hint="Search:"
+						material:HintAssist.Hint="Replace:"
 						material:TextFieldAssist.PrefixText="Replace:"
 						Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
 					<TextBox
