@@ -13,7 +13,10 @@
 				TextWrapping="Wrap" />
 
 			<material:Card>
-				<controls:MultiSelectControl />
+				<controls:MultiSelectControl
+					MaxHeight="100"
+					ItemsSource="{Binding ValidColumns, Mode=TwoWay}"
+					SelectedItems="{Binding SelectedColumns, Mode=TwoWay}" />
 			</material:Card>
 		</DockPanel>
 	</DataTemplate>

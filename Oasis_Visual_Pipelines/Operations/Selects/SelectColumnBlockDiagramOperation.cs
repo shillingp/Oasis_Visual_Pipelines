@@ -15,14 +15,13 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGroup.Select)]
-
     public class SelectColumnBlockDiagramOperation : IBlockDiagramOperation
     {
         public int MaxInputs => 1;
         public string OperationTitle => "Select Column";
 
         public string[] ValidColumns { get; set; }
-        public string ColumnName { get; set; } = null;
+        public HashSet<object> SelectedColumns { get; set; } = new HashSet<object>();
 
         public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
@@ -33,11 +32,11 @@ namespace Oasis_Visual_Pipelines.Operations
 
             ValidColumns = HelperFunctions.ExtractColumnNamesFromTable(dataTable);
 
-            if (ColumnName is null)
+            if (SelectedColumns is null || !SelectedColumns.Any())
                 return BlockOperationResult.NullOperation;
 
             return new BlockOperationResult(additionalOperations =>
-                new DataView(dataTable).ToTable(false, ColumnName));
+                new DataView(dataTable).ToTable(false, SelectedColumns.Cast<string>().ToArray()));
         }
     }
 }

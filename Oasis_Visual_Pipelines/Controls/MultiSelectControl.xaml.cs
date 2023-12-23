@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,29 +30,41 @@ namespace Oasis_Visual_Pipelines.Controls
 
         public static readonly DependencyProperty ItemsSourceProperty =
             DependencyProperty.Register(
-                "ItemsSource", 
-                typeof(IEnumerable), 
-                typeof(MultiSelectControl), 
+                "ItemsSource",
+                typeof(IEnumerable),
+                typeof(MultiSelectControl),
                 new PropertyMetadata(Enumerable.Empty<object>()));
 
-        public IList SelectedItems
+
+        public HashSet<object> SelectedItems
         {
-            get { return (IList)GetValue(SelectedItemsProperty); }
+            get { return (HashSet<object>)GetValue(SelectedItemsProperty); }
             set { SetValue(SelectedItemsProperty, value); }
         }
 
         public static readonly DependencyProperty SelectedItemsProperty =
             DependencyProperty.Register(
-                "SelectedItems", 
-                typeof(IList), 
-                typeof(MultiSelectControl), 
+                "SelectedItems",
+                typeof(HashSet<object>),
+                typeof(MultiSelectControl),
                 new PropertyMetadata(new HashSet<object>()));
+
 
         public MultiSelectControl()
         {
             InitializeComponent();
         }
 
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            object item = ((CheckBox)sender).DataContext;
+            SelectedItems.Add(item);
+        }
 
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            object item = ((CheckBox)sender).DataContext;
+            SelectedItems.Remove(item);
+        }
     }
 }
