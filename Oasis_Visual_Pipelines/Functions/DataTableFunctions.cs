@@ -25,33 +25,26 @@ namespace Oasis_Visual_Pipelines.Functions
         {
             DataTable resultTable = new DataTable();
 
-            var joinTable = leftTable.AsEnumerable()
-                .Join(
-                    rightTable.AsEnumerable(),
+            IEnumerable<(DataRow Left, DataRow Right)> joinTable = leftTable.AsEnumerable()
+                .Join(rightTable.AsEnumerable(),
                     leftRow => leftRow[leftJoinColumn],
                     rightRow => rightRow[rightJoinColumn],
-                    (left, right) => new { left, right });
-            //var joinTable = from t1 in dataTable1.AsEnumerable()
-            //                join t2 in dataTable2.AsEnumerable()
-            //                    on t1[joinField] equals t2[joinField]
-            //                select new { t1, t2 };
+                    (left, right) => (Left: left, Right: right));
 
             foreach (DataColumn column in leftTable.Columns)
                 resultTable.Columns.Add(column.ColumnName, column.DataType);
 
-            //resultTable.Columns.Remove(leftJoinColumn);
-
             foreach (DataColumn column in rightTable.Columns)
-                resultTable.Columns.Add(column.ColumnName, column.DataType);
-
-            resultTable.Columns.Remove(rightJoinColumn);
+                resultTable.Columns.Add("new-" + column.ColumnName, column.DataType);
 
             foreach (var row in joinTable)
             {
                 DataRow newRow = resultTable.NewRow();
-                newRow.ItemArray = row.left.ItemArray.Union(row.right.ItemArray).ToArray();
+                newRow.ItemArray = row.Left.ItemArray.Concat(row.Right.ItemArray).ToArray();
                 resultTable.Rows.Add(newRow);
             }
+
+            resultTable.Columns.Remove("new-" + rightJoinColumn);
 
             return resultTable;
         }

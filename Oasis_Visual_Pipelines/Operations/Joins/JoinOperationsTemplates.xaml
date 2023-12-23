@@ -13,10 +13,12 @@
 			<material:Card>
 				<UniformGrid Margin="5" Rows="2">
 					<ComboBox
+						MinHeight="24"
 						material:HintAssist.Hint="Left Join Column"
 						ItemsSource="{Binding LeftColumns}"
 						SelectedItem="{Binding SelectedLeftColumn}" />
 					<ComboBox
+						MinHeight="24"
 						material:HintAssist.Hint="Right Join Column"
 						ItemsSource="{Binding RightColumns}"
 						SelectedItem="{Binding SelectedRightColumn}" />

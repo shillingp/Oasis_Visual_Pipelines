@@ -31,7 +31,8 @@ namespace Oasis_Visual_Pipelines.Operations
             BlockOperationResult? leftDataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
             BlockOperationResult? rightDataTableInput = inputOperations.FirstOrDefault(operation => operation != leftDataTableInput);
 
-            if (leftDataTableInput?.Result() is not DataTable leftDataTable)
+            if (leftDataTableInput?.Result() is not DataTable leftDataTable
+                || SelectedLeftColumn is null || SelectedRightColumn is null)
                 return BlockOperationResult.NullOperation;
 
             LeftColumns = DataTableFunctions.ExtractColumnNamesFromTable(leftDataTable);
