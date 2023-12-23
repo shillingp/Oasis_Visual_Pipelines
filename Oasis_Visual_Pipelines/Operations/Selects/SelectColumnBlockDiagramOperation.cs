@@ -30,13 +30,17 @@ namespace Oasis_Visual_Pipelines.Operations
             if (dataTableInput?.Result() is not DataTable dataTable)
                 return BlockOperationResult.NullOperation;
 
-            ValidColumns = HelperFunctions.ExtractColumnNamesFromTable(dataTable);
+            ValidColumns = DataTableFunctions.ExtractColumnNamesFromTable(dataTable);
 
             if (SelectedColumns is null || !SelectedColumns.Any())
                 return BlockOperationResult.NullOperation;
 
+            string[] selectedColumnsRetainingOrder = ValidColumns
+                .Intersect(SelectedColumns.Cast<string>())
+                .ToArray();
+
             return new BlockOperationResult(additionalOperations =>
-                new DataView(dataTable).ToTable(false, SelectedColumns.Cast<string>().ToArray()));
+                new DataView(dataTable).ToTable(false, selectedColumnsRetainingOrder));
         }
     }
 }

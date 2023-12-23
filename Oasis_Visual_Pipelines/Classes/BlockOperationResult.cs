@@ -28,5 +28,18 @@
             new BlockOperationResult((additionalOperations) => null);
     }
 
-    public record struct FailedOperation(Exception error);
+    public record struct FailedOperation
+    {
+        public Exception Error;
+
+        public FailedOperation(Exception error)
+        {
+            Error = error;
+        }
+
+        public FailedOperation(string errorMessage)
+        {
+            Error = new Exception(errorMessage);
+        }
+    }
 }

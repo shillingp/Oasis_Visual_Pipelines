@@ -30,7 +30,7 @@ namespace Oasis_Visual_Pipelines.Operations
             if (dataTableInput?.Result() is not DataTable dataTable)
                 return BlockOperationResult.NullOperation;
 
-            ValidColumns = HelperFunctions.ExtractColumnNamesFromTable(dataTable);
+            ValidColumns = DataTableFunctions.ExtractColumnNamesFromTable(dataTable);
 
             return new BlockOperationResult(additionalOperations =>
             {

@@ -2,12 +2,14 @@
 using Oasis_Visual_Pipelines.Attributes;
 using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Controls;
+using Oasis_Visual_Pipelines.Converters;
 using Oasis_Visual_Pipelines.Dialogs;
 using Oasis_Visual_Pipelines.Enums;
 using Oasis_Visual_Pipelines.Functions;
 using Oasis_Visual_Pipelines.Interfaces;
 using Oasis_Visual_Pipelines.Models;
 using PropertyChanged;
+using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using System.Reflection;
@@ -58,7 +60,7 @@ namespace Oasis_Visual_Pipelines.Operations
             control.Block.BlockDiagram.BlockDiagramItems.Remove(control.Block);
         });
 
-        private static List<object> GenerateBlockControlInstancesForClassesDerivedFromType(Type blockOperationInterface)
+        private static List<object?> GenerateBlockControlInstancesForClassesDerivedFromType(Type blockOperationInterface)
         {
             return AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(assembly => assembly.GetTypes())
@@ -70,7 +72,7 @@ namespace Oasis_Visual_Pipelines.Operations
                     Type genericBlockType = typeof(Block<>).MakeGenericType(operationType);
                     object operationTypeInstance = Activator.CreateInstance(operationType);
                     BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
-                    object genericBlockInstance = Activator.CreateInstance(
+                    object? genericBlockInstance = Activator.CreateInstance(
                         type: genericBlockType,
                         bindingAttr: flags,
                         binder: null,
@@ -84,42 +86,6 @@ namespace Oasis_Visual_Pipelines.Operations
                 .Select(genericBlockOperationInstance =>
                     Activator.CreateInstance(typeof(BlockControl), genericBlockOperationInstance))
                 .ToList();
-        }
-    }
-
-    public class BlockOperationGroupDataTypeConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            BlockOperationGroupAttribute blockGroupAttribute = value.GetType()
-                .GetCustomAttribute(typeof(BlockOperationGroupAttribute))
-                as BlockOperationGroupAttribute;
-            if (value is null) return null;
-
-            return blockGroupAttribute.TypeGroup;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class BlockOperationGroupOperationTypeConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            BlockOperationGroupAttribute blockGroupAttribute = value.GetType()
-                .GetCustomAttribute(typeof(BlockOperationGroupAttribute))
-                as BlockOperationGroupAttribute;
-            if (value is null) return null;
-
-            return blockGroupAttribute.OperationGroup;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
         }
     }
 }
