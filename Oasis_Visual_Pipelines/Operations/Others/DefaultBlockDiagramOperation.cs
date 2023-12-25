@@ -23,6 +23,8 @@ namespace Oasis_Visual_Pipelines.Operations
     [BlockOperationGroup(BlockOperationType.None, BlockOperationGroup.Other)]
     public class DefaultBlockDiagramOperation : IBlockDiagramOperation
     {
+        private static List<object?> blockOperationInstances;
+
         public int MaxInputs => 0;
         public int MaxOutputs => 0;
         public string OperationTitle => "Select Block";
@@ -35,10 +37,11 @@ namespace Oasis_Visual_Pipelines.Operations
         public ICommand ChooseBlockTypeCommand => new RelayCommand<BlockControl>(async (control) =>
         {
             Type blockOperationInterface = typeof(IBlockDiagramOperation);
-            List<object> blockControlInstances = GenerateBlockControlInstancesForClassesDerivedFromType(blockOperationInterface);
+
+            blockOperationInstances ??= GenerateBlockControlInstancesForClassesDerivedFromType(blockOperationInterface);
 
             CollectionViewSource blockControlsViewSource = new CollectionViewSource();
-            blockControlsViewSource.Source = blockControlInstances;
+            blockControlsViewSource.Source = blockOperationInstances;
             blockControlsViewSource.GroupDescriptions.Add(new PropertyGroupDescription("Block.Data", new BlockOperationGroupDataTypeConverter()));
             blockControlsViewSource.GroupDescriptions.Add(new PropertyGroupDescription("Block.Data", new BlockOperationGroupOperationTypeConverter()));
 
