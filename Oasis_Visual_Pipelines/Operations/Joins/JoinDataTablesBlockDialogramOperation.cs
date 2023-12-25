@@ -20,11 +20,11 @@ namespace Oasis_Visual_Pipelines.Operations
         public int MaxInputs => 2;
         public string OperationTitle => "Join Tables";
 
-        public string[] LeftColumns { get; set; }
-        public string[] RightColumns { get; set; }
+        public string[] LeftColumns { get; set; } = [];
+        public string[] RightColumns { get; set; } = [];
 
-        public string SelectedLeftColumn { get; set; }
-        public string SelectedRightColumn { get; set; }
+        public string? SelectedLeftColumn { get; set; }
+        public string? SelectedRightColumn { get; set; }
 
         public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {

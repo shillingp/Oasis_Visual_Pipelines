@@ -13,7 +13,7 @@ namespace Oasis_Visual_Pipelines.Operations
 
         public string OperationTitle => "Insert Column";
 
-        public string ColumnName { get; set; }
+        public string? ColumnName { get; set; }
 
         public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
@@ -34,8 +34,11 @@ namespace Oasis_Visual_Pipelines.Operations
                 if (insertValueInput is null)
                     return inputTable;
 
-                dynamic insertData = insertValueInput.Result();
-                Type insertDataType = insertData.GetType();
+                dynamic? insertData = insertValueInput.Result();
+                Type? insertDataType = insertData?.GetType();
+                if (insertDataType is null)
+                    return inputTable;
+
                 DataColumn insertedColumn = inputTable.Columns.Add(ColumnName, insertDataType);
 
                 foreach (DataRow tableRow in inputTable.Rows)

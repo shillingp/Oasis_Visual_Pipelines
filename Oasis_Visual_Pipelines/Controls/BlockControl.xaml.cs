@@ -107,9 +107,9 @@ namespace Oasis_Visual_Pipelines.Controls
         }
 
         #region Connection Drag Handling
-        private LooseConnection drawingLooseConnection;
-        private Block looseConnectionSourceBlock;
-        private Block looseConnectionTargetBlock;
+        private LooseConnection? drawingLooseConnection;
+        private Block? looseConnectionSourceBlock;
+        private Block? looseConnectionTargetBlock;
         private ConnectionSide sourceConnectionSide;
         private void ConnectorNode_DragStarted(object sender, DragStartedEventArgs e)
         {
@@ -129,16 +129,20 @@ namespace Oasis_Visual_Pipelines.Controls
                 return;
             }
 
-            Block.BlockDiagram.BlockDiagramItems.Add(drawingLooseConnection);
+            Block.BlockDiagram!.BlockDiagramItems.Add(drawingLooseConnection);
         }
 
         private void ConnectorNode_DragDelta(object sender, DragDeltaEventArgs e)
         {
-            ConnectorNodeControl targetConnectorNode = FindConnectorNodeUnderCursor();
+            ConnectorNodeControl? targetConnectorNode = FindConnectorNodeUnderCursor();
             looseConnectionTargetBlock = UIHelperFunctions.FindAncestor<BlockControl>(targetConnectorNode)?.Block;
+
+            if (drawingLooseConnection is null)
+                return;
 
             if (targetConnectorNode is not null
                 && targetConnectorNode.Connection is null
+                && looseConnectionSourceBlock is not null
                 && looseConnectionTargetBlock is not null
                 && targetConnectorNode.ConnectionSide != sourceConnectionSide
                 && !looseConnectionTargetBlock.IsConnectedTo(looseConnectionSourceBlock))
@@ -154,14 +158,17 @@ namespace Oasis_Visual_Pipelines.Controls
 
         private void ConnectorNode_DragCompleted(object sender, DragCompletedEventArgs e)
         {
-            Block.BlockDiagram.BlockDiagramItems.Remove(drawingLooseConnection);
+            if (drawingLooseConnection is not null)
+                Block.BlockDiagram!.BlockDiagramItems.Remove(drawingLooseConnection);
+
             drawingLooseConnection = null;
 
-            ConnectorNodeControl targetConnectionNode = FindConnectorNodeUnderCursor();
+            ConnectorNodeControl? targetConnectionNode = FindConnectorNodeUnderCursor();
             if (targetConnectionNode is null || targetConnectionNode.Connection is not null) return;
             looseConnectionTargetBlock = UIHelperFunctions.FindAncestor<BlockControl>(targetConnectionNode)?.Block;
 
             if (looseConnectionTargetBlock is null
+                || looseConnectionSourceBlock is null
                 || looseConnectionSourceBlock == looseConnectionTargetBlock
                 || sourceConnectionSide == targetConnectionNode.ConnectionSide
                 || looseConnectionSourceBlock.IsConnectedTo(looseConnectionTargetBlock)) return;
@@ -178,11 +185,12 @@ namespace Oasis_Visual_Pipelines.Controls
         #endregion
         #endregion
 
-        private ConnectorNodeControl FindConnectorNodeUnderCursor()
+        private ConnectorNodeControl? FindConnectorNodeUnderCursor()
         {
-            Canvas activeCanvas = UIHelperFunctions.FindAncestor<Canvas>(this);
+            Canvas? activeCanvas = UIHelperFunctions.FindAncestor<Canvas>(this);
+            if (activeCanvas is null) return null;
             Point currentMousePosition = Mouse.GetPosition(activeCanvas);
-            ConnectorNodeControl firstConnectorNodeUnderCursor = null;
+            ConnectorNodeControl? firstConnectorNodeUnderCursor = null;
             VisualTreeHelper.HitTest(
                 activeCanvas,
                 new HitTestFilterCallback(target =>
@@ -200,7 +208,7 @@ namespace Oasis_Visual_Pipelines.Controls
             return firstConnectorNodeUnderCursor;
         }
 
-        internal ConnectorNodeControl FindConnectorNodeFromConnection(Connection connectionToFind)
+        internal ConnectorNodeControl? FindConnectorNodeFromConnection(Connection connectionToFind)
         {
             return UIHelperFunctions.FindVisualChildren<ConnectorNodeControl>(this)
                 .FirstOrDefault(connectionNode => connectionNode.Connection == connectionToFind);

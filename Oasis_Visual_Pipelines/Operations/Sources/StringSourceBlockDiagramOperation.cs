@@ -13,7 +13,7 @@ namespace Oasis_Visual_Pipelines.Operations
         public int MaxInputs => 0;
         public string OperationTitle => "String Source";
 
-        public string TextValue { get; set; }
+        public string? TextValue { get; set; }
 
         public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {

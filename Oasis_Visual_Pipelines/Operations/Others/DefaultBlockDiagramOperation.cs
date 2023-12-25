@@ -9,6 +9,7 @@ using Oasis_Visual_Pipelines.Functions;
 using Oasis_Visual_Pipelines.Interfaces;
 using Oasis_Visual_Pipelines.Models;
 using PropertyChanged;
+using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Data;
 using System.Globalization;
@@ -23,7 +24,7 @@ namespace Oasis_Visual_Pipelines.Operations
     [BlockOperationGroup(BlockOperationType.None, BlockOperationGroup.Other)]
     public class DefaultBlockDiagramOperation : IBlockDiagramOperation
     {
-        private static List<object?> blockOperationInstances;
+        private static ImmutableArray<object?>? blockOperationInstances;
 
         public int MaxInputs => 0;
         public int MaxOutputs => 0;
@@ -34,28 +35,23 @@ namespace Oasis_Visual_Pipelines.Operations
             return new BlockOperationResult(additionalOperations => null);
         }
 
-        public ICommand ChooseBlockTypeCommand => new RelayCommand<BlockControl>(async (control) =>
+        public static ICommand ChooseBlockTypeCommand => new RelayCommand<BlockControl>(async (control) =>
         {
             Type blockOperationInterface = typeof(IBlockDiagramOperation);
 
             blockOperationInstances ??= GenerateBlockControlInstancesForClassesDerivedFromType(blockOperationInterface);
 
-            //CollectionViewSource blockControlsViewSource = new CollectionViewSource();
-            //blockControlsViewSource.Source = blockOperationInstances;
-            //blockControlsViewSource.GroupDescriptions.Add(new PropertyGroupDescription("Block.Data", new BlockOperationGroupDataTypeConverter()));
-            //blockControlsViewSource.GroupDescriptions.Add(new PropertyGroupDescription("Block.Data", new BlockOperationGroupOperationTypeConverter()));
-
-            Block chosenBlock = (Block)await DialogHostFunctions.CreateAndShowDialog(
+            Block? chosenBlock = (Block?)await DialogHostFunctions.CreateAndShowDialog(
                 new BlockPickerDialog(),
                 blockOperationInstances,
                 closeOnClickAway: true);
             if (chosenBlock is null) return;
 
-            Point newPosition = control.Block.Position;
+            Point newPosition = control!.Block.Position;
             newPosition.X += chosenBlock.CanvasElement.ActualWidth / 2;
             newPosition.Y += chosenBlock.CanvasElement.ActualHeight / 2;
 
-            control.Block.BlockDiagram.AddBlock(
+            control.Block.BlockDiagram!.AddBlock(
                 newPosition,
                 null,
                 ((dynamic)chosenBlock).Data);
@@ -63,8 +59,10 @@ namespace Oasis_Visual_Pipelines.Operations
             control.Block.BlockDiagram.BlockDiagramItems.Remove(control.Block);
         });
 
-        private static List<object?> GenerateBlockControlInstancesForClassesDerivedFromType(Type blockOperationInterface)
+        private static ImmutableArray<object?> GenerateBlockControlInstancesForClassesDerivedFromType(Type blockOperationInterface)
         {
+            if (blockOperationInterface is null) throw new ArgumentNullException(nameof(blockOperationInterface));
+
             return AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(assembly => assembly.GetTypes())
                 .Where(assemblyType => blockOperationInterface.IsAssignableFrom(assemblyType))
@@ -73,7 +71,9 @@ namespace Oasis_Visual_Pipelines.Operations
                 .Select(operationType =>
                 {
                     Type genericBlockType = typeof(Block<>).MakeGenericType(operationType);
-                    object operationTypeInstance = Activator.CreateInstance(operationType);
+                    object? operationTypeInstance = Activator.CreateInstance(operationType);
+                    if (operationTypeInstance is null) return null;
+
                     BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
                     object? genericBlockInstance = Activator.CreateInstance(
                         type: genericBlockType,
@@ -81,6 +81,7 @@ namespace Oasis_Visual_Pipelines.Operations
                         binder: null,
                         args: [operationTypeInstance],
                         culture: CultureInfo.CurrentCulture);
+                    if (genericBlockInstance is null) return null;
 
                     ((Block)genericBlockInstance).Title = "Block";
 
@@ -88,7 +89,7 @@ namespace Oasis_Visual_Pipelines.Operations
                 })
                 .Select(genericBlockOperationInstance =>
                     Activator.CreateInstance(typeof(BlockControl), genericBlockOperationInstance))
-                .ToList();
+                .ToImmutableArray();
         }
     }
 }

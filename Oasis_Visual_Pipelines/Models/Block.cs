@@ -3,6 +3,7 @@ using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Controls;
 using Oasis_Visual_Pipelines.Interfaces;
 using PropertyChanged;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -12,8 +13,8 @@ namespace Oasis_Visual_Pipelines.Models
     [AddINotifyPropertyChangedInterface]
     public class Block<T> : Block
     {
-        //public OneOf<T, IBlockOperation> Data { get; set; }
-        public T Data { get; set; }
+        public T? Data { get; set; }
+
         internal Block(T data)
         {
             Data = data;
@@ -22,10 +23,10 @@ namespace Oasis_Visual_Pipelines.Models
         internal Block(Point position, BlockDiagramControl blockDiagram)
             : base(position, blockDiagram)
         {
-            Data = TryToCreateDataObject();
+            Data = Block<T>.TryToCreateDataObject();
         }
 
-        private T TryToCreateDataObject()
+        private static T? TryToCreateDataObject()
         {
             try
             {
@@ -63,11 +64,11 @@ namespace Oasis_Visual_Pipelines.Models
     [AddINotifyPropertyChangedInterface]
     public class Block : IBlockDiagramObject<BlockControl>, IBlockDiagramObject
     {
-        public BlockDiagramControl BlockDiagram;
+        public BlockDiagramControl? BlockDiagram;
 
         public Point Position { get; set; }
 
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         public BlockControl CanvasElement { get; protected set; }
 
@@ -98,7 +99,7 @@ namespace Oasis_Visual_Pipelines.Models
             foreach (Connection connection in LeftConnections.Concat(RightConnections).ToList())
                 RemoveConnectionTo(connection);
 
-            BlockDiagram.BlockDiagramItems.Remove(this);
+            BlockDiagram!.BlockDiagramItems.Remove(this);
         });
         #endregion
 
@@ -136,13 +137,13 @@ namespace Oasis_Visual_Pipelines.Models
             this.RightConnections.Add(newConnection);
             secondBlock.LeftConnections.Add(newConnection);
 
-            BlockDiagram.BlockDiagramItems.Add(newConnection);
+            BlockDiagram!.BlockDiagramItems.Add(newConnection);
 
             Application.Current.Dispatcher.Invoke(
-                newConnection.LeftBlock.RedrawAnyConnections,
+                newConnection.LeftBlock!.RedrawAnyConnections,
                 DispatcherPriority.Render);
             Application.Current.Dispatcher.Invoke(
-                newConnection.RightBlock.RedrawAnyConnections,
+                newConnection.RightBlock!.RedrawAnyConnections,
                 DispatcherPriority.Render);
 
             return newConnection;
@@ -150,7 +151,7 @@ namespace Oasis_Visual_Pipelines.Models
 
         public void RemoveConnectionTo(Block secondBlock)
         {
-            Connection foundConnection = LeftConnections
+            Connection? foundConnection = LeftConnections
                 .Concat(RightConnections)
                 .FirstOrDefault(connection => connection.LeftBlock == secondBlock || connection.RightBlock == secondBlock);
             if (foundConnection is null) return;
@@ -160,10 +161,10 @@ namespace Oasis_Visual_Pipelines.Models
 
         public void RemoveConnectionTo(Connection connectionToRemove)
         {
-            connectionToRemove.LeftBlock.RightConnections.Remove(connectionToRemove);
-            connectionToRemove.RightBlock.LeftConnections.Remove(connectionToRemove);
+            connectionToRemove.LeftBlock!.RightConnections.Remove(connectionToRemove);
+            connectionToRemove.RightBlock!.LeftConnections.Remove(connectionToRemove);
 
-            BlockDiagram.BlockDiagramItems.Remove(connectionToRemove);
+            BlockDiagram!.BlockDiagramItems.Remove(connectionToRemove);
 
             Application.Current.Dispatcher.Invoke(
                 connectionToRemove.LeftBlock.RedrawAnyConnections,
@@ -175,6 +176,8 @@ namespace Oasis_Visual_Pipelines.Models
 
         internal bool IsConnectedTo(Block secondBlock)
         {
+            if (secondBlock is null) throw new ArgumentNullException(nameof(secondBlock));
+
             return LeftConnections.Any(connection => connection.LeftBlock == secondBlock)
                 || RightConnections.Any(connection => connection.RightBlock == secondBlock);
         }
@@ -187,7 +190,7 @@ namespace Oasis_Visual_Pipelines.Models
                 connection.UpdateCanvasElementVector();
         }
 
-        internal ConnectorNodeControl GetConnectionNode(Connection connection)
+        internal ConnectorNodeControl? GetConnectionNode(Connection connection)
         {
             return CanvasElement.FindConnectorNodeFromConnection(connection);
         }

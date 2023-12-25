@@ -7,12 +7,11 @@ namespace Oasis_Visual_Pipelines.Converters
 {
     internal class BlockOperationGroupDataTypeConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            BlockOperationGroupAttribute blockGroupAttribute = value.GetType()
-                .GetCustomAttribute(typeof(BlockOperationGroupAttribute))
-                as BlockOperationGroupAttribute;
-            if (value is null) return null;
+            if (value is null || value.GetType().GetCustomAttribute(typeof(BlockOperationGroupAttribute)) 
+                is not BlockOperationGroupAttribute blockGroupAttribute)
+                return null;
 
             return blockGroupAttribute.TypeGroup;
         }

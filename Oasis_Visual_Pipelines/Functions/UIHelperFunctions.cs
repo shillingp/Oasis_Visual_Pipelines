@@ -6,17 +6,16 @@ namespace Oasis_Visual_Pipelines.Functions
 {
     internal static class UIHelperFunctions
     {
-        public static T? FindAncestor<T>(DependencyObject current)
+        public static T? FindAncestor<T>(DependencyObject? current)
             where T : DependencyObject
         {
             if (current is null) return null;
 
             do
             {
-                if (current is T)
-                {
-                    return (T)current;
-                }
+                if (current is T matchedType)
+                    return matchedType;
+                
                 current = VisualTreeHelper.GetParent(current);
             }
             while (current != null);
@@ -24,23 +23,23 @@ namespace Oasis_Visual_Pipelines.Functions
             return null;
         }
 
-        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
+        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject? depObj) where T : DependencyObject
         {
-            if (depObj == null)
+            if (depObj is null)
                 yield break;
 
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
             {
                 DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
-                if (child != null && child is T)
-                    yield return (T)child;
+                if (child != null && child is T matchedType)
+                    yield return matchedType;
 
                 foreach (T childOfChild in FindVisualChildren<T>(child))
                     yield return childOfChild;
             }
         }
 
-        public static T GetChildOfType<T>(DependencyObject parent)
+        public static T? GetChildOfType<T>(DependencyObject parent)
             where T : DependencyObject
         {
             if (parent == null) return null;
@@ -49,7 +48,7 @@ namespace Oasis_Visual_Pipelines.Functions
             {
                 DependencyObject child = VisualTreeHelper.GetChild(parent, i);
 
-                T result = (child as T) ?? GetChildOfType<T>(child);
+                T? result = (child as T) ?? GetChildOfType<T>(child);
                 if (result != null) return result;
             }
             return null;

@@ -15,8 +15,8 @@ namespace Oasis_Visual_Pipelines.Operations
         public int MaxInputs => 1;
         public string OperationTitle => "Sort Table";
 
-        public string[] ValidColumns { get; set; }
-        public string ColumnName { get; set; } = null;
+        public string[] ValidColumns { get; set; } = [];
+        public string? ColumnName { get; set; }
 
         public SortDirection SortDirection { get; set; } = SortDirection.Ascending;
 

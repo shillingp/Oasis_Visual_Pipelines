@@ -6,16 +6,16 @@ namespace Oasis_Visual_Pipelines.Functions
 {
     internal sealed class DialogHostFunctions
     {
-        internal static async Task<object> CreateAndShowDialog(object content, object dataContext, bool closeOnClickAway = true)
+        internal static async Task<object?> CreateAndShowDialog(object content, object dataContext, bool closeOnClickAway = true)
         {
             DialogHost newDialogHost = CreateDialog(content, dataContext, closeOnClickAway);
 
             return await newDialogHost.ShowDialog(content);
         }
 
-        internal static DialogHost CreateDialog(object content, object dataContext, bool closeOnClickAway = true, Panel rootPanel = null)
+        internal static DialogHost CreateDialog(object content, object dataContext, bool closeOnClickAway = true, Panel? rootPanel = null)
         {
-            Window activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            Window? activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             rootPanel ??= UIHelperFunctions.GetChildOfType<Panel>(activeWindow ?? Application.Current.MainWindow);
 
             if (rootPanel == null) throw new Exception("Unable to find panel to attach DialogHost to");

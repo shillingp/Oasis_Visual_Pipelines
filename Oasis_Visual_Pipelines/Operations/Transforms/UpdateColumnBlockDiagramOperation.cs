@@ -18,9 +18,9 @@ namespace Oasis_Visual_Pipelines.Operations
 
         public string OperationTitle => "Update Column";
 
-        public string ColumnName { get; set; } = null;
+        public string? ColumnName { get; set; }
 
-        public string[] ValidColumns { get; set; }
+        public string[] ValidColumns { get; set; } = [];
 
         public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
@@ -39,7 +39,7 @@ namespace Oasis_Visual_Pipelines.Operations
 
                 DataTable inputTable = dataTable.Copy();
 
-                DataColumn temporaryColumn = null;
+                DataColumn? temporaryColumn = null;
 
                 foreach (DataRow tableRow in inputTable.Rows)
                 {
@@ -52,21 +52,24 @@ namespace Oasis_Visual_Pipelines.Operations
                             .Cast<dynamic>()
                             .Select(element => new BlockOperationResult(element));
 
-                    dynamic updateFunctionData = updateFunctionInput.Result(innerBlockOperations.ToArray());
+                    dynamic? updateFunctionData = updateFunctionInput.Result(innerBlockOperations.ToArray());
 
-                    if (temporaryColumn is null)
+                    if (updateFunctionData is null)
+                        return dataTable;
+
+                    if (temporaryColumn is null && updateFunctionData is not null)
                     {
                         Type updateFunctionType = updateFunctionData.GetType();
                         temporaryColumn = inputTable.Columns.Add("$$__Temporary__Column__$$", updateFunctionType);
                     }
 
-                    tableRow[temporaryColumn] = updateFunctionData;
+                    tableRow[temporaryColumn!] = updateFunctionData;
                 }
 
                 if (temporaryColumn is null) 
                     return dataTable;
 
-                int existingColumnPosition = inputTable.Columns[ColumnName].Ordinal;
+                int existingColumnPosition = inputTable.Columns[ColumnName]!.Ordinal;
 
                 inputTable.Columns.Remove(ColumnName);
                 temporaryColumn!.ColumnName = ColumnName;

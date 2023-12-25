@@ -19,10 +19,10 @@ namespace Oasis_Visual_Pipelines.Operations
         public int MaxInputs => 1;
         public string OperationTitle => "Rename Column";
 
-        public string[] ValidColumns { get; set; }
+        public string[] ValidColumns { get; set; } = [];
 
-        public string SelectedColumn { get; set; }
-        public string NewColumnName { get; set; }
+        public string? SelectedColumn { get; set; }
+        public string? NewColumnName { get; set; }
 
         public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {

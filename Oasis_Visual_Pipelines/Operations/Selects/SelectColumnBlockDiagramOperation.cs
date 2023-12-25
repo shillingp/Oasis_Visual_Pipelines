@@ -20,7 +20,7 @@ namespace Oasis_Visual_Pipelines.Operations
         public int MaxInputs => 1;
         public string OperationTitle => "Select Column";
 
-        public string[] ValidColumns { get; set; }
+        public string[] ValidColumns { get; set; } = [];
         public HashSet<object> SelectedColumns { get; set; } = new HashSet<object>();
 
         public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)

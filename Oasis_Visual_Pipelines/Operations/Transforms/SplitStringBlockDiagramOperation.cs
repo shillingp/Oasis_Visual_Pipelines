@@ -20,7 +20,7 @@ namespace Oasis_Visual_Pipelines.Operations
         public int MaxInputs => 1;
         public string OperationTitle => "Split String";
 
-        public string SplitString { get; set; }
+        public string? SplitString { get; set; }
 
         public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {

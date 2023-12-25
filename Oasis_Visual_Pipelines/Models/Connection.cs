@@ -17,8 +17,8 @@ namespace Oasis_Visual_Pipelines.Models
         public Point Start { get; protected set; }
         public Point Finish { get; protected set; }
 
-        public Block LeftBlock { get; }
-        public Block RightBlock { get; }
+        public Block? LeftBlock { get; }
+        public Block? RightBlock { get; }
 
         public Path CanvasElement { get; }
 
@@ -46,10 +46,8 @@ namespace Oasis_Visual_Pipelines.Models
 
         public void UpdateCanvasElementVector()
         {
-            
-
-            ConnectorNodeControl leftNode = LeftBlock.GetConnectionNode(this);
-            ConnectorNodeControl rightNode = RightBlock.GetConnectionNode(this);
+            ConnectorNodeControl? leftNode = LeftBlock?.GetConnectionNode(this);
+            ConnectorNodeControl? rightNode = RightBlock?.GetConnectionNode(this);
 
             if (leftNode is null || rightNode is null) return;
 

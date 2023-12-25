@@ -30,8 +30,6 @@ namespace Oasis_Visual_Pipelines.Operations
                 exampleDataTable.Rows.Add(3, "Joe", "Bloggs");
 
                 return exampleDataTable;
-
-                return new DataTable();
             });
         }
     }
