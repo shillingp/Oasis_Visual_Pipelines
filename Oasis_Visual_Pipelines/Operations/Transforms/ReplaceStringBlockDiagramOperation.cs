@@ -5,6 +5,7 @@ using Oasis_Visual_Pipelines.Interfaces;
 using PropertyChanged;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,8 +19,8 @@ namespace Oasis_Visual_Pipelines.Operations
         public int MaxInputs => 1;
         public string OperationTitle => "Replace String";
 
-        public string SearchText { get; set; }
-        public string ReplaceText { get; set; }
+        public string SearchText { get; set; } = "";
+        public string ReplaceText { get; set; } = "";
 
         public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
