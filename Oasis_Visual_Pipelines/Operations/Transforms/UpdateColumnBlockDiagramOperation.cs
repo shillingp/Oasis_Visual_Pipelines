@@ -66,8 +66,12 @@ namespace Oasis_Visual_Pipelines.Operations
                 if (temporaryColumn is null) 
                     return dataTable;
 
+                int existingColumnPosition = inputTable.Columns[ColumnName].Ordinal;
+
                 inputTable.Columns.Remove(ColumnName);
                 temporaryColumn!.ColumnName = ColumnName;
+
+                temporaryColumn.SetOrdinal(existingColumnPosition);
 
                 return inputTable;
             });
