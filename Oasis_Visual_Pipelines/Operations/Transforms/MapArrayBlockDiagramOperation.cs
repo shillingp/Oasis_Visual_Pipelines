@@ -27,7 +27,7 @@ namespace Oasis_Visual_Pipelines.Operations
                 BlockOperationResult? updateFunctionInput = inputOperations.FirstOrDefault(operation => operation != arrayInput);
 
                 if (arrayInput?.Result() is not Array resultantArray)
-                    return BlockOperationResult.NullOperation;
+                    return null;
 
                 if (updateFunctionInput is null)
                     return resultantArray;

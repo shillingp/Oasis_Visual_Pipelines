@@ -24,8 +24,6 @@ namespace Oasis_Visual_Pipelines.Operations
     [BlockOperationGroup(BlockOperationType.None, BlockOperationGroup.Other)]
     public class DefaultBlockDiagramOperation : IBlockDiagramOperation
     {
-        private static ImmutableArray<object?>? blockOperationInstances;
-
         public int MaxInputs => 0;
         public int MaxOutputs => 0;
         public string OperationTitle => "Select Block";
@@ -39,7 +37,7 @@ namespace Oasis_Visual_Pipelines.Operations
         {
             Type blockOperationInterface = typeof(IBlockDiagramOperation);
 
-            blockOperationInstances ??= GenerateBlockControlInstancesForClassesDerivedFromType(blockOperationInterface);
+            ImmutableArray<object?> blockOperationInstances = GenerateBlockControlInstancesForClassesDerivedFromTypeAsync(blockOperationInterface);
 
             Block? chosenBlock = (Block?)await DialogHostFunctions.CreateAndShowDialog(
                 new BlockPickerDialog(),
@@ -59,7 +57,7 @@ namespace Oasis_Visual_Pipelines.Operations
             control.Block.BlockDiagram.BlockDiagramItems.Remove(control.Block);
         });
 
-        private static ImmutableArray<object?> GenerateBlockControlInstancesForClassesDerivedFromType(Type blockOperationInterface)
+        private static ImmutableArray<object?> GenerateBlockControlInstancesForClassesDerivedFromTypeAsync(Type blockOperationInterface)
         {
             if (blockOperationInterface is null) throw new ArgumentNullException(nameof(blockOperationInterface));
 
