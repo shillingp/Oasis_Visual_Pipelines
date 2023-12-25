@@ -12,7 +12,7 @@ namespace Oasis_Visual_Pipelines.Controls
                 return Enumerable.Empty<Connection>();
 
             if (values[1] is int maximumNodes && connections.Count >= maximumNodes)
-                return connections;
+                return connections.ToArray();
 
             return connections.Append(null);
         }

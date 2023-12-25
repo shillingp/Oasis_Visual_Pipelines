@@ -166,7 +166,7 @@
 			x:Name="LeftConnectorsControl"
 			Grid.Column="0"
 			VerticalAlignment="Center"
-			d:ItemsSource="{d:SampleData ItemCount=2}">
+			d:ItemsSource="{d:SampleData ItemCount=3}">
 			<ItemsControl.ItemsSource>
 				<MultiBinding Converter="{StaticResource AddItemToEndConverter}">
 					<Binding Path="LeftConnections" />
