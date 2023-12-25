@@ -31,8 +31,7 @@ namespace Oasis_Visual_Pipelines.Operations
             BlockOperationResult? leftDataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
             BlockOperationResult? rightDataTableInput = inputOperations.FirstOrDefault(operation => operation != leftDataTableInput);
 
-            if (leftDataTableInput?.Result() is not DataTable leftDataTable
-                || SelectedLeftColumn is null || SelectedRightColumn is null)
+            if (leftDataTableInput?.Result() is not DataTable leftDataTable)
                 return BlockOperationResult.NullOperation;
 
             LeftColumns = DataTableFunctions.ExtractColumnNamesFromTable(leftDataTable);
@@ -43,6 +42,9 @@ namespace Oasis_Visual_Pipelines.Operations
                     return leftDataTable;
 
                 RightColumns = DataTableFunctions.ExtractColumnNamesFromTable(rightDataTable);
+
+                if (SelectedLeftColumn is null || SelectedRightColumn is null)
+                    return BlockOperationResult.NullOperation;
 
                 if (leftDataTable.Columns[SelectedLeftColumn]?.DataType != rightDataTable.Columns[SelectedRightColumn]?.DataType)
                     return new FailedOperation("Column data types must match!");
