@@ -51,6 +51,25 @@
 		</DockPanel>
 	</DataTemplate>
 
+	<DataTemplate DataType="{x:Type local:RenameColumnBlockDiagramOperation}">
+		<DockPanel>
+			<TextBlock
+				DockPanel.Dock="Top"
+				Text="{Binding OperationTitle}"
+				TextWrapping="Wrap" />
+
+			<material:Card>
+				<UniformGrid Margin="5" Rows="2">
+					<ComboBox
+						MinHeight="24"
+						ItemsSource="{Binding ValidColumns}"
+						SelectedItem="{Binding SelectedColumn}" />
+					<TextBox Text="{Binding NewColumnName}" />
+				</UniformGrid>
+			</material:Card>
+		</DockPanel>
+	</DataTemplate>
+
 	<DataTemplate DataType="{x:Type local:ReplaceStringBlockDiagramOperation}">
 		<DockPanel>
 			<TextBlock
