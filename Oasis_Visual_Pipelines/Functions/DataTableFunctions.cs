@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 
 namespace Oasis_Visual_Pipelines.Functions
 {
@@ -37,10 +32,10 @@ namespace Oasis_Visual_Pipelines.Functions
             foreach (DataColumn column in rightTable.Columns)
                 resultTable.Columns.Add("new-" + column.ColumnName, column.DataType);
 
-            foreach (var row in joinTable)
+            foreach ((DataRow Left, DataRow Right) in joinTable)
             {
                 DataRow newRow = resultTable.NewRow();
-                newRow.ItemArray = row.Left.ItemArray.Concat(row.Right.ItemArray).ToArray();
+                newRow.ItemArray = Left.ItemArray.Concat(Right.ItemArray).ToArray();
                 resultTable.Rows.Add(newRow);
             }
 
