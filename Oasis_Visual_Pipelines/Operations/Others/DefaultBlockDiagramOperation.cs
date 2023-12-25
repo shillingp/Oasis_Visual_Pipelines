@@ -40,14 +40,14 @@ namespace Oasis_Visual_Pipelines.Operations
 
             blockOperationInstances ??= GenerateBlockControlInstancesForClassesDerivedFromType(blockOperationInterface);
 
-            CollectionViewSource blockControlsViewSource = new CollectionViewSource();
-            blockControlsViewSource.Source = blockOperationInstances;
-            blockControlsViewSource.GroupDescriptions.Add(new PropertyGroupDescription("Block.Data", new BlockOperationGroupDataTypeConverter()));
-            blockControlsViewSource.GroupDescriptions.Add(new PropertyGroupDescription("Block.Data", new BlockOperationGroupOperationTypeConverter()));
+            //CollectionViewSource blockControlsViewSource = new CollectionViewSource();
+            //blockControlsViewSource.Source = blockOperationInstances;
+            //blockControlsViewSource.GroupDescriptions.Add(new PropertyGroupDescription("Block.Data", new BlockOperationGroupDataTypeConverter()));
+            //blockControlsViewSource.GroupDescriptions.Add(new PropertyGroupDescription("Block.Data", new BlockOperationGroupOperationTypeConverter()));
 
             Block chosenBlock = (Block)await DialogHostFunctions.CreateAndShowDialog(
                 new BlockPickerDialog(),
-                blockControlsViewSource,
+                blockOperationInstances,
                 closeOnClickAway: true);
             if (chosenBlock is null) return;
 

@@ -2,129 +2,159 @@
 	x:Class="Oasis_Visual_Pipelines.Dialogs.BlockPickerDialog"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:converters="clr-namespace:Oasis_Visual_Pipelines.Converters"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:local="clr-namespace:Oasis_Visual_Pipelines.Dialogs"
 	xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	Width="800"
 	Height="400"
+	Background="{StaticResource MaterialDesignPaper}"
+	Foreground="{StaticResource MaterialDesignBody}"
 	mc:Ignorable="d">
-	<ListBox d:ItemsSource="{d:SampleData ItemCount=5}" ItemsSource="{Binding}">
-		<ListBox.ItemsPanel>
-			<ItemsPanelTemplate>
-				<UniformGrid Columns="4" />
-			</ItemsPanelTemplate>
-		</ListBox.ItemsPanel>
-		<ListBox.ItemContainerStyle>
-			<Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
-				<Setter Property="Padding" Value="0" />
-				<Setter Property="Margin" Value="0" />
-				<Setter Property="Template">
-					<Setter.Value>
-						<ControlTemplate>
-							<Grid VerticalAlignment="Center">
-								<Grid.RowDefinitions>
-									<RowDefinition Height="*" />
-									<RowDefinition Height="Auto" />
-								</Grid.RowDefinitions>
-								<ContentControl
-									Grid.Row="0"
-									VerticalAlignment="Bottom"
-									Content="{Binding CanvasElement}"
-									DataContext="{Binding Block}" />
-								<Border
-									Grid.Row="0"
-									Background="White"
-									Opacity="0.1" />
+	<UserControl.Resources>
+		<converters:BlockOperationItemsSourceFilterConverter x:Key="BlockOperationItemsSourceFilterConverter" />
+		<converters:BlockOperationGroupDataTypeConverter x:Key="BlockOperationGroupDataTypeConverter" />
+		<converters:BlockOperationGroupOperationTypeConverter x:Key="BlockOperationGroupOperationTypeConverter" />
 
-								<Button
-									Grid.Row="1"
-									Margin="14,10"
-									Command="{x:Static material:DialogHost.CloseDialogCommand}"
-									CommandParameter="{Binding Block}"
-									Style="{StaticResource MaterialDesignFlatButton}">
-									<Button.Content>
-										<StackPanel Orientation="Horizontal">
-											<TextBlock Text="Select Block" />
-											<material:PackIcon Kind="Tick" />
-										</StackPanel>
-									</Button.Content>
-								</Button>
-							</Grid>
-						</ControlTemplate>
-					</Setter.Value>
-				</Setter>
-			</Style>
-		</ListBox.ItemContainerStyle>
-		<ListBox.GroupStyle>
-			<GroupStyle>
-				<GroupStyle.HeaderTemplate>
-					<DataTemplate DataType="{x:Type GroupItem}">
-						<TextBlock
-							Margin="10,0"
-							Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-							Text="{Binding Name}" />
-					</DataTemplate>
-				</GroupStyle.HeaderTemplate>
-				<GroupStyle.Panel>
-					<ItemsPanelTemplate>
-						<StackPanel />
-					</ItemsPanelTemplate>
-				</GroupStyle.Panel>
-				<GroupStyle.ContainerStyle>
-					<Style TargetType="GroupItem">
-						<Setter Property="Template">
-							<Setter.Value>
-								<ControlTemplate TargetType="GroupItem">
-									<material:Card Margin="10">
-										<StackPanel>
-											<TextBlock Margin="5" Style="{StaticResource MaterialDesignHeadline5TextBlock}">
-												<Run Text="{Binding Name, Mode=OneWay}" />
-												<Run Text="Blocks" />
-											</TextBlock>
+		<CollectionViewSource x:Key="BlockOperationCollectionViewSource">
+			<CollectionViewSource.Source>
+				<MultiBinding Converter="{StaticResource BlockOperationItemsSourceFilterConverter}">
+					<Binding Path="." />
+					<Binding ElementName="BlockOperationSearchTextBox" Path="Text" />
+				</MultiBinding>
+			</CollectionViewSource.Source>
+			<CollectionViewSource.GroupDescriptions>
+				<PropertyGroupDescription Converter="{StaticResource BlockOperationGroupDataTypeConverter}" PropertyName="Block.Data" />
+				<PropertyGroupDescription Converter="{StaticResource BlockOperationGroupOperationTypeConverter}" PropertyName="Block.Data" />
+			</CollectionViewSource.GroupDescriptions>
+		</CollectionViewSource>
+	</UserControl.Resources>
+	<DockPanel>
+		<TextBox
+			x:Name="BlockOperationSearchTextBox"
+			Margin="10,5"
+			material:HintAssist.Hint="Search Operations"
+			DockPanel.Dock="Top"
+			Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
-											<Separator />
+		<ListBox d:ItemsSource="{d:SampleData ItemCount=5}" ItemsSource="{Binding Source={StaticResource BlockOperationCollectionViewSource}}">
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<UniformGrid Columns="4" />
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+			<ListBox.ItemContainerStyle>
+				<Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
+					<Setter Property="Padding" Value="0" />
+					<Setter Property="Margin" Value="0" />
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate>
+								<Grid VerticalAlignment="Center">
+									<Grid.RowDefinitions>
+										<RowDefinition Height="*" />
+										<RowDefinition Height="Auto" />
+									</Grid.RowDefinitions>
+									<ContentControl
+										Grid.Row="0"
+										VerticalAlignment="Bottom"
+										Content="{Binding CanvasElement}"
+										DataContext="{Binding Block}" />
+									<Border
+										Grid.Row="0"
+										Background="White"
+										Opacity="0.1" />
 
-											<ItemsPresenter />
-										</StackPanel>
-									</material:Card>
-								</ControlTemplate>
-							</Setter.Value>
-						</Setter>
-					</Style>
-				</GroupStyle.ContainerStyle>
-			</GroupStyle>
-			<GroupStyle>
-				<GroupStyle.Panel>
-					<ItemsPanelTemplate>
-						<WrapPanel />
-					</ItemsPanelTemplate>
-				</GroupStyle.Panel>
-				<GroupStyle.ContainerStyle>
-					<Style TargetType="GroupItem">
-						<Setter Property="Template">
-							<Setter.Value>
-								<ControlTemplate TargetType="GroupItem">
-									<Grid>
-										<Border
-											Margin="50,0"
-											BorderBrush="LightGray"
-											BorderThickness="0,0,0,1" />
-										<StackPanel>
-											<TextBlock
-												Margin="20,5"
-												Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
-												Text="{Binding Name}" />
+									<Button
+										Grid.Row="1"
+										Margin="14,10"
+										Command="{x:Static material:DialogHost.CloseDialogCommand}"
+										CommandParameter="{Binding Block}"
+										Style="{StaticResource MaterialDesignFlatButton}">
+										<Button.Content>
+											<StackPanel Orientation="Horizontal">
+												<TextBlock Text="Select Block" />
+												<material:PackIcon Kind="Tick" />
+											</StackPanel>
+										</Button.Content>
+									</Button>
+								</Grid>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</ListBox.ItemContainerStyle>
+			<ListBox.GroupStyle>
+				<GroupStyle>
+					<GroupStyle.HeaderTemplate>
+						<DataTemplate DataType="{x:Type GroupItem}">
+							<TextBlock
+								Margin="10,0"
+								Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+								Text="{Binding Name}" />
+						</DataTemplate>
+					</GroupStyle.HeaderTemplate>
+					<GroupStyle.Panel>
+						<ItemsPanelTemplate>
+							<StackPanel />
+						</ItemsPanelTemplate>
+					</GroupStyle.Panel>
+					<GroupStyle.ContainerStyle>
+						<Style TargetType="GroupItem">
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="GroupItem">
+										<material:Card Margin="10">
+											<StackPanel>
+												<TextBlock Margin="5" Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+													<Run Text="{Binding Name, Mode=OneWay}" />
+													<Run Text="Blocks" />
+												</TextBlock>
 
-											<ItemsPresenter />
-										</StackPanel>
-									</Grid>
-								</ControlTemplate>
-							</Setter.Value>
-						</Setter>
-					</Style>
-				</GroupStyle.ContainerStyle>
-			</GroupStyle>
-		</ListBox.GroupStyle>
-	</ListBox>
+												<Separator />
+
+												<ItemsPresenter />
+											</StackPanel>
+										</material:Card>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+						</Style>
+					</GroupStyle.ContainerStyle>
+				</GroupStyle>
+				<GroupStyle>
+					<GroupStyle.Panel>
+						<ItemsPanelTemplate>
+							<WrapPanel />
+						</ItemsPanelTemplate>
+					</GroupStyle.Panel>
+					<GroupStyle.ContainerStyle>
+						<Style TargetType="GroupItem">
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="GroupItem">
+										<Grid>
+											<Border
+												Margin="50,0"
+												BorderBrush="LightGray"
+												BorderThickness="0,0,0,1" />
+											<StackPanel>
+												<TextBlock
+													Margin="20,5"
+													Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
+													Text="{Binding Name}" />
+
+												<ItemsPresenter />
+											</StackPanel>
+										</Grid>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+						</Style>
+					</GroupStyle.ContainerStyle>
+				</GroupStyle>
+			</ListBox.GroupStyle>
+		</ListBox>
+	</DockPanel>
 </UserControl>
