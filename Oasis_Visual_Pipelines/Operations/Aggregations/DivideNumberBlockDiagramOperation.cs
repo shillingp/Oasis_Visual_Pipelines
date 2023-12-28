@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
-    public class SubtractNumberBlockDiagramOperation : IBlockDiagramOperation
+    internal class DivideNumberBlockDiagramOperation : IBlockDiagramOperation
     {
         public int MaxInputs => int.MaxValue;
-        public string OperationTitle => "Subtract Numbers";
+
+        public string OperationTitle => "Divide Numbers";
 
         public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
-            return new BlockOperationResult(additionalOperations => 
+            return new BlockOperationResult((additionalOperations) =>
             {
                 IEnumerable<BlockOperationResult> allOperations = additionalOperations
                     .Concat(inputOperations);
