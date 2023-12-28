@@ -64,4 +64,17 @@
 			</material:Card>
 		</DockPanel>
 	</DataTemplate>
+
+	<DataTemplate DataType="{x:Type local:TakeArrayElementsBlockDiagramOperation}">
+		<DockPanel>
+			<TextBlock
+				DockPanel.Dock="Top"
+				Text="{Binding OperationTitle}"
+				TextWrapping="Wrap" />
+
+			<material:Card Margin="5">
+				<controls:NumericUpDownControl Minimum="0" NumberValue="{Binding ElementCount, Mode=TwoWay}" />
+			</material:Card>
+		</DockPanel>
+	</DataTemplate>
 </ResourceDictionary>
