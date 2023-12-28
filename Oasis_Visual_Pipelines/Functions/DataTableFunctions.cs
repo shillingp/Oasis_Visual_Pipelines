@@ -20,13 +20,14 @@ namespace Oasis_Visual_Pipelines.Functions
                 .ToArray();
         }
 
-        internal static DataTable FilterDataTable(DataTable tableObject, ObservableSet<DataTableFilter> selectedFilters)
+        internal static DataTable FilterDataTable(DataTable tableObject, ObservableSet<DataTableFilter> selectedFilters, string sqlJoinStatement = "AND")
         {
             if (tableObject is null) throw new ArgumentNullException(nameof(tableObject));
             if (selectedFilters is null) throw new ArgumentNullException(nameof(selectedFilters));
 
             DataTable resultTable = tableObject.Copy();
-            resultTable.DefaultView.RowFilter = string.Join(" AND ",
+            resultTable.DefaultView.RowFilter = string.Join(
+                " " + sqlJoinStatement + " ",
                 selectedFilters.Select(filter => filter.ToString()));
 
             return resultTable;

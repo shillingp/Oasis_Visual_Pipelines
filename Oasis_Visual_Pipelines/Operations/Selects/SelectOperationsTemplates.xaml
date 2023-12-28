@@ -12,19 +12,26 @@
 				Text="{Binding OperationTitle}"
 				TextWrapping="Wrap" />
 
-			<material:Card>
-				<DockPanel>
-					<Button
-						Command="{Binding EditFiltersCommand}"
-						Content="{material:PackIcon Kind=Edit}"
-						DockPanel.Dock="Right"
-						Style="{StaticResource MaterialDesignToolButton}" />
-					<TextBlock
-						Margin="5,2"
-						VerticalAlignment="Center"
-						DockPanel.Dock="Left"
-						Text="{Binding SelectedFilters.Count, StringFormat='{}{0} Active Filters'}" />
-				</DockPanel>
+			<material:Card Margin="5">
+				<StackPanel>
+					<DockPanel>
+						<Button
+							Command="{Binding EditFiltersCommand}"
+							Content="{material:PackIcon Kind=Edit}"
+							DockPanel.Dock="Right"
+							Style="{StaticResource MaterialDesignToolButton}" />
+						<TextBlock
+							Margin="5,2"
+							VerticalAlignment="Center"
+							DockPanel.Dock="Left"
+							Text="{Binding SelectedFilters.Count, StringFormat='{}{0} Active Filters'}" />
+					</DockPanel>
+					<UniformGrid Margin="0,5" Columns="3">
+						<TextBlock HorizontalAlignment="Right" Text="All" />
+						<ToggleButton IsChecked="{Binding FilterAny}" />
+						<TextBlock HorizontalAlignment="Left" Text="Any" />
+					</UniformGrid>
+				</StackPanel>
 			</material:Card>
 		</DockPanel>
 	</DataTemplate>

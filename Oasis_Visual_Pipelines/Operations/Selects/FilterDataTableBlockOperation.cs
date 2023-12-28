@@ -17,6 +17,8 @@ namespace Oasis_Visual_Pipelines.Operations
         public int MaxInputs => 1;
         public string OperationTitle => "Filter Table";
 
+        public bool FilterAny { get; set; } = false;
+
         public Dictionary<string, Type> Columns { get; set; } = new Dictionary<string, Type>();
         public ObservableSet<DataTableFilter> SelectedFilters { get; set; } = new ObservableSet<DataTableFilter>();
 
@@ -29,15 +31,15 @@ namespace Oasis_Visual_Pipelines.Operations
 
                 if (tableOperation?.Result() is not DataTable tableObject) return null;
 
-                //IEnumerable<string> newColumns = DataTableFunctions.ExtractColumnsFromTable(tableObject)
-                //    .Select(column => column.ColumnName);
-                //if (Columns.Select(column => column.ColumnName).Except(newColumns).Any())
                 Columns = DataTableFunctions.ExtractColumnsFromTable(tableObject)
                     .ToDictionary(
                         column => column.ColumnName, 
                         column => column.DataType);
 
-                return DataTableFunctions.FilterDataTable(tableObject, SelectedFilters);
+                return DataTableFunctions.FilterDataTable(
+                    tableObject, 
+                    SelectedFilters, 
+                    FilterAny ? "OR" : "AND");
             });
         }
 
