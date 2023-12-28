@@ -34,7 +34,7 @@ namespace Oasis_Visual_Pipelines.Operations
         {
             Type blockOperationInterface = typeof(IBlockDiagramOperation);
 
-            ImmutableArray<object?> blockOperationInstances = GenerateBlockControlInstancesForClassesDerivedFromTypeAsync(blockOperationInterface);
+            object?[] blockOperationInstances = GenerateBlockControlInstancesForClassesDerivedFromTypeAsync(blockOperationInterface);
 
             Block? chosenBlock = (Block?)await DialogHostFunctions.CreateAndShowDialog(
                 new BlockPickerDialog(),
@@ -54,7 +54,7 @@ namespace Oasis_Visual_Pipelines.Operations
             control.Block.BlockDiagram.BlockDiagramItems.Remove(control.Block);
         });
 
-        private static ImmutableArray<object?> GenerateBlockControlInstancesForClassesDerivedFromTypeAsync(Type blockOperationInterface)
+        private static object?[] GenerateBlockControlInstancesForClassesDerivedFromTypeAsync(Type blockOperationInterface)
         {
             if (blockOperationInterface is null) throw new ArgumentNullException(nameof(blockOperationInterface));
 
@@ -84,7 +84,7 @@ namespace Oasis_Visual_Pipelines.Operations
                 })
                 .Select(genericBlockOperationInstance =>
                     Activator.CreateInstance(typeof(BlockControl), genericBlockOperationInstance))
-                .ToImmutableArray();
+                .ToArray();
         }
     }
 }
