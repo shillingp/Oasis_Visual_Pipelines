@@ -21,6 +21,19 @@
 		</DockPanel>
 	</DataTemplate>
 
+	<DataTemplate DataType="{x:Type local:DateSourceBlockDiagramOperation}">
+		<DockPanel>
+			<TextBlock
+				DockPanel.Dock="Top"
+				Text="{Binding OperationTitle}"
+				TextWrapping="Wrap" />
+
+			<material:Card Margin="5" VerticalAlignment="Center">
+				<DatePicker SelectedDate="{Binding SelectedDate}" />
+			</material:Card>
+		</DockPanel>
+	</DataTemplate>
+
 	<DataTemplate DataType="{x:Type local:NumberSourceBlockDiagramOperation}">
 		<DockPanel>
 			<TextBlock

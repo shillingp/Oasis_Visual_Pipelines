@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace Oasis_Visual_Pipelines.Controls
 {
@@ -70,6 +71,10 @@ namespace Oasis_Visual_Pipelines.Controls
         public event RoutedEventHandler? CanvasLoaded;
         private void BlockDiagramCanvas_Loaded(object sender, RoutedEventArgs e)
         {
+            Dispatcher.Invoke(
+                RedrawAllBlocksAndConnections, 
+                DispatcherPriority.Background);
+
             CanvasLoaded?.Invoke(sender, e);
         }
 
