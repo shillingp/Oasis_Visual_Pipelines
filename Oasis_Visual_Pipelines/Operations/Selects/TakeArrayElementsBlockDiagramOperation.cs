@@ -7,7 +7,7 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(Enums.BlockOperationType.Array, Enums.BlockOperationGroup.Select)]
-    internal class TakeArrayElementsBlockDiagramOperation : IBlockDiagramOperation
+    public class TakeArrayElementsBlockDiagramOperation : IBlockDiagramOperation
     {
         public int MaxInputs => 1;
         public string OperationTitle => "Take 'N' Elements";

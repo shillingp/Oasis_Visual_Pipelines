@@ -7,7 +7,7 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(Enums.BlockOperationType.Number, Enums.BlockOperationGroup.Transforms)]
-    internal class DivideNumberBlockDiagramOperation : IBlockDiagramOperation
+    public class DivideNumberBlockDiagramOperation : IBlockDiagramOperation
     {
         public int MaxInputs => int.MaxValue;
 
