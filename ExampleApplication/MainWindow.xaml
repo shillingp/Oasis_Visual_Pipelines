@@ -44,8 +44,7 @@
 							<DataGrid
 								CanUserSortColumns="False"
 								IsReadOnly="True"
-								ItemsSource="{Binding}"
-								ScrollViewer.CanContentScroll="False" />
+								ItemsSource="{Binding}" />
 						</DataTemplate>
 						<DataTemplate DataType="{x:Type sys:Array}">
 							<ItemsControl ItemsSource="{Binding}" />

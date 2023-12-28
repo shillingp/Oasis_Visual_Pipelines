@@ -5,6 +5,23 @@
 	xmlns:converters="clr-namespace:Oasis_Visual_Pipelines.Converters"
 	xmlns:local="clr-namespace:Oasis_Visual_Pipelines.Operations"
 	xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
+	<DataTemplate DataType="{x:Type local:DistinctDataTableBlockOperation}">
+		<DockPanel>
+			<TextBlock
+				DockPanel.Dock="Top"
+				Text="{Binding OperationTitle}"
+				TextWrapping="Wrap" />
+
+			<UniformGrid VerticalAlignment="Center" Columns="5">
+				<material:PackIcon HorizontalAlignment="Center" Kind="Numeric" />
+				<material:PackIcon HorizontalAlignment="Center" Kind="ArrowRight" />
+				<material:PackIcon HorizontalAlignment="Center" Kind="Filter" />
+				<material:PackIcon HorizontalAlignment="Center" Kind="ArrowRight" />
+				<material:PackIcon HorizontalAlignment="Center" Kind="Numeric" />
+			</UniformGrid>
+		</DockPanel>
+	</DataTemplate>
+
 	<DataTemplate DataType="{x:Type local:FilterDataTableBlockDiagramOperation}">
 		<DockPanel>
 			<TextBlock
