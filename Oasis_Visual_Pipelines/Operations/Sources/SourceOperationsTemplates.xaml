@@ -34,6 +34,26 @@
 		</DockPanel>
 	</DataTemplate>
 
+	<DataTemplate DataType="{x:Type local:ExcelDataTableSourceBlockDiagramOperation}">
+		<DockPanel>
+			<TextBlock
+				DockPanel.Dock="Top"
+				Text="{Binding OperationTitle}"
+				TextWrapping="Wrap" />
+
+			<material:Card>
+				<DockPanel Margin="5">
+					<Button
+						Command="{Binding SelectFilePathCommand}"
+						Content="{material:PackIcon Kind=FileSearch}"
+						DockPanel.Dock="Right"
+						Style="{StaticResource MaterialDesignToolButton}" />
+					<TextBox VerticalAlignment="Center" Text="{Binding SourceFilePath, Mode=TwoWay}" />
+				</DockPanel>
+			</material:Card>
+		</DockPanel>
+	</DataTemplate>
+
 	<DataTemplate DataType="{x:Type local:NumberSourceBlockDiagramOperation}">
 		<DockPanel>
 			<TextBlock
