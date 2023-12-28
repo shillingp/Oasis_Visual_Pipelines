@@ -5,8 +5,6 @@ using Oasis_Visual_Pipelines.Functions;
 using Oasis_Visual_Pipelines.Interfaces;
 using PropertyChanged;
 using System.Data;
-using System.Diagnostics;
-using System.Windows.Media.TextFormatting;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
@@ -66,7 +64,7 @@ namespace Oasis_Visual_Pipelines.Operations
                     tableRow[temporaryColumn!] = updateFunctionData;
                 }
 
-                if (temporaryColumn is null) 
+                if (temporaryColumn is null)
                     return dataTable;
 
                 int existingColumnPosition = inputTable.Columns[ColumnName]!.Ordinal;

@@ -15,7 +15,8 @@ namespace Oasis_Visual_Pipelines.Operations
 
         public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
-            return new BlockOperationResult(additionalOperations => {
+            return new BlockOperationResult(additionalOperations =>
+            {
                 BlockOperationResult? firstOperationResult = inputOperations
                     .Concat(additionalOperations)
                     .FirstOrDefault();

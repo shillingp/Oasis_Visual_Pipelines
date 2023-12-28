@@ -1,5 +1,4 @@
 ﻿using Oasis_Visual_Pipelines.Controls;
-using Oasis_Visual_Pipelines.Interfaces;
 using System.Collections;
 using System.Globalization;
 using System.Windows.Data;

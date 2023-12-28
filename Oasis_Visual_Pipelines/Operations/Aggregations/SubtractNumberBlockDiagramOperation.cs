@@ -1,10 +1,5 @@
 ﻿using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
@@ -15,7 +10,7 @@ namespace Oasis_Visual_Pipelines.Operations
 
         public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
-            return new BlockOperationResult(additionalOperations => 
+            return new BlockOperationResult(additionalOperations =>
             {
                 IEnumerable<BlockOperationResult> allOperations = additionalOperations
                     .Concat(inputOperations);

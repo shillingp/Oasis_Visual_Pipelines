@@ -15,7 +15,7 @@ namespace Oasis_Visual_Pipelines.Functions
             {
                 if (current is T matchedType)
                     return matchedType;
-                
+
                 current = VisualTreeHelper.GetParent(current);
             }
             while (current != null);

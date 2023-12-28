@@ -3,7 +3,6 @@ using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Controls;
 using Oasis_Visual_Pipelines.Interfaces;
 using PropertyChanged;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;

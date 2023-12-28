@@ -1,5 +1,4 @@
-﻿using Oasis_Visual_Pipelines.Classes;
-using Oasis_Visual_Pipelines.Interfaces;
+﻿using Oasis_Visual_Pipelines.Interfaces;
 using Oasis_Visual_Pipelines.Models;
 using System.Globalization;
 using System.Windows.Data;

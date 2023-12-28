@@ -9,7 +9,7 @@ namespace Oasis_Visual_Pipelines.Converters
     {
         public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is null || value.GetType().GetCustomAttribute(typeof(BlockOperationGroupAttribute)) 
+            if (value is null || value.GetType().GetCustomAttribute(typeof(BlockOperationGroupAttribute))
                 is not BlockOperationGroupAttribute blockGroupAttribute)
                 return null;
 

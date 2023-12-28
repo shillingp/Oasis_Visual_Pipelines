@@ -2,7 +2,6 @@
 using Oasis_Visual_Pipelines.Attributes;
 using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Controls;
-using Oasis_Visual_Pipelines.Converters;
 using Oasis_Visual_Pipelines.Dialogs;
 using Oasis_Visual_Pipelines.Enums;
 using Oasis_Visual_Pipelines.Functions;
@@ -10,12 +9,10 @@ using Oasis_Visual_Pipelines.Interfaces;
 using Oasis_Visual_Pipelines.Models;
 using PropertyChanged;
 using System.Collections.Immutable;
-using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using System.Reflection;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Oasis_Visual_Pipelines.Operations
