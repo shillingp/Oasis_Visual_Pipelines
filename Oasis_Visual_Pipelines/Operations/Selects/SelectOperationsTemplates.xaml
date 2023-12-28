@@ -5,6 +5,30 @@
 	xmlns:converters="clr-namespace:Oasis_Visual_Pipelines.Converters"
 	xmlns:local="clr-namespace:Oasis_Visual_Pipelines.Operations"
 	xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
+	<DataTemplate DataType="{x:Type local:FilterDataTableBlockDiagramOperation}">
+		<DockPanel>
+			<TextBlock
+				DockPanel.Dock="Top"
+				Text="{Binding OperationTitle}"
+				TextWrapping="Wrap" />
+
+			<material:Card>
+				<DockPanel>
+					<Button
+						Command="{Binding EditFiltersCommand}"
+						Content="{material:PackIcon Kind=Edit}"
+						DockPanel.Dock="Right"
+						Style="{StaticResource MaterialDesignToolButton}" />
+					<TextBlock
+						Margin="5,2"
+						VerticalAlignment="Center"
+						DockPanel.Dock="Left"
+						Text="{Binding SelectedFilters.Count, StringFormat='{}{0} Active Filters'}" />
+				</DockPanel>
+			</material:Card>
+		</DockPanel>
+	</DataTemplate>
+
 	<DataTemplate DataType="{x:Type local:SelectColumnBlockDiagramOperation}">
 		<DockPanel>
 			<TextBlock

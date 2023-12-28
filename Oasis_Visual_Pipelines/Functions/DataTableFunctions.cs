@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Oasis_Visual_Pipelines.Classes;
+using System.Data;
 
 namespace Oasis_Visual_Pipelines.Functions
 {
@@ -10,6 +11,25 @@ namespace Oasis_Visual_Pipelines.Functions
                 .Cast<DataColumn>()
                 .Select(column => column.ColumnName)
                 .ToArray();
+        }
+
+        internal static DataColumn[] ExtractColumnsFromTable(DataTable dataTable)
+        {
+            return dataTable.Columns
+                .Cast<DataColumn>()
+                .ToArray();
+        }
+
+        internal static DataTable FilterDataTable(DataTable tableObject, ObservableSet<DataTableFilter> selectedFilters)
+        {
+            if (tableObject is null) throw new ArgumentNullException(nameof(tableObject));
+            if (selectedFilters is null) throw new ArgumentNullException(nameof(selectedFilters));
+
+            DataTable resultTable = tableObject.Copy();
+            resultTable.DefaultView.RowFilter = string.Join(" AND ",
+                selectedFilters.Select(filter => filter.ToString()));
+
+            return resultTable;
         }
 
         internal static DataTable JoinDataTable(
