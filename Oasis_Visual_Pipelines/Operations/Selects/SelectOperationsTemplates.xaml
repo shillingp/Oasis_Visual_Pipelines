@@ -53,6 +53,23 @@
 		</DockPanel>
 	</DataTemplate>
 
+	<DataTemplate DataType="{x:Type local:RemoveBlanksBlockDiagramOperation}">
+		<DockPanel>
+			<TextBlock
+				DockPanel.Dock="Top"
+				Text="{Binding OperationTitle}"
+				TextWrapping="Wrap" />
+
+			<UniformGrid VerticalAlignment="Center" Columns="5">
+				<material:PackIcon HorizontalAlignment="Center" Kind="Numeric" />
+				<material:PackIcon HorizontalAlignment="Center" Kind="ArrowRight" />
+				<material:PackIcon HorizontalAlignment="Center" Kind="PlaylistRemove" />
+				<material:PackIcon HorizontalAlignment="Center" Kind="ArrowRight" />
+				<material:PackIcon HorizontalAlignment="Center" Kind="Numeric" />
+			</UniformGrid>
+		</DockPanel>
+	</DataTemplate>
+
 	<DataTemplate DataType="{x:Type local:SelectColumnBlockDiagramOperation}">
 		<DockPanel>
 			<TextBlock

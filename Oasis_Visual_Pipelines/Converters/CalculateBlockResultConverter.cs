@@ -13,7 +13,7 @@ namespace Oasis_Visual_Pipelines.Converters
                 || block.GetType().GetGenericArguments()[0].GetInterface(nameof(IBlockDiagramOperation)) is null)
                 return string.Empty;
 
-            return ((dynamic)block).CalculateFlowPathResult().Result();
+            return ((dynamic)block).CalculateFlowPathResult()?.Result();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
