@@ -7,5 +7,6 @@
         Text = 2,
         DataTable = 4,
         Array = 8,
+        DateTime = 16,
     }
 }

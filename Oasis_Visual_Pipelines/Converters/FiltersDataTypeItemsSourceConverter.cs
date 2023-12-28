@@ -28,7 +28,7 @@ namespace Oasis_Visual_Pipelines.Converters
                 case Type _ when tableColumnType == typeof(float):
                     return numericFilters;
                 case Type _ when tableColumnType == typeof(DateTime):
-                    return Enumerable.Empty<string>();
+                    return dateTimeFilters;
                 default:
                     return Array.Empty<FilterFunctor>();
             }
@@ -55,6 +55,15 @@ namespace Oasis_Visual_Pipelines.Converters
             new FilterFunctor("Less than or equal", "<="),
             new FilterFunctor("Greater than", ">"),
             new FilterFunctor("Greater than or equal", ">="),
+        ];
+
+        private FilterFunctor[] dateTimeFilters = [
+            new FilterFunctor("Equals", "= #__REPLACE__#"),
+            new FilterFunctor("Not equal", "<> #__REPLACE__#"),
+            new FilterFunctor("Less than", "< #__REPLACE__#"),
+            new FilterFunctor("Less than or equal", "<= #__REPLACE__#"),
+            new FilterFunctor("Greater than", "> #__REPLACE__#"),
+            new FilterFunctor("Greater than or equal", ">= #__REPLACE__#"),
         ];
     }
 }

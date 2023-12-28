@@ -187,15 +187,6 @@
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>
 
-		<!--<TextBlock
-		Grid.Column="0"
-		HorizontalAlignment="Left"
-		Text="{Binding LeftConnections.Count}" />
-	<TextBlock
-		Grid.Column="2"
-		HorizontalAlignment="Right"
-		Text="{Binding RightConnections.Count}" />-->
-
 		<ItemsControl
 			x:Name="RightConnectorsControl"
 			Grid.Column="2"
