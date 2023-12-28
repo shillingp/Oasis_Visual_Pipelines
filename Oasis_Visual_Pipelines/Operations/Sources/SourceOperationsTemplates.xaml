@@ -43,29 +43,32 @@
 
 			<material:Card Margin="5" VerticalAlignment="Center">
 				<controls:NumericUpDownControl NumberValue="{Binding NumberValue}" />
-				<!--<DockPanel>
-					<Button
-						Command="{Binding IncreaseNumberCommand}"
-						Content="{material:PackIcon Kind=Plus}"
-						DockPanel.Dock="Right"
-						Style="{StaticResource MaterialDesignToolButton}" />
-					<Button
-						Command="{Binding DecreaseNumberCommand}"
-						Content="{material:PackIcon Kind=Minus}"
-						DockPanel.Dock="Right"
-						Style="{StaticResource MaterialDesignToolButton}" />
-					<TextBox
-						Margin="5,0,0,0"
-						VerticalAlignment="Center"
-						Text="{Binding NumberValue, UpdateSourceTrigger=PropertyChanged}" />
-				</DockPanel>-->
+			</material:Card>
+		</DockPanel>
+	</DataTemplate>
+
+	<DataTemplate DataType="{x:Type local:SQLDataTableSourceBlockDiagramOperation}">
+		<DockPanel>
+			<TextBlock
+				DockPanel.Dock="Top"
+				Text="{Binding OperationTitle}"
+				TextWrapping="Wrap" />
+
+			<material:Card Padding="2">
+				<StackPanel>
+					<TextBox material:HintAssist.Hint="Connection String" Text="{Binding ConnectionString}" />
+					<TextBox material:HintAssist.Hint="Table Name" Text="{Binding TableName}" />
+				</StackPanel>
 			</material:Card>
 		</DockPanel>
 	</DataTemplate>
 
 	<DataTemplate DataType="{x:Type local:StringSourceBlockDiagramOperation}">
 		<DockPanel>
-			<TextBlock DockPanel.Dock="Top" Text="{Binding OperationTitle}" />
+			<TextBlock
+				DockPanel.Dock="Top"
+				Text="{Binding OperationTitle}"
+				TextWrapping="Wrap" />
 
 			<material:Card Margin="5" VerticalAlignment="Center">
 				<TextBox
