@@ -53,6 +53,23 @@
 		</DockPanel>
 	</DataTemplate>
 
+	<DataTemplate DataType="{x:Type local:RemoveBlanksBlockDiagramOperation}">
+		<DockPanel>
+			<TextBlock
+				DockPanel.Dock="Top"
+				Text="{Binding OperationTitle}"
+				TextWrapping="Wrap" />
+
+			<UniformGrid VerticalAlignment="Center" Columns="5">
+				<material:PackIcon HorizontalAlignment="Center" Kind="Numeric" />
+				<material:PackIcon HorizontalAlignment="Center" Kind="ArrowRight" />
+				<material:PackIcon HorizontalAlignment="Center" Kind="PlaylistRemove" />
+				<material:PackIcon HorizontalAlignment="Center" Kind="ArrowRight" />
+				<material:PackIcon HorizontalAlignment="Center" Kind="Numeric" />
+			</UniformGrid>
+		</DockPanel>
+	</DataTemplate>
+
 	<DataTemplate DataType="{x:Type local:SelectColumnBlockDiagramOperation}">
 		<DockPanel>
 			<TextBlock
@@ -80,35 +97,24 @@
 				TextWrapping="Wrap" />
 
 			<material:Card Margin="5">
-				<Grid Margin="5,2">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition />
-						<ColumnDefinition />
-					</Grid.ColumnDefinitions>
-					<Grid.RowDefinitions>
-						<RowDefinition />
-						<RowDefinition />
-					</Grid.RowDefinitions>
-
+				<StackPanel Margin="5,2">
 					<ComboBox
 						Grid.Row="0"
 						Grid.ColumnSpan="2"
 						ItemsSource="{Binding ValidColumns}"
 						SelectedItem="{Binding ColumnName}" />
 
-					<RadioButton
-						Grid.Row="1"
-						Grid.Column="0"
-						Content="{material:PackIcon Kind=SortAscending}"
-						IsChecked="{Binding SortDirection, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Static local:SortDirection.Ascending}}"
-						Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
-					<RadioButton
-						Grid.Row="1"
-						Grid.Column="1"
-						Content="{material:PackIcon Kind=SortDescending}"
-						IsChecked="{Binding SortDirection, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Static local:SortDirection.Descending}}"
-						Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
-				</Grid>
+					<UniformGrid Columns="2">
+						<RadioButton
+							Content="{material:PackIcon Kind=SortAscending}"
+							IsChecked="{Binding SortDirection, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Static local:SortDirection.Ascending}}"
+							Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+						<RadioButton
+							Content="{material:PackIcon Kind=SortDescending}"
+							IsChecked="{Binding SortDirection, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Static local:SortDirection.Descending}}"
+							Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+					</UniformGrid>
+				</StackPanel>
 			</material:Card>
 		</DockPanel>
 	</DataTemplate>

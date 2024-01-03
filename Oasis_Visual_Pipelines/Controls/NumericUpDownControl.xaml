@@ -6,6 +6,7 @@
 	xmlns:local="clr-namespace:Oasis_Visual_Pipelines.Controls"
 	xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	Margin="2,1"
 	d:Background="White"
 	d:Width="150"
 	mc:Ignorable="d">

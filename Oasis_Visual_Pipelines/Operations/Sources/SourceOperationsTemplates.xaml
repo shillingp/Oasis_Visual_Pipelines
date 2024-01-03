@@ -28,7 +28,10 @@
 				Text="{Binding OperationTitle}"
 				TextWrapping="Wrap" />
 
-			<material:Card Margin="5" VerticalAlignment="Center">
+			<material:Card
+				Margin="5"
+				Padding="2"
+				VerticalAlignment="Center">
 				<DatePicker SelectedDate="{Binding SelectedDate}" />
 			</material:Card>
 		</DockPanel>
@@ -41,16 +44,11 @@
 				Text="{Binding OperationTitle}"
 				TextWrapping="Wrap" />
 
-			<material:Card>
-				<DockPanel Margin="5">
-					<Button
-						Command="{Binding SelectFilePathCommand}"
-						Content="{material:PackIcon Kind=FileSearch}"
-						DockPanel.Dock="Right"
-						Style="{StaticResource MaterialDesignToolButton}" />
-					<TextBox VerticalAlignment="Center" Text="{Binding SourceFilePath, Mode=TwoWay}" />
-				</DockPanel>
-			</material:Card>
+			<Button
+				Margin="15,5"
+				Padding="0"
+				Command="{Binding UpdateExcelSourceCommand}"
+				Content="Update Source" />
 		</DockPanel>
 	</DataTemplate>
 
@@ -74,12 +72,11 @@
 				Text="{Binding OperationTitle}"
 				TextWrapping="Wrap" />
 
-			<material:Card Padding="2">
-				<StackPanel>
-					<TextBox material:HintAssist.Hint="Connection String" Text="{Binding ConnectionString}" />
-					<TextBox material:HintAssist.Hint="Table Name" Text="{Binding TableName}" />
-				</StackPanel>
-			</material:Card>
+			<Button
+				Margin="15,5"
+				Padding="0"
+				Command="{Binding UpdateConnectionSettingsCommand}"
+				Content="Update Settings" />
 		</DockPanel>
 	</DataTemplate>
 

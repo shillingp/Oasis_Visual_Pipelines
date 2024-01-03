@@ -1,5 +1,8 @@
-﻿using Oasis_Visual_Pipelines.Classes;
+﻿using ExcelDataReader;
+using Oasis_Visual_Pipelines.Classes;
 using System.Data;
+using System.IO;
+using System.Text;
 
 namespace Oasis_Visual_Pipelines.Functions
 {
@@ -63,6 +66,45 @@ namespace Oasis_Visual_Pipelines.Functions
             resultTable.Columns.Remove("new-" + rightJoinColumn);
 
             return resultTable;
+        }
+
+        internal static string ConvertDataTableToCSVString(DataTable resultTable)
+        {
+            StringBuilder resultString = new StringBuilder();
+
+            IEnumerable<string> columnNames = resultTable.Columns
+                .Cast<DataColumn>()
+                .Select(column => column.ColumnName);
+            resultString.AppendLine(string.Join(",", columnNames));
+
+            foreach (DataRow row in resultTable.Rows)
+            {
+                IEnumerable<string?> fields = row.ItemArray.Select(field => field!.ToString());
+                resultString.AppendLine(string.Join(",", fields));
+            }
+
+            return resultString.ToString();
+        }
+
+        internal static DataTable ImportExcelToDataTable(string sourceFilePath)
+        {
+            if (string.IsNullOrEmpty(sourceFilePath))
+                return new DataTable();
+
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            using (FileStream stream = File.Open(sourceFilePath, FileMode.Open, FileAccess.Read))
+            using (IExcelDataReader reader = ExcelReaderFactory.CreateOpenXmlReader(stream))
+            {
+                DataSet dataset = reader.AsDataSet(new ExcelDataSetConfiguration()
+                {
+                    ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
+                    {
+                        UseHeaderRow = true,
+                    }
+                });
+
+                return dataset.Tables[0];
+            }
         }
     }
 }

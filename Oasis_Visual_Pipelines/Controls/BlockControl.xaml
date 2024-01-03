@@ -187,6 +187,15 @@
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>
 
+		<!--<StackPanel
+			Grid.Column="1"
+			HorizontalAlignment="Center"
+			Orientation="Horizontal">
+			<TextBlock Text="{Binding Position.X, StringFormat=N0}" />
+			<TextBlock Text="," />
+			<TextBlock Text="{Binding Position.Y, StringFormat=N0}" />
+		</StackPanel>-->
+
 		<ItemsControl
 			x:Name="RightConnectorsControl"
 			Grid.Column="2"

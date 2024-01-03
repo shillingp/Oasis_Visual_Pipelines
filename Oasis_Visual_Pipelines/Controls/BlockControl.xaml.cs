@@ -72,7 +72,7 @@ namespace Oasis_Visual_Pipelines.Controls
             MaxHeight = IsExpanded ? 100 : double.MaxValue;
             IsExpanded ^= true;
 
-            Application.Current.Dispatcher.Invoke(Block.RedrawAnyConnections, DispatcherPriority.Render);
+            Application.Current.Dispatcher.Invoke(Block.RedrawAnyConnections, DispatcherPriority.Loaded);
         });
         #endregion
 

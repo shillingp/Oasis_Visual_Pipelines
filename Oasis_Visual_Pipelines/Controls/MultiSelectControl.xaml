@@ -15,7 +15,12 @@
 	<UserControl.Resources>
 		<converters:CollectionContainsConverter x:Key="CollectionContainsConverter" />
 	</UserControl.Resources>
-	<DockPanel>
+	<Grid>
+		<TextBlock
+			HorizontalAlignment="Center"
+			VerticalAlignment="Center"
+			Style="{StaticResource MaterialDesignCharacterCounterTextBlock}"
+			Text="No Table Input" />
 		<ListView
 			x:Name="ItemSelectionListView"
 			MaxHeight="100"
@@ -26,6 +31,7 @@
 			<ListView.ItemContainerStyle>
 				<Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
 					<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+					<Setter Property="Background" Value="{StaticResource MaterialDesignBackground}" />
 				</Style>
 			</ListView.ItemContainerStyle>
 			<ListView.ItemTemplate>
@@ -45,5 +51,5 @@
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>
-	</DockPanel>
+	</Grid>
 </UserControl>
