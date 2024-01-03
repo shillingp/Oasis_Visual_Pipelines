@@ -1,13 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using ExcelDataReader;
 using Microsoft.Win32;
 using Oasis_Visual_Pipelines.Attributes;
 using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Enums;
+using Oasis_Visual_Pipelines.Functions;
 using Oasis_Visual_Pipelines.Interfaces;
 using PropertyChanged;
 using System.Data;
-using System.IO;
 using System.Windows.Input;
 
 namespace Oasis_Visual_Pipelines.Operations
@@ -19,47 +18,14 @@ namespace Oasis_Visual_Pipelines.Operations
         public int MaxInputs => 0;
         public string OperationTitle => "Excel Data Source";
 
-        private string _sourceFilePath = string.Empty;
-        public string SourceFilePath
-        {
-            get { return _sourceFilePath; }
-            set
-            {
-                if (value == _sourceFilePath)
-                    return;
-
-                _sourceFilePath = value;
-                CachedTable = null;
-            }
-        }
-
-        public DataTable? CachedTable { get; set; }
+        public DataTable? FetchedExcelTable { get; set; } = null;
 
         public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
-            CachedTable ??= ImportExcelToDataTable();
+            if (FetchedExcelTable is not null)
+                return new BlockOperationResult(FetchedExcelTable);
 
-            return new BlockOperationResult(CachedTable);
-        }
-
-        private DataTable ImportExcelToDataTable()
-        {
-            if (string.IsNullOrEmpty(SourceFilePath))
-                return new DataTable();
-
-            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-            using (FileStream stream = File.Open(SourceFilePath, FileMode.Open, FileAccess.Read))
-            using (IExcelDataReader reader = ExcelReaderFactory.CreateOpenXmlReader(stream))
-            {
-                DataSet dataset = reader.AsDataSet(new ExcelDataSetConfiguration()
-                {
-                    ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
-                    {
-                        UseHeaderRow = true,
-                    }
-                });
-                return dataset.Tables[0];
-            }
+            return BlockOperationResult.NullOperation;
         }
 
         public ICommand SelectFilePathCommand => new RelayCommand(() =>
@@ -73,7 +39,7 @@ namespace Oasis_Visual_Pipelines.Operations
             if (openFileDialog.ShowDialog() != true)
                 return;
 
-            SourceFilePath = openFileDialog.FileName;
+            FetchedExcelTable = DataTableFunctions.ImportExcelToDataTable(openFileDialog.FileName);
         });
     }
 }

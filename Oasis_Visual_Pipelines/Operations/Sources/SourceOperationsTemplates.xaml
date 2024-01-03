@@ -44,16 +44,11 @@
 				Text="{Binding OperationTitle}"
 				TextWrapping="Wrap" />
 
-			<material:Card>
-				<DockPanel Margin="5">
-					<Button
-						Command="{Binding SelectFilePathCommand}"
-						Content="{material:PackIcon Kind=FileSearch}"
-						DockPanel.Dock="Right"
-						Style="{StaticResource MaterialDesignToolButton}" />
-					<TextBox VerticalAlignment="Center" Text="{Binding SourceFilePath, Mode=TwoWay}" />
-				</DockPanel>
-			</material:Card>
+			<Button
+				Margin="15,5"
+				Padding="0"
+				Command="{Binding UpdateExcelSourceCommand}"
+				Content="Update Source" />
 		</DockPanel>
 	</DataTemplate>
 
@@ -79,8 +74,9 @@
 
 			<Button
 				Margin="15,5"
+				Padding="0"
 				Command="{Binding UpdateConnectionSettingsCommand}"
-				Content="Edit Settings" />
+				Content="Update Settings" />
 		</DockPanel>
 	</DataTemplate>
 

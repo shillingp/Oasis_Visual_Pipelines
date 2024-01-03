@@ -1,5 +1,7 @@
-﻿using Oasis_Visual_Pipelines.Classes;
+﻿using ExcelDataReader;
+using Oasis_Visual_Pipelines.Classes;
 using System.Data;
+using System.IO;
 using System.Text;
 
 namespace Oasis_Visual_Pipelines.Functions
@@ -82,6 +84,27 @@ namespace Oasis_Visual_Pipelines.Functions
             }
 
             return resultString.ToString();
+        }
+
+        internal static DataTable ImportExcelToDataTable(string sourceFilePath)
+        {
+            if (string.IsNullOrEmpty(sourceFilePath))
+                return new DataTable();
+
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            using (FileStream stream = File.Open(sourceFilePath, FileMode.Open, FileAccess.Read))
+            using (IExcelDataReader reader = ExcelReaderFactory.CreateOpenXmlReader(stream))
+            {
+                DataSet dataset = reader.AsDataSet(new ExcelDataSetConfiguration()
+                {
+                    ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
+                    {
+                        UseHeaderRow = true,
+                    }
+                });
+
+                return dataset.Tables[0];
+            }
         }
     }
 }

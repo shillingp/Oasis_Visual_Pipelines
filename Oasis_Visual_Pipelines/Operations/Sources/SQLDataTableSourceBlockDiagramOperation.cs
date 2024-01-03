@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using Microsoft.Data.SqlClient;
 using Oasis_Visual_Pipelines.Attributes;
 using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Dialogs;
@@ -6,10 +7,7 @@ using Oasis_Visual_Pipelines.Enums;
 using Oasis_Visual_Pipelines.Functions;
 using Oasis_Visual_Pipelines.Interfaces;
 using PropertyChanged;
-using System.Collections;
-using System.Collections.Generic;
 using System.Data;
-using Microsoft.Data.SqlClient;
 using System.Windows.Input;
 
 namespace Oasis_Visual_Pipelines.Operations
@@ -26,20 +24,6 @@ namespace Oasis_Visual_Pipelines.Operations
 
         public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
-            //if (currentCachedTable is null && !string.IsNullOrEmpty(ConnectionString) && !string.IsNullOrEmpty(TableName))
-            //{
-            //    using (SqlConnection connection = new SqlConnection(ConnectionString))
-            //    using (SqlCommand command = new SqlCommand($"SELECT * FROM {TableName}", connection))
-            //    using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
-            //    {
-            //        DataTable sqlTable = new DataTable();
-            //        dataAdapter.Fill(sqlTable);
-            //        currentCachedTable = sqlTable;
-            //    };
-            //}
-
-            //return new BlockOperationResult(currentCachedTable);
-
             if (FetchedDataTable is not null)
                 return new BlockOperationResult(FetchedDataTable);
 
