@@ -1,12 +1,16 @@
-﻿using Oasis_Visual_Pipelines.Attributes;
+﻿using CommunityToolkit.Mvvm.Input;
+using Oasis_Visual_Pipelines.Attributes;
 using Oasis_Visual_Pipelines.Classes;
+using Oasis_Visual_Pipelines.Dialogs;
 using Oasis_Visual_Pipelines.Enums;
+using Oasis_Visual_Pipelines.Functions;
 using Oasis_Visual_Pipelines.Interfaces;
 using PropertyChanged;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
+using System.Windows.Input;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
@@ -17,51 +21,68 @@ namespace Oasis_Visual_Pipelines.Operations
         public int MaxInputs => 0;
         public string OperationTitle => "SQL Connection";
 
-        private DataTable? currentCachedTable;
-
-        private string _connectionString = string.Empty;
-        public string ConnectionString
-        {
-            get => _connectionString;
-            set
-            {
-                if (value == _connectionString) 
-                    return;
-
-                _connectionString = value;
-                currentCachedTable = null;
-            }
-        }
-
-        private string _tableName = string.Empty;
-        public string TableName
-        {
-            get => _tableName;
-            set
-            {
-                if (value == _tableName)
-                    return;
-
-                _tableName = value;
-                currentCachedTable = null;
-            }
-        }
+        private readonly SQLConnectionSettingsDialog settingsDialog = new SQLConnectionSettingsDialog();
+        private DataTable? FetchedDataTable = null;
 
         public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
-            if (currentCachedTable is null && !string.IsNullOrEmpty(ConnectionString) && !string.IsNullOrEmpty(TableName))
+            //if (currentCachedTable is null && !string.IsNullOrEmpty(ConnectionString) && !string.IsNullOrEmpty(TableName))
+            //{
+            //    using (SqlConnection connection = new SqlConnection(ConnectionString))
+            //    using (SqlCommand command = new SqlCommand($"SELECT * FROM {TableName}", connection))
+            //    using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
+            //    {
+            //        DataTable sqlTable = new DataTable();
+            //        dataAdapter.Fill(sqlTable);
+            //        currentCachedTable = sqlTable;
+            //    };
+            //}
+
+            //return new BlockOperationResult(currentCachedTable);
+
+            if (FetchedDataTable is not null)
+                return new BlockOperationResult(FetchedDataTable);
+
+            return BlockOperationResult.NullOperation;
+        }
+
+        public ICommand UpdateConnectionSettingsCommand => new RelayCommand(async () =>
+        {
+            bool? closeStateResult = (bool?)await DialogHostFunctions.CreateAndShowDialog(settingsDialog, null, true);
+            if (closeStateResult != true) return;
+
+            string authenticationString = settingsDialog.AuthenticationMethod switch
             {
-                using (SqlConnection connection = new SqlConnection(ConnectionString))
-                using (SqlCommand command = new SqlCommand($"SELECT * FROM {TableName}", connection))
+                Authentication.None => "",
+                Authentication.Default => "Authentication=Active Directory Default",
+                Authentication.UsernamePassword => "Authentication=Active Directory Password",
+                Authentication.Integrated => "Authentication=Active Directory Integrated",
+                Authentication.Interactive => "Authentication=Active Directory Interactive",
+            };
+
+            string tableName = settingsDialog.TableName;
+            string connectionString = string.Join(';', new[] {
+                $"Server={settingsDialog.ServerString}",
+                $"Database={settingsDialog.DatabaseName}",
+                authenticationString,
+                "Encrypt=True"
+            }.Where(part => !string.IsNullOrEmpty(part)));
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlCommand command = new SqlCommand($"SELECT * FROM {tableName}", connection))
                 using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
                 {
                     DataTable sqlTable = new DataTable();
                     dataAdapter.Fill(sqlTable);
-                    currentCachedTable = sqlTable;
+                    FetchedDataTable = sqlTable;
                 };
             }
-
-            return new BlockOperationResult(currentCachedTable);
-        }
+            catch
+            {
+                FetchedDataTable = null;
+            }
+        });
     }
 }
