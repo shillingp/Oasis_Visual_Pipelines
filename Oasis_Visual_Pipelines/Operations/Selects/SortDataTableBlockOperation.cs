@@ -25,7 +25,10 @@ namespace Oasis_Visual_Pipelines.Operations
             BlockOperationResult? dataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
 
             if (dataTableInput?.Result() is not DataTable dataTable)
+            {
+                ValidColumns = [];
                 return BlockOperationResult.NullOperation;
+            }
 
             ValidColumns = DataTableFunctions.ExtractColumnNamesFromTable(dataTable);
 

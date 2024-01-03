@@ -31,12 +31,24 @@
 			Margin="5"
 			Padding="5">
 			<DockPanel>
-				<Button
-					HorizontalAlignment="Left"
-					Click="PreviewRefreshButton_Click"
-					Content="{material:PackIcon Kind=Refresh}"
-					DockPanel.Dock="Left"
-					Style="{StaticResource MaterialDesignToolButton}" />
+				<DockPanel Width="50" HorizontalAlignment="Stretch">
+					<Button
+						Click="PreviewRefreshButton_Click"
+						Content="{material:PackIcon Kind=Refresh}"
+						DockPanel.Dock="Top"
+						Style="{StaticResource MaterialDesignToolButton}" />
+
+					<Button
+						Command="{Binding ElementName=MainBlockDiagram, Path=ExportBlockResultCommand}"
+						Content="{material:PackIcon Kind=Export}"
+						DockPanel.Dock="Bottom"
+						Style="{StaticResource MaterialDesignToolButton}" />
+					<Button
+						Command="{Binding ElementName=MainBlockDiagram, Path=CopyBlockResultToClipboardCommand}"
+						Content="{material:PackIcon Kind=ContentCopy}"
+						DockPanel.Dock="Bottom"
+						Style="{StaticResource MaterialDesignToolButton}" />
+				</DockPanel>
 
 				<ContentControl x:Name="ResultsPreviewControl" Content="{Binding ElementName=MainBlockDiagram, Path=SelectedBlock, Converter={StaticResource CalculateBlockResultConverter}}">
 					<ContentControl.Resources>
@@ -44,8 +56,7 @@
 							<DataGrid
 								CanUserSortColumns="False"
 								IsReadOnly="True"
-								ItemsSource="{Binding}"
-								ScrollViewer.CanContentScroll="False" />
+								ItemsSource="{Binding}" />
 						</DataTemplate>
 						<DataTemplate DataType="{x:Type sys:Array}">
 							<ItemsControl ItemsSource="{Binding}" />

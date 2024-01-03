@@ -28,9 +28,27 @@
 				Text="{Binding OperationTitle}"
 				TextWrapping="Wrap" />
 
-			<material:Card Margin="5" VerticalAlignment="Center">
+			<material:Card
+				Margin="5"
+				Padding="2"
+				VerticalAlignment="Center">
 				<DatePicker SelectedDate="{Binding SelectedDate}" />
 			</material:Card>
+		</DockPanel>
+	</DataTemplate>
+
+	<DataTemplate DataType="{x:Type local:ExcelDataTableSourceBlockDiagramOperation}">
+		<DockPanel>
+			<TextBlock
+				DockPanel.Dock="Top"
+				Text="{Binding OperationTitle}"
+				TextWrapping="Wrap" />
+
+			<Button
+				Margin="15,5"
+				Padding="0"
+				Command="{Binding UpdateExcelSourceCommand}"
+				Content="Update Source" />
 		</DockPanel>
 	</DataTemplate>
 
@@ -43,29 +61,31 @@
 
 			<material:Card Margin="5" VerticalAlignment="Center">
 				<controls:NumericUpDownControl NumberValue="{Binding NumberValue}" />
-				<!--<DockPanel>
-					<Button
-						Command="{Binding IncreaseNumberCommand}"
-						Content="{material:PackIcon Kind=Plus}"
-						DockPanel.Dock="Right"
-						Style="{StaticResource MaterialDesignToolButton}" />
-					<Button
-						Command="{Binding DecreaseNumberCommand}"
-						Content="{material:PackIcon Kind=Minus}"
-						DockPanel.Dock="Right"
-						Style="{StaticResource MaterialDesignToolButton}" />
-					<TextBox
-						Margin="5,0,0,0"
-						VerticalAlignment="Center"
-						Text="{Binding NumberValue, UpdateSourceTrigger=PropertyChanged}" />
-				</DockPanel>-->
 			</material:Card>
+		</DockPanel>
+	</DataTemplate>
+
+	<DataTemplate DataType="{x:Type local:SQLDataTableSourceBlockDiagramOperation}">
+		<DockPanel>
+			<TextBlock
+				DockPanel.Dock="Top"
+				Text="{Binding OperationTitle}"
+				TextWrapping="Wrap" />
+
+			<Button
+				Margin="15,5"
+				Padding="0"
+				Command="{Binding UpdateConnectionSettingsCommand}"
+				Content="Update Settings" />
 		</DockPanel>
 	</DataTemplate>
 
 	<DataTemplate DataType="{x:Type local:StringSourceBlockDiagramOperation}">
 		<DockPanel>
-			<TextBlock DockPanel.Dock="Top" Text="{Binding OperationTitle}" />
+			<TextBlock
+				DockPanel.Dock="Top"
+				Text="{Binding OperationTitle}"
+				TextWrapping="Wrap" />
 
 			<material:Card Margin="5" VerticalAlignment="Center">
 				<TextBox

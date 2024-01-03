@@ -1,12 +1,18 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
+﻿using ClosedXML.Excel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Classes.Messages;
 using Oasis_Visual_Pipelines.Functions;
 using Oasis_Visual_Pipelines.Interfaces;
 using Oasis_Visual_Pipelines.Models;
 using Oasis_Visual_Pipelines.Operations;
+using System.Collections;
+using System.Data;
 using System.Globalization;
+using System.IO;
 using System.Reflection;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -68,11 +74,74 @@ namespace Oasis_Visual_Pipelines.Controls
             InitializeComponent();
         }
 
+        #region Commands
+        public ICommand CopyBlockResultToClipboardCommand => new RelayCommand(() =>
+        {
+            dynamic currentBlockResult = HelperFunctions.ReturnBlockResult(SelectedBlock!);
+
+            if (currentBlockResult is not (DataTable or IEnumerable))
+            {
+                Clipboard.SetText(currentBlockResult.ToString());
+                return;
+            }
+            
+            if (currentBlockResult is DataTable resultTable)
+            {
+                string resultString = DataTableFunctions.ConvertDataTableToCSVString(resultTable);
+
+                Clipboard.SetText(resultString, TextDataFormat.CommaSeparatedValue);
+                return;
+            }
+
+            if (currentBlockResult is IEnumerable resultCollection)
+            {
+                StringBuilder resultString = new StringBuilder();
+
+                foreach (var item in resultCollection)
+                    resultString.AppendLine(item.ToString());
+
+                Clipboard.SetText(resultString.ToString(), TextDataFormat.Text);
+                return;
+            }
+
+            Clipboard.SetDataObject(currentBlockResult);
+        });
+
+        public ICommand ExportBlockResultCommand => new RelayCommand(async () =>
+        {
+            dynamic currentBlockResult = HelperFunctions.ReturnBlockResult(SelectedBlock!);
+
+            if (currentBlockResult is not (DataTable or IEnumerable))
+                await DialogHostFunctions.CreateAndShowDialog(
+                    new TextBlock
+                    {
+                        Text = "Unable to export data.\nData must be a Table or a List",
+                        Margin = new Thickness(5)
+                    },
+                    null,
+                    true);
+
+            using (XLWorkbook workbook = new XLWorkbook())
+            {
+                IXLWorksheet worksheet = workbook.Worksheets.Add("Oasis Export");
+
+                if (currentBlockResult is DataTable resultantTable)
+                    worksheet.FirstCell().InsertTable(resultantTable, true);
+                else if (currentBlockResult is IEnumerable resultantCollection)
+                    worksheet.FirstCell().InsertData(resultantCollection);
+
+                string desktopLocation = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory, Environment.SpecialFolderOption.None);
+                workbook.SaveAs(Path.Combine(desktopLocation, "Oasis_Data_Export.xlsx"));
+            }
+        });
+        #endregion
+
+        #region Events
         public event RoutedEventHandler? CanvasLoaded;
         private void BlockDiagramCanvas_Loaded(object sender, RoutedEventArgs e)
         {
             Dispatcher.Invoke(
-                RedrawAllBlocksAndConnections, 
+                RedrawAllBlocksAndConnections,
                 DispatcherPriority.Background);
 
             CanvasLoaded?.Invoke(sender, e);
@@ -102,7 +171,8 @@ namespace Oasis_Visual_Pipelines.Controls
             blockToAdd.Title = "New Block";
 
             BlockDiagramItems.Add((IBlockDiagramObject)newBlockToAdd);
-        }
+        } 
+        #endregion
 
         public Block<T> AddBlock<T>(Point position, string? title = null, T? data = null)
             where T : class, new()

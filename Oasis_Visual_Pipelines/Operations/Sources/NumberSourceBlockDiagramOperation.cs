@@ -21,8 +21,5 @@ namespace Oasis_Visual_Pipelines.Operations
         {
             return new BlockOperationResult(additionalOperations => NumberValue);
         }
-
-        //public ICommand DecreaseNumberCommand => new RelayCommand(() => NumberValue--);
-        //public ICommand IncreaseNumberCommand => new RelayCommand(() => NumberValue++);
     }
 }

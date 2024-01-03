@@ -22,7 +22,6 @@ namespace Oasis_Visual_Pipelines.Controls
                 typeof(MultiSelectControl),
                 new PropertyMetadata(Enumerable.Empty<object>()));
 
-
         public HashSet<object> SelectedItems
         {
             get { return (HashSet<object>)GetValue(SelectedItemsProperty); }
