@@ -1,5 +1,6 @@
 ﻿using Oasis_Visual_Pipelines.Classes;
 using System.Data;
+using System.Text;
 
 namespace Oasis_Visual_Pipelines.Functions
 {
@@ -63,6 +64,24 @@ namespace Oasis_Visual_Pipelines.Functions
             resultTable.Columns.Remove("new-" + rightJoinColumn);
 
             return resultTable;
+        }
+
+        internal static string ConvertDataTableToCSVString(DataTable resultTable)
+        {
+            StringBuilder resultString = new StringBuilder();
+
+            IEnumerable<string> columnNames = resultTable.Columns
+                .Cast<DataColumn>()
+                .Select(column => column.ColumnName);
+            resultString.AppendLine(string.Join(",", columnNames));
+
+            foreach (DataRow row in resultTable.Rows)
+            {
+                IEnumerable<string?> fields = row.ItemArray.Select(field => field!.ToString());
+                resultString.AppendLine(string.Join(",", fields));
+            }
+
+            return resultString.ToString();
         }
     }
 }

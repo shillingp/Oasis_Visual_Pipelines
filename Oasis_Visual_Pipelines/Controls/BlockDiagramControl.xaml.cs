@@ -12,6 +12,7 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -74,21 +75,37 @@ namespace Oasis_Visual_Pipelines.Controls
         }
 
         #region Commands
-        public ICommand CopyBlockResultToClipboardCommand => new RelayCommand(
-            () =>
+        public ICommand CopyBlockResultToClipboardCommand => new RelayCommand(() =>
+        {
+            dynamic currentBlockResult = HelperFunctions.ReturnBlockResult(SelectedBlock!);
+
+            if (currentBlockResult is not (DataTable or IEnumerable))
             {
-                dynamic currentBlockResult = HelperFunctions.ReturnBlockResult(SelectedBlock!);
+                Clipboard.SetText(currentBlockResult.ToString());
+                return;
+            }
+            
+            if (currentBlockResult is DataTable resultTable)
+            {
+                string resultString = DataTableFunctions.ConvertDataTableToCSVString(resultTable);
 
-                if (currentBlockResult is not (DataTable or IEnumerable))
-                    Clipboard.SetText(currentBlockResult.ToString());
-                else if (currentBlockResult is DataTable)
-                    ;
-                else
-                    ;
+                Clipboard.SetText(resultString, TextDataFormat.CommaSeparatedValue);
+                return;
+            }
 
-                Clipboard.SetDataObject(currentBlockResult);
-            }, 
-            () => false && SelectedBlock is not null);
+            if (currentBlockResult is IEnumerable resultCollection)
+            {
+                StringBuilder resultString = new StringBuilder();
+
+                foreach (var item in resultCollection)
+                    resultString.AppendLine(item.ToString());
+
+                Clipboard.SetText(resultString.ToString(), TextDataFormat.Text);
+                return;
+            }
+
+            Clipboard.SetDataObject(currentBlockResult);
+        });
 
         public ICommand ExportBlockResultCommand => new RelayCommand(async () =>
         {
