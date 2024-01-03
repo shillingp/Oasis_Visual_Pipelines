@@ -45,8 +45,10 @@ namespace Oasis_Visual_Pipelines.Operations
                     return new FailedOperation("Column data types must match!");
 
                 return DataTableFunctions.JoinDataTables(
-                    leftDataTable, rightDataTable,
-                    SelectedLeftColumn, SelectedRightColumn);
+                    leftDataTable,
+                    rightDataTable,
+                    SelectedLeftColumn,
+                    SelectedRightColumn);
             });
         }
     }

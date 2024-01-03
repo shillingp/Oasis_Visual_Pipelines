@@ -5,6 +5,8 @@ using System.Data;
 
 namespace Oasis_Visual_Pipelines.Operations.Joins
 {
+    [AddINotifyPropertyChangedInterface]
+    [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGroup.Join)]
     class ConcatDataTablesBlockDiagramOperation : IBlockDiagramOperation
     {
         public int MaxInputs => 2;
@@ -39,7 +41,9 @@ namespace Oasis_Visual_Pipelines.Operations.Joins
                 if (leftDataTable.Columns[SelectedLeftColumn]?.DataType != rightDataTable.Columns[SelectedRightColumn]?.DataType)
                     return new FailedOperation("Column data types must match!");
 
-                return DataTableFunctions.ConcatDataTables(leftDataTable, rightDataTable);
+                return DataTableFunctions.ConcatDataTables(
+                    leftDataTable,
+                    rightDataTable);
             });
         }
     }
