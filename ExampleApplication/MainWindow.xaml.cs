@@ -37,13 +37,13 @@ namespace ExampleApplication
                             Column = new KeyValuePair<string, Type>("First Name", typeof(string)),
                             Filter = new FilterFunctor("Starts with", "LIKE '___REPLACE___*'"),
                             Value = "J"
-                        },
+                        }, // Keep anything whose 'First Name' starts with 'J'
                         new DataTableFilter
                         {
                             Column = new KeyValuePair<string, Type>("Index", typeof(int)),
                             Filter = new FilterFunctor("Less than", "<"),
                             Value = "3"
-                        }
+                        } // Keep anything that has an 'Index' less than '3'
                     ]
                 });
 
