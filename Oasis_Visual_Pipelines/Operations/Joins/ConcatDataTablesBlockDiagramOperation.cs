@@ -1,16 +1,11 @@
-﻿using Oasis_Visual_Pipelines.Attributes;
-using Oasis_Visual_Pipelines.Classes;
-using Oasis_Visual_Pipelines.Enums;
+﻿using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Functions;
 using Oasis_Visual_Pipelines.Interfaces;
-using PropertyChanged;
 using System.Data;
 
-namespace Oasis_Visual_Pipelines.Operations
+namespace Oasis_Visual_Pipelines.Operations.Joins
 {
-    [AddINotifyPropertyChangedInterface]
-    [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGroup.Join)]
-    public class JoinDataTablesBlockDiagramOperation : IBlockDiagramOperation
+    class ConcatDataTablesBlockDiagramOperation : IBlockDiagramOperation
     {
         public int MaxInputs => 2;
         public string OperationTitle => "Join Tables";
@@ -44,9 +39,7 @@ namespace Oasis_Visual_Pipelines.Operations
                 if (leftDataTable.Columns[SelectedLeftColumn]?.DataType != rightDataTable.Columns[SelectedRightColumn]?.DataType)
                     return new FailedOperation("Column data types must match!");
 
-                return DataTableFunctions.JoinDataTable(
-                    leftDataTable, rightDataTable,
-                    SelectedLeftColumn, SelectedRightColumn);
+                return DataTableFunctions.ConcatDataTables(leftDataTable, rightDataTable);
             });
         }
     }

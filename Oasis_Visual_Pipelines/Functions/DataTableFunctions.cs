@@ -33,7 +33,22 @@ namespace Oasis_Visual_Pipelines.Functions
             return resultTable;
         }
 
-        internal static DataTable JoinDataTable(
+        internal static object ConcatDataTables(DataTable leftDataTable, DataTable rightDataTable)
+        {
+            DataTable resultTable = leftDataTable.Copy();
+
+            string[] leftHandColumns = leftDataTable.Columns
+                .Cast<DataColumn>()
+                .Select(column => column.ColumnName)
+                .ToArray();
+            
+            foreach (DataRow dataRow in rightDataTable.Rows.Cast<DataRow>())
+                resultTable.Rows.Add(leftHandColumns.Select(column => dataRow[column]));
+
+            return resultTable;
+        }
+
+        internal static DataTable JoinDataTables(
             DataTable leftTable,
             DataTable rightTable,
             string leftJoinColumn,
