@@ -9,7 +9,7 @@ namespace Oasis_Visual_Pipelines.Classes
     public class BaseBlockDiagramOperation : INotifyPropertyChanged, IBlockDiagramOperation
     {
         public virtual int MaxInputs => 0;
-        public virtual int MaxOutputs => 0;
+        public virtual int MaxOutputs => int.MaxValue;
         public virtual string OperationTitle => "";
 
         public event PropertyChangedEventHandler? PropertyChanged;

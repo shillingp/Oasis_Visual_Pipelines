@@ -25,7 +25,7 @@ namespace Oasis_Visual_Pipelines.Operations
             return BlockOperationResult.NullOperation;
         }
 
-        public ICommand SelectFilePathCommand => new RelayCommand(() =>
+        public ICommand UpdateExcelSourceCommand => new RelayCommand(() =>
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
