@@ -9,12 +9,12 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.Array, BlockOperationGroup.Transforms)]
-    public class MapArrayBlockDiagramOperation : IBlockDiagramOperation
+    public class MapArrayBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 2;
-        public string OperationTitle => "Map Array";
+        public override int MaxInputs => 2;
+        public override string OperationTitle => "Map Array";
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             return new BlockOperationResult(additionalOperations =>
             {

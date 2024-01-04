@@ -8,15 +8,15 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.DateTime, BlockOperationGroup.Transforms)]
-    internal class DateTimeOffsetBlockDiagramOperation : IBlockDiagramOperation
+    internal class DateTimeOffsetBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 1;
-        public string OperationTitle => "Offset DateTime";
+        public override int MaxInputs => 1;
+        public override string OperationTitle => "Offset DateTime";
 
         public int OffsetValue { get; set; } = 0;
         public TimeDateOffset TimeDateOffset { get; set; } = TimeDateOffset.Day;
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             return new BlockOperationResult(additionalOperations =>
             {

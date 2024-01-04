@@ -7,13 +7,12 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(Enums.BlockOperationType.Number, Enums.BlockOperationGroup.Transforms)]
-    public class DivideNumberBlockDiagramOperation : IBlockDiagramOperation
+    public class DivideNumberBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => int.MaxValue;
+        public override int MaxInputs => int.MaxValue;
+        public override string OperationTitle => "Divide Numbers";
 
-        public string OperationTitle => "Divide Numbers";
-
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             return new BlockOperationResult((additionalOperations) =>
             {

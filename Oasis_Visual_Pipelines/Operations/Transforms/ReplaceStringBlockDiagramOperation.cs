@@ -8,15 +8,15 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.Text, BlockOperationGroup.Transforms)]
-    public class ReplaceStringBlockDiagramOperation : IBlockDiagramOperation
+    public class ReplaceStringBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 1;
-        public string OperationTitle => "Replace String";
+        public override int MaxInputs => 1;
+        public override string OperationTitle => "Replace String";
 
         public string SearchText { get; set; } = "";
         public string ReplaceText { get; set; } = "";
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             return new BlockOperationResult(additionalOperations =>
             {

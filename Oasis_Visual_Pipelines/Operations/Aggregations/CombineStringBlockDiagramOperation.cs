@@ -8,12 +8,12 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.Text, BlockOperationGroup.Aggregation)]
-    public class CombineStringBlockDiagramOperation : IBlockDiagramOperation
+    public class CombineStringBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => int.MaxValue;
-        public string OperationTitle => "Combine String";
+        public override int MaxInputs => int.MaxValue;
+        public override string OperationTitle => "Combine String";
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             return new BlockOperationResult((additionalOperations) => inputOperations
                 .Concat(additionalOperations)

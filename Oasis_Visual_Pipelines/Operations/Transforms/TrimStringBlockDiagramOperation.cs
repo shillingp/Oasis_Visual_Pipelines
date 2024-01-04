@@ -8,12 +8,12 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.Text, BlockOperationGroup.Transforms)]
-    public class TrimStringBlockDiagramOperation : IBlockDiagramOperation
+    public class TrimStringBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 1;
-        public string OperationTitle => "Trim String";
+        public override int MaxInputs => 1;
+        public override string OperationTitle => "Trim String";
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             return new BlockOperationResult(additionalOperations =>
             {

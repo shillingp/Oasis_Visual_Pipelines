@@ -8,14 +8,14 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.Text, BlockOperationGroup.Sources)]
-    public class StringSourceBlockDiagramOperation : IBlockDiagramOperation
+    public class StringSourceBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 0;
-        public string OperationTitle => "String Source";
+        public override int MaxInputs => 0;
+        public override string OperationTitle => "String Source";
 
         public string? TextValue { get; set; }
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             return new BlockOperationResult(additionalOperations => TextValue);
         }

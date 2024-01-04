@@ -10,17 +10,16 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGroup.Transforms)]
-    public class UpdateColumnBlockDiagramOperation : IBlockDiagramOperation
+    public class UpdateColumnBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 2;
-
-        public string OperationTitle => "Update Column";
+        public override int MaxInputs => 2;
+        public override string OperationTitle => "Update Column";
 
         public string? ColumnName { get; set; }
 
         public string[] ValidColumns { get; set; } = [];
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             BlockOperationResult? dataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
             BlockOperationResult? updateFunctionInput = inputOperations.FirstOrDefault(operation => operation != dataTableInput);

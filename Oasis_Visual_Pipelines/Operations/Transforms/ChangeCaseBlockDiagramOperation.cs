@@ -8,14 +8,14 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(Enums.BlockOperationType.Text, Enums.BlockOperationGroup.Transforms)]
-    public class ChangeCaseBlockDiagramOperation : IBlockDiagramOperation
+    public class ChangeCaseBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 1;
-        public string OperationTitle => "Change Text Case";
+        public override int MaxInputs => 1;
+        public override string OperationTitle => "Change Text Case";
 
         public TextCase TextCaseChoice { get; set; } = TextCase.LowerCase;
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             return new BlockOperationResult(additionalOperations =>
             {

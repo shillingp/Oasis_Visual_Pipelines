@@ -4,12 +4,12 @@ using System.Data;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
-    public class RemoveBlanksBlockDiagramOperation : IBlockDiagramOperation
+    public class RemoveBlanksBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 1;
-        public string OperationTitle => "Remove Blanks";
+        public override int MaxInputs => 1;
+        public override string OperationTitle => "Remove Blanks";
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             BlockOperationResult? tableOperation = inputOperations
                 .FirstOrDefault(operation => operation?.Result() is DataTable);

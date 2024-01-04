@@ -10,15 +10,15 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGroup.Select)]
-    public class SelectColumnBlockDiagramOperation : IBlockDiagramOperation
+    public class SelectColumnBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 1;
-        public string OperationTitle => "Select Column";
+        public override int MaxInputs => 1;
+        public override string OperationTitle => "Select Column";
 
         public string[] ValidColumns { get; set; } = [];
         public HashSet<object> SelectedColumns { get; set; } = new HashSet<object>();
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             BlockOperationResult? dataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
 

@@ -12,17 +12,17 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(Enums.BlockOperationType.DataTable, Enums.BlockOperationGroup.Select)]
-    public class FilterDataTableBlockDiagramOperation : IBlockDiagramOperation
+    public class FilterDataTableBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 1;
-        public string OperationTitle => "Filter Table";
+        public override int MaxInputs => 1;
+        public override string OperationTitle => "Filter Table";
 
         public bool FilterAny { get; set; } = false;
 
         public Dictionary<string, Type> Columns { get; set; } = new Dictionary<string, Type>();
         public ObservableSet<DataTableFilter> SelectedFilters { get; set; } = new ObservableSet<DataTableFilter>();
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             return new BlockOperationResult(additionalOperations =>
             {

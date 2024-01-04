@@ -92,7 +92,10 @@ namespace Oasis_Visual_Pipelines.Controls
         #region Commands
         public ICommand CopyBlockResultToClipboardCommand => new RelayCommand(() =>
         {
-            dynamic currentBlockResult = HelperFunctions.ReturnBlockResult(SelectedBlock!);
+            dynamic? currentBlockResult = HelperFunctions.ReturnBlockResult(SelectedBlock!);
+
+            if (currentBlockResult is null)
+                return;
 
             if (currentBlockResult is not (DataTable or IEnumerable))
             {
@@ -124,7 +127,10 @@ namespace Oasis_Visual_Pipelines.Controls
 
         public ICommand ExportBlockResultCommand => new RelayCommand(async () =>
         {
-            dynamic currentBlockResult = HelperFunctions.ReturnBlockResult(SelectedBlock!);
+            dynamic? currentBlockResult = HelperFunctions.ReturnBlockResult(SelectedBlock!);
+
+            if (currentBlockResult is null)
+                return;
 
             if (currentBlockResult is not (DataTable or IEnumerable))
                 await DialogHostFunctions.CreateAndShowDialog(

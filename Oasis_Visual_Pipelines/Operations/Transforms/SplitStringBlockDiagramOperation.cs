@@ -10,14 +10,14 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.Text, BlockOperationGroup.Transforms)]
-    public class SplitStringBlockDiagramOperation : IBlockDiagramOperation
+    public class SplitStringBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 1;
-        public string OperationTitle => "Split String";
+        public override int MaxInputs => 1;
+        public override string OperationTitle => "Split String";
 
         public string? SplitString { get; set; }
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             return new BlockOperationResult(additionalOperations =>
             {

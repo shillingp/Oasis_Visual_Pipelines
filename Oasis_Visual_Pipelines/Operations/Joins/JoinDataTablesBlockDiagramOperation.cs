@@ -10,10 +10,10 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGroup.Join)]
-    public class JoinDataTablesBlockDiagramOperation : IBlockDiagramOperation
+    public class JoinDataTablesBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 2;
-        public string OperationTitle => "Join Tables";
+        public override int MaxInputs => 2;
+        public override string OperationTitle => "Join Tables";
 
         public string[] LeftColumns { get; set; } = [];
         public string[] RightColumns { get; set; } = [];
@@ -21,7 +21,7 @@ namespace Oasis_Visual_Pipelines.Operations
         public string? SelectedLeftColumn { get; set; }
         public string? SelectedRightColumn { get; set; }
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             BlockOperationResult? leftDataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
             BlockOperationResult? rightDataTableInput = inputOperations.FirstOrDefault(operation => operation != leftDataTableInput);

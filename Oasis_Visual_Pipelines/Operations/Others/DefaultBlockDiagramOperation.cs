@@ -18,13 +18,13 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.None, BlockOperationGroup.Other)]
-    public class DefaultBlockDiagramOperation : IBlockDiagramOperation
+    public class DefaultBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 0;
-        public int MaxOutputs => 0;
-        public string OperationTitle => "Select Block";
+        public override int MaxInputs => 0;
+        public override int MaxOutputs => 0;
+        public override string OperationTitle => "Select Block";
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             return new BlockOperationResult(additionalOperations => null);
         }

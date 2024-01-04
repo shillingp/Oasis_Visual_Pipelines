@@ -7,14 +7,14 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(Enums.BlockOperationType.Array, Enums.BlockOperationGroup.Select)]
-    public class TakeArrayElementsBlockDiagramOperation : IBlockDiagramOperation
+    public class TakeArrayElementsBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 1;
-        public string OperationTitle => "Take 'N' Elements";
+        public override int MaxInputs => 1;
+        public override string OperationTitle => "Take 'N' Elements";
 
         public int ElementCount { get; set; } = 1;
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             return new BlockOperationResult(additionalOperations =>
             {

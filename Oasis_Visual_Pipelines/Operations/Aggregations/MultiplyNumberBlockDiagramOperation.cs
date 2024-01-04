@@ -8,12 +8,12 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.Number, BlockOperationGroup.Aggregation)]
-    public class MultiplyNumberBlockDiagramOperation : IBlockDiagramOperation
+    public class MultiplyNumberBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => int.MaxValue;
-        public string OperationTitle => "Multiply Numbers";
+        public override int MaxInputs => int.MaxValue;
+        public override string OperationTitle => "Multiply Numbers";
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             return new BlockOperationResult((additionalOperations) => inputOperations
                 .Concat(additionalOperations)

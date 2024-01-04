@@ -9,13 +9,12 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGroup.Sources)]
-    public class DataTableSourceBlockDiagramOperation : IBlockDiagramOperation
+    public class DataTableSourceBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 0;
+        public override int MaxInputs => 0;
+        public override string OperationTitle => "Table Source";
 
-        public string OperationTitle => "Table Source";
-
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             return new BlockOperationResult(additionalOperations =>
             {

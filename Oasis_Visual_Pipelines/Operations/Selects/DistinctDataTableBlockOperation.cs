@@ -10,12 +10,12 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGroup.Sources)]
-    public class DistinctDataTableBlockOperation : IBlockDiagramOperation
+    public class DistinctDataTableBlockOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 1;
-        public string OperationTitle => "Distinct Rows";
+        public override int MaxInputs => 1;
+        public override string OperationTitle => "Distinct Rows";
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             BlockOperationResult? tableOperation = inputOperations
                 .FirstOrDefault(operation => operation?.Result() is DataTable);

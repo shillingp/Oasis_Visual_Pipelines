@@ -10,17 +10,17 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGroup.Select)]
-    public class SortDataTableBlockOperation : IBlockDiagramOperation
+    public class SortDataTableBlockOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 1;
-        public string OperationTitle => "Sort Table";
+        public override int MaxInputs => 1;
+        public override string OperationTitle => "Sort Table";
 
         public string[] ValidColumns { get; set; } = [];
         public string? ColumnName { get; set; }
 
         public SortDirection SortDirection { get; set; } = SortDirection.Ascending;
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             BlockOperationResult? dataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
 

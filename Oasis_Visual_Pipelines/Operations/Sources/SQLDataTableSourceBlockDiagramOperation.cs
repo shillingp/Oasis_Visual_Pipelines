@@ -14,15 +14,15 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGroup.Sources)]
-    public class SQLDataTableSourceBlockDiagramOperation : IBlockDiagramOperation
+    public class SQLDataTableSourceBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 0;
-        public string OperationTitle => "SQL Connection";
+        public override int MaxInputs => 0;
+        public override string OperationTitle => "SQL Connection";
 
         private readonly SQLConnectionSettingsDialog settingsDialog = new SQLConnectionSettingsDialog();
         private DataTable? FetchedDataTable = null;
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             if (FetchedDataTable is not null)
                 return new BlockOperationResult(FetchedDataTable);

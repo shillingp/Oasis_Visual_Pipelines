@@ -3,12 +3,12 @@ using Oasis_Visual_Pipelines.Interfaces;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
-    public class SubtractNumberBlockDiagramOperation : IBlockDiagramOperation
+    public class SubtractNumberBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => int.MaxValue;
-        public string OperationTitle => "Subtract Numbers";
+        public override int MaxInputs => int.MaxValue;
+        public override string OperationTitle => "Subtract Numbers";
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             return new BlockOperationResult(additionalOperations =>
             {

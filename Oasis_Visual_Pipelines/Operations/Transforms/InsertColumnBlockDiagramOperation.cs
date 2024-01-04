@@ -7,15 +7,14 @@ using System.Data;
 namespace Oasis_Visual_Pipelines.Operations
 {
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGroup.Transforms)]
-    public class InsertColumnBlockDiagramOperation : IBlockDiagramOperation
+    public class InsertColumnBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 2;
-
-        public string OperationTitle => "Insert Column";
+        public override int MaxInputs => 2;
+        public override string OperationTitle => "Insert Column";
 
         public string? ColumnName { get; set; }
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             BlockOperationResult? dataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
             BlockOperationResult? insertValueInput = inputOperations.FirstOrDefault(operation => operation != dataTableInput);

@@ -13,14 +13,14 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGroup.Sources)]
-    public class ExcelDataTableSourceBlockDiagramOperation : IBlockDiagramOperation
+    public class ExcelDataTableSourceBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 0;
-        public string OperationTitle => "Excel Data Source";
+        public override int MaxInputs => 0;
+        public override string OperationTitle => "Excel Data Source";
 
         public DataTable? FetchedExcelTable { get; set; } = null;
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             if (FetchedExcelTable is not null)
                 return new BlockOperationResult(FetchedExcelTable);

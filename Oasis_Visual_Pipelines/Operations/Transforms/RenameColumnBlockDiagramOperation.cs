@@ -9,17 +9,17 @@ namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(Enums.BlockOperationType.DataTable, Enums.BlockOperationGroup.Transforms)]
-    public class RenameColumnBlockDiagramOperation : IBlockDiagramOperation
+    public class RenameColumnBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 1;
-        public string OperationTitle => "Rename Column";
+        public override int MaxInputs => 1;
+        public override string OperationTitle => "Rename Column";
 
         public string[] ValidColumns { get; set; } = [];
 
         public string? SelectedColumn { get; set; }
         public string? NewColumnName { get; set; }
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             BlockOperationResult? leftDataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
 
