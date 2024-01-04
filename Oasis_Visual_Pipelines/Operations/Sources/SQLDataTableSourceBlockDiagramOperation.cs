@@ -42,6 +42,7 @@ namespace Oasis_Visual_Pipelines.Operations
                 Authentication.UsernamePassword => "Authentication=Active Directory Password",
                 Authentication.Integrated => "Authentication=Active Directory Integrated",
                 Authentication.Interactive => "Authentication=Active Directory Interactive",
+                _ => throw new NotImplementedException(),
             };
 
             string tableName = settingsDialog.TableName;

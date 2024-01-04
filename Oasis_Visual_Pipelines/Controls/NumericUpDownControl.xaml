@@ -17,7 +17,10 @@
 			<ColumnDefinition Width="Auto" />
 		</Grid.ColumnDefinitions>
 
-		<TextBox Margin="2" Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:NumericUpDownControl}}, Path=NumberValue}" />
+		<TextBox
+			Margin="2"
+			Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:NumericUpDownControl}}, Path=NumberValue}"
+			TextAlignment="Center" />
 		<Button
 			Grid.Column="1"
 			Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:NumericUpDownControl}}, Path=DecrementNumberCommand}"
