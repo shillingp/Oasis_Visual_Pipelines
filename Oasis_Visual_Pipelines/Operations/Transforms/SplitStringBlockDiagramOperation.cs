@@ -2,8 +2,6 @@
 using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Enums;
 using Oasis_Visual_Pipelines.Functions;
-using Oasis_Visual_Pipelines.Interfaces;
-using PropertyChanged;
 using System.Text.RegularExpressions;
 
 namespace Oasis_Visual_Pipelines.Operations

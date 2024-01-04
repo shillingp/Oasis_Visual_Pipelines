@@ -1,8 +1,6 @@
 ﻿using Oasis_Visual_Pipelines.Attributes;
 using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Enums;
-using Oasis_Visual_Pipelines.Interfaces;
-using PropertyChanged;
 using System.Data;
 
 namespace Oasis_Visual_Pipelines.Operations

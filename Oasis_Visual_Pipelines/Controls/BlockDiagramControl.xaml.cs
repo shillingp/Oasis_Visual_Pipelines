@@ -71,7 +71,7 @@ namespace Oasis_Visual_Pipelines.Controls
 
         public object SelectedBlockResult
         {
-            get { return (object)GetValue(SelectedBlockResultProperty); }
+            get { return GetValue(SelectedBlockResultProperty); }
             set { SetValue(SelectedBlockResultProperty, value); }
         }
 

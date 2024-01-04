@@ -1,5 +1,4 @@
 ﻿using Oasis_Visual_Pipelines.Classes;
-using Oasis_Visual_Pipelines.Interfaces;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
