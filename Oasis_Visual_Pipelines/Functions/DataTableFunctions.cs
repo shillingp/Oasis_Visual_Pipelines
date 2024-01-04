@@ -40,13 +40,12 @@ namespace Oasis_Visual_Pipelines.Functions
         {
             DataTable resultTable = leftDataTable.Copy();
 
-            string[] leftHandColumns = leftDataTable.Columns
-                .Cast<DataColumn>()
-                .Select(column => column.ColumnName)
-                .ToArray();
+            string[] leftHandColumns = ExtractColumnNamesFromTable(leftDataTable);
 
             foreach (DataRow dataRow in rightDataTable.Rows.Cast<DataRow>())
-                resultTable.Rows.Add(leftHandColumns.Select(column => dataRow[column]));
+                resultTable.Rows.Add(leftHandColumns
+                    .Select(column => dataRow[column])
+                    .ToArray());
 
             return resultTable;
         }

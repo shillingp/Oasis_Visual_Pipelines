@@ -15,7 +15,7 @@
 	<UserControl.Resources>
 		<converters:CollectionContainsConverter x:Key="CollectionContainsConverter" />
 	</UserControl.Resources>
-	<Grid>
+	<Grid MinHeight="30">
 		<TextBlock
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"

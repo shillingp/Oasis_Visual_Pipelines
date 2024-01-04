@@ -74,8 +74,8 @@
 										Style="{StaticResource MaterialDesignFlatButton}">
 										<Button.Content>
 											<StackPanel Orientation="Horizontal">
-												<TextBlock Text="Select Block" />
-												<material:PackIcon Kind="Tick" />
+												<TextBlock VerticalAlignment="Center" Text="Select Block" />
+												<material:PackIcon VerticalAlignment="Center" Kind="Tick" />
 											</StackPanel>
 										</Button.Content>
 									</Button>

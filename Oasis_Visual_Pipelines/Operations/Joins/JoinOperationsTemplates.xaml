@@ -3,6 +3,38 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:local="clr-namespace:Oasis_Visual_Pipelines.Operations"
 	xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
+	<DataTemplate DataType="{x:Type local:ConcatDataTablesBlockDiagramOperation}">
+		<DockPanel>
+			<TextBlock
+				DockPanel.Dock="Top"
+				Text="{Binding OperationTitle}"
+				TextWrapping="Wrap" />
+
+			<UniformGrid VerticalAlignment="Center" Columns="5">
+				<material:PackIcon
+					Grid.Column="0"
+					HorizontalAlignment="Center"
+					Kind="Table" />
+				<material:PackIcon
+					Grid.Column="1"
+					HorizontalAlignment="Center"
+					Kind="ArrowRight" />
+				<material:PackIcon
+					Grid.Column="2"
+					HorizontalAlignment="Center"
+					Kind="TableMergeCells" />
+				<material:PackIcon
+					Grid.Column="3"
+					HorizontalAlignment="Center"
+					Kind="ArrowRight" />
+				<material:PackIcon
+					Grid.Column="4"
+					HorizontalAlignment="Center"
+					Kind="Table" />
+			</UniformGrid>
+		</DockPanel>
+	</DataTemplate>
+
 	<DataTemplate DataType="{x:Type local:JoinDataTablesBlockDiagramOperation}">
 		<DockPanel>
 			<TextBlock

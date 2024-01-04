@@ -1,4 +1,6 @@
 ﻿using Oasis_Visual_Pipelines.Classes;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Oasis_Visual_Pipelines.Interfaces
 {

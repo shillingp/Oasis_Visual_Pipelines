@@ -32,13 +32,12 @@ namespace Oasis_Visual_Pipelines.Functions
             return true;
         }
 
-        public static dynamic ReturnBlockResult(Block block)
+        public static dynamic? ReturnBlockResult(Block block)
         {
-            if (block is null) throw new ArgumentNullException(nameof(block));
-
-            if (!block.GetType().IsGenericType
+            if (block is null ||
+                !block.GetType().IsGenericType
                 || block.GetType().GetGenericArguments()[0].GetInterface(nameof(IBlockDiagramOperation)) is null)
-                return string.Empty;
+                return null;
 
             return ((dynamic)block).CalculateFlowPathResult()?.Result();
         }

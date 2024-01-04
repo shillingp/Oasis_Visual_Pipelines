@@ -15,9 +15,6 @@
 	Width="1000"
 	Height="700"
 	mc:Ignorable="d">
-	<Window.Resources>
-		<converters:CalculateBlockResultConverter x:Key="CalculateBlockResultConverter" />
-	</Window.Resources>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="3*" />
@@ -50,7 +47,7 @@
 						Style="{StaticResource MaterialDesignToolButton}" />
 				</DockPanel>
 
-				<ContentControl x:Name="ResultsPreviewControl" Content="{Binding ElementName=MainBlockDiagram, Path=SelectedBlock, Converter={StaticResource CalculateBlockResultConverter}}">
+				<ContentControl x:Name="ResultsPreviewControl" Content="{Binding ElementName=MainBlockDiagram, Path=SelectedBlockResult}">
 					<ContentControl.Resources>
 						<DataTemplate DataType="{x:Type data:DataTable}">
 							<DataGrid

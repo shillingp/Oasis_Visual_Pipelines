@@ -18,8 +18,8 @@ namespace Oasis_Visual_Pipelines.Converters
             return collection
                 .OfType<BlockControl>()
                 .Cast<dynamic>()
-                .Where(blockControl => ((string)blockControl.Block.Data.OperationTitle)
-                    .Contains(searchText, StringComparison.OrdinalIgnoreCase));
+                .Where(blockControl => (blockControl.Block.Data.OperationTitle as string)?
+                    .Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false);
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

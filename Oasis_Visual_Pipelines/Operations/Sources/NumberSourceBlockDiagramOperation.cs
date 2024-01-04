@@ -3,19 +3,20 @@ using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Enums;
 using Oasis_Visual_Pipelines.Interfaces;
 using PropertyChanged;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
-    [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.Number, BlockOperationGroup.Sources)]
-    public class NumberSourceBlockDiagramOperation : IBlockDiagramOperation
+    public class NumberSourceBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 0;
-        public string OperationTitle => "Number Source";
+        public override int MaxInputs => 0;
+        public override string OperationTitle => "Number Source";
 
         public double NumberValue { get; set; }
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             return new BlockOperationResult(additionalOperations => NumberValue);
         }

@@ -7,6 +7,7 @@ using Oasis_Visual_Pipelines.Functions;
 using Oasis_Visual_Pipelines.Interfaces;
 using Oasis_Visual_Pipelines.Models;
 using Oasis_Visual_Pipelines.Operations;
+using PropertyChanged;
 using System.Collections;
 using System.Data;
 using System.Globalization;
@@ -24,7 +25,8 @@ namespace Oasis_Visual_Pipelines.Controls
     /// <summary>
     /// Interaction logic for BlockDiagramControl.xaml
     /// </summary>
-    public partial class BlockDiagramControl : UserControl, IRecipient<BlockControlSelectionMessage>
+    [AddINotifyPropertyChangedInterface]
+    public partial class BlockDiagramControl : UserControl, IRecipient<BlockControlSelectionMessage>, IRecipient<BlockControlPropertyChangedMessage>
     {
         private static int numberOfBlocksCreated = 0;
 
@@ -64,6 +66,19 @@ namespace Oasis_Visual_Pipelines.Controls
             DependencyProperty.Register(
                 "SelectedBlock",
                 typeof(Block),
+                typeof(BlockDiagramControl),
+                new PropertyMetadata(null));
+
+        public object SelectedBlockResult
+        {
+            get { return (object)GetValue(SelectedBlockResultProperty); }
+            set { SetValue(SelectedBlockResultProperty, value); }
+        }
+
+        public static readonly DependencyProperty SelectedBlockResultProperty =
+            DependencyProperty.Register(
+                "SelectedBlockResult",
+                typeof(object),
                 typeof(BlockDiagramControl),
                 new PropertyMetadata(null));
 
@@ -140,9 +155,11 @@ namespace Oasis_Visual_Pipelines.Controls
         public event RoutedEventHandler? CanvasLoaded;
         private void BlockDiagramCanvas_Loaded(object sender, RoutedEventArgs e)
         {
-            Dispatcher.Invoke(
-                RedrawAllBlocksAndConnections,
-                DispatcherPriority.Background);
+            Task.Delay(100)
+                .ContinueWith((_) =>
+                    Dispatcher.Invoke(
+                        RedrawAllBlocksAndConnections,
+                        DispatcherPriority.Background));
 
             CanvasLoaded?.Invoke(sender, e);
         }
@@ -174,6 +191,7 @@ namespace Oasis_Visual_Pipelines.Controls
         }
         #endregion
 
+        #region Methods
         public Block<T> AddBlock<T>(Point position, string? title = null, T? data = null)
             where T : class, new()
         {
@@ -203,6 +221,13 @@ namespace Oasis_Visual_Pipelines.Controls
         public void Receive(BlockControlSelectionMessage message)
         {
             SelectedBlock = message.NewSelection?.Block;
+            SelectedBlockResult = HelperFunctions.ReturnBlockResult(SelectedBlock!)!;
         }
+
+        public void Receive(BlockControlPropertyChangedMessage message)
+        {
+            SelectedBlockResult = HelperFunctions.ReturnBlockResult(SelectedBlock!)!;
+        }
+        #endregion
     }
 }

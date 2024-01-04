@@ -77,7 +77,7 @@
 				Text="{Binding OperationTitle}"
 				TextWrapping="Wrap" />
 
-			<material:Card>
+			<material:Card Margin="5">
 				<controls:MultiSelectControl
 					MaxHeight="100"
 					ItemsSource="{Binding ValidColumns, Mode=TwoWay}"

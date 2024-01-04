@@ -60,7 +60,7 @@
 				TextWrapping="Wrap" />
 
 			<material:Card Margin="5" VerticalAlignment="Center">
-				<controls:NumericUpDownControl NumberValue="{Binding NumberValue}" />
+				<controls:NumericUpDownControl NumberValue="{Binding NumberValue, Mode=TwoWay}" />
 			</material:Card>
 		</DockPanel>
 	</DataTemplate>

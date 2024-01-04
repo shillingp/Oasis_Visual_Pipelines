@@ -6,14 +6,14 @@ using Oasis_Visual_Pipelines.Interfaces;
 using PropertyChanged;
 using System.Data;
 
-namespace Oasis_Visual_Pipelines.Operations.Joins
+namespace Oasis_Visual_Pipelines.Operations
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGroup.Join)]
     internal class ConcatDataTablesBlockDiagramOperation : IBlockDiagramOperation
     {
         public int MaxInputs => 2;
-        public string OperationTitle => "Join Tables";
+        public string OperationTitle => "Concat Tables";
 
         public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {

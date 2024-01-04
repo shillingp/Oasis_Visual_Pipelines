@@ -4,6 +4,8 @@ using Oasis_Visual_Pipelines.Classes.Messages;
 using Oasis_Visual_Pipelines.Enums;
 using Oasis_Visual_Pipelines.Functions;
 using Oasis_Visual_Pipelines.Models;
+using PropertyChanged;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
