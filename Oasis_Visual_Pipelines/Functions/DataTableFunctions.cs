@@ -44,7 +44,7 @@ namespace Oasis_Visual_Pipelines.Functions
                 .Cast<DataColumn>()
                 .Select(column => column.ColumnName)
                 .ToArray();
-            
+
             foreach (DataRow dataRow in rightDataTable.Rows.Cast<DataRow>())
                 resultTable.Rows.Add(leftHandColumns.Select(column => dataRow[column]));
 

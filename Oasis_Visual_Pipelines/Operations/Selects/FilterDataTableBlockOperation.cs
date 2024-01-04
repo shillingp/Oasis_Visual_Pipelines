@@ -33,12 +33,12 @@ namespace Oasis_Visual_Pipelines.Operations
 
                 Columns = DataTableFunctions.ExtractColumnsFromTable(tableObject)
                     .ToDictionary(
-                        column => column.ColumnName, 
+                        column => column.ColumnName,
                         column => column.DataType);
 
                 return DataTableFunctions.FilterDataTable(
-                    tableObject, 
-                    SelectedFilters, 
+                    tableObject,
+                    SelectedFilters,
                     FilterAny ? "OR" : "AND");
             });
         }

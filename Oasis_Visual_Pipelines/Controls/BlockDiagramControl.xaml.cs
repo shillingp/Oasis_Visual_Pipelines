@@ -84,7 +84,7 @@ namespace Oasis_Visual_Pipelines.Controls
                 Clipboard.SetText(currentBlockResult.ToString());
                 return;
             }
-            
+
             if (currentBlockResult is DataTable resultTable)
             {
                 string resultString = DataTableFunctions.ConvertDataTableToCSVString(resultTable);
@@ -97,7 +97,7 @@ namespace Oasis_Visual_Pipelines.Controls
             {
                 StringBuilder resultString = new StringBuilder();
 
-                foreach (var item in resultCollection)
+                foreach (object? item in resultCollection)
                     resultString.AppendLine(item.ToString());
 
                 Clipboard.SetText(resultString.ToString(), TextDataFormat.Text);
@@ -171,7 +171,7 @@ namespace Oasis_Visual_Pipelines.Controls
             blockToAdd.Title = "New Block";
 
             BlockDiagramItems.Add((IBlockDiagramObject)newBlockToAdd);
-        } 
+        }
         #endregion
 
         public Block<T> AddBlock<T>(Point position, string? title = null, T? data = null)

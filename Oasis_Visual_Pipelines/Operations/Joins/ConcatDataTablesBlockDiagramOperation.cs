@@ -10,7 +10,7 @@ namespace Oasis_Visual_Pipelines.Operations.Joins
 {
     [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGroup.Join)]
-    class ConcatDataTablesBlockDiagramOperation : IBlockDiagramOperation
+    internal class ConcatDataTablesBlockDiagramOperation : IBlockDiagramOperation
     {
         public int MaxInputs => 2;
         public string OperationTitle => "Join Tables";

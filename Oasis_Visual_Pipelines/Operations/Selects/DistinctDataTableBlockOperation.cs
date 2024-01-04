@@ -25,7 +25,7 @@ namespace Oasis_Visual_Pipelines.Operations
 
             return new BlockOperationResult(additionalOperations =>
             {
-                return inputTable.DefaultView.ToTable(true, 
+                return inputTable.DefaultView.ToTable(true,
                     DataTableFunctions.ExtractColumnNamesFromTable(inputTable));
             });
         }

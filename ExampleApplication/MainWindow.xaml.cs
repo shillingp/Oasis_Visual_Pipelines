@@ -26,7 +26,7 @@ namespace ExampleApplication
 
             Block<DataTableSourceBlockDiagramOperation> tableSource = MainBlockDiagram.AddBlock<DataTableSourceBlockDiagramOperation>(new Point(75, 75));
             Block<InsertColumnBlockDiagramOperation> insertColumn = MainBlockDiagram.AddBlock<InsertColumnBlockDiagramOperation>(new Point(400, 100), null,
-                new InsertColumnBlockDiagramOperation { ColumnName = "Date"});
+                new InsertColumnBlockDiagramOperation { ColumnName = "Date" });
             Block<DateSourceBlockDiagramOperation> dateTimeSource = MainBlockDiagram.AddBlock<DateSourceBlockDiagramOperation>(new Point(125, 200));
             Block<FilterDataTableBlockDiagramOperation> tableFilter = MainBlockDiagram.AddBlock<FilterDataTableBlockDiagramOperation>(new Point(700, 125), null,
                 new FilterDataTableBlockDiagramOperation

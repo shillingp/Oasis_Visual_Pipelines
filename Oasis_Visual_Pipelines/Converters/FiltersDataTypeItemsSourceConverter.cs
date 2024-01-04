@@ -1,12 +1,5 @@
 ﻿using Oasis_Visual_Pipelines.Classes;
-using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Data;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace Oasis_Visual_Pipelines.Converters
@@ -15,7 +8,7 @@ namespace Oasis_Visual_Pipelines.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is not Type tableColumnType) 
+            if (value is not Type tableColumnType)
                 return Enumerable.Empty<string>();
 
             switch (tableColumnType)
@@ -39,7 +32,7 @@ namespace Oasis_Visual_Pipelines.Converters
             throw new NotImplementedException();
         }
 
-        private FilterFunctor[] stringFilters = [
+        private readonly FilterFunctor[] stringFilters = [
             new FilterFunctor("Equals", "="),
             new FilterFunctor("Not equal", "<>"),
             new FilterFunctor("Starts with", "LIKE '___REPLACE___*'"),
@@ -48,7 +41,7 @@ namespace Oasis_Visual_Pipelines.Converters
             new FilterFunctor("Does not end with", "NOT LIKE '*___REPLACE___'")
         ];
 
-        private FilterFunctor[] numericFilters = [
+        private readonly FilterFunctor[] numericFilters = [
             new FilterFunctor("Equals", "="),
             new FilterFunctor("Not equal", "<>"),
             new FilterFunctor("Less than", "<"),
@@ -57,7 +50,7 @@ namespace Oasis_Visual_Pipelines.Converters
             new FilterFunctor("Greater than or equal", ">="),
         ];
 
-        private FilterFunctor[] dateTimeFilters = [
+        private readonly FilterFunctor[] dateTimeFilters = [
             new FilterFunctor("Equals", "= #__REPLACE__#"),
             new FilterFunctor("Not equal", "<> #__REPLACE__#"),
             new FilterFunctor("Less than", "< #__REPLACE__#"),
