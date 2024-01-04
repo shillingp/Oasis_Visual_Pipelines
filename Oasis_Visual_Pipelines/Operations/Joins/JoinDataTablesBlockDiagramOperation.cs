@@ -2,6 +2,7 @@
 using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Enums;
 using Oasis_Visual_Pipelines.Functions;
+using PropertyChanged;
 using System.Data;
 
 namespace Oasis_Visual_Pipelines.Operations
@@ -12,7 +13,9 @@ namespace Oasis_Visual_Pipelines.Operations
         public override int MaxInputs => 2;
         public override string OperationTitle => "Join Tables";
 
+        [DoNotNotify]
         public string[] LeftColumns { get; set; } = [];
+        [DoNotNotify]
         public string[] RightColumns { get; set; } = [];
 
         public string? SelectedLeftColumn { get; set; }

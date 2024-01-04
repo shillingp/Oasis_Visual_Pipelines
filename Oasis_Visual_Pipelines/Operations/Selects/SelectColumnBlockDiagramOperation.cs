@@ -2,6 +2,7 @@
 using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Enums;
 using Oasis_Visual_Pipelines.Functions;
+using PropertyChanged;
 using System.Data;
 
 namespace Oasis_Visual_Pipelines.Operations
@@ -12,6 +13,7 @@ namespace Oasis_Visual_Pipelines.Operations
         public override int MaxInputs => 1;
         public override string OperationTitle => "Select Column";
 
+        [DoNotNotify]
         public string[] ValidColumns { get; set; } = [];
         public HashSet<object> SelectedColumns { get; set; } = new HashSet<object>();
 
