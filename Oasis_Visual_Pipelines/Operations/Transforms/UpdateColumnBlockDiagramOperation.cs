@@ -8,7 +8,6 @@ using System.Data;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
-    [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGroup.Transforms)]
     public class UpdateColumnBlockDiagramOperation : BaseBlockDiagramOperation
     {

@@ -6,7 +6,6 @@ using System.Globalization;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
-    [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(Enums.BlockOperationType.Text, Enums.BlockOperationGroup.Transforms)]
     public class ChangeCaseBlockDiagramOperation : BaseBlockDiagramOperation
     {

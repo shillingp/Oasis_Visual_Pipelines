@@ -8,7 +8,6 @@ using System.Text.RegularExpressions;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
-    [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.Text, BlockOperationGroup.Transforms)]
     public class SplitStringBlockDiagramOperation : BaseBlockDiagramOperation
     {

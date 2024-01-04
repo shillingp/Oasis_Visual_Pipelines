@@ -12,7 +12,6 @@ using System.Windows.Input;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
-    [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGroup.Sources)]
     public class SQLDataTableSourceBlockDiagramOperation : BaseBlockDiagramOperation
     {

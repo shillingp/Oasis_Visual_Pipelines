@@ -7,7 +7,6 @@ using System.Data;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
-    [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.Array, BlockOperationGroup.Transforms)]
     public class MapArrayBlockDiagramOperation : BaseBlockDiagramOperation
     {

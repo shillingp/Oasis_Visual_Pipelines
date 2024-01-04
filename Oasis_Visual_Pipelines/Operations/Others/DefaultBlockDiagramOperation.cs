@@ -16,7 +16,6 @@ using System.Windows.Input;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
-    [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.None, BlockOperationGroup.Other)]
     public class DefaultBlockDiagramOperation : BaseBlockDiagramOperation
     {

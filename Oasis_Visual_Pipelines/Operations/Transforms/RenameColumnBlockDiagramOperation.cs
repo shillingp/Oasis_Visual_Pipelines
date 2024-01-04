@@ -7,7 +7,6 @@ using System.Data;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
-    [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(Enums.BlockOperationType.DataTable, Enums.BlockOperationGroup.Transforms)]
     public class RenameColumnBlockDiagramOperation : BaseBlockDiagramOperation
     {

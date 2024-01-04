@@ -10,7 +10,6 @@ using System.Windows.Input;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
-    [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(Enums.BlockOperationType.DataTable, Enums.BlockOperationGroup.Select)]
     public class FilterDataTableBlockDiagramOperation : BaseBlockDiagramOperation
     {

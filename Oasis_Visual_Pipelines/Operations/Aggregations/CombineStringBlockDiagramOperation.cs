@@ -6,7 +6,6 @@ using PropertyChanged;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
-    [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.Text, BlockOperationGroup.Aggregation)]
     public class CombineStringBlockDiagramOperation : BaseBlockDiagramOperation
     {

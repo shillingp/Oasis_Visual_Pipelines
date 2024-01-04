@@ -6,7 +6,6 @@ using PropertyChanged;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
-    [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(BlockOperationType.Number, BlockOperationGroup.Aggregation)]
     public class AddNumberBlockDiagramOperation : BaseBlockDiagramOperation
     {

@@ -5,7 +5,6 @@ using PropertyChanged;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
-    [AddINotifyPropertyChangedInterface]
     [BlockOperationGroup(Enums.BlockOperationType.Array, Enums.BlockOperationGroup.Select)]
     public class TakeArrayElementsBlockDiagramOperation : BaseBlockDiagramOperation
     {
