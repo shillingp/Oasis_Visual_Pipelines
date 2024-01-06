@@ -11,14 +11,12 @@ namespace Oasis_Visual_Pipelines.Converters
         {
             if (value is Enum enumVal)
             {
-                FieldInfo fi = enumVal.GetType().GetField(enumVal.ToString());
-
-                DescriptionAttribute[] attributes = fi.GetCustomAttributes(typeof(DescriptionAttribute), false) as DescriptionAttribute[];
-
-                if (attributes != null && attributes.Any())
+                if (enumVal.GetType().GetField(enumVal.ToString()) is FieldInfo fi
+                    && fi.GetCustomAttributes(typeof(DescriptionAttribute), false) is DescriptionAttribute[] attributes 
+                    && attributes.Any())
                     return attributes.First().Description;
 
-                return value.ToString();
+                return value.ToString()!;
             }
 
             return Binding.DoNothing;

@@ -24,7 +24,7 @@
             };
         }
 
-        public static BlockOperationResult NullOperation =
+        public static readonly BlockOperationResult NullOperation =
             new BlockOperationResult((additionalOperations) => null);
     }
 

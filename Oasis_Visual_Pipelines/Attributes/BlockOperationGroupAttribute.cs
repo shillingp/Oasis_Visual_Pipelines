@@ -3,15 +3,9 @@
 namespace Oasis_Visual_Pipelines.Attributes
 {
     [AttributeUsage(AttributeTargets.All, Inherited = false, AllowMultiple = false)]
-    internal sealed class BlockOperationGroupAttribute : Attribute
+    internal sealed class BlockOperationGroupAttribute(BlockOperationType typeGroup, BlockOperationGroup operationGroup) : Attribute
     {
-        public BlockOperationGroupAttribute(BlockOperationType typeGroup, BlockOperationGroup operationGroup)
-        {
-            this.TypeGroup = typeGroup;
-            this.OperationGroup = operationGroup;
-        }
-
-        public BlockOperationType TypeGroup { get; } = BlockOperationType.None;
-        public BlockOperationGroup OperationGroup { get; } = BlockOperationGroup.Other;
+        public BlockOperationType TypeGroup { get; } = typeGroup;
+        public BlockOperationGroup OperationGroup { get; } = operationGroup;
     }
 }

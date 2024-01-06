@@ -18,7 +18,7 @@ namespace Oasis_Visual_Pipelines.Operations
                 .FirstOrDefault(operation => operation?.Result() is DataTable);
 
             if (tableOperation?.Result() is not DataTable inputTable)
-                return null;
+                return BlockOperationResult.NullOperation;
 
             return new BlockOperationResult(additionalOperations =>
             {

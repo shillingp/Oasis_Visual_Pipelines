@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Oasis_Visual_Pipelines.Classes;
+using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -22,18 +23,18 @@ namespace Oasis_Visual_Pipelines.Controls
                 typeof(MultiSelectControl),
                 new PropertyMetadata(Enumerable.Empty<object>()));
 
-        public HashSet<object> SelectedItems
+        public ObservableSet<object> SelectedItems
         {
-            get { return (HashSet<object>)GetValue(SelectedItemsProperty); }
+            get { return (ObservableSet<object>)GetValue(SelectedItemsProperty); }
             set { SetValue(SelectedItemsProperty, value); }
         }
 
         public static readonly DependencyProperty SelectedItemsProperty =
             DependencyProperty.Register(
                 "SelectedItems",
-                typeof(HashSet<object>),
+                typeof(ObservableSet<object>),
                 typeof(MultiSelectControl),
-                new PropertyMetadata(new HashSet<object>()));
+                new PropertyMetadata(new ObservableSet<object>()));
 
 
         public MultiSelectControl()

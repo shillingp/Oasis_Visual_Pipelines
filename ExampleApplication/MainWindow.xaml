@@ -28,13 +28,7 @@
 			Margin="5"
 			Padding="5">
 			<DockPanel>
-				<DockPanel Width="50" HorizontalAlignment="Stretch">
-					<Button
-						Click="PreviewRefreshButton_Click"
-						Content="{material:PackIcon Kind=Refresh}"
-						DockPanel.Dock="Top"
-						Style="{StaticResource MaterialDesignToolButton}" />
-
+				<DockPanel Width="50">
 					<Button
 						Command="{Binding ElementName=MainBlockDiagram, Path=ExportBlockResultCommand}"
 						Content="{material:PackIcon Kind=Export}"
@@ -44,6 +38,12 @@
 						Command="{Binding ElementName=MainBlockDiagram, Path=CopyBlockResultToClipboardCommand}"
 						Content="{material:PackIcon Kind=ContentCopy}"
 						DockPanel.Dock="Bottom"
+						Style="{StaticResource MaterialDesignToolButton}" />
+					<Button
+						VerticalAlignment="Top"
+						Content="{material:PackIcon Kind=Refresh}"
+						DockPanel.Dock="Top"
+						IsEnabled="False"
 						Style="{StaticResource MaterialDesignToolButton}" />
 				</DockPanel>
 

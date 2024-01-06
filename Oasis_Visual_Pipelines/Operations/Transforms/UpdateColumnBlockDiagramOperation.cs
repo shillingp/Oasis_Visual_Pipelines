@@ -15,7 +15,7 @@ namespace Oasis_Visual_Pipelines.Operations
 
         public string? ColumnName { get; set; }
 
-        [DoNotNotify]
+        [DoNotReflowOnPropertyChanged]
         public string[] ValidColumns { get; set; } = [];
 
         public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)

@@ -17,7 +17,7 @@ namespace Oasis_Visual_Pipelines.Operations
 
         public bool FilterAny { get; set; } = false;
 
-        [DoNotNotify]
+        [DoNotReflowOnPropertyChanged]
         public Dictionary<string, Type> Columns { get; set; } = new Dictionary<string, Type>();
         public ObservableSet<DataTableFilter> SelectedFilters { get; set; } = new ObservableSet<DataTableFilter>();
 
