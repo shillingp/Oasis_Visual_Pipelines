@@ -1,5 +1,5 @@
-﻿using Oasis_Visual_Pipelines.Classes;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Immutable;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -23,18 +23,18 @@ namespace Oasis_Visual_Pipelines.Controls
                 typeof(MultiSelectControl),
                 new PropertyMetadata(Enumerable.Empty<object>()));
 
-        public ObservableSet<object> SelectedItems
+        public ImmutableHashSet<object> SelectedItems
         {
-            get { return (ObservableSet<object>)GetValue(SelectedItemsProperty); }
+            get { return (ImmutableHashSet<object>)GetValue(SelectedItemsProperty); }
             set { SetValue(SelectedItemsProperty, value); }
         }
 
         public static readonly DependencyProperty SelectedItemsProperty =
             DependencyProperty.Register(
                 "SelectedItems",
-                typeof(ObservableSet<object>),
+                typeof(ImmutableHashSet<object>),
                 typeof(MultiSelectControl),
-                new PropertyMetadata(new ObservableSet<object>()));
+                new PropertyMetadata(ImmutableHashSet<object>.Empty));
 
 
         public MultiSelectControl()
@@ -45,13 +45,13 @@ namespace Oasis_Visual_Pipelines.Controls
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             object item = ((CheckBox)sender).DataContext;
-            SelectedItems.Add(item);
+            SelectedItems = SelectedItems.Add(item);
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             object item = ((CheckBox)sender).DataContext;
-            SelectedItems.Remove(item);
+            SelectedItems = SelectedItems.Remove(item);
         }
     }
 }

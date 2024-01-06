@@ -3,6 +3,7 @@ using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Enums;
 using Oasis_Visual_Pipelines.Functions;
 using PropertyChanged;
+using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Data;
 
@@ -16,7 +17,7 @@ namespace Oasis_Visual_Pipelines.Operations
 
         [DoNotReflowOnPropertyChanged]
         public string[]? ValidColumns { get; set; } = null;
-        public ObservableSet<object> SelectedColumns { get; set; } = new ObservableSet<object>();
+        public ImmutableHashSet<object> SelectedColumns { get; set; } = ImmutableHashSet<object>.Empty;
 
         public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
