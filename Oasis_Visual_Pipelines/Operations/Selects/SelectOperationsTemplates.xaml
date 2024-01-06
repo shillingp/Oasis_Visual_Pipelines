@@ -80,7 +80,7 @@
 			<material:Card Margin="5">
 				<controls:MultiSelectControl
 					MaxHeight="100"
-					ItemsSource="{Binding ValidColumns, Mode=TwoWay}"
+					ItemsSource="{Binding ValidColumns}"
 					SelectedItems="{Binding SelectedColumns, Mode=TwoWay}" />
 			</material:Card>
 		</DockPanel>

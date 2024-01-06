@@ -117,7 +117,7 @@
 						MinHeight="24"
 						ItemsSource="{Binding ValidColumns}"
 						SelectedItem="{Binding SelectedColumn}" />
-					<TextBox Text="{Binding NewColumnName}" />
+					<TextBox Text="{Binding NewColumnName, UpdateSourceTrigger=PropertyChanged}" />
 				</UniformGrid>
 			</material:Card>
 		</DockPanel>

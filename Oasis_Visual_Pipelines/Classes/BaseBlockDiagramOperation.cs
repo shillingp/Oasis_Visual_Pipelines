@@ -18,10 +18,10 @@ namespace Oasis_Visual_Pipelines.Classes
         public virtual int MaxOutputs => int.MaxValue;
         public virtual string OperationTitle => "";
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
         readonly Dictionary<(IBlockDiagramOperation Operation, string Property), DateTime> lastUpdateTime
             = new Dictionary<(IBlockDiagramOperation Operation, string Property), DateTime>();
+
+        public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs eventArgs)
         {
             PropertyChanged?.Invoke(this, eventArgs);
