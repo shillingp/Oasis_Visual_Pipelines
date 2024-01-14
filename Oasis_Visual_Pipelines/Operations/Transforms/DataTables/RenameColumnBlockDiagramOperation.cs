@@ -2,6 +2,7 @@
 using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Functions;
 using PropertyChanged;
+using System.ComponentModel;
 using System.Data;
 
 namespace Oasis_Visual_Pipelines.Operations.Transforms.DataTables
@@ -12,8 +13,8 @@ namespace Oasis_Visual_Pipelines.Operations.Transforms.DataTables
         public override int MaxInputs => 1;
         public override string OperationTitle => "Rename Column";
 
-        [DoNotNotify]
-        public string[] ValidColumns { get; set; } = [];
+        [DoNotReflowOnPropertyChanged]
+        public string[]? ValidColumns { get; set; } = null;
 
         public string? SelectedColumn { get; set; }
         public string? NewColumnName { get; set; }
@@ -23,7 +24,10 @@ namespace Oasis_Visual_Pipelines.Operations.Transforms.DataTables
             BlockOperationResult? leftDataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
 
             if (leftDataTableInput?.Result() is not DataTable inputDataTable)
+            {
+                ValidColumns = [];
                 return BlockOperationResult.NullOperation;
+            }
 
             ValidColumns = DataTableFunctions.ExtractColumnNamesFromTable(inputDataTable);
 

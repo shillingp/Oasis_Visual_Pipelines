@@ -224,6 +224,9 @@ namespace Oasis_Visual_Pipelines.Controls
 
         public void Receive(BlockControlSelectionMessage message)
         {
+            if (SelectedBlock == message.NewSelection?.Block)
+                return;
+
             SelectedBlock = message.NewSelection?.Block;
             SelectedBlockResult = HelperFunctions.ReturnBlockResult(SelectedBlock!)!;
         }

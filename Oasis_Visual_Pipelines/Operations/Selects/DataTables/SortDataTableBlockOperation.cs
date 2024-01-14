@@ -13,7 +13,7 @@ namespace Oasis_Visual_Pipelines.Operations.Selects.DataTables
         public override int MaxInputs => 1;
         public override string OperationTitle => "Sort Table";
 
-        [DoNotNotify]
+        [DoNotReflowOnPropertyChanged]
         public string[] ValidColumns { get; set; } = [];
         public string? ColumnName { get; set; }
 

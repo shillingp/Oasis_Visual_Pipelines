@@ -23,7 +23,7 @@ namespace Oasis_Visual_Pipelines.Functions
                 .ToArray();
         }
 
-        internal static DataTable FilterDataTable(DataTable tableObject, ObservableSet<DataTableFilter> selectedFilters, string sqlJoinStatement = "AND")
+        internal static DataTable FilterDataTable(DataTable tableObject, IEnumerable<DataTableFilter> selectedFilters, string sqlJoinStatement = "AND")
         {
             if (tableObject is null) throw new ArgumentNullException(nameof(tableObject));
             if (selectedFilters is null) throw new ArgumentNullException(nameof(selectedFilters));
@@ -106,19 +106,18 @@ namespace Oasis_Visual_Pipelines.Functions
                 return new DataTable();
 
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            using (FileStream stream = File.Open(sourceFilePath, FileMode.Open, FileAccess.Read))
-            using (IExcelDataReader reader = ExcelReaderFactory.CreateOpenXmlReader(stream))
+            
+            using FileStream stream = File.Open(sourceFilePath, FileMode.Open, FileAccess.Read);
+            using IExcelDataReader reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+            DataSet dataset = reader.AsDataSet(new ExcelDataSetConfiguration()
             {
-                DataSet dataset = reader.AsDataSet(new ExcelDataSetConfiguration()
+                ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
                 {
-                    ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
-                    {
-                        UseHeaderRow = true,
-                    }
-                });
+                    UseHeaderRow = true,
+                }
+            });
 
-                return dataset.Tables[0];
-            }
+            return dataset.Tables[0];
         }
     }
 }

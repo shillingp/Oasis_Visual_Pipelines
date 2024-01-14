@@ -13,9 +13,9 @@ namespace Oasis_Visual_Pipelines.Operations.Joins.DataTables
         public override int MaxInputs => 2;
         public override string OperationTitle => "Join Tables";
 
-        [DoNotNotify]
+        [DoNotReflowOnPropertyChanged]
         public string[] LeftColumns { get; set; } = [];
-        [DoNotNotify]
+        [DoNotReflowOnPropertyChanged]
         public string[] RightColumns { get; set; } = [];
 
         public string? SelectedLeftColumn { get; set; }

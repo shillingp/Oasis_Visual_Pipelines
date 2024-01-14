@@ -1,9 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Oasis_Visual_Pipelines.Attributes;
 using Oasis_Visual_Pipelines.Classes;
+using Oasis_Visual_Pipelines.Classes.Messages;
 using Oasis_Visual_Pipelines.Dialogs;
 using Oasis_Visual_Pipelines.Functions;
-using PropertyChanged;
 using System.Data;
 using System.Windows.Input;
 
@@ -17,7 +18,7 @@ namespace Oasis_Visual_Pipelines.Operations.Selects.DataTables
 
         public bool FilterAny { get; set; } = false;
 
-        [DoNotNotify]
+        [DoNotReflowOnPropertyChanged]
         public Dictionary<string, Type> Columns { get; set; } = new Dictionary<string, Type>();
         public ObservableSet<DataTableFilter> SelectedFilters { get; set; } = new ObservableSet<DataTableFilter>();
 
@@ -48,6 +49,8 @@ namespace Oasis_Visual_Pipelines.Operations.Selects.DataTables
                 new FilterSelectionDialog(),
                 this,
                 closeOnClickAway: true);
+
+            WeakReferenceMessenger.Default.Send<BlockControlPropertyChangedMessage>();
         });
 
         public ICommand AddNewFilterCommand => new RelayCommand(
