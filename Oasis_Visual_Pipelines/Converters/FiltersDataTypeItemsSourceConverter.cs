@@ -35,6 +35,8 @@ namespace Oasis_Visual_Pipelines.Converters
         private readonly FilterFunctor[] stringFilters = [
             new FilterFunctor("Equals", "="),
             new FilterFunctor("Not equal", "<>"),
+            new FilterFunctor("Contains", "LIKE '*___REPLACE___*'"),
+            new FilterFunctor("Does not contain", "NOT LIKE '*___REPLACE___*'"),
             new FilterFunctor("Starts with", "LIKE '___REPLACE___*'"),
             new FilterFunctor("Ends with", "LIKE '*___REPLACE___'"),
             new FilterFunctor("Does not start with", "NOT LIKE '___REPLACE___*'"),
