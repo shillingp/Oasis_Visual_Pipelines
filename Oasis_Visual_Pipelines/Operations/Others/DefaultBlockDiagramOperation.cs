@@ -13,7 +13,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Oasis_Visual_Pipelines.Operations
+namespace Oasis_Visual_Pipelines.Operations.Others
 {
     [BlockOperationGroup(BlockOperationType.None, BlockOperationGroup.Other)]
     public class DefaultBlockDiagramOperation : BaseBlockDiagramOperation

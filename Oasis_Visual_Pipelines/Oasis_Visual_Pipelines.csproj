@@ -21,8 +21,4 @@
     <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Operations\Transforms\Number\" />
-  </ItemGroup>
-
 </Project>

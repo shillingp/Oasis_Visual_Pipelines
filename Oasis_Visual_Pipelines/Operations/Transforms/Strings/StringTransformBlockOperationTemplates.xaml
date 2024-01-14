@@ -1,0 +1,103 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:Oasis_Visual_Pipelines.Converters"
+    xmlns:local="clr-namespace:Oasis_Visual_Pipelines.Operations.Transforms.Strings"
+    xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <DataTemplate DataType="{x:Type local:ChangeCaseBlockDiagramOperation}">
+        <DataTemplate.Resources>
+            <converters:IsEqualConverter x:Key="IsEqualConverter" />
+        </DataTemplate.Resources>
+        <DockPanel>
+            <TextBlock
+                DockPanel.Dock="Top"
+                Text="{Binding OperationTitle}"
+                TextWrapping="Wrap" />
+
+            <StackPanel Orientation="Horizontal">
+                <RadioButton
+                    Margin="2"
+                    Content="{material:PackIcon Kind=FormatLowercase}"
+                    IsChecked="{Binding TextCaseChoice, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Static local:TextCase.LowerCase}}"
+                    Style="{StaticResource MaterialDesignChoiceChipRadioButton}" />
+                <RadioButton
+                    Margin="2"
+                    Content="{material:PackIcon Kind=FormatUppercase}"
+                    IsChecked="{Binding TextCaseChoice, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Static local:TextCase.UpperCase}}"
+                    Style="{StaticResource MaterialDesignChoiceChipRadioButton}" />
+                <RadioButton
+                    Margin="2"
+                    Content="{material:PackIcon Kind=FormatLetterCase}"
+                    IsChecked="{Binding TextCaseChoice, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Static local:TextCase.TitleCase}}"
+                    Style="{StaticResource MaterialDesignChoiceChipRadioButton}" />
+            </StackPanel>
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type local:ReplaceStringBlockDiagramOperation}">
+        <DockPanel>
+            <TextBlock
+                DockPanel.Dock="Top"
+                Text="{Binding OperationTitle}"
+                TextWrapping="Wrap" />
+
+            <material:Card>
+                <StackPanel Margin="5">
+                    <TextBox
+                        material:HintAssist.Hint="Replace:"
+                        material:TextFieldAssist.PrefixText="Replace:"
+                        Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox
+                        material:HintAssist.Hint="With:"
+                        material:TextFieldAssist.PrefixText="With:"
+                        Text="{Binding ReplaceText, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+            </material:Card>
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type local:SplitStringBlockDiagramOperation}">
+        <DockPanel>
+            <TextBlock
+                DockPanel.Dock="Top"
+                Text="{Binding OperationTitle}"
+                TextWrapping="Wrap" />
+
+            <material:Card>
+                <TextBox Margin="5" Text="{Binding SplitString, UpdateSourceTrigger=PropertyChanged}" />
+            </material:Card>
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type local:TrimStringBlockDiagramOperation}">
+        <DockPanel>
+            <TextBlock
+                DockPanel.Dock="Top"
+                Text="{Binding OperationTitle}"
+                TextWrapping="Wrap" />
+
+            <UniformGrid VerticalAlignment="Center" Columns="5">
+                <material:PackIcon
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    Kind="FormatQuoteClose" />
+                <material:PackIcon
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    Kind="ArrowRight" />
+                <material:PackIcon
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    Kind="Scissors" />
+                <material:PackIcon
+                    Grid.Column="3"
+                    HorizontalAlignment="Center"
+                    Kind="ArrowRight" />
+                <material:PackIcon
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    Kind="FormatQuoteClose" />
+            </UniformGrid>
+        </DockPanel>
+    </DataTemplate>
+</ResourceDictionary>

@@ -6,7 +6,7 @@ using Oasis_Visual_Pipelines.Classes.Messages;
 using Oasis_Visual_Pipelines.Functions;
 using Oasis_Visual_Pipelines.Interfaces;
 using Oasis_Visual_Pipelines.Models;
-using Oasis_Visual_Pipelines.Operations;
+using Oasis_Visual_Pipelines.Operations.Others;
 using PropertyChanged;
 using System.Collections;
 using System.Data;

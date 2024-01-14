@@ -1,6 +1,9 @@
 ﻿using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Models;
-using Oasis_Visual_Pipelines.Operations;
+using Oasis_Visual_Pipelines.Operations.Selects.DataTables;
+using Oasis_Visual_Pipelines.Operations.Sources.DataTables;
+using Oasis_Visual_Pipelines.Operations.Sources.DateTimes;
+using Oasis_Visual_Pipelines.Operations.Transforms.DataTables;
 using System.Windows;
 
 namespace ExampleApplication
