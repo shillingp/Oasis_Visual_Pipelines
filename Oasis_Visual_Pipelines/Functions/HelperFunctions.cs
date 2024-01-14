@@ -41,5 +41,33 @@ namespace Oasis_Visual_Pipelines.Functions
 
             return ((dynamic)block).CalculateFlowPathResult()?.Result();
         }
+
+        public static bool IsNumeric(object expression)
+        {
+            if (expression is null || expression is DateTime)
+                return false;
+
+            if (expression is short || expression is int || expression is long || expression is decimal || expression is float || expression is double)
+                return true;
+
+            return (expression is string && double.TryParse(expression as string, out double _))
+                || double.TryParse(expression.ToString(), out double _);
+        }
+
+        public static double? ConvertNumeric(object number)
+        {
+            if (number is null || number is DateTime)
+                return null;
+
+            if (number is short || number is int || number is long || number is decimal || number is float || number is double)
+                return (double)number;
+
+            double parsedNumber = 0;
+            if ((number is string && double.TryParse(number as string, out parsedNumber))
+                || double.TryParse(number.ToString(), out double _))
+                return parsedNumber;
+
+            return null;
+        }
     }
 }
