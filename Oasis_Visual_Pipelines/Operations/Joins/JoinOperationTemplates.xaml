@@ -1,5 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="DataTables/DataTable.JoinOperationTemplates.xaml" />
+        <ResourceDictionary Source="DataTables/DataTableJoinOperationTemplates.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

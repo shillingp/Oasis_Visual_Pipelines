@@ -1,8 +1,11 @@
-﻿using Oasis_Visual_Pipelines.Classes;
+﻿using Oasis_Visual_Pipelines.Attributes;
+using Oasis_Visual_Pipelines.Classes;
+using Oasis_Visual_Pipelines.Enums;
 using System.Data;
 
 namespace Oasis_Visual_Pipelines.Operations.Selects.DataTables
 {
+    [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGroup.Select)]
     public class RemoveBlanksBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => 1;
