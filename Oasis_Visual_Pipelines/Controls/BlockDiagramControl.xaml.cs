@@ -142,18 +142,16 @@ namespace Oasis_Visual_Pipelines.Controls
                     null,
                     true);
 
-            using (XLWorkbook workbook = new XLWorkbook())
-            {
-                IXLWorksheet worksheet = workbook.Worksheets.Add("Oasis Export");
+            using XLWorkbook workbook = new XLWorkbook();
+            IXLWorksheet worksheet = workbook.Worksheets.Add("Oasis Export");
 
-                if (currentBlockResult is DataTable resultantTable)
-                    worksheet.FirstCell().InsertTable(resultantTable, true);
-                else if (currentBlockResult is IEnumerable resultantCollection)
-                    worksheet.FirstCell().InsertData(resultantCollection);
+            if (currentBlockResult is DataTable resultantTable)
+                worksheet.FirstCell().InsertTable(resultantTable, true);
+            else if (currentBlockResult is IEnumerable resultantCollection)
+                worksheet.FirstCell().InsertData(resultantCollection);
 
-                string desktopLocation = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory, Environment.SpecialFolderOption.None);
-                workbook.SaveAs(Path.Combine(desktopLocation, "Oasis_Data_Export.xlsx"));
-            }
+            string desktopLocation = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory, Environment.SpecialFolderOption.None);
+            workbook.SaveAs(Path.Combine(desktopLocation, "Oasis_Data_Export.xlsx"));
         });
         #endregion
 

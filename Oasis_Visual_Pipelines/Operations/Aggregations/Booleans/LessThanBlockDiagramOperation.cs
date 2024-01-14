@@ -7,12 +7,12 @@ using Oasis_Visual_Pipelines.Interfaces;
 namespace Oasis_Visual_Pipelines.Operations.Aggregations.Booleans
 {
     [BlockOperationGroup(BlockOperationType.Boolean, BlockOperationGroup.Aggregation)]
-    internal class LessThanBlockDiagramOperation : IBlockDiagramOperation
+    internal class LessThanBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 2;
-        public string OperationTitle => "Less Than";
+        public override int MaxInputs => 2;
+        public override string OperationTitle => "Less Than";
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             return new BlockOperationResult(additionalOperations =>
             {

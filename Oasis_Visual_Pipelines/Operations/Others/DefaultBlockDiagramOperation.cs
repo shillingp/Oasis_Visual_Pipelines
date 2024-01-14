@@ -29,7 +29,7 @@ namespace Oasis_Visual_Pipelines.Operations.Others
 
         public static ICommand ChooseBlockTypeCommand => new RelayCommand<BlockControl>(async (control) =>
         {
-            Type blockOperationInterface = typeof(IBlockDiagramOperation);
+            Type blockOperationInterface = typeof(BaseBlockDiagramOperation);
 
             object?[] blockOperationInstances = GenerateBlockControlInstancesForClassesDerivedFromTypeAsync(blockOperationInterface);
 
@@ -60,6 +60,7 @@ namespace Oasis_Visual_Pipelines.Operations.Others
                 .Where(assemblyType => blockOperationInterface.IsAssignableFrom(assemblyType))
                 .Where(assemblyType => assemblyType.IsClass)
                 .Where(assemblyType => assemblyType != typeof(DefaultBlockDiagramOperation))
+                .Where(assemblyType => assemblyType != typeof(BaseBlockDiagramOperation))
                 .Select(operationType =>
                 {
                     Type genericBlockType = typeof(Block<>).MakeGenericType(operationType);

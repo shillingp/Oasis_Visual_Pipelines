@@ -1,17 +1,16 @@
 ﻿using Oasis_Visual_Pipelines.Attributes;
 using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Enums;
-using Oasis_Visual_Pipelines.Interfaces;
 
 namespace Oasis_Visual_Pipelines.Operations.Aggregations.Booleans
 {
-    [BlockOperationGroup(BlockOperationType.Boolean | BlockOperationType.Text, BlockOperationGroup.Aggregation)]
-    public class StringContainsBlockDiagramOperation : IBlockDiagramOperation
+    [BlockOperationGroup(BlockOperationType.Boolean, BlockOperationGroup.Aggregation)]
+    public class StringContainsBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 2;
-        public string OperationTitle => "String Contains";
+        public override int MaxInputs => 2;
+        public override string OperationTitle => "String Contains";
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             return new BlockOperationResult(additionalOperations =>
             {

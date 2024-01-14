@@ -6,12 +6,12 @@ using Oasis_Visual_Pipelines.Interfaces;
 namespace Oasis_Visual_Pipelines.Operations.Aggregations.Booleans
 {
     [BlockOperationGroup(BlockOperationType.Boolean, BlockOperationGroup.Aggregation)]
-    internal class NotEqualToBlockDiagramOperation : IBlockDiagramOperation
+    internal class NotEqualToBlockDiagramOperation : BaseBlockDiagramOperation
     {
-        public int MaxInputs => 2;
-        public string OperationTitle => "Not Equal To";
+        public override int MaxInputs => 2;
+        public override string OperationTitle => "Not Equal To";
 
-        public BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+        public override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
         {
             return new BlockOperationResult(additionalOperations =>
             {
