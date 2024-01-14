@@ -8,10 +8,12 @@ namespace Oasis_Visual_Pipelines.Controls
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values.Length < 2) return Visibility.Collapsed;
+            if (values[2] is bool isExpanded && isExpanded)
+                return Visibility.Visible;
 
-            double.TryParse(values[0]?.ToString(), out double actualHeight);
-            double.TryParse(values[1]?.ToString(), out double maxHeight);
+            if (!double.TryParse(values[0]?.ToString(), out double actualHeight)
+                || !double.TryParse(values[1]?.ToString(), out double maxHeight))
+                return Visibility.Collapsed;
 
             if (maxHeight is double.PositiveInfinity) return Visibility.Visible;
 

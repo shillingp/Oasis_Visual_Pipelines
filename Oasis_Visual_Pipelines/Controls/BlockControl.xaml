@@ -127,6 +127,7 @@
 						<MultiBinding Converter="{StaticResource HeightExpanderButtonVisibilityConverter}">
 							<Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType=local:BlockControl}" />
 							<Binding Path="MaxHeight" RelativeSource="{RelativeSource AncestorType=local:BlockControl}" />
+							<Binding Path="IsExpanded" RelativeSource="{RelativeSource AncestorType=local:BlockControl}" />
 						</MultiBinding>
 					</Button.Visibility>
 					<Button.Template>
