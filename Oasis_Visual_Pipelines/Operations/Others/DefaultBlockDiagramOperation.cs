@@ -13,7 +13,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Oasis_Visual_Pipelines.Operations
+namespace Oasis_Visual_Pipelines.Operations.Others
 {
     [BlockOperationGroup(BlockOperationType.None, BlockOperationGroup.Other)]
     public class DefaultBlockDiagramOperation : BaseBlockDiagramOperation
@@ -29,7 +29,7 @@ namespace Oasis_Visual_Pipelines.Operations
 
         public static ICommand ChooseBlockTypeCommand => new RelayCommand<BlockControl>(async (control) =>
         {
-            Type blockOperationInterface = typeof(IBlockDiagramOperation);
+            Type blockOperationInterface = typeof(BaseBlockDiagramOperation);
 
             object?[] blockOperationInstances = GenerateBlockControlInstancesForClassesDerivedFromTypeAsync(blockOperationInterface);
 
@@ -60,6 +60,7 @@ namespace Oasis_Visual_Pipelines.Operations
                 .Where(assemblyType => blockOperationInterface.IsAssignableFrom(assemblyType))
                 .Where(assemblyType => assemblyType.IsClass)
                 .Where(assemblyType => assemblyType != typeof(DefaultBlockDiagramOperation))
+                .Where(assemblyType => assemblyType != typeof(BaseBlockDiagramOperation))
                 .Select(operationType =>
                 {
                     Type genericBlockType = typeof(Block<>).MakeGenericType(operationType);

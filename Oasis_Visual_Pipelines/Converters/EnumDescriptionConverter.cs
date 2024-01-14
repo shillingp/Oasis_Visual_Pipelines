@@ -9,16 +9,14 @@ namespace Oasis_Visual_Pipelines.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is Enum enumVal)
+            if (value is Enum enumValue)
             {
-                FieldInfo fi = enumVal.GetType().GetField(enumVal.ToString());
-
-                DescriptionAttribute[] attributes = fi.GetCustomAttributes(typeof(DescriptionAttribute), false) as DescriptionAttribute[];
-
-                if (attributes != null && attributes.Any())
+                if (enumValue.GetType().GetField(enumValue.ToString()) is FieldInfo field
+                    && field.GetCustomAttributes(typeof(DescriptionAttribute), false) is DescriptionAttribute[] attributes 
+                    && attributes.Any())
                     return attributes.First().Description;
 
-                return value.ToString();
+                return enumValue.ToString();
             }
 
             return Binding.DoNothing;

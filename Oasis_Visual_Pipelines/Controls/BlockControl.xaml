@@ -1,194 +1,195 @@
 ﻿<UserControl
-	x:Class="Oasis_Visual_Pipelines.Controls.BlockControl"
-	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	xmlns:controls="clr-namespace:Oasis_Visual_Pipelines.Controls"
-	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	xmlns:local="clr-namespace:Oasis_Visual_Pipelines.Controls"
-	xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
-	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:models="clr-namespace:Oasis_Visual_Pipelines.Models"
-	xmlns:sys="clr-namespace:System;assembly=mscorlib"
-	Width="200"
-	MinHeight="80"
-	MaxHeight="120"
-	d:DataContext="{d:DesignInstance Type=models:Block}"
-	mc:Ignorable="d">
-	<UserControl.Resources>
-		<ResourceDictionary>
-			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="../Styles/Theme.xaml" />
+    x:Class="Oasis_Visual_Pipelines.Controls.BlockControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Oasis_Visual_Pipelines.Controls"
+    xmlns:converters="clr-namespace:Oasis_Visual_Pipelines.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Oasis_Visual_Pipelines.Controls"
+    xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:Oasis_Visual_Pipelines.Models"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    Width="200"
+    MinHeight="80"
+    MaxHeight="120"
+    d:DataContext="{d:DesignInstance Type=models:Block}"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/Theme.xaml" />
 
-				<ResourceDictionary Source="../Operations/BlockOperationTemplates.xaml" />
-			</ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Operations/BlockOperationTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
-			<local:AddItemToEndConverter x:Key="AddItemToEndConverter" />
-			<local:HeightExpanderButtonVisibilityConverter x:Key="HeightExpanderButtonVisibilityConverter" />
+            <converters:AddItemToEndConverter x:Key="AddItemToEndConverter" />
+            <converters:HeightExpanderButtonVisibilityConverter x:Key="HeightExpanderButtonVisibilityConverter" />
 
-			<Style TargetType="Control">
-				<Setter Property="SnapsToDevicePixels" Value="True" />
-				<Setter Property="UseLayoutRounding" Value="True" />
-				<Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
-				<Setter Property="SnapsToDevicePixels" Value="True" />
-				<Setter Property="RenderOptions.ClearTypeHint" Value="Enabled" />
-			</Style>
+            <Style TargetType="Control">
+                <Setter Property="SnapsToDevicePixels" Value="True" />
+                <Setter Property="UseLayoutRounding" Value="True" />
+                <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
+                <Setter Property="SnapsToDevicePixels" Value="True" />
+                <Setter Property="RenderOptions.ClearTypeHint" Value="Enabled" />
+            </Style>
 
-			<Style x:Key="NonEditableTextBox" TargetType="TextBox">
-				<Setter Property="Template">
-					<Setter.Value>
-						<ControlTemplate TargetType="TextBox">
-							<TextBlock
-								VerticalAlignment="Center"
-								Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
-								Text="{TemplateBinding Text}" />
-						</ControlTemplate>
-					</Setter.Value>
-				</Setter>
-			</Style>
-		</ResourceDictionary>
-	</UserControl.Resources>
-	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="30" />
-			<ColumnDefinition />
-			<ColumnDefinition Width="30" />
-		</Grid.ColumnDefinitions>
+            <Style x:Key="NonEditableTextBox" TargetType="TextBox">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TextBox">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
+                                Text="{TemplateBinding Text}" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="30" />
+        </Grid.ColumnDefinitions>
 
 
-		<material:Card
-			x:Name="TopLevelCard"
-			Grid.ColumnSpan="3"
-			Margin="15,0"
-			PreviewMouseDown="TopLevelCard_PreviewMouseDown"
-			SnapsToDevicePixels="True">
-			<material:Card.Style>
-				<Style TargetType="material:Card">
-					<Style.Triggers>
-						<DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=local:BlockControl}}" Value="True">
-							<Setter Property="material:ElevationAssist.Elevation" Value="Dp0" />
-							<Setter Property="Effect">
-								<Setter.Value>
-									<DropShadowEffect
-										BlurRadius="5"
-										Direction="270"
-										Opacity=".42"
-										RenderingBias="Performance"
-										ShadowDepth="1"
-										Color="Red" />
-								</Setter.Value>
-							</Setter>
-						</DataTrigger>
-					</Style.Triggers>
-				</Style>
-			</material:Card.Style>
-			<DockPanel>
-				<Border
-					Background="{DynamicResource MaterialDesignPaper}"
-					BorderBrush="LightGray"
-					BorderThickness="0,0,0,1"
-					CornerRadius="3,3,0,0"
-					DockPanel.Dock="Top">
-					<DockPanel>
-						<Grid DockPanel.Dock="Left">
-							<material:PackIcon
-								VerticalAlignment="Center"
-								Foreground="Gray"
-								Kind="Drag" />
-							<Thumb
-								Grid.RowSpan="2"
-								Cursor="SizeAll"
-								Thumb.DragDelta="Thumb_DragDelta" />
-						</Grid>
+        <material:Card
+            x:Name="TopLevelCard"
+            Grid.ColumnSpan="3"
+            Margin="15,0"
+            PreviewMouseDown="TopLevelCard_PreviewMouseDown"
+            SnapsToDevicePixels="True">
+            <material:Card.Style>
+                <Style TargetType="material:Card">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=local:BlockControl}}" Value="True">
+                            <Setter Property="material:ElevationAssist.Elevation" Value="Dp0" />
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect
+                                        BlurRadius="5"
+                                        Direction="270"
+                                        Opacity=".42"
+                                        RenderingBias="Performance"
+                                        ShadowDepth="1"
+                                        Color="Red" />
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </material:Card.Style>
+            <DockPanel>
+                <Border
+                    Background="{DynamicResource MaterialDesignPaper}"
+                    BorderBrush="LightGray"
+                    BorderThickness="0,0,0,1"
+                    CornerRadius="3,3,0,0"
+                    DockPanel.Dock="Top">
+                    <DockPanel>
+                        <Grid DockPanel.Dock="Left">
+                            <material:PackIcon
+                                VerticalAlignment="Center"
+                                Foreground="Gray"
+                                Kind="Drag" />
+                            <Thumb
+                                Grid.RowSpan="2"
+                                Cursor="SizeAll"
+                                Thumb.DragDelta="Thumb_DragDelta" />
+                        </Grid>
 
-						<Button
-							VerticalAlignment="Center"
-							Command="{Binding RemoveBlockCommand}"
-							Content="{material:PackIcon Kind=Close}"
-							DockPanel.Dock="Right"
-							Style="{StaticResource MaterialDesignToolButton}" />
+                        <Button
+                            VerticalAlignment="Center"
+                            Command="{Binding RemoveBlockCommand}"
+                            Content="{material:PackIcon Kind=Close}"
+                            DockPanel.Dock="Right"
+                            Style="{StaticResource MaterialDesignToolButton}" />
 
-						<controls:EditableTextBox
-							Height="24"
-							VerticalAlignment="Center"
-							material:TextFieldAssist.UnderlineBrush="Transparent"
-							EditingStyle="{StaticResource MaterialDesignTextBoxBase}"
-							ReadOnlyStyle="{StaticResource NonEditableTextBox}"
-							Text="{Binding Title}" />
-					</DockPanel>
-				</Border>
+                        <controls:EditableTextBox
+                            Height="24"
+                            VerticalAlignment="Center"
+                            material:TextFieldAssist.UnderlineBrush="Transparent"
+                            EditingStyle="{StaticResource MaterialDesignTextBoxBase}"
+                            ReadOnlyStyle="{StaticResource NonEditableTextBox}"
+                            Text="{Binding Title}" />
+                    </DockPanel>
+                </Border>
 
-				<Button
-					Height="12"
-					Command="{Binding ToggleBlockHeightCommand, RelativeSource={RelativeSource AncestorType=local:BlockControl}}"
-					Cursor="Hand"
-					DockPanel.Dock="Bottom"
-					Style="{x:Null}">
-					<Button.Visibility>
-						<MultiBinding Converter="{StaticResource HeightExpanderButtonVisibilityConverter}">
-							<Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType=local:BlockControl}" />
-							<Binding Path="MaxHeight" RelativeSource="{RelativeSource AncestorType=local:BlockControl}" />
-							<Binding Path="IsExpanded" RelativeSource="{RelativeSource AncestorType=local:BlockControl}" />
-						</MultiBinding>
-					</Button.Visibility>
-					<Button.Template>
-						<ControlTemplate>
-							<Border
-								Background="{DynamicResource MaterialDesignPaper}"
-								BorderBrush="LightGray"
-								BorderThickness="0,1,0,0"
-								CornerRadius="0,0,3,3">
-								<Grid HorizontalAlignment="Center">
-									<material:PackIcon VerticalAlignment="Center">
-										<material:PackIcon.Style>
-											<Style TargetType="material:PackIcon">
-												<Setter Property="Kind" Value="TriangleSmallDown" />
-												<Style.Triggers>
-													<DataTrigger Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=local:BlockControl}}" Value="True">
-														<Setter Property="Kind" Value="TriangleSmallUp" />
-													</DataTrigger>
-												</Style.Triggers>
-											</Style>
-										</material:PackIcon.Style>
-									</material:PackIcon>
-								</Grid>
-							</Border>
-						</ControlTemplate>
-					</Button.Template>
-				</Button>
+                <Button
+                    Height="12"
+                    Command="{Binding ToggleBlockHeightCommand, RelativeSource={RelativeSource AncestorType=local:BlockControl}}"
+                    Cursor="Hand"
+                    DockPanel.Dock="Bottom"
+                    Style="{x:Null}">
+                    <Button.Visibility>
+                        <MultiBinding Converter="{StaticResource HeightExpanderButtonVisibilityConverter}">
+                            <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType=local:BlockControl}" />
+                            <Binding Path="MaxHeight" RelativeSource="{RelativeSource AncestorType=local:BlockControl}" />
+                            <Binding Path="IsExpanded" RelativeSource="{RelativeSource AncestorType=local:BlockControl}" />
+                        </MultiBinding>
+                    </Button.Visibility>
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border
+                                Background="{DynamicResource MaterialDesignPaper}"
+                                BorderBrush="LightGray"
+                                BorderThickness="0,1,0,0"
+                                CornerRadius="0,0,3,3">
+                                <Grid HorizontalAlignment="Center">
+                                    <material:PackIcon VerticalAlignment="Center">
+                                        <material:PackIcon.Style>
+                                            <Style TargetType="material:PackIcon">
+                                                <Setter Property="Kind" Value="TriangleSmallDown" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=local:BlockControl}}" Value="True">
+                                                        <Setter Property="Kind" Value="TriangleSmallUp" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </material:PackIcon.Style>
+                                    </material:PackIcon>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
 
-				<ContentPresenter
-					Grid.Row="1"
-					Margin="10,0"
-					Content="{Binding Data}" />
-			</DockPanel>
-		</material:Card>
+                <ContentPresenter
+                    Grid.Row="1"
+                    Margin="10,0"
+                    Content="{Binding Data}" />
+            </DockPanel>
+        </material:Card>
 
-		<ItemsControl
-			x:Name="LeftConnectorsControl"
-			Grid.Column="0"
-			VerticalAlignment="Center"
-			d:ItemsSource="{d:SampleData ItemCount=3}">
-			<ItemsControl.ItemsSource>
-				<MultiBinding Converter="{StaticResource AddItemToEndConverter}">
-					<Binding Path="LeftConnections" />
-					<Binding Path="Data.MaxInputs" />
-					<Binding Path="LeftConnections.Count" />
-				</MultiBinding>
-			</ItemsControl.ItemsSource>
-			<ItemsControl.ItemTemplate>
-				<DataTemplate>
-					<local:ConnectorNodeControl
-						Height="20"
-						Connection="{Binding}"
-						ConnectionSide="Left"
-						DragCompleted="ConnectorNode_DragCompleted"
-						DragDelta="ConnectorNode_DragDelta"
-						DragStarted="ConnectorNode_DragStarted" />
-				</DataTemplate>
-			</ItemsControl.ItemTemplate>
-		</ItemsControl>
+        <ItemsControl
+            x:Name="LeftConnectorsControl"
+            Grid.Column="0"
+            VerticalAlignment="Center"
+            d:ItemsSource="{d:SampleData ItemCount=3}">
+            <ItemsControl.ItemsSource>
+                <MultiBinding Converter="{StaticResource AddItemToEndConverter}">
+                    <Binding Path="LeftConnections" />
+                    <Binding Path="Data.MaxInputs" />
+                    <Binding Path="LeftConnections.Count" />
+                </MultiBinding>
+            </ItemsControl.ItemsSource>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <local:ConnectorNodeControl
+                        Height="20"
+                        Connection="{Binding}"
+                        ConnectionSide="Left"
+                        DragCompleted="ConnectorNode_DragCompleted"
+                        DragDelta="ConnectorNode_DragDelta"
+                        DragStarted="ConnectorNode_DragStarted" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
-		<!--<StackPanel
+        <!--<StackPanel
 			Grid.Column="1"
 			HorizontalAlignment="Center"
 			Orientation="Horizontal">
@@ -197,29 +198,29 @@
 			<TextBlock Text="{Binding Position.Y, StringFormat=N0}" />
 		</StackPanel>-->
 
-		<ItemsControl
-			x:Name="RightConnectorsControl"
-			Grid.Column="2"
-			VerticalAlignment="Center"
-			d:ItemsSource="{d:SampleData ItemCount=2}">
-			<ItemsControl.ItemsSource>
-				<MultiBinding Converter="{StaticResource AddItemToEndConverter}" ConverterParameter="Left">
-					<Binding Path="RightConnections" />
-					<Binding Path="Data.MaxOutputs" TargetNullValue="{x:Null}" />
-					<Binding Path="RightConnections.Count" />
-				</MultiBinding>
-			</ItemsControl.ItemsSource>
-			<ItemsControl.ItemTemplate>
-				<DataTemplate>
-					<local:ConnectorNodeControl
-						Height="20"
-						Connection="{Binding}"
-						ConnectionSide="Right"
-						DragCompleted="ConnectorNode_DragCompleted"
-						DragDelta="ConnectorNode_DragDelta"
-						DragStarted="ConnectorNode_DragStarted" />
-				</DataTemplate>
-			</ItemsControl.ItemTemplate>
-		</ItemsControl>
-	</Grid>
+        <ItemsControl
+            x:Name="RightConnectorsControl"
+            Grid.Column="2"
+            VerticalAlignment="Center"
+            d:ItemsSource="{d:SampleData ItemCount=2}">
+            <ItemsControl.ItemsSource>
+                <MultiBinding Converter="{StaticResource AddItemToEndConverter}" ConverterParameter="Left">
+                    <Binding Path="RightConnections" />
+                    <Binding Path="Data.MaxOutputs" TargetNullValue="{x:Null}" />
+                    <Binding Path="RightConnections.Count" />
+                </MultiBinding>
+            </ItemsControl.ItemsSource>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <local:ConnectorNodeControl
+                        Height="20"
+                        Connection="{Binding}"
+                        ConnectionSide="Right"
+                        DragCompleted="ConnectorNode_DragCompleted"
+                        DragDelta="ConnectorNode_DragDelta"
+                        DragStarted="ConnectorNode_DragStarted" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
 </UserControl>

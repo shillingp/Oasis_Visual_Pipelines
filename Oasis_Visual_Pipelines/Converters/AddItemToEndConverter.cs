@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Oasis_Visual_Pipelines.Controls
+namespace Oasis_Visual_Pipelines.Converters
 {
     internal class AddItemToEndConverter : IMultiValueConverter
     {
