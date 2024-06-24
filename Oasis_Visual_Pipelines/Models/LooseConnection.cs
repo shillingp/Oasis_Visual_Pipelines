@@ -17,7 +17,7 @@ namespace Oasis_Visual_Pipelines.Models
         public Point End
         {
             get => end;
-            internal set
+            set
             {
                 end = value;
 

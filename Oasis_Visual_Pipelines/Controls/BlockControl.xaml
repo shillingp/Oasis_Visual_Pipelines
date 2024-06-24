@@ -20,7 +20,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Styles/Theme.xaml" />
 
-                <ResourceDictionary Source="../Operations/BlockOperationTemplates.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Oasis_Visual_Pipelines;component/Operations/DefaultBlockDiagramOperationTemplate.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/Oasis_Visual_Pipelines.Operations;component/Operations/BlockOperationTemplates.xaml" />-->
             </ResourceDictionary.MergedDictionaries>
 
             <converters:AddItemToEndConverter x:Key="AddItemToEndConverter" />

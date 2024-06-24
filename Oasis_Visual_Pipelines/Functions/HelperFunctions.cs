@@ -4,9 +4,9 @@ using System.Text.RegularExpressions;
 
 namespace Oasis_Visual_Pipelines.Functions
 {
-    internal static class HelperFunctions
+    public static class HelperFunctions
     {
-        internal static string ConvertNumberToLetters(int number)
+        public static string ConvertNumberToLetters(int number)
         {
             if (number <= 26)
                 return Convert.ToChar(number + 64).ToString();
@@ -16,7 +16,7 @@ namespace Oasis_Visual_Pipelines.Functions
             return ConvertNumberToLetters(div) + ConvertNumberToLetters(mod);
         }
 
-        internal static bool IsValidRegex(string pattern)
+        public static bool IsValidRegex(string pattern)
         {
             if (string.IsNullOrWhiteSpace(pattern)) return false;
 

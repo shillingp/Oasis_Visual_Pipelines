@@ -6,7 +6,7 @@ using Oasis_Visual_Pipelines.Classes.Messages;
 using Oasis_Visual_Pipelines.Functions;
 using Oasis_Visual_Pipelines.Interfaces;
 using Oasis_Visual_Pipelines.Models;
-using Oasis_Visual_Pipelines.Operations.Others;
+using Oasis_Visual_Pipelines.Operations;
 using PropertyChanged;
 using System.Collections;
 using System.Data;
@@ -179,7 +179,7 @@ namespace Oasis_Visual_Pipelines.Controls
             WeakReferenceMessenger.Default.Send(new BlockControlSelectionMessage(null));
 
             Type contextType = typeof(Block<>).MakeGenericType(BlockDataType);
-            BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
+            BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
             object? newBlockToAdd = Activator.CreateInstance(
                 type: contextType,
                 bindingAttr: flags,
@@ -216,7 +216,7 @@ namespace Oasis_Visual_Pipelines.Controls
             return newBlockToAdd;
         }
 
-        internal void RedrawAllBlocksAndConnections()
+        public  void RedrawAllBlocksAndConnections()
         {
             foreach (Block block in BlockDiagramItems.OfType<Block>())
                 block.RedrawAnyConnections();

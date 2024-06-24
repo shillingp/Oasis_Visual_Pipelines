@@ -1,0 +1,27 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Oasis_Visual_Pipelines.Controls;assembly=Oasis_Visual_Pipelines"
+    xmlns:converters="clr-namespace:Oasis_Visual_Pipelines.Converters"
+    xmlns:enums="clr-namespace:Oasis_Visual_Pipelines.Enums;assembly=Oasis_Visual_Pipelines"
+    xmlns:local="clr-namespace:Oasis_Visual_Pipelines.Operations.Transforms.DateTimes">
+    <DataTemplate DataType="{x:Type local:DateTimeOffsetBlockDiagramOperation}">
+        <DataTemplate.Resources>
+            <converters:EnumValuesItemsSourceConverter x:Key="EnumValuesItemsSourceConverter" />
+        </DataTemplate.Resources>
+        <DockPanel>
+            <TextBlock
+                DockPanel.Dock="Top"
+                Text="{Binding OperationTitle}"
+                TextWrapping="Wrap" />
+
+            <UniformGrid Columns="2">
+                <controls:NumericUpDownControl NumberValue="{Binding OffsetValue, Mode=TwoWay}" />
+                <ComboBox
+                    ItemsSource="{Binding Converter={StaticResource EnumValuesItemsSourceConverter}, ConverterParameter={x:Type enums:TimeDateOffset}}"
+                    SelectedItem="{Binding TimeDateOffset}"
+                    TextBlock.TextAlignment="Center" />
+            </UniformGrid>
+        </DockPanel>
+    </DataTemplate>
+</ResourceDictionary>
