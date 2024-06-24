@@ -26,11 +26,14 @@ namespace Oasis_Visual_Pipelines.Operations
             return new BlockOperationResult(additionalOperations => null);
         }
 
+        private static object?[]? pregeneratedBlocks;
         public static ICommand ChooseBlockTypeCommand => new RelayCommand<BlockControl>(async (control) =>
         {
             Type blockOperationInterface = typeof(BaseBlockDiagramOperation);
 
-            object?[] blockOperationInstances = GenerateBlockControlInstancesForClassesDerivedFromTypeAsync(blockOperationInterface);
+            pregeneratedBlocks ??= GenerateBlockControlInstancesForClassesDerivedFromTypeAsync(blockOperationInterface);
+
+            object?[] blockOperationInstances = pregeneratedBlocks;
 
             Block? chosenBlock = (Block?)await DialogHostFunctions.CreateAndShowDialog(
                 new BlockPickerDialog(),
