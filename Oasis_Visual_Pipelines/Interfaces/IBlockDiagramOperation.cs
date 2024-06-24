@@ -4,10 +4,10 @@ namespace Oasis_Visual_Pipelines.Interfaces
 {
     public interface IBlockDiagramOperation
     {
-        internal int MaxInputs { get; }
-        internal int MaxOutputs => int.MaxValue;
-        internal string OperationTitle { get; }
+        public  int MaxInputs { get; }
+        public  int MaxOutputs => int.MaxValue;
+        public  string OperationTitle { get; }
         
-        internal abstract BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations);
+        public  abstract BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations);
     }
 }

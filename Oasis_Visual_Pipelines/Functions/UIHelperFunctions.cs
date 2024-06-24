@@ -4,7 +4,7 @@ using System.Windows.Media;
 
 namespace Oasis_Visual_Pipelines.Functions
 {
-    internal static class UIHelperFunctions
+    public  static class UIHelperFunctions
     {
         public static T? FindAncestor<T>(DependencyObject? current)
             where T : DependencyObject
@@ -54,7 +54,7 @@ namespace Oasis_Visual_Pipelines.Functions
             return null;
         }
 
-        internal static Point GetFrameworkElementCenter(FrameworkElement element)
+        public  static Point GetFrameworkElementCenter(FrameworkElement element)
         {
             Point position = element.TranslatePoint(
                 new Point(0, 0),
@@ -66,7 +66,7 @@ namespace Oasis_Visual_Pipelines.Functions
             return position;
         }
 
-        internal static Point ClipFrameworkElementPointWithinCanvas(FrameworkElement sourceElement, Point position)
+        public  static Point ClipFrameworkElementPointWithinCanvas(FrameworkElement sourceElement, Point position)
         {
             Canvas? canvasAncestor = FindAncestor<Canvas>(sourceElement);
             if (canvasAncestor is null)

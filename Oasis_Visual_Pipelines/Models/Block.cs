@@ -14,12 +14,12 @@ namespace Oasis_Visual_Pipelines.Models
     {
         public T? Data { get; set; }
 
-        internal Block(T data)
+        public Block(T data)
         {
             Data = data;
         }
 
-        internal Block(Point position, BlockDiagramControl blockDiagram)
+        public Block(Point position, BlockDiagramControl blockDiagram)
             : base(position, blockDiagram)
         {
             Data = Block<T>.TryToCreateDataObject();
@@ -75,12 +75,12 @@ namespace Oasis_Visual_Pipelines.Models
 
         public ObservableSet<Connection> RightConnections { get; set; } = new ObservableSet<Connection>();
 
-        internal Block()
+        public  Block()
         {
             CanvasElement = CreateDefaultCanvasElement();
         }
 
-        internal Block(Point position, BlockDiagramControl blockDiagram)
+        public  Block(Point position, BlockDiagramControl blockDiagram)
             : this()
         {
             BlockDiagram = blockDiagram;
@@ -103,7 +103,7 @@ namespace Oasis_Visual_Pipelines.Models
         #endregion
 
         #region Methods
-        internal object[] GetLeftInputs()
+        public  object[] GetLeftInputs()
         {
             return LeftConnections
                 .Select(connection => connection.LeftBlock)
@@ -113,7 +113,7 @@ namespace Oasis_Visual_Pipelines.Models
                 .ToArray();
         }
 
-        internal IBlockDiagramOperation[] GetLeftOperations()
+        public  IBlockDiagramOperation[] GetLeftOperations()
         {
             return LeftConnections
                 .Select(connection => connection.LeftBlock)
@@ -173,7 +173,7 @@ namespace Oasis_Visual_Pipelines.Models
                 DispatcherPriority.Render);
         }
 
-        internal bool IsConnectedTo(Block secondBlock)
+        public  bool IsConnectedTo(Block secondBlock)
         {
             if (secondBlock is null) throw new ArgumentNullException(nameof(secondBlock));
 
@@ -183,13 +183,13 @@ namespace Oasis_Visual_Pipelines.Models
         #endregion
 
         #region Graphics
-        internal void RedrawAnyConnections()
+        public  void RedrawAnyConnections()
         {
             foreach (Connection connection in LeftConnections.Concat(RightConnections).ToList())
                 connection.UpdateCanvasElementVector();
         }
 
-        internal ConnectorNodeControl? GetConnectionNode(Connection connection)
+        public  ConnectorNodeControl? GetConnectionNode(Connection connection)
         {
             return CanvasElement.FindConnectorNodeFromConnection(connection);
         }

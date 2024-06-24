@@ -208,7 +208,7 @@ namespace Oasis_Visual_Pipelines.Controls
             return firstConnectorNodeUnderCursor;
         }
 
-        internal ConnectorNodeControl? FindConnectorNodeFromConnection(Connection connectionToFind)
+        public  ConnectorNodeControl? FindConnectorNodeFromConnection(Connection connectionToFind)
         {
             return UIHelperFunctions.FindVisualChildren<ConnectorNodeControl>(this)
                 .FirstOrDefault(connectionNode => connectionNode.Connection == connectionToFind);

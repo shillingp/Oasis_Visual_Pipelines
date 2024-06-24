@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Aggregations/AggregationOperationTemplates.xaml" />
+        <ResourceDictionary Source="Joins/JoinOperationTemplates.xaml" />
+        <!--<ResourceDictionary Source="Others/OtherOperationTemplates.xaml" />-->
+        <ResourceDictionary Source="Selects/SelectOperationTemplates.xaml" />
+        <ResourceDictionary Source="Sources/SourceOperationTemplates.xaml" />
+        <ResourceDictionary Source="Transforms/TransformOperationTemplates.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>
