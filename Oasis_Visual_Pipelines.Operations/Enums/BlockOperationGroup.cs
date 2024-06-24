@@ -1,4 +1,4 @@
-﻿namespace Oasis_Visual_Pipelines.Enums
+﻿namespace Oasis_Visual_Pipelines.Operations.Enums
 {
     // number dictates the order in which they will appear in BlockChoiceDialogHost
     public enum BlockOperationGroup

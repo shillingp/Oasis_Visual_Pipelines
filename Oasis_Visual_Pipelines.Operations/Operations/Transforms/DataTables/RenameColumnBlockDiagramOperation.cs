@@ -1,5 +1,5 @@
-﻿using Oasis_Visual_Pipelines.Attributes;
-using Oasis_Visual_Pipelines.Classes;
+﻿using Oasis_Visual_Pipelines.Operations.Attributes;
+using Oasis_Visual_Pipelines.Operations.Classes;
 using Oasis_Visual_Pipelines.Functions;
 using PropertyChanged;
 using System.ComponentModel;

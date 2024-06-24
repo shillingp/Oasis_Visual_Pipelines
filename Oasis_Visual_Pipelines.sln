@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.8.34112.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oasis_Visual_Pipelines", "Oasis_Visual_Pipelines\Oasis_Visual_Pipelines.csproj", "{08F2E240-7A3E-45A7-B359-7C1C6B9A7CBC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{809BF082-489D-48D2-97FD-A4ED6753F655} = {809BF082-489D-48D2-97FD-A4ED6753F655}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleApplication", "ExampleApplication\ExampleApplication.csproj", "{A09A2271-C460-40AF-A22A-F792152E83B1}"
 EndProject
@@ -12,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oasis_Visual_Pipelines.Operations", "Oasis_Visual_Pipelines.Operations\Oasis_Visual_Pipelines.Operations.csproj", "{809BF082-489D-48D2-97FD-A4ED6753F655}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oasis_Visual_Pipelines.Operations", "Oasis_Visual_Pipelines.Operations\Oasis_Visual_Pipelines.Operations.csproj", "{809BF082-489D-48D2-97FD-A4ED6753F655}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

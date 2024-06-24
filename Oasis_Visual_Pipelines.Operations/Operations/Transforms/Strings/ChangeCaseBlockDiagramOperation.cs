@@ -1,10 +1,11 @@
-﻿using Oasis_Visual_Pipelines.Attributes;
-using Oasis_Visual_Pipelines.Classes;
+﻿using Oasis_Visual_Pipelines.Operations.Classes;
+using Oasis_Visual_Pipelines.Operations.Attributes;
+using Oasis_Visual_Pipelines.Operations.Enums;
 using System.Globalization;
 
 namespace Oasis_Visual_Pipelines.Operations.Transforms.Strings
 {
-    [BlockOperationGroup(Enums.BlockOperationType.Text, Enums.BlockOperationGroup.Transforms)]
+    [BlockOperationGroup(BlockOperationType.Text, BlockOperationGroup.Transforms)]
     public class ChangeCaseBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => 1;

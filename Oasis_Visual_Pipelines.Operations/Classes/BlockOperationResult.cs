@@ -1,4 +1,4 @@
-﻿namespace Oasis_Visual_Pipelines.Classes
+﻿namespace Oasis_Visual_Pipelines.Operations.Classes
 {
     public delegate dynamic? ParamsFunc(params BlockOperationResult[] operationArguments);
 

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Oasis_Visual_Pipelines.Operations\Oasis_Visual_Pipelines.Operations.csproj" />
     <ProjectReference Include="..\Oasis_Visual_Pipelines\Oasis_Visual_Pipelines.csproj" />
   </ItemGroup>
 

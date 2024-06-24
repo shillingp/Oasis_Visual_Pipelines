@@ -1,6 +1,6 @@
 ﻿using PropertyChanged;
 
-namespace Oasis_Visual_Pipelines.Classes
+namespace Oasis_Visual_Pipelines.Operations.Classes
 {
     [AddINotifyPropertyChangedInterface]
     public class DataTableFilter

@@ -1,16 +1,7 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
-using Oasis_Visual_Pipelines.Attributes;
-using Oasis_Visual_Pipelines.Classes.Messages;
-using Oasis_Visual_Pipelines.Interfaces;
-using Oasis_Visual_Pipelines.Models;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Numerics;
+﻿using System.ComponentModel;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Windows.Threading;
 
-namespace Oasis_Visual_Pipelines.Classes
+namespace Oasis_Visual_Pipelines.Operations.Classes
 {
     public class BaseBlockDiagramOperation : INotifyPropertyChanged, IBlockDiagramOperation
     {

@@ -1,4 +1,6 @@
-﻿using Oasis_Visual_Pipelines.Classes;
+﻿using Oasis_Visual_Pipelines.Operations.Attributes;
+using Oasis_Visual_Pipelines.Operations.Classes;
+using Oasis_Visual_Pipelines.Operations.Enums;
 using System.Data;
 
 namespace Oasis_Visual_Pipelines.Operations.Joins.DataTables

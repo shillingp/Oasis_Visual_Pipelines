@@ -1,4 +1,4 @@
-﻿using Oasis_Visual_Pipelines.Enums;
+﻿using Oasis_Visual_Pipelines.Operations.Enums;
 using System.Windows.Controls;
 
 namespace Oasis_Visual_Pipelines.Dialogs

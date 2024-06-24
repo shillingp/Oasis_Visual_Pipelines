@@ -1,4 +1,4 @@
-﻿namespace Oasis_Visual_Pipelines.Enums
+﻿namespace Oasis_Visual_Pipelines.Operations.Enums
 {
     public enum TimeDateOffset
     {
