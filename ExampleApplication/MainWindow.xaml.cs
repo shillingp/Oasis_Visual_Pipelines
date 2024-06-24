@@ -1,4 +1,5 @@
 ﻿using Oasis_Visual_Pipelines.Classes;
+using Oasis_Visual_Pipelines.Controls;
 using Oasis_Visual_Pipelines.Models;
 using Oasis_Visual_Pipelines.Operations.Selects.DataTables;
 using Oasis_Visual_Pipelines.Operations.Sources.DataTables;
@@ -20,8 +21,18 @@ namespace ExampleApplication
             Loaded += MainWindow_Loaded;
         }
 
+        private class MTBF
+        {
+            internal int Value { get; set; }
+        }
+
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            MainBlockDiagram.AddBlock<MTBF>(new Point(250, 250), null, new MTBF { Value = 500 });
+            MainBlockDiagram.AddBlock<MTBF>(new Point(300, 250), null, new MTBF { Value = 100 });
+            MainBlockDiagram.AddBlock<MTBF>(new Point(300, 325), null, new MTBF { Value = 300 });
+
+
             // NOTE: Diagrams are made predominantly for use from the front end
             //       The following is to demonstrate functionality
             //       Simple block additions and connection is trivial however
