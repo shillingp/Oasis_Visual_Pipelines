@@ -32,36 +32,35 @@ namespace Oasis_Visual_Pipelines.Operations.Sources.DataTables
             bool? closeStateResult = (bool?)await DialogHostFunctions.CreateAndShowDialog(settingsDialog, null, true);
             if (closeStateResult != true) return;
 
-            string authenticationString = settingsDialog.AuthenticationMethod switch
+            string authenticationString = "Authentication=" + settingsDialog.AuthenticationMethod switch
             {
-                Authentication.None => "",
-                Authentication.Default => "Authentication=Active Directory Default",
-                Authentication.UsernamePassword => "Authentication=Active Directory Password",
-                Authentication.Integrated => "Authentication=Active Directory Integrated",
-                Authentication.Interactive => "Authentication=Active Directory Interactive",
+                Authentication.None => "None",
+                Authentication.Default => "Active Directory Default",
+                Authentication.UsernamePassword => "Active Directory Password",
+                Authentication.Integrated => "Active Directory Integrated",
+                Authentication.Interactive => "Active Directory Interactive",
                 _ => throw new NotImplementedException(),
             };
 
             string tableName = settingsDialog.TableName;
-            string connectionString = string.Join(';', (new[] {
+            string connectionString = string.Join(';',
                 $"Server={settingsDialog.ServerString}",
                 $"Database={settingsDialog.DatabaseName}",
                 authenticationString,
                 "Encrypt=True"
-            }).Where(part => !string.IsNullOrEmpty(part)));
+            );
 
             try
             {
                 using SqlConnection connection = new SqlConnection(connectionString);
-                using SqlCommand sqlCommand = new SqlCommand($"SELECT * FROM @TABLENAME", connection);
-                sqlCommand.Parameters.AddWithValue("@TABLENAME", tableName);
-
-                using SqlCommand command = sqlCommand;
-                using SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
-
-                DataTable sqlTable = new DataTable();
-                dataAdapter.Fill(sqlTable);
-                FetchedDataTable = sqlTable;
+                using (SqlCommand sqlCommand = new SqlCommand($"SELECT * FROM [{tableName}]", connection))
+                using (SqlCommand command = sqlCommand)
+                using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
+                {
+                    DataTable sqlTable = new DataTable();
+                    dataAdapter.Fill(sqlTable);
+                    FetchedDataTable = sqlTable;
+                }
             }
             catch
             {

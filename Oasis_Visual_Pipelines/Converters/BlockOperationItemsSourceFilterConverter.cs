@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Globalization;
 using System.Windows.Data;
+using Oasis_Visual_Pipelines.Models;
 
 namespace Oasis_Visual_Pipelines.Converters
 {

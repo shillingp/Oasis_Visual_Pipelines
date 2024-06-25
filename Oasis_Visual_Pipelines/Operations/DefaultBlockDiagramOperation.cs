@@ -31,9 +31,9 @@ namespace Oasis_Visual_Pipelines.Operations
         {
             Type blockOperationInterface = typeof(BaseBlockDiagramOperation);
 
-            pregeneratedBlocks ??= GenerateBlockControlInstancesForClassesDerivedFromTypeAsync(blockOperationInterface);
+            //pregeneratedBlocks ??= GenerateBlockControlInstancesForClassesDerivedFromTypeAsync(blockOperationInterface);
 
-            object?[] blockOperationInstances = pregeneratedBlocks;
+            object?[] blockOperationInstances = GenerateBlockControlInstancesForClassesDerivedFromTypeAsync(blockOperationInterface);
 
             Block? chosenBlock = (Block?)await DialogHostFunctions.CreateAndShowDialog(
                 new BlockPickerDialog(),

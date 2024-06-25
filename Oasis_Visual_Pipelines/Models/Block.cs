@@ -12,8 +12,6 @@ namespace Oasis_Visual_Pipelines.Models
     [AddINotifyPropertyChangedInterface]
     public class Block<T> : Block
     {
-        public T? Data { get; set; }
-
         public Block(T data)
         {
             Data = data;
@@ -63,6 +61,8 @@ namespace Oasis_Visual_Pipelines.Models
     [AddINotifyPropertyChangedInterface]
     public class Block : IBlockDiagramObject<BlockControl>, IBlockDiagramObject
     {
+        public object? Data { get; set; }
+
         public BlockDiagramControl? BlockDiagram;
 
         public Point Position { get; set; }
