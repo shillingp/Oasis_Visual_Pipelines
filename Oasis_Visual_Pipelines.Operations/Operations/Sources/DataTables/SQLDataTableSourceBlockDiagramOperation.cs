@@ -43,23 +43,25 @@ namespace Oasis_Visual_Pipelines.Operations.Sources.DataTables
             };
 
             string tableName = settingsDialog.TableName;
-            string connectionString = string.Join(';', new[] {
+            string connectionString = string.Join(';', (new[] {
                 $"Server={settingsDialog.ServerString}",
                 $"Database={settingsDialog.DatabaseName}",
                 authenticationString,
                 "Encrypt=True"
-            }.Where(part => !string.IsNullOrEmpty(part)));
+            }).Where(part => !string.IsNullOrEmpty(part)));
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                using (SqlCommand command = new SqlCommand($"SELECT * FROM {tableName}", connection))
-                using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
-                {
-                    DataTable sqlTable = new DataTable();
-                    dataAdapter.Fill(sqlTable);
-                    FetchedDataTable = sqlTable;
-                };
+                using SqlConnection connection = new SqlConnection(connectionString);
+                using SqlCommand sqlCommand = new SqlCommand($"SELECT * FROM @TABLENAME", connection);
+                sqlCommand.Parameters.AddWithValue("@TABLENAME", tableName);
+
+                using SqlCommand command = sqlCommand;
+                using SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
+
+                DataTable sqlTable = new DataTable();
+                dataAdapter.Fill(sqlTable);
+                FetchedDataTable = sqlTable;
             }
             catch
             {
