@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Classes.Messages;
+using Oasis_Visual_Pipelines.Enums;
 using Oasis_Visual_Pipelines.Functions;
 using Oasis_Visual_Pipelines.Interfaces;
 using Oasis_Visual_Pipelines.Models;
@@ -81,6 +82,19 @@ namespace Oasis_Visual_Pipelines.Controls
                 typeof(object),
                 typeof(BlockDiagramControl),
                 new PropertyMetadata(null));
+
+        public ConnectionStyle ConnectionStyle
+        {
+            get { return (ConnectionStyle)GetValue(ConnectionStyleProperty); }
+            set { SetValue(ConnectionStyleProperty, value); }
+        }
+
+        public static readonly DependencyProperty ConnectionStyleProperty =
+            DependencyProperty.Register(
+                "ConnectionStyle",
+                typeof(ConnectionStyle),
+                typeof(BlockDiagramControl),
+                new PropertyMetadata(Enums.ConnectionStyle.Bezier));
 
         public BlockDiagramControl()
         {
