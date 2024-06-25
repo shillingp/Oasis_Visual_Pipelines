@@ -94,7 +94,7 @@ namespace Oasis_Visual_Pipelines.Controls
                 "ConnectionStyle",
                 typeof(ConnectionStyle),
                 typeof(BlockDiagramControl),
-                new PropertyMetadata(Enums.ConnectionStyle.Bezier));
+                new PropertyMetadata(ConnectionStyle.Bezier));
 
         public BlockDiagramControl()
         {

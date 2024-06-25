@@ -81,11 +81,7 @@ namespace Oasis_Visual_Pipelines.Models
             {
                 Figures =
                 [
-                    new PathFigure()
-                    {
-                        StartPoint = start,
-                        Segments = [ new PolyBezierSegment(points, true) ]
-                    }
+                    new PathFigure(start, [ new PolyBezierSegment(points, true) ], false)
                 ]
             };
         }
@@ -102,11 +98,7 @@ namespace Oasis_Visual_Pipelines.Models
             {
                 Figures =
                 [
-                    new PathFigure
-                    {
-                        StartPoint = start,
-                        Segments = [ new PolyLineSegment(points, true) ]
-                    }
+                    new PathFigure(start, [ new PolyLineSegment(points, true) ], false)
                 ]
             };
         }
@@ -117,11 +109,7 @@ namespace Oasis_Visual_Pipelines.Models
             {
                 Figures =
                 [
-                    new PathFigure
-                    {
-                        StartPoint = start,
-                        Segments = [ new PolyLineSegment([finish], true) ]
-                    }
+                    new PathFigure(start, [ new PolyLineSegment([finish], true) ], false)
                 ]
             };
         }
