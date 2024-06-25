@@ -53,12 +53,12 @@ namespace Oasis_Visual_Pipelines.Converters
         ];
 
         private readonly FilterFunctor[] dateTimeFilters = [
-            new FilterFunctor("Equals", "= #__REPLACE__#"),
-            new FilterFunctor("Not equal", "<> #__REPLACE__#"),
-            new FilterFunctor("Less than", "< #__REPLACE__#"),
-            new FilterFunctor("Less than or equal", "<= #__REPLACE__#"),
-            new FilterFunctor("Greater than", "> #__REPLACE__#"),
-            new FilterFunctor("Greater than or equal", ">= #__REPLACE__#"),
+            new FilterFunctor("Equals", "= #___REPLACE___#"),
+            new FilterFunctor("Not equal", "<> #___REPLACE___#"),
+            new FilterFunctor("Less than", "< #___REPLACE___#"),
+            new FilterFunctor("Less than or equal", "<= #___REPLACE___#"),
+            new FilterFunctor("Greater than", "> #___REPLACE___#"),
+            new FilterFunctor("Greater than or equal", ">= #___REPLACE___#"),
         ];
     }
 }
