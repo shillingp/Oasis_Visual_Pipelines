@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using MaterialDesignThemes.Wpf;
 using Oasis_Visual_Pipelines.Attributes;
 using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Controls;
@@ -8,9 +9,10 @@ using Oasis_Visual_Pipelines.Functions;
 using Oasis_Visual_Pipelines.Models;
 using System.Data;
 using System.Globalization;
+using System.Linq.Expressions;
 using System.Reflection;
-using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace Oasis_Visual_Pipelines.Operations
 {
@@ -26,14 +28,11 @@ namespace Oasis_Visual_Pipelines.Operations
             return new BlockOperationResult(additionalOperations => null);
         }
 
-        private static object?[]? pregeneratedBlocks;
         public static ICommand ChooseBlockTypeCommand => new RelayCommand<BlockControl>(async (control) =>
         {
             Type blockOperationInterface = typeof(BaseBlockDiagramOperation);
 
-            //pregeneratedBlocks ??= GenerateBlockControlInstancesForClassesDerivedFromTypeAsync(blockOperationInterface);
-
-            object?[] blockOperationInstances = GenerateBlockControlInstancesForClassesDerivedFromTypeAsync(blockOperationInterface);
+            IEnumerable<BlockControl> blockOperationInstances = GenerateBlockControlInstancesForClassesDerivedFromTypeFaster(blockOperationInterface);
 
             Block? chosenBlock = (Block?)await DialogHostFunctions.CreateAndShowDialog(
                 new BlockPickerDialog(),
@@ -41,7 +40,7 @@ namespace Oasis_Visual_Pipelines.Operations
                 closeOnClickAway: true);
             if (chosenBlock is null) return;
 
-            Point newPosition = control!.Block.Position;
+            System.Windows.Point newPosition = control!.Block.Position;
             newPosition.X += chosenBlock.CanvasElement.ActualWidth / 2;
             newPosition.Y += chosenBlock.CanvasElement.ActualHeight / 2;
 
@@ -53,10 +52,51 @@ namespace Oasis_Visual_Pipelines.Operations
             control.Block.BlockDiagram.BlockDiagramItems.Remove(control.Block);
         });
 
-        private static object?[] GenerateBlockControlInstancesForClassesDerivedFromTypeAsync(Type blockOperationInterface)
+        private delegate T ObjectActivator<T>(params object[] args);
+        private static ObjectActivator<T> GetActivator<T>(ConstructorInfo ctor)
         {
-            if (blockOperationInterface is null) throw new ArgumentNullException(nameof(blockOperationInterface));
+            Type? type = ctor.DeclaringType;
+            ParameterInfo[] paramsInfo = ctor.GetParameters();
 
+            //create a single param of type object[]
+            ParameterExpression param =
+                Expression.Parameter(typeof(object[]), "args");
+
+            Expression[] argsExp =
+                new Expression[paramsInfo.Length];
+
+            //pick each arg from the params array 
+            //and create a typed expression of them
+            for (int i = 0; i < paramsInfo.Length; i++)
+            {
+                Expression index = Expression.Constant(i);
+                Type paramType = paramsInfo[i].ParameterType;
+
+                Expression paramAccessorExp =
+                    Expression.ArrayIndex(param, index);
+
+                Expression paramCastExp =
+                    Expression.Convert(paramAccessorExp, paramType);
+
+                argsExp[i] = paramCastExp;
+            }
+
+            //make a NewExpression that calls the
+            //ctor with the args we just created
+            NewExpression newExp = Expression.New(ctor, argsExp);
+
+            //create a lambda with the New
+            //Expression as body and our param object[] as arg
+            LambdaExpression lambda =
+                Expression.Lambda(typeof(ObjectActivator<T>), newExp, param);
+
+            //compile it
+            ObjectActivator<T> compiled = (ObjectActivator<T>)lambda.Compile();
+            return compiled;
+        }
+
+        private static IEnumerable<BlockControl> GenerateBlockControlInstancesForClassesDerivedFromTypeFaster(Type blockOperationInterface)
+        {
             return AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(assembly => assembly.GetTypes())
                 .Where(assemblyType => blockOperationInterface.IsAssignableFrom(assemblyType))
@@ -69,22 +109,52 @@ namespace Oasis_Visual_Pipelines.Operations
                     object? operationTypeInstance = Activator.CreateInstance(operationType);
                     if (operationTypeInstance is null) return null;
 
-                    BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
-                    object? genericBlockInstance = Activator.CreateInstance(
-                        type: genericBlockType,
-                        bindingAttr: flags,
-                        binder: null,
-                        args: [operationTypeInstance],
-                        culture: CultureInfo.CurrentCulture);
-                    if (genericBlockInstance is null) return null;
+                    ConstructorInfo ctor = genericBlockType.GetConstructors().First();
+                    ObjectActivator<object> createdActivator = GetActivator<object>(ctor);
 
-                    ((Block)genericBlockInstance).Title = "Block";
-
-                    return genericBlockInstance;
+                    return createdActivator(operationTypeInstance)!;
                 })
                 .Select(genericBlockOperationInstance =>
-                    Activator.CreateInstance(typeof(BlockControl), genericBlockOperationInstance))
-                .ToArray();
+                {
+                    ConstructorInfo ctor = typeof(BlockControl).GetConstructors().First();
+                    ObjectActivator<BlockControl> createdActivator = GetActivator<BlockControl>(ctor);
+
+                    return createdActivator(genericBlockOperationInstance!);
+                });
         }
+
+        //private static object?[] GenerateBlockControlInstancesForClassesDerivedFromType(Type blockOperationInterface)
+        //{
+        //    if (blockOperationInterface is null) throw new ArgumentNullException(nameof(blockOperationInterface));
+
+        //    return AppDomain.CurrentDomain.GetAssemblies()
+        //        .SelectMany(assembly => assembly.GetTypes())
+        //        .Where(assemblyType => blockOperationInterface.IsAssignableFrom(assemblyType))
+        //        .Where(assemblyType => assemblyType.IsClass)
+        //        .Where(assemblyType => assemblyType != typeof(DefaultBlockDiagramOperation))
+        //        .Where(assemblyType => assemblyType != typeof(BaseBlockDiagramOperation))
+        //        .Select(operationType =>
+        //        {
+        //            Type genericBlockType = typeof(Block<>).MakeGenericType(operationType);
+        //            object? operationTypeInstance = Activator.CreateInstance(operationType);
+        //            if (operationTypeInstance is null) return null;
+
+        //            BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
+        //            object? genericBlockInstance = Activator.CreateInstance(
+        //                type: genericBlockType,
+        //                bindingAttr: flags,
+        //                binder: null,
+        //                args: [operationTypeInstance],
+        //                culture: CultureInfo.CurrentCulture);
+        //            if (genericBlockInstance is null) return null;
+
+        //            ((Block)genericBlockInstance).Title = "Block";
+
+        //            return genericBlockInstance;
+        //        })
+        //        .Select(genericBlockOperationInstance =>
+        //            Activator.CreateInstance(typeof(BlockControl), genericBlockOperationInstance))
+        //        .ToArray();
+        //}
     }
 }
