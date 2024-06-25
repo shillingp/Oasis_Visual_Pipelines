@@ -45,6 +45,7 @@ namespace Oasis_Visual_Pipelines.Models
 
         public void UpdateCanvasElementVector()
         {
+
             ConnectorNodeControl? leftNode = LeftBlock?.GetConnectionNode(this);
             ConnectorNodeControl? rightNode = RightBlock?.GetConnectionNode(this);
 
@@ -56,29 +57,72 @@ namespace Oasis_Visual_Pipelines.Models
             start.X += ConnectorNodeControl.ConnectorNodeSize / 2;
             finish.X -= ConnectorNodeControl.ConnectorNodeSize / 2;
 
+            CanvasElement.Data = LeftBlock!.BlockDiagram!.ConnectionStyle switch
+            {
+                Enums.ConnectionStyle.Bezier => GenerateBezier(start, finish),
+                Enums.ConnectionStyle.RightAngle => GenerateRightAngle(start, finish),
+                Enums.ConnectionStyle.Straight => GenerateStraight(start, finish),
+                _ => throw new NotImplementedException(),
+            };
+        }
+
+        private static Geometry GenerateBezier(Point start, Point finish)
+        {
             double horizontalOffset = Math.Abs((finish - start).X);
             int bezierExtentFromBlock = (int)horizontalOffset / 2;
 
             Point[] points = [
-                start,
                 new Point(start.X + bezierExtentFromBlock, start.Y),
                 new Point(finish.X - bezierExtentFromBlock, finish.Y),
                 finish
             ];
 
-            CanvasElement.Data = new PathGeometry()
+            return new PathGeometry()
             {
-                Figures = new PathFigureCollection
-                {
+                Figures =
+                [
                     new PathFigure()
                     {
-                        StartPoint = points[0],
-                        Segments = new PathSegmentCollection()
-                        {
-                            new PolyBezierSegment(points.Skip(1), true),
-                        }
+                        StartPoint = start,
+                        Segments = [ new PolyBezierSegment(points, true) ]
                     }
-                }
+                ]
+            };
+        }
+
+        private static Geometry GenerateRightAngle(Point start, Point finish)
+        {
+            Point[] points = [
+                new Point(start.X + Math.Abs(finish.X - start.X) / 2, start.Y),
+                new Point(start.X + Math.Abs(finish.X - start.X) / 2, finish.Y),
+                finish
+            ];
+
+            return new PathGeometry
+            {
+                Figures =
+                [
+                    new PathFigure
+                    {
+                        StartPoint = start,
+                        Segments = [ new PolyLineSegment(points, true) ]
+                    }
+                ]
+            };
+        }
+
+        private static Geometry GenerateStraight(Point start, Point finish)
+        {
+            return new PathGeometry
+            {
+                Figures =
+                [
+                    new PathFigure
+                    {
+                        StartPoint = start,
+                        Segments = [ new PolyLineSegment([finish], true) ]
+                    }
+                ]
             };
         }
     }
