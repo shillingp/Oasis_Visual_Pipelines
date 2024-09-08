@@ -2,13 +2,8 @@
 using Oasis_Visual_Pipelines.Attributes;
 using Oasis_Visual_Pipelines.Classes.Messages;
 using Oasis_Visual_Pipelines.Interfaces;
-using Oasis_Visual_Pipelines.Models;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Numerics;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Windows.Threading;
 
 namespace Oasis_Visual_Pipelines.Classes
 {
@@ -18,7 +13,7 @@ namespace Oasis_Visual_Pipelines.Classes
         public virtual int MaxOutputs => int.MaxValue;
         public virtual string OperationTitle => "";
 
-        readonly Dictionary<(IBlockDiagramOperation Operation, string Property), DateTime> lastUpdateTime
+        private readonly Dictionary<(IBlockDiagramOperation Operation, string Property), DateTime> lastUpdateTime
             = new Dictionary<(IBlockDiagramOperation Operation, string Property), DateTime>();
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -42,7 +37,7 @@ namespace Oasis_Visual_Pipelines.Classes
                         return;
                     }
                 }
-                
+
                 lastUpdateTime[(this, eventArgs.PropertyName!)] = DateTime.Now;
             }
 

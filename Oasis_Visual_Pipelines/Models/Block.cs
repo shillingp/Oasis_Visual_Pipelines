@@ -83,12 +83,12 @@ namespace Oasis_Visual_Pipelines.Models
 
         public ObservableSet<Connection> RightConnections { get; set; } = [];
 
-        public  Block()
+        public Block()
         {
             CanvasElement = CreateDefaultCanvasElement();
         }
 
-        public  Block(Point position, BlockDiagramControl blockDiagram)
+        public Block(Point position, BlockDiagramControl blockDiagram)
             : this()
         {
             BlockDiagram = blockDiagram;
@@ -166,7 +166,7 @@ namespace Oasis_Visual_Pipelines.Models
                 DispatcherPriority.Render);
         }
 
-        public  bool IsConnectedTo(Block secondBlock)
+        public bool IsConnectedTo(Block secondBlock)
         {
             if (secondBlock is null) throw new ArgumentNullException(nameof(secondBlock));
 
@@ -176,13 +176,13 @@ namespace Oasis_Visual_Pipelines.Models
         #endregion
 
         #region Graphics
-        public  void RedrawAnyConnections()
+        public void RedrawAnyConnections()
         {
             foreach (Connection connection in LeftConnections.Concat(RightConnections).ToList())
                 connection.UpdateCanvasElementVector();
         }
 
-        public  ConnectorNodeControl? GetConnectionNode(Connection connection)
+        public ConnectorNodeControl? GetConnectionNode(Connection connection)
         {
             return CanvasElement.FindConnectorNodeFromConnection(connection);
         }

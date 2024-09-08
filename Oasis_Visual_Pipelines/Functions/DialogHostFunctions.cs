@@ -4,16 +4,16 @@ using System.Windows.Controls;
 
 namespace Oasis_Visual_Pipelines.Functions
 {
-    public  sealed class DialogHostFunctions
+    public sealed class DialogHostFunctions
     {
-        public  static async Task<object?> CreateAndShowDialog(object content, object? dataContext = null, bool closeOnClickAway = true)
+        public static async Task<object?> CreateAndShowDialog(object content, object? dataContext = null, bool closeOnClickAway = true)
         {
             DialogHost newDialogHost = CreateDialog(content, dataContext, closeOnClickAway);
 
             return await newDialogHost.ShowDialog(content);
         }
 
-        public  static DialogHost CreateDialog(object content, object? dataContext = null, bool closeOnClickAway = true, Panel? rootPanel = null)
+        public static DialogHost CreateDialog(object content, object? dataContext = null, bool closeOnClickAway = true, Panel? rootPanel = null)
         {
             Window? activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             rootPanel ??= UIHelperFunctions.GetChildOfType<Panel>(activeWindow ?? Application.Current.MainWindow);

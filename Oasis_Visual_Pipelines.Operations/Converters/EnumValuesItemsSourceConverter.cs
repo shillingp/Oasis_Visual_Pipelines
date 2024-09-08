@@ -3,7 +3,7 @@ using System.Windows.Data;
 
 namespace Oasis_Visual_Pipelines.Converters
 {
-    public  class EnumValuesItemsSourceConverter : IValueConverter
+    public class EnumValuesItemsSourceConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

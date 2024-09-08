@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace Oasis_Visual_Pipelines.Converters
 {
-    public  class HeightExpanderButtonVisibilityConverter : IMultiValueConverter
+    public class HeightExpanderButtonVisibilityConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

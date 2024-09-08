@@ -16,14 +16,14 @@ namespace Oasis_Visual_Pipelines.Functions
                 .ToArray();
         }
 
-        public  static DataColumn[] ExtractColumnsFromTable(DataTable dataTable)
+        public static DataColumn[] ExtractColumnsFromTable(DataTable dataTable)
         {
             return dataTable.Columns
                 .Cast<DataColumn>()
                 .ToArray();
         }
 
-        public  static DataTable FilterDataTable(DataTable tableObject, IEnumerable<DataTableFilter> selectedFilters, string sqlJoinStatement = "AND")
+        public static DataTable FilterDataTable(DataTable tableObject, IEnumerable<DataTableFilter> selectedFilters, string sqlJoinStatement = "AND")
         {
             if (tableObject is null) throw new ArgumentNullException(nameof(tableObject));
             if (selectedFilters is null) throw new ArgumentNullException(nameof(selectedFilters));
@@ -36,7 +36,7 @@ namespace Oasis_Visual_Pipelines.Functions
             return resultTable;
         }
 
-        public  static object ConcatDataTables(DataTable leftDataTable, DataTable rightDataTable)
+        public static object ConcatDataTables(DataTable leftDataTable, DataTable rightDataTable)
         {
             DataTable resultTable = leftDataTable.Copy();
 
@@ -50,7 +50,7 @@ namespace Oasis_Visual_Pipelines.Functions
             return resultTable;
         }
 
-        public  static DataTable JoinDataTables(
+        public static DataTable JoinDataTables(
             DataTable leftTable,
             DataTable rightTable,
             string leftJoinColumn,
@@ -82,7 +82,7 @@ namespace Oasis_Visual_Pipelines.Functions
             return resultTable;
         }
 
-        public  static string ConvertDataTableToCSVString(DataTable resultTable)
+        public static string ConvertDataTableToCSVString(DataTable resultTable)
         {
             StringBuilder resultString = new StringBuilder();
 
@@ -100,13 +100,13 @@ namespace Oasis_Visual_Pipelines.Functions
             return resultString.ToString();
         }
 
-        public  static DataTable ImportExcelToDataTable(string sourceFilePath)
+        public static DataTable ImportExcelToDataTable(string sourceFilePath)
         {
             if (string.IsNullOrEmpty(sourceFilePath))
                 return new DataTable();
 
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            
+
             using FileStream stream = File.Open(sourceFilePath, FileMode.Open, FileAccess.Read);
             using IExcelDataReader reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
             DataSet dataset = reader.AsDataSet(new ExcelDataSetConfiguration()

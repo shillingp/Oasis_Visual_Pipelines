@@ -210,7 +210,7 @@ namespace Oasis_Visual_Pipelines.Controls
             return firstConnectorNodeUnderCursor;
         }
 
-        public  ConnectorNodeControl? FindConnectorNodeFromConnection(Connection connectionToFind)
+        public ConnectorNodeControl? FindConnectorNodeFromConnection(Connection connectionToFind)
         {
             return UIHelperFunctions.FindVisualChildren<ConnectorNodeControl>(this)
                 .FirstOrDefault(connectionNode => connectionNode.Connection == connectionToFind);

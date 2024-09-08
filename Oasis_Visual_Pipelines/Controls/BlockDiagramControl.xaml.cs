@@ -228,7 +228,7 @@ namespace Oasis_Visual_Pipelines.Controls
             return newBlockToAdd;
         }
 
-        public  void RedrawAllBlocksAndConnections()
+        public void RedrawAllBlocksAndConnections()
         {
             foreach (Block block in BlockDiagramItems.OfType<Block>())
                 block.RedrawAnyConnections();
@@ -250,7 +250,7 @@ namespace Oasis_Visual_Pipelines.Controls
 
         internal void MoveBlockAndConnectionsToTop(Block blockControl)
         {
-            foreach (IBlockDiagramObject connection in blockControl.LeftConnections                
+            foreach (IBlockDiagramObject connection in blockControl.LeftConnections
                 .Concat(blockControl.RightConnections)
                 .OfType<IBlockDiagramObject>()
                 .Append(blockControl))

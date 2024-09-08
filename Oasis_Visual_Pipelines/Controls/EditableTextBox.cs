@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace Oasis_Visual_Pipelines.Controls
 {
-    public  class EditableTextBox : TextBox
+    public class EditableTextBox : TextBox
     {
         public Style ReadOnlyStyle
         {

@@ -2,7 +2,6 @@
 using Oasis_Visual_Pipelines.Classes;
 using Oasis_Visual_Pipelines.Enums;
 using Oasis_Visual_Pipelines.Functions;
-using PropertyChanged;
 using System.Data;
 
 namespace Oasis_Visual_Pipelines.Operations.Selects.DataTables
