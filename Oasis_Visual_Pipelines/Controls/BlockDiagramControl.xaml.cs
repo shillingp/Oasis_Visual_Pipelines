@@ -213,10 +213,7 @@ namespace Oasis_Visual_Pipelines.Controls
         public Block<T> AddBlock<T>(Point position, string? title = null, T? data = null)
             where T : class, new()
         {
-            Block<T> newBlockToAdd = new Block<T>(position, this)
-            {
-                Data = data ?? new T()
-            };
+            Block<T> newBlockToAdd = new Block<T>(position, this, data ?? new T());
 
             if (title is not null)
                 newBlockToAdd.Title = title;

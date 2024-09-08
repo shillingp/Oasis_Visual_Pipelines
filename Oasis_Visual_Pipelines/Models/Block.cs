@@ -12,6 +12,8 @@ namespace Oasis_Visual_Pipelines.Models
     [AddINotifyPropertyChangedInterface]
     public class Block<T> : Block
     {
+        public new T? Data { get; set; }
+
         public Block(T data)
         {
             Data = data;
@@ -21,6 +23,12 @@ namespace Oasis_Visual_Pipelines.Models
             : base(position, blockDiagram)
         {
             Data = Block<T>.TryToCreateDataObject();
+        }
+
+        public Block(Point position, BlockDiagramControl blockDiagram, T data)
+            : base(position, blockDiagram)
+        {
+            Data = data;
         }
 
         private static T? TryToCreateDataObject()
@@ -42,7 +50,7 @@ namespace Oasis_Visual_Pipelines.Models
             }
         }
 
-        public BlockOperationResult CalculateFlowPathResult()
+        public new BlockOperationResult CalculateFlowPathResult()
         {
             if (Data is not IBlockDiagramOperation blockOperation)
                 return new BlockOperationResult(additionalInputs => Data);
@@ -71,9 +79,9 @@ namespace Oasis_Visual_Pipelines.Models
 
         public BlockControl CanvasElement { get; protected set; }
 
-        public ObservableSet<Connection> LeftConnections { get; set; } = new ObservableSet<Connection>();
+        public ObservableSet<Connection> LeftConnections { get; set; } = [];
 
-        public ObservableSet<Connection> RightConnections { get; set; } = new ObservableSet<Connection>();
+        public ObservableSet<Connection> RightConnections { get; set; } = [];
 
         public  Block()
         {
@@ -103,24 +111,9 @@ namespace Oasis_Visual_Pipelines.Models
         #endregion
 
         #region Methods
-        public  object[] GetLeftInputs()
+        public object? CalculateFlowPathResult()
         {
-            return LeftConnections
-                .Select(connection => connection.LeftBlock)
-                .Cast<dynamic>()
-                .Select(block => block.CalculateOperationalResult())
-                .Cast<object>()
-                .ToArray();
-        }
-
-        public  IBlockDiagramOperation[] GetLeftOperations()
-        {
-            return LeftConnections
-                .Select(connection => connection.LeftBlock)
-                .Cast<dynamic>()
-                .Select(block => block.Data)
-                .Cast<IBlockDiagramOperation>()
-                .ToArray();
+            return Data;
         }
 
         public BlockControl CreateDefaultCanvasElement()
