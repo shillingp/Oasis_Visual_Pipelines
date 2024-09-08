@@ -29,7 +29,7 @@ namespace Oasis_Visual_Pipelines.Operations
         {
             Type blockOperationInterface = typeof(BaseBlockDiagramOperation);
 
-            IEnumerable<BlockControl> blockOperationInstances = GenerateBlockControlInstancesForClassesDerivedFromTypeFaster(blockOperationInterface);
+            BlockControl[] blockOperationInstances = GenerateBlockControlInstancesForClassesDerivedFromTypeFaster(blockOperationInterface);
 
             Block? chosenBlock = (Block?)await DialogHostFunctions.CreateAndShowDialog(
                 new BlockPickerDialog(),
@@ -92,7 +92,7 @@ namespace Oasis_Visual_Pipelines.Operations
             return compiled;
         }
 
-        private static IEnumerable<BlockControl> GenerateBlockControlInstancesForClassesDerivedFromTypeFaster(Type blockOperationInterface)
+        private static BlockControl[] GenerateBlockControlInstancesForClassesDerivedFromTypeFaster(Type blockOperationInterface)
         {
             return AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(assembly => assembly.GetTypes())
@@ -117,7 +117,8 @@ namespace Oasis_Visual_Pipelines.Operations
                     ObjectActivator<BlockControl> createdActivator = GetActivator<BlockControl>(ctor);
 
                     return createdActivator(genericBlockOperationInstance!);
-                });
+                })
+                .ToArray();
         }
 
         //private static object?[] GenerateBlockControlInstancesForClassesDerivedFromType(Type blockOperationInterface)

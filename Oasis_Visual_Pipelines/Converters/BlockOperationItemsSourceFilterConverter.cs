@@ -18,7 +18,7 @@ namespace Oasis_Visual_Pipelines.Converters
             return collection
                 .OfType<BlockControl>()
                 .Cast<dynamic>()
-                .Where(blockControl => (blockControl.Block.Data.OperationTitle as string)?
+                .Where(blockControl => (blockControl.Block.Data?.OperationTitle as string)?
                     .Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false);
         }
 
