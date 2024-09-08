@@ -10,6 +10,7 @@ using Oasis_Visual_Pipelines.Models;
 using Oasis_Visual_Pipelines.Operations;
 using PropertyChanged;
 using System.Collections;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Globalization;
 using System.IO;
@@ -31,16 +32,16 @@ namespace Oasis_Visual_Pipelines.Controls
     {
         private static int numberOfBlocksCreated = 0;
 
-        public ICollection<IBlockDiagramObject> BlockDiagramItems
+        public ObservableCollection<IBlockDiagramObject> BlockDiagramItems
         {
-            get { return (ICollection<IBlockDiagramObject>)GetValue(BlockDiagramItemsProperty); }
+            get { return (ObservableCollection<IBlockDiagramObject>)GetValue(BlockDiagramItemsProperty); }
             set { SetValue(BlockDiagramItemsProperty, value); }
         }
 
         public static readonly DependencyProperty BlockDiagramItemsProperty =
             DependencyProperty.Register(
                 "BlockDiagramItems",
-                typeof(ICollection<IBlockDiagramObject>),
+                typeof(ObservableCollection<IBlockDiagramObject>),
                 typeof(BlockDiagramControl),
                 new PropertyMetadata(new ObservableSet<IBlockDiagramObject>()));
 
@@ -245,6 +246,17 @@ namespace Oasis_Visual_Pipelines.Controls
         public void Receive(BlockControlPropertyChangedMessage message)
         {
             SelectedBlockResult = HelperFunctions.ReturnBlockResult(SelectedBlock!)!;
+        }
+
+        internal void MoveBlockAndConnectionsToTop(Block blockControl)
+        {
+            foreach (IBlockDiagramObject connection in blockControl.LeftConnections                
+                .Concat(blockControl.RightConnections)
+                .OfType<IBlockDiagramObject>()
+                .Append(blockControl))
+                BlockDiagramItems.Move(
+                    BlockDiagramItems.IndexOf(connection),
+                    BlockDiagramItems.Count - 1);
         }
         #endregion
     }

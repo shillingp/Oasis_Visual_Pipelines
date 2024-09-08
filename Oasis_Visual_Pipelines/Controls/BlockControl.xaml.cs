@@ -82,6 +82,8 @@ namespace Oasis_Visual_Pipelines.Controls
         {
             e.Handled = false;
 
+            Block.BlockDiagram?.MoveBlockAndConnectionsToTop(Block);
+
             WeakReferenceMessenger.Default.Send(new BlockControlSelectionMessage(this));
         }
 
