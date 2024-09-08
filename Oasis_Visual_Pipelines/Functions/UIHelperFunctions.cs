@@ -31,7 +31,7 @@ namespace Oasis_Visual_Pipelines.Functions
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
             {
                 DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
-                if (child != null && child is T matchedType)
+                if (child is not null and T matchedType)
                     yield return matchedType;
 
                 foreach (T childOfChild in FindVisualChildren<T>(child))

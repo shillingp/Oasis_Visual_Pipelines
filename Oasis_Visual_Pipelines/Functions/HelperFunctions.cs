@@ -44,10 +44,10 @@ namespace Oasis_Visual_Pipelines.Functions
 
         public static bool IsNumeric(object expression)
         {
-            if (expression is null || expression is DateTime)
+            if (expression is null or DateTime)
                 return false;
 
-            if (expression is short || expression is int || expression is long || expression is decimal || expression is float || expression is double)
+            if (expression is short or int or long or decimal or float or double)
                 return true;
 
             return (expression is string && double.TryParse(expression as string, out double _))
@@ -56,10 +56,10 @@ namespace Oasis_Visual_Pipelines.Functions
 
         public static double? ConvertNumeric(object number)
         {
-            if (number is null || number is DateTime)
+            if (number is null or DateTime)
                 return null;
 
-            if (number is short || number is int || number is long || number is decimal || number is float || number is double)
+            if (number is short or int or long or decimal or float or double)
                 return (double)number;
 
             double parsedNumber = 0;
