@@ -7,14 +7,14 @@ using System.Windows.Shapes;
 
 namespace Oasis_Visual_Pipelines.Models
 {
-    public class Connection : IBlockDiagramObject<Path>, IBlockDiagramObject, IBlockDiagramConnection
+    public sealed class Connection : IBlockDiagramObject<Path>, IBlockDiagramObject, IBlockDiagramConnection
     {
         public static Brush ConnectionColor { get; } = Brushes.OrangeRed;
 
         public Point Position { get; set; } = new Point(0, 0);
 
-        public Point Start { get; protected set; }
-        public Point Finish { get; protected set; }
+        public Point Start { get; internal set; }
+        public Point Finish { get; internal set; }
 
         public Block? LeftBlock { get; }
         public Block? RightBlock { get; }

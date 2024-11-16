@@ -5,7 +5,7 @@ using System.Windows.Data;
 
 namespace Oasis_Visual_Pipelines.Converters
 {
-    public class BlockOperationItemsSourceFilterConverter : IMultiValueConverter
+    public sealed class BlockOperationItemsSourceFilterConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

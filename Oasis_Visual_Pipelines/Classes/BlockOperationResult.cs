@@ -4,10 +4,10 @@
 
     public record BlockOperationResult
     {
-        public ParamsFunc Result;
+        public readonly ParamsFunc Result;
 
         public BlockOperationResult(object data)
-            : this(new BlockOperationResult(additionalInputs => data)) { }
+            : this(new BlockOperationResult(_ => data)) { }
 
         public BlockOperationResult(ParamsFunc executionFunction)
         {
@@ -25,21 +25,11 @@
         }
 
         public static readonly BlockOperationResult NullOperation =
-            new BlockOperationResult((additionalOperations) => null);
+            new BlockOperationResult(_ => null);
     }
 
-    public record struct FailedOperation
+    public record struct FailedOperation(Exception Error)
     {
-        public Exception Error;
-
-        public FailedOperation(Exception error)
-        {
-            Error = error;
-        }
-
-        public FailedOperation(string errorMessage)
-        {
-            Error = new Exception(errorMessage);
-        }
+        public FailedOperation(string errorMessage) : this(new Exception(errorMessage)) { }
     }
 }

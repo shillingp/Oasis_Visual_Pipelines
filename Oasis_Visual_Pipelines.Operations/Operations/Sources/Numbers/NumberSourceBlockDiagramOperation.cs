@@ -5,7 +5,7 @@ using Oasis_Visual_Pipelines.Enums;
 namespace Oasis_Visual_Pipelines.Operations.Sources.Numbers
 {
     [BlockOperationGroup(BlockOperationType.Number, BlockOperationGrouping.Sources)]
-    public class NumberSourceBlockDiagramOperation : BaseBlockDiagramOperation
+    public sealed class NumberSourceBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => 0;
         public override string OperationTitle => "Number Source";

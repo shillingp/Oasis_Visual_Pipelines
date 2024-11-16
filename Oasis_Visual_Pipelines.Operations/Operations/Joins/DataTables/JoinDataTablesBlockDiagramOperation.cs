@@ -7,7 +7,7 @@ using System.Data;
 namespace Oasis_Visual_Pipelines.Operations.Joins.DataTables
 {
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGrouping.Join)]
-    public class JoinDataTablesBlockDiagramOperation : BaseBlockDiagramOperation
+    public sealed class JoinDataTablesBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => 2;
         public override string OperationTitle => "Join Tables";

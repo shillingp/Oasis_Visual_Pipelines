@@ -11,7 +11,7 @@ using System.Windows.Input;
 namespace Oasis_Visual_Pipelines.Operations.Selects.DataTables
 {
     [BlockOperationGroup(Enums.BlockOperationType.DataTable, Enums.BlockOperationGrouping.Select)]
-    public class FilterDataTableBlockDiagramOperation : BaseBlockDiagramOperation
+    public sealed class FilterDataTableBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => 1;
         public override string OperationTitle => "Filter Table";

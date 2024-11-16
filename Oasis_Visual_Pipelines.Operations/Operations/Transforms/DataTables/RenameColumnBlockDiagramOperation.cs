@@ -6,7 +6,7 @@ using System.Data;
 namespace Oasis_Visual_Pipelines.Operations.Transforms.DataTables
 {
     [BlockOperationGroup(Enums.BlockOperationType.DataTable, Enums.BlockOperationGrouping.Transforms)]
-    public class RenameColumnBlockDiagramOperation : BaseBlockDiagramOperation
+    public sealed class RenameColumnBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => 1;
         public override string OperationTitle => "Rename Column";

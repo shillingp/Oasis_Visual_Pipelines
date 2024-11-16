@@ -5,7 +5,7 @@ using Oasis_Visual_Pipelines.Enums;
 namespace Oasis_Visual_Pipelines.Operations.Transforms.Strings
 {
     [BlockOperationGroup(BlockOperationType.Text, BlockOperationGrouping.Transforms)]
-    public class TrimStringBlockDiagramOperation : BaseBlockDiagramOperation
+    public sealed class TrimStringBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => 1;
         public override string OperationTitle => "Trim String";

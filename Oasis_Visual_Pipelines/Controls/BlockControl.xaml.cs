@@ -204,7 +204,7 @@ namespace Oasis_Visual_Pipelines.Controls
 
                     return HitTestFilterBehavior.Stop;
                 }),
-                new HitTestResultCallback(result => HitTestResultBehavior.Stop),
+                new HitTestResultCallback(_ => HitTestResultBehavior.Stop),
                 new PointHitTestParameters(currentMousePosition));
 
             return firstConnectorNodeUnderCursor;

@@ -10,7 +10,7 @@ using System.Windows.Threading;
 namespace Oasis_Visual_Pipelines.Models
 {
     [AddINotifyPropertyChangedInterface]
-    public class Block<T> : Block
+    public sealed class Block<T> : Block
     {
         public new T? Data { get; set; }
 
@@ -53,7 +53,7 @@ namespace Oasis_Visual_Pipelines.Models
         public new BlockOperationResult CalculateFlowPathResult()
         {
             if (Data is not IBlockDiagramOperation blockOperation)
-                return new BlockOperationResult(additionalInputs => Data);
+                return new BlockOperationResult(_ => Data);
 
             BlockOperationResult[] leftOperations = LeftConnections
                 .Select(connection => connection.LeftBlock)

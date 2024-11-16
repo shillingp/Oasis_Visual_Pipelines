@@ -111,7 +111,7 @@ namespace Oasis_Visual_Pipelines.Functions
             using IExcelDataReader reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
             DataSet dataset = reader.AsDataSet(new ExcelDataSetConfiguration()
             {
-                ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
+                ConfigureDataTable = _ => new ExcelDataTableConfiguration()
                 {
                     UseHeaderRow = true,
                 }

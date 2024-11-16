@@ -22,17 +22,15 @@ namespace Oasis_Visual_Pipelines.Functions
 
             try
             {
-                Regex.Match("", pattern);
+                return Regex.IsMatch("", pattern);
             }
             catch (ArgumentException)
             {
                 return false;
             }
-
-            return true;
         }
 
-        public static dynamic? ReturnBlockResult(Block block)
+        public static dynamic? ReturnBlockResult(Block? block)
         {
             if (block is null ||
                 !block.GetType().IsGenericType

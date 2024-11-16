@@ -9,7 +9,7 @@ using System.Data;
 namespace Oasis_Visual_Pipelines.Operations.Selects.DataTables
 {
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGrouping.Select)]
-    public class SelectColumnBlockDiagramOperation : BaseBlockDiagramOperation, INotifyPropertyChanged
+    public sealed class SelectColumnBlockDiagramOperation : BaseBlockDiagramOperation, INotifyPropertyChanged
     {
         public override int MaxInputs => 1;
         public override string OperationTitle => "Select Column";

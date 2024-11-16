@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 namespace Oasis_Visual_Pipelines.Operations.Transforms.Strings
 {
     [BlockOperationGroup(BlockOperationType.Text, BlockOperationGrouping.Transforms)]
-    public class SplitStringBlockDiagramOperation : BaseBlockDiagramOperation
+    public sealed class SplitStringBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => 1;
         public override string OperationTitle => "Split String";

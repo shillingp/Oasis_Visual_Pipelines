@@ -175,7 +175,7 @@ namespace Oasis_Visual_Pipelines.Controls
         private void BlockDiagramCanvas_Loaded(object sender, RoutedEventArgs e)
         {
             Task.Delay(100)
-                .ContinueWith((_) =>
+                .ContinueWith(_ =>
                     Dispatcher.Invoke(
                         RedrawAllBlocksAndConnections,
                         DispatcherPriority.Background));

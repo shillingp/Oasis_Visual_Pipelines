@@ -3,7 +3,7 @@ using System.Windows.Data;
 
 namespace Oasis_Visual_Pipelines.Converters
 {
-    public class CollectionContainsConverter : IMultiValueConverter
+    public sealed class CollectionContainsConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

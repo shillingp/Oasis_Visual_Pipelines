@@ -7,7 +7,7 @@ using System.Data;
 namespace Oasis_Visual_Pipelines.Operations.Selects.DataTables
 {
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGrouping.Sources)]
-    public class DistinctDataTableBlockOperation : BaseBlockDiagramOperation
+    public sealed class DistinctDataTableBlockOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => 1;
         public override string OperationTitle => "Distinct Rows";

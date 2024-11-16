@@ -5,7 +5,7 @@ using Oasis_Visual_Pipelines.Enums;
 namespace Oasis_Visual_Pipelines.Operations.Aggregations.Numbers
 {
     [BlockOperationGroup(BlockOperationType.Number, BlockOperationGrouping.Aggregation)]
-    public class SubtractNumberBlockDiagramOperation : BaseBlockDiagramOperation
+    public sealed class SubtractNumberBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => int.MaxValue;
         public override string OperationTitle => "Subtract Numbers";

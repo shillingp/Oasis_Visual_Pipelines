@@ -47,13 +47,13 @@ namespace Oasis_Visual_Pipelines.Controls
         #endregion
 
         #region Events
-        public event DragStartedEventHandler DragStarted = (a, b) => { };
+        public event DragStartedEventHandler DragStarted = (_, _) => { };
         private void ConnectorThumb_DragStarted(object sender, DragStartedEventArgs e) => DragStarted?.Invoke(this, e);
 
-        public event DragDeltaEventHandler DragDelta = (a, b) => { };
+        public event DragDeltaEventHandler DragDelta = (_, _) => { };
         private void ConnectorThumb_DragDelta(object sender, DragDeltaEventArgs e) => DragDelta?.Invoke(this, e);
 
-        public event DragCompletedEventHandler DragCompleted = (a, b) => { };
+        public event DragCompletedEventHandler DragCompleted = (_, _) => { };
         private void ConnectorThumb_DragCompleted(object sender, DragCompletedEventArgs e) => DragCompleted?.Invoke(this, e);
         #endregion
     }

@@ -21,7 +21,10 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <oasis_controls:BlockDiagramControl x:Name="MainBlockDiagram" ConnectionStyle="Bezier" />
+        <oasis_controls:BlockDiagramControl
+            x:Name="MainBlockDiagram"
+            Grid.Row="0"
+            ConnectionStyle="Bezier" />
 
         <material:Card
             Grid.Row="1"

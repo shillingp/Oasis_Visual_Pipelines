@@ -5,7 +5,7 @@ using Oasis_Visual_Pipelines.Enums;
 namespace Oasis_Visual_Pipelines.Operations.Aggregations.Booleans
 {
     [BlockOperationGroup(BlockOperationType.Boolean, BlockOperationGrouping.Aggregation)]
-    public class StringContainsBlockDiagramOperation : BaseBlockDiagramOperation
+    public sealed class StringContainsBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => 2;
         public override string OperationTitle => "String Contains";

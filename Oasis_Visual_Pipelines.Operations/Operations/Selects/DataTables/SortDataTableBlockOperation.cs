@@ -7,7 +7,7 @@ using System.Data;
 namespace Oasis_Visual_Pipelines.Operations.Selects.DataTables
 {
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGrouping.Select)]
-    public class SortDataTableBlockOperation : BaseBlockDiagramOperation
+    public sealed class SortDataTableBlockOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => 1;
         public override string OperationTitle => "Sort Table";

@@ -5,7 +5,7 @@ using System.Windows.Shapes;
 
 namespace Oasis_Visual_Pipelines.Models
 {
-    public class LooseConnection : IBlockDiagramObject<Line>, IBlockDiagramObject, IBlockDiagramConnection
+    public sealed class LooseConnection : IBlockDiagramObject<Line>, IBlockDiagramObject, IBlockDiagramConnection
     {
         public static Brush ConnectionColor { get; } = Brushes.LightGray;
 

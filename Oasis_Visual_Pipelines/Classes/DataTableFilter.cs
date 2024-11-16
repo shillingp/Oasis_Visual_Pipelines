@@ -3,11 +3,9 @@
 namespace Oasis_Visual_Pipelines.Classes
 {
     [AddINotifyPropertyChangedInterface]
-    public class DataTableFilter
+    public sealed class DataTableFilter
     {
-        //public DataColumn? Column { get; set; }
-        //public string ColumnName { get; set; } = string.Empty;
-        public KeyValuePair<string, Type> Column { get; set; }
+        public KeyValuePair<string?, Type> Column { get; set; }
 
         public FilterFunctor Filter { get; set; }
 
@@ -27,5 +25,5 @@ namespace Oasis_Visual_Pipelines.Classes
         }
     }
 
-    public record struct FilterFunctor(string Title, string Functor);
+    public record struct FilterFunctor(string Title, string? Functor);
 }

@@ -6,7 +6,7 @@ using System.Data;
 namespace Oasis_Visual_Pipelines.Operations.Transforms.Arrays
 {
     [BlockOperationGroup(BlockOperationType.Array, BlockOperationGrouping.Transforms)]
-    public class MapArrayBlockDiagramOperation : BaseBlockDiagramOperation
+    public sealed class MapArrayBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => 2;
         public override string OperationTitle => "Map Array";

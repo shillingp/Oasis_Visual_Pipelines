@@ -26,10 +26,8 @@ namespace Oasis_Visual_Pipelines.Classes
 
             if (doNotReflowAttribute is not null)
             {
-                if (lastUpdateTime.ContainsKey(eventArgs.PropertyName!))
+                if (lastUpdateTime.TryGetValue(eventArgs.PropertyName!, out DateTime lastCallTime))
                 {
-                    DateTime lastCallTime = lastUpdateTime[eventArgs.PropertyName!];
-
                     if (DateTime.Now - lastCallTime < TimeSpan.FromMilliseconds(10))
                     {
                         lastUpdateTime[eventArgs.PropertyName!] = DateTime.Now;

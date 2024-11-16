@@ -5,7 +5,7 @@ using Oasis_Visual_Pipelines.Enums;
 namespace Oasis_Visual_Pipelines.Operations.Aggregations.Strings
 {
     [BlockOperationGroup(BlockOperationType.Text, BlockOperationGrouping.Aggregation)]
-    public class CombineStringBlockDiagramOperation : BaseBlockDiagramOperation
+    public sealed class CombineStringBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => int.MaxValue;
         public override string OperationTitle => "Combine String";

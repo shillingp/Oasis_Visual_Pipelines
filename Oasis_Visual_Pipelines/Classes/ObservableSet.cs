@@ -2,7 +2,7 @@
 
 namespace Oasis_Visual_Pipelines.Classes
 {
-    public class ObservableSet<T> : ObservableCollection<T>
+    public sealed class ObservableSet<T> : ObservableCollection<T>
     {
         protected override void InsertItem(int index, T item)
         {

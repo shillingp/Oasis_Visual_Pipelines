@@ -4,7 +4,7 @@ using Oasis_Visual_Pipelines.Classes;
 namespace Oasis_Visual_Pipelines.Operations.Aggregations.Numbers
 {
     [BlockOperationGroup(Enums.BlockOperationType.Number, Enums.BlockOperationGrouping.Transforms)]
-    public class DivideNumberBlockDiagramOperation : BaseBlockDiagramOperation
+    public sealed class DivideNumberBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => int.MaxValue;
         public override string OperationTitle => "Divide Numbers";

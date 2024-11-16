@@ -5,7 +5,7 @@ using Oasis_Visual_Pipelines.Enums;
 namespace Oasis_Visual_Pipelines.Operations.Transforms.Strings
 {
     [BlockOperationGroup(BlockOperationType.Text, BlockOperationGrouping.Transforms)]
-    public class ReplaceStringBlockDiagramOperation : BaseBlockDiagramOperation
+    public sealed class ReplaceStringBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => 1;
         public override string OperationTitle => "Replace String";

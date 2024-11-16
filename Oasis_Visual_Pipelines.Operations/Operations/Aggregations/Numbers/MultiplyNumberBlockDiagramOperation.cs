@@ -5,7 +5,7 @@ using Oasis_Visual_Pipelines.Enums;
 namespace Oasis_Visual_Pipelines.Operations.Aggregations.Numbers
 {
     [BlockOperationGroup(BlockOperationType.Number, BlockOperationGrouping.Aggregation)]
-    public class MultiplyNumberBlockDiagramOperation : BaseBlockDiagramOperation
+    public sealed class MultiplyNumberBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => int.MaxValue;
         public override string OperationTitle => "Multiply Numbers";

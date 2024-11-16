@@ -5,7 +5,7 @@ using Oasis_Visual_Pipelines.Enums;
 namespace Oasis_Visual_Pipelines.Operations.Sources.DateTimes
 {
     [BlockOperationGroup(BlockOperationType.DateTime, BlockOperationGrouping.Sources)]
-    public class DateSourceBlockDiagramOperation : BaseBlockDiagramOperation
+    public sealed class DateSourceBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => 0;
         public override string OperationTitle => "Date Source";

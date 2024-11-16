@@ -38,7 +38,7 @@ namespace Oasis_Visual_Pipelines.Functions
                     Grid.SetColumnSpan(newDialogHost, grid.ColumnDefinitions.Count);
             }
 
-            newDialogHost.DialogClosed += async (sender, eventArgs) =>
+            newDialogHost.DialogClosed += async (_, _) =>
             {
                 await Task.Delay(500);
                 rootPanel.Children.Remove(newDialogHost);

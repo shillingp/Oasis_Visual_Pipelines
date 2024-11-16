@@ -6,7 +6,7 @@ using System.Data;
 namespace Oasis_Visual_Pipelines.Operations.Selects.DataTables
 {
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGrouping.Select)]
-    public class RemoveBlanksBlockDiagramOperation : BaseBlockDiagramOperation
+    public sealed class RemoveBlanksBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => 1;
         public override string OperationTitle => "Remove Blanks";

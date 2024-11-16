@@ -10,7 +10,7 @@ using System.Windows.Input;
 namespace Oasis_Visual_Pipelines.Operations.Sources.DataTables
 {
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGrouping.Sources)]
-    public class DataTableSourceBlockDiagramOperation : BaseBlockDiagramOperation
+    public sealed class DataTableSourceBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => 0;
         public override string OperationTitle => "Table Source";

@@ -4,7 +4,7 @@ using Oasis_Visual_Pipelines.Classes;
 namespace Oasis_Visual_Pipelines.Operations.Selects.Arrays
 {
     [BlockOperationGroup(Enums.BlockOperationType.Array, Enums.BlockOperationGrouping.Select)]
-    public class TakeArrayElementsBlockDiagramOperation : BaseBlockDiagramOperation
+    public sealed class TakeArrayElementsBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => 1;
         public override string OperationTitle => "Take 'N' Elements";

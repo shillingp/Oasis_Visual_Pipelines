@@ -2,8 +2,8 @@
 
 namespace Oasis_Visual_Pipelines.Classes.Messages
 {
-    public class BlockControlSelectionMessage(BlockControl? NewSelection)
+    public sealed class BlockControlSelectionMessage(BlockControl? newSelection)
     {
-        public readonly BlockControl? NewSelection = NewSelection;
+        internal readonly BlockControl? NewSelection = newSelection;
     }
 }

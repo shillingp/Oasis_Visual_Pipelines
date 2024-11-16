@@ -7,7 +7,7 @@ using System.Data;
 namespace Oasis_Visual_Pipelines.Operations.Transforms.DataTables
 {
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGrouping.Transforms)]
-    public class UpdateColumnBlockDiagramOperation : BaseBlockDiagramOperation
+    public sealed class UpdateColumnBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => 2;
         public override string OperationTitle => "Update Column";

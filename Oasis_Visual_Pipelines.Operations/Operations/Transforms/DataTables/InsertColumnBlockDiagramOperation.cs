@@ -6,7 +6,7 @@ using System.Data;
 namespace Oasis_Visual_Pipelines.Operations.Transforms.DataTables
 {
     [BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGrouping.Transforms)]
-    public class InsertColumnBlockDiagramOperation : BaseBlockDiagramOperation
+    public sealed class InsertColumnBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => 2;
         public override string OperationTitle => "Insert Column";

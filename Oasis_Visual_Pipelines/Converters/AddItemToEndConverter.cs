@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace Oasis_Visual_Pipelines.Converters
 {
-    public class AddItemToEndConverter : IMultiValueConverter
+    public sealed class AddItemToEndConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

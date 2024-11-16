@@ -1,4 +1,4 @@
 ﻿namespace Oasis_Visual_Pipelines.Classes.Messages
 {
-    public class BlockControlPropertyChangedMessage();
+    public sealed class BlockControlPropertyChangedMessage;
 }

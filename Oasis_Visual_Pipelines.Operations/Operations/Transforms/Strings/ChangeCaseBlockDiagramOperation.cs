@@ -5,7 +5,7 @@ using System.Globalization;
 namespace Oasis_Visual_Pipelines.Operations.Transforms.Strings
 {
     [BlockOperationGroup(Enums.BlockOperationType.Text, Enums.BlockOperationGrouping.Transforms)]
-    public class ChangeCaseBlockDiagramOperation : BaseBlockDiagramOperation
+    public sealed class ChangeCaseBlockDiagramOperation : BaseBlockDiagramOperation
     {
         public override int MaxInputs => 1;
         public override string OperationTitle => "Change Text Case";
