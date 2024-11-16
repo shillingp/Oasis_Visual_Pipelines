@@ -40,7 +40,7 @@ namespace Oasis_Visual_Pipelines.Controls
 
         public static readonly DependencyProperty BlockDiagramItemsProperty =
             DependencyProperty.Register(
-                "BlockDiagramItems",
+                nameof(BlockDiagramItems),
                 typeof(ObservableCollection<IBlockDiagramObject>),
                 typeof(BlockDiagramControl),
                 new PropertyMetadata(new ObservableSet<IBlockDiagramObject>()));
@@ -53,7 +53,7 @@ namespace Oasis_Visual_Pipelines.Controls
 
         public static readonly DependencyProperty BlockDataTypeProperty =
             DependencyProperty.Register(
-                "BlockDataType",
+                nameof(BlockDataType),
                 typeof(Type),
                 typeof(BlockDiagramControl),
                 new PropertyMetadata(typeof(DefaultBlockDiagramOperation)));
@@ -66,7 +66,7 @@ namespace Oasis_Visual_Pipelines.Controls
 
         public static readonly DependencyProperty SelectedBlockProperty =
             DependencyProperty.Register(
-                "SelectedBlock",
+                nameof(SelectedBlock),
                 typeof(Block),
                 typeof(BlockDiagramControl),
                 new PropertyMetadata(null));
@@ -79,7 +79,7 @@ namespace Oasis_Visual_Pipelines.Controls
 
         public static readonly DependencyProperty SelectedBlockResultProperty =
             DependencyProperty.Register(
-                "SelectedBlockResult",
+                nameof(SelectedBlockResult),
                 typeof(object),
                 typeof(BlockDiagramControl),
                 new PropertyMetadata(null));
@@ -92,7 +92,7 @@ namespace Oasis_Visual_Pipelines.Controls
 
         public static readonly DependencyProperty ConnectionStyleProperty =
             DependencyProperty.Register(
-                "ConnectionStyle",
+                nameof(ConnectionStyle),
                 typeof(ConnectionStyle),
                 typeof(BlockDiagramControl),
                 new PropertyMetadata(ConnectionStyle.Bezier));

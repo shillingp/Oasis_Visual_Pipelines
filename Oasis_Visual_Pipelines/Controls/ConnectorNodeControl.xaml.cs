@@ -27,7 +27,7 @@ namespace Oasis_Visual_Pipelines.Controls
 
         public static readonly DependencyProperty ConnectionProperty =
             DependencyProperty.Register(
-                "Connection",
+                nameof(Connection),
                 typeof(Connection),
                 typeof(ConnectorNodeControl),
                 new PropertyMetadata(null));
@@ -40,7 +40,7 @@ namespace Oasis_Visual_Pipelines.Controls
 
         public static readonly DependencyProperty ConnectionSideProperty =
             DependencyProperty.Register(
-                "ConnectionSide",
+                nameof(ConnectionSide),
                 typeof(ConnectionSide),
                 typeof(ConnectorNodeControl),
                 new PropertyMetadata(null));

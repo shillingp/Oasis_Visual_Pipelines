@@ -13,7 +13,7 @@ namespace Oasis_Visual_Pipelines.Controls
         }
 
         public static readonly DependencyProperty ReadOnlyStyleProperty =
-            DependencyProperty.Register("ReadOnlyStyle", typeof(Style), typeof(EditableTextBox), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(ReadOnlyStyle), typeof(Style), typeof(EditableTextBox), new PropertyMetadata(null));
 
         public Style EditingStyle
         {
@@ -22,7 +22,7 @@ namespace Oasis_Visual_Pipelines.Controls
         }
 
         public static readonly DependencyProperty EditingStyleProperty =
-            DependencyProperty.Register("EditingStyle", typeof(Style), typeof(EditableTextBox), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(EditingStyle), typeof(Style), typeof(EditableTextBox), new PropertyMetadata(null));
 
         public EditableTextBox() : base()
         {
@@ -55,7 +55,7 @@ namespace Oasis_Visual_Pipelines.Controls
             base.OnPreviewKeyDown(e);
 
             if (e.Key == Key.Enter)
-                FocusManager.SetFocusedElement(Application.Current.MainWindow, Application.Current.MainWindow);
+                FocusManager.SetFocusedElement(Application.Current.MainWindow!, Application.Current.MainWindow);
         }
     }
 }

@@ -13,8 +13,7 @@ namespace Oasis_Visual_Pipelines.Classes
         public virtual int MaxOutputs => int.MaxValue;
         public virtual string OperationTitle => "";
 
-        private readonly Dictionary<(IBlockDiagramOperation Operation, string Property), DateTime> lastUpdateTime
-            = new Dictionary<(IBlockDiagramOperation Operation, string Property), DateTime>();
+        private readonly Dictionary<string, DateTime> lastUpdateTime = new Dictionary<string, DateTime>();
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs eventArgs)
@@ -27,18 +26,18 @@ namespace Oasis_Visual_Pipelines.Classes
 
             if (doNotReflowAttribute is not null)
             {
-                if (lastUpdateTime.ContainsKey((this, eventArgs.PropertyName!)))
+                if (lastUpdateTime.ContainsKey(eventArgs.PropertyName!))
                 {
-                    DateTime lastCallTime = lastUpdateTime[(this, eventArgs.PropertyName!)];
+                    DateTime lastCallTime = lastUpdateTime[eventArgs.PropertyName!];
 
                     if (DateTime.Now - lastCallTime < TimeSpan.FromMilliseconds(10))
                     {
-                        lastUpdateTime[(this, eventArgs.PropertyName!)] = DateTime.Now;
+                        lastUpdateTime[eventArgs.PropertyName!] = DateTime.Now;
                         return;
                     }
                 }
 
-                lastUpdateTime[(this, eventArgs.PropertyName!)] = DateTime.Now;
+                lastUpdateTime[eventArgs.PropertyName!] = DateTime.Now;
             }
 
             WeakReferenceMessenger.Default.Send<BlockControlPropertyChangedMessage>();

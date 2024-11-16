@@ -18,7 +18,7 @@ namespace Oasis_Visual_Pipelines.Controls
 
         public static readonly DependencyProperty NumberValueProperty =
             DependencyProperty.Register(
-                "NumberValue",
+                nameof(NumberValue),
                 typeof(int),
                 typeof(NumericUpDownControl),
                 new PropertyMetadata(0));
@@ -31,7 +31,7 @@ namespace Oasis_Visual_Pipelines.Controls
 
         public static readonly DependencyProperty MaximumProperty =
             DependencyProperty.Register(
-                "Maximum",
+                nameof(Maximum),
                 typeof(int),
                 typeof(NumericUpDownControl),
                 new PropertyMetadata(int.MaxValue));
@@ -44,7 +44,7 @@ namespace Oasis_Visual_Pipelines.Controls
 
         public static readonly DependencyProperty MinimumProperty =
             DependencyProperty.Register(
-                "Minimum",
+                nameof(Minimum),
                 typeof(int),
                 typeof(NumericUpDownControl),
                 new PropertyMetadata(int.MinValue));

@@ -26,7 +26,7 @@ namespace Oasis_Visual_Pipelines.Controls
 
         public static readonly DependencyProperty BlockProperty =
             DependencyProperty.Register(
-                "Block",
+                nameof(Block),
                 typeof(Block),
                 typeof(BlockControl),
                 new PropertyMetadata(null));
@@ -39,7 +39,7 @@ namespace Oasis_Visual_Pipelines.Controls
 
         public static readonly DependencyProperty IsSelectedProperty =
             DependencyProperty.Register(
-                "IsSelected",
+                nameof(IsSelected),
                 typeof(bool),
                 typeof(BlockControl),
                 new PropertyMetadata(false));
@@ -52,7 +52,7 @@ namespace Oasis_Visual_Pipelines.Controls
 
         public static readonly DependencyProperty IsExpandedProperty =
             DependencyProperty.Register(
-                "IsExpanded",
+                nameof(IsExpanded),
                 typeof(bool),
                 typeof(BlockControl),
                 new PropertyMetadata(false));
