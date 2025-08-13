@@ -1,9 +1,12 @@
 ﻿using Oasis_Pipelines.Model;
 
-namespace Oasis_Pipelines.Services;
+namespace Oasis_Pipelines.Services.ConnectionManagement;
 
-public class BlockConnectionService : IBlockConnectionService
+public sealed class ConnectionManager : IConnectionManager
 {
+    /// <inheritdoc />
+    public ICollection<Connection> AllConnections { get; set; } = [];
+
     public Connection AddConnection(Block leftSide, Block rightSide)
     {
         Connection newConnection = new Connection(leftSide, rightSide);
@@ -11,12 +14,15 @@ public class BlockConnectionService : IBlockConnectionService
         leftSide.DownstreamConnections.Add(newConnection);
         rightSide.UpstreamConnections.Add(newConnection);
 
+        AllConnections.Add(newConnection);
         return newConnection;
     }
 
-    public void RemoveConnection(Connection connection)
+    public bool RemoveConnection(Connection connection)
     {
         connection.LeftBlock.DownstreamConnections.Remove(connection);
         connection.RightBlock.UpstreamConnections.Remove(connection);
+
+        return AllConnections.Remove(connection);
     }
 }

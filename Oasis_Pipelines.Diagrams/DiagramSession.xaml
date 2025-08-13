@@ -1,0 +1,24 @@
+﻿<Window
+    x:Class="Oasis_Pipelines.Diagrams.DiagramSession"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Oasis_Pipelines.Diagrams"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sessionManagement="clr-namespace:Oasis_Pipelines.Services.SessionManagement;assembly=Oasis_Pipelines"
+    Title="SessionManager"
+    d:DataContext="{d:DesignInstance local:DiagramSessionViewModel}"
+    d:Height="450"
+    d:Width="800"
+    mc:Ignorable="d">
+    <TabControl
+        DisplayMemberPath="SessionTitle"
+        ItemsSource="{Binding SessionManager.ActiveSessions}"
+        TabStripPlacement="Top">
+        <TabControl.ContentTemplate>
+            <DataTemplate DataType="{x:Type sessionManagement:ISessionContext}">
+                <local:PipelineDiagram />
+            </DataTemplate>
+        </TabControl.ContentTemplate>
+    </TabControl>
+</Window>

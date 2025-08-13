@@ -5,15 +5,30 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>preview</LangVersion>
-        <OutputType>Exe</OutputType>
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+      <PackageReference Include="ExcelDataReader" Version="3.7.0" />
+      <PackageReference Include="ExcelDataReader.DataSet" Version="3.7.0" />
       <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.8" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.8" />
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.8" />
       <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.8" />
       <PackageReference Include="OneOf" Version="3.0.271" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Operations\Others\" />
+      <Folder Include="Operations\Sources\DataTables\" />
+      <Folder Include="Operations\Transforms\Numbers\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Operations\Selects\DataTables\FilterDataTableOperation.cs" />
+      <Compile Remove="Operations\Sources\DataTables\DataTableSourceOperation.cs" />
+      <Compile Remove="Operations\Sources\DataTables\ExcelDataTableSourceOperation.cs" />
+      <Compile Remove="Operations\Sources\DataTables\SQLDataTableSourceOperation.cs" />
     </ItemGroup>
 
 </Project>

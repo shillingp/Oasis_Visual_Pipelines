@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>preview</LangVersion>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Others\" />
+      <Folder Include="Sources\DataTables\" />
+      <Folder Include="Transforms\Numbers\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Oasis_Pipelines\Oasis_Pipelines.csproj" />
+    </ItemGroup>
+
+</Project>

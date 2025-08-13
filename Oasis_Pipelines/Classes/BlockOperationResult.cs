@@ -2,14 +2,19 @@
 
 public readonly record struct BlockOperationResult
 {
-    private readonly ParameterisedFunction result;
+    private readonly ParameterisedFunction _result;
 
     public static readonly BlockOperationResult NullOperation =
         new BlockOperationResult(_ => null);
 
+    public BlockOperationResult(object data)
+    {
+        _result = _ => data;
+    }
+
     public BlockOperationResult(ParameterisedFunction executionFunction)
     {
-        result = RunSafely(executionFunction);
+        _result = RunSafely(executionFunction);
     }
 
     private ParameterisedFunction RunSafely(
@@ -29,7 +34,7 @@ public readonly record struct BlockOperationResult
         }
     }
 
-    public object CalculateResult() => result().Value;
+    public object CalculateResult(params BlockOperationResult[] optionalInputs) => _result(optionalInputs).Value;
 
-    public T CalculateResult<T>() => (T)result().AsT1;
+    public T CalculateResult<T>(params BlockOperationResult[] optionalInputs) => (T)_result(optionalInputs).AsT1;
 }
