@@ -1,8 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Oasis_Pipelines.Interfaces;
 
 namespace Oasis_Pipelines.Model;
 
-public class Connection
+public class Connection : IPipelineObject
 {
     public int UpstreamHashCache;
 

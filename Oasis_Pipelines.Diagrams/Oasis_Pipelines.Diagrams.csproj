@@ -16,4 +16,8 @@
     <ItemGroup>
       <ProjectReference Include="..\Oasis_Pipelines\Oasis_Pipelines.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Classes\" />
+    </ItemGroup>
 </Project>

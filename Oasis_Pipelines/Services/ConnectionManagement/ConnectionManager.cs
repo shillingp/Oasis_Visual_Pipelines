@@ -1,11 +1,12 @@
-﻿using Oasis_Pipelines.Model;
+﻿using System.Collections.ObjectModel;
+using Oasis_Pipelines.Model;
 
 namespace Oasis_Pipelines.Services.ConnectionManagement;
 
 public sealed class ConnectionManager : IConnectionManager
 {
     /// <inheritdoc />
-    public ICollection<Connection> AllConnections { get; set; } = [];
+    public ICollection<Connection> AllConnections { get; set; } = new ObservableCollection<Connection>();
 
     public Connection AddConnection(Block leftSide, Block rightSide)
     {

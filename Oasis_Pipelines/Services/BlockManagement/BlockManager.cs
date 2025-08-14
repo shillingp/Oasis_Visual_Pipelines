@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using Oasis_Pipelines.Model;
 using Oasis_Pipelines.Operations;
 
@@ -6,7 +7,7 @@ namespace Oasis_Pipelines.Services.BlockManagement;
 public sealed class BlockManager : IBlockManager
 {
     /// <inheritdoc />
-    public ICollection<Block> AllBlocks { get; set; } = [];
+    public ICollection<Block> AllBlocks { get; set; } = new ObservableCollection<Block>();
 
     /// <inheritdoc />
     public Block AddBlock(string blockTitle, BlockOperation blockOperation)

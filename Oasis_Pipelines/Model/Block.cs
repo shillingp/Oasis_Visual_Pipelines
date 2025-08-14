@@ -1,9 +1,10 @@
 ﻿using System.Collections.ObjectModel;
+using Oasis_Pipelines.Interfaces;
 using Oasis_Pipelines.Operations;
 
 namespace Oasis_Pipelines.Model;
 
-public class Block
+public class Block : IPipelineObject
 {
     public string BlockTitle { get; set; }
     public BlockOperation Operation { get; set; }

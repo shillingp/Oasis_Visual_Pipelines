@@ -1,3 +1,4 @@
+using Oasis_Pipelines.Services.BlockCalculation;
 using Oasis_Pipelines.Services.BlockManagement;
 using Oasis_Pipelines.Services.ConnectionManagement;
 
@@ -7,14 +8,17 @@ public class SessionContextFactory : ISessionContextFactory
 {
     private readonly IConnectionManager _connectionManager;
     private readonly IBlockManager _blockManager;
+    private readonly IBlockCalculation _blockCalculation;
     private string? _sessionTitle;
 
     public SessionContextFactory(
         IConnectionManager connectionManager,
-        IBlockManager blockManager)
+        IBlockManager blockManager,
+        IBlockCalculation blockCalculation)
     {
         _connectionManager = connectionManager;
         _blockManager = blockManager;
+        _blockCalculation = blockCalculation;
     }
 
     public ISessionContextFactory WithSessionTitle(string sessionTitle)
@@ -27,6 +31,6 @@ public class SessionContextFactory : ISessionContextFactory
     {
         ArgumentNullException.ThrowIfNull(_sessionTitle);
 
-        return new SessionContext(_connectionManager, _blockManager, _sessionTitle);
+        return new SessionContext(_connectionManager, _blockManager, _blockCalculation, _sessionTitle);
     }
 }
