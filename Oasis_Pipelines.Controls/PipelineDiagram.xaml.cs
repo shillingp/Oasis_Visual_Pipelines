@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Oasis_Pipelines.Diagrams;
+namespace Oasis_Pipelines.Controls;
 
 public partial class PipelineDiagram : UserControl
 {

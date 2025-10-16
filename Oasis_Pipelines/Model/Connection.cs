@@ -1,12 +1,11 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using Oasis_Pipelines.Interfaces;
 
 namespace Oasis_Pipelines.Model;
 
 public class Connection : IPipelineObject
 {
-    public int UpstreamHashCache;
-
     [field: MaybeNull]
     public string ConnectionTitle
     {
@@ -15,6 +14,8 @@ public class Connection : IPipelineObject
     }
     public Block LeftBlock { get; set; }
     public Block RightBlock { get; set; }
+    /// <inheritdoc />
+    public PointF Position { get; set; }
 
     public Connection(Block leftBlock, Block rightBlock)
     {
@@ -27,4 +28,5 @@ public class Connection : IPipelineObject
     {
         ConnectionTitle = connectionTitle;
     }
+
 }

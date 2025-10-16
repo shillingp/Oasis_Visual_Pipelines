@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Drawing;
 using Oasis_Pipelines.Interfaces;
 using Oasis_Pipelines.Operations;
 
@@ -10,6 +11,8 @@ public class Block : IPipelineObject
     public BlockOperation Operation { get; set; }
     public ObservableCollection<Connection> UpstreamConnections { get; init; } = [];
     public ObservableCollection<Connection> DownstreamConnections { get; init; } = [];
+    /// <inheritdoc />
+    public PointF Position { get; set; }
 
     public Block(string blockTitle, BlockOperation operation)
     {

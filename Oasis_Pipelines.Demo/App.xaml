@@ -1,0 +1,8 @@
+﻿<Application
+    x:Class="Oasis_Pipelines.Demo.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Oasis_Pipelines.Demo"
+    StartupUri="MainWindow.xaml">
+    <Application.Resources />
+</Application>

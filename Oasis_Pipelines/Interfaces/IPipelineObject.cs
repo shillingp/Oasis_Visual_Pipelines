@@ -1,6 +1,8 @@
-﻿namespace Oasis_Pipelines.Interfaces;
+﻿using System.Drawing;
 
-public class IPipelineObject
+namespace Oasis_Pipelines.Interfaces;
+
+public interface IPipelineObject
 {
-    
+    public PointF Position { get; set; }
 }

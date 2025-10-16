@@ -1,0 +1,16 @@
+﻿<Window
+    x:Class="Oasis_Pipelines.Demo.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Oasis_Pipelines.Controls;assembly=Oasis_Pipelines.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Oasis_Pipelines.Demo"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="800"
+    Height="600"
+    mc:Ignorable="d">
+    <Grid VerticalAlignment="Stretch">
+        <controls:DiagramSessionManager SessionManager="{Binding SessionManager}" />
+    </Grid>
+</Window>

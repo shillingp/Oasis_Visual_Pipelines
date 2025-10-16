@@ -1,20 +1,25 @@
-﻿using Oasis_Pipelines.Model;
+﻿using System.Windows;
+using System.Windows.Media.Animation;
+using Microsoft.Extensions.DependencyInjection;
+using Oasis_Pipelines.Model;
 using Oasis_Pipelines.Operations.Aggregations.Numbers;
 using Oasis_Pipelines.Operations.Sources.Numbers;
 using Oasis_Pipelines.Services.SessionManagement;
 
-namespace Oasis_Pipelines.Diagrams;
+namespace Oasis_Pipelines.Demo;
 
-public class DiagramSessionViewModel
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
 {
     public ISessionManager SessionManager { get; }
 
-    public DiagramSessionViewModel(ISessionManager sessionManager)
+    public MainWindow()
     {
-        SessionManager = sessionManager;
-
+        SessionManager = App.Host.Services.GetRequiredService<ISessionManager>();
         ISessionContext sessionContext = SessionManager.CreateContext();
-        
+
         Block blockA = sessionContext.BlockManager.AddBlock("Input A", new NumberSourceOperation(10d));
         Block blockB = sessionContext.BlockManager.AddBlock("Input B", new NumberSourceOperation(3d));
         Block blockC = sessionContext.BlockManager.AddBlock("Middle A", new AddNumberOperation());
@@ -26,8 +31,12 @@ public class DiagramSessionViewModel
         sessionContext.ConnectionManager.AddConnection(blockC, blockE);
         sessionContext.ConnectionManager.AddConnection(blockD, blockE);
 
-        object result = sessionContext.BlockCalculation
-            .CalculateFlowPath(blockE)
-            .CalculateResult();
+        // object result = sessionContext.BlockCalculation
+        //     .CalculateFlowPath(blockE)
+        //     .CalculateResult();
+        
+        InitializeComponent();
+
+        DataContext = this;
     }
 }

@@ -1,18 +1,18 @@
 ﻿<UserControl
-    x:Class="Oasis_Pipelines.Diagrams.PipelineDiagram"
+    x:Class="Oasis_Pipelines.Controls.PipelineDiagram"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="clr-namespace:Oasis_Pipelines.Diagrams.Converters"
+    xmlns:converters="clr-namespace:Oasis_Pipelines.Controls.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sessionManagement="clr-namespace:Oasis_Pipelines.Services.SessionManagement;assembly=Oasis_Pipelines"
-    xmlns:templateSelectors="clr-namespace:Oasis_Pipelines.Diagrams.Classes.TemplateSelectors"
+    xmlns:templateSelectors="clr-namespace:Oasis_Pipelines.Controls.Classes.TemplateSelectors"
     d:DataContext="{d:DesignInstance sessionManagement:ISessionContext}"
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <converters:ConcatenateConverter x:Key="ConcatenateConverter" />
+        <converters:ConcatenatePipelineObjectsConverter x:Key="ConcatenateConverter" />
 
         <DataTemplate x:Key="Thing1">
             <Rectangle

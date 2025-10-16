@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Windows;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Oasis_Pipelines.Diagrams;
+using Oasis_Pipelines.Controls;
 using Oasis_Pipelines.Operations;
 using Oasis_Pipelines.Operations.Aggregations.Numbers;
 using Oasis_Pipelines.Operations.Sources.Numbers;
@@ -9,11 +10,14 @@ using Oasis_Pipelines.Services.BlockManagement;
 using Oasis_Pipelines.Services.ConnectionManagement;
 using Oasis_Pipelines.Services.SessionManagement;
 
-namespace Oasis_Pipelines.Example;
+namespace Oasis_Pipelines.Demo;
 
-public class Program
+/// <summary>
+/// Interaction logic for App.xaml
+/// </summary>
+public partial class App : Application
 {
-    private static IHost Host => Microsoft.Extensions.Hosting.Host
+    public static readonly IHost Host = Microsoft.Extensions.Hosting.Host
         .CreateDefaultBuilder()
         .ConfigureServices((_, services) =>
         {
@@ -25,20 +29,17 @@ public class Program
             services.AddTransient<BlockOperation, NumberSourceOperation>();
             services.AddTransient<BlockOperation, AddNumberOperation>();
 
-            services.AddTransient<ISessionManager, SessionManager>();
+            services.AddSingleton<ISessionManager, SessionManager>();
             services.AddTransient<ISessionContext, SessionContext>();
             services.AddTransient<ISessionContextFactory, SessionContextFactory>();
-
-            services.AddTransient<DiagramSession>();
-            services.AddTransient<DiagramSessionViewModel>();
         })
         .Build();
 
-    [STAThread]
-    static void Main(string[] args)
+    /// <inheritdoc />
+    protected override void OnStartup(StartupEventArgs e)
     {
-        Host.Services
-            .GetRequiredService<DiagramSession>()
-            .ShowDialog();
+        base.OnStartup(e);
+
+        Host.Start();
     }
 }

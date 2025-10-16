@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using Oasis_Pipelines.Model;
 
-namespace Oasis_Pipelines.Diagrams.Classes.TemplateSelectors;
+namespace Oasis_Pipelines.Controls.Classes.TemplateSelectors;
 
 public class PipelineObjectTemplateSelector : DataTemplateSelector
 {
