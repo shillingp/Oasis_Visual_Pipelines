@@ -1,11 +1,12 @@
-﻿using Oasis_Pipelines.Classes;
+﻿using Oasis_Pipelines.Operations.Attributes;
+using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
 
 namespace Oasis_Pipelines.Operations.Aggregations.Booleans;
 
-
-internal class NotEqualToOperation : BlockOperation
+[BlockOperationGroup(BlockOperationType.Boolean, BlockOperationGrouping.Aggregation)]
+public class NotEqualToOperation : BlockOperation
 {
-
     public override string OperationTitle => "Not Equal To";
 
     protected override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
@@ -17,7 +18,7 @@ internal class NotEqualToOperation : BlockOperation
             if (numbers.Length < 2)
                 return BlockOperationResult.NullOperation;
 
-            return numbers[0].CalculateResult() != numbers[1].CalculateResult();
+            return numbers[0].Result() != numbers[1].Result();
         });
     }
 }

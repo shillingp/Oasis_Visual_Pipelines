@@ -1,20 +1,21 @@
 ﻿using System.Data;
-using Oasis_Pipelines.Classes;
+using Oasis_Pipelines.Operations.Attributes;
+using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
 
 namespace Oasis_Pipelines.Operations.Selects.DataTables;
 
-
+[BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGrouping.Select)]
 public sealed class RemoveBlanksOperation : BlockOperation
 {
-
     public override string OperationTitle => "Remove Blanks";
 
     protected override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
     {
         BlockOperationResult? tableOperation = inputOperations
-            .FirstOrDefault(operation => operation.CalculateResult() is DataTable);
+            .FirstOrDefault(operation => operation?.Result() is DataTable);
 
-        if (tableOperation?.CalculateResult() is not DataTable inputTable)
+        if (tableOperation?.Result() is not DataTable inputTable)
             return BlockOperationResult.NullOperation;
 
         return new BlockOperationResult(additionalOperations => inputTable.Rows

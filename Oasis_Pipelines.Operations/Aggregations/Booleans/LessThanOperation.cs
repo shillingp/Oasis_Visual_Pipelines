@@ -1,28 +1,29 @@
-﻿using Oasis_Pipelines.Classes;
+﻿using Oasis_Pipelines.Operations.Attributes;
+using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
+using Oasis_Visual_Pipelines.Functions;
 
 namespace Oasis_Pipelines.Operations.Aggregations.Booleans;
 
-
-internal class LessThanOperation : BlockOperation
+[BlockOperationGroup(BlockOperationType.Boolean, BlockOperationGrouping.Aggregation)]
+public class LessThanOperation : BlockOperation
 {
-
     public override string OperationTitle => "Less Than";
 
     protected override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
     {
         return new BlockOperationResult(additionalOperations =>
         {
-            BlockOperationResult[] numbers = additionalOperations
+            IEnumerable<BlockOperationResult> numbers = additionalOperations
                 .Concat(inputOperations)
-                // .Where(HelperFunctions.IsNumeric)
-                .ToArray();
+                .Where(HelperFunctions.IsNumeric);
 
             BlockOperationResult? firstNumericResult = numbers.ElementAtOrDefault(0);
-            if (firstNumericResult is null || firstNumericResult.Value.CalculateResult() is not double firstNumber)
+            if (firstNumericResult is null || HelperFunctions.ConvertNumeric(firstNumericResult.Result()) is not double firstNumber)
                 return BlockOperationResult.NullOperation;
 
             BlockOperationResult? secondNumericResult = numbers.ElementAtOrDefault(1);
-            if (secondNumericResult is null || secondNumericResult.Value.CalculateResult() is not double secondNumber)
+            if (secondNumericResult is null || HelperFunctions.ConvertNumeric(secondNumericResult.Result()) is not double secondNumber)
                 return new BlockOperationResult(firstNumber);
 
             return firstNumber < secondNumber;

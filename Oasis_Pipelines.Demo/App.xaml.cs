@@ -2,11 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Oasis_Pipelines.Controls;
-using Oasis_Pipelines.Operations;
-using Oasis_Pipelines.Operations.Aggregations.Numbers;
-using Oasis_Pipelines.Operations.Sources.Numbers;
-using Oasis_Pipelines.Services.BlockCalculation;
-using Oasis_Pipelines.Services.BlockManagement;
 using Oasis_Pipelines.Services.ConnectionManagement;
 using Oasis_Pipelines.Services.SessionManagement;
 
@@ -22,16 +17,8 @@ public partial class App : Application
         .ConfigureServices((_, services) =>
         {
             services.AddTransient<IConnectionManager, ConnectionManager>();
-            services.AddTransient<IBlockManager, BlockManager>();
-
-            services.AddTransient<IBlockCalculation, BlockCalculation>();
-
-            services.AddTransient<BlockOperation, NumberSourceOperation>();
-            services.AddTransient<BlockOperation, AddNumberOperation>();
 
             services.AddSingleton<ISessionManager, SessionManager>();
-            services.AddTransient<ISessionContext, SessionContext>();
-            services.AddTransient<ISessionContextFactory, SessionContextFactory>();
         })
         .Build();
 

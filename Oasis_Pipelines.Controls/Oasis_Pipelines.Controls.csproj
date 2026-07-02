@@ -13,6 +13,10 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="MaterialDesignThemes" Version="5.3.2" />
+    </ItemGroup>
+    
+    <ItemGroup>
       <Page Update="DiagramSession.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
@@ -23,6 +27,12 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Reference Include="Oasis_Visual_Pipelines.Operations">
+        <HintPath>..\Oasis_Visual_Pipelines.Operations\bin\Debug\net9.0-windows\Oasis_Visual_Pipelines.Operations.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

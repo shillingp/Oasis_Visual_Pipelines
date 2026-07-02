@@ -1,9 +1,12 @@
 ﻿using System.Text.RegularExpressions;
-using Oasis_Pipelines.Classes;
+using Oasis_Pipelines.Operations.Attributes;
+using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
+using Oasis_Visual_Pipelines.Functions;
 
 namespace Oasis_Pipelines.Operations.Transforms.Strings;
 
-
+[BlockOperationGroup(BlockOperationType.Text, BlockOperationGrouping.Transforms)]
 public sealed class SplitStringOperation : BlockOperation
 {
     public override string OperationTitle => "Split String";
@@ -18,8 +21,11 @@ public sealed class SplitStringOperation : BlockOperation
                 return null;
 
             if (inputOperations.Concat(additionalOperations)
-                    .FirstOrDefault().CalculateResult() is not string inputString)
+                    .FirstOrDefault()?.Result() is not string inputString)
                 return null;
+
+            if (HelperFunctions.IsValidRegex(inputString))
+                return Regex.Split(inputString, SplitString);
 
             return inputString.Split(SplitString);
         });

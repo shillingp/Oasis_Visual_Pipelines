@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Arrays/ArrayTransformTemplates.xaml" />
+        <ResourceDictionary Source="DataTables/DataTableTransformTemplates.xaml" />
+        <ResourceDictionary Source="DateTimes/DateTimeTransformTemplates.xaml" />
+        <ResourceDictionary Source="Numbers/NumberTransformTemplates.xaml" />
+        <ResourceDictionary Source="Strings/StringTransformTemplates.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

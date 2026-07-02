@@ -1,6 +1,6 @@
 ﻿using System.Data;
-using Oasis_Pipelines.Classes;
-using Oasis_Pipelines.Functions;
+using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Functions;
 
 namespace Oasis_Pipelines.Operations.Selects.DataTables;
 
@@ -16,9 +16,9 @@ public sealed class SortDataTableOperation : BlockOperation
 
     protected override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
     {
-        BlockOperationResult? dataTableInput = inputOperations.FirstOrDefault(operation => operation.CalculateResult() is DataTable);
+        BlockOperationResult? dataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
 
-        if (dataTableInput?.CalculateResult() is not DataTable dataTable)
+        if (dataTableInput?.Result() is not DataTable dataTable)
         {
             ValidColumns = [];
             return BlockOperationResult.NullOperation;

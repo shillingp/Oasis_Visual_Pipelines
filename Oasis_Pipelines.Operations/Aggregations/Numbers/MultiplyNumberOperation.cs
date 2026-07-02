@@ -1,8 +1,11 @@
-﻿using Oasis_Pipelines.Classes;
+﻿using Oasis_Pipelines.Operations.Attributes;
+using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
+using Oasis_Visual_Pipelines.Models;
 
 namespace Oasis_Pipelines.Operations.Aggregations.Numbers;
 
-
+[BlockOperationGroup(BlockOperationType.Number, BlockOperationGrouping.Aggregation)]
 public sealed class MultiplyNumberOperation : BlockOperation
 {
     public override string OperationTitle => "Multiply Numbers";
@@ -11,6 +14,6 @@ public sealed class MultiplyNumberOperation : BlockOperation
     {
         return new BlockOperationResult((additionalOperations) => inputOperations
             .Concat(additionalOperations)
-            .Aggregate(1d, (total, item) => total * item.CalculateResult<double>()));
+            .Aggregate(1d, (total, item) => total * item.Result()));
     }
 }

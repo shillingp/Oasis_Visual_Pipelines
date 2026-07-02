@@ -1,0 +1,3 @@
+﻿namespace Oasis_Pipelines.Operations.Classes.Messages;
+
+public sealed class BlockControlPropertyChangedMessage;

@@ -1,8 +1,10 @@
-﻿using Oasis_Pipelines.Classes;
+﻿using Oasis_Pipelines.Operations.Attributes;
+using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
 
 namespace Oasis_Pipelines.Operations.Sources.Strings;
 
-
+[BlockOperationGroup(BlockOperationType.Text, BlockOperationGrouping.Sources)]
 public sealed class StringSourceOperation : BlockOperation
 {
     public override string OperationTitle => "String Source";

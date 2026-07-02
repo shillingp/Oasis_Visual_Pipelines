@@ -1,8 +1,10 @@
-﻿using Oasis_Pipelines.Classes;
+﻿using Oasis_Pipelines.Operations.Attributes;
+using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
 
 namespace Oasis_Pipelines.Operations.Aggregations.Numbers;
 
-
+[BlockOperationGroup(BlockOperationType.Number, BlockOperationGrouping.Aggregation)]
 public sealed class SubtractNumberOperation : BlockOperation
 {
     public override string OperationTitle => "Subtract Numbers";
@@ -11,15 +13,14 @@ public sealed class SubtractNumberOperation : BlockOperation
     {
         return new BlockOperationResult(additionalOperations =>
         {
-            BlockOperationResult[] allOperations = additionalOperations
-                .Concat(inputOperations)
-                .ToArray();
+            IEnumerable<BlockOperationResult> allOperations = additionalOperations
+                .Concat(inputOperations);
 
             return allOperations
                 .Skip(1)
                 .Aggregate(
-                    allOperations.First().CalculateResult<double>(),
-                    (total, item) => total - item.CalculateResult<double>());
+                    (double)allOperations.First().Result(),
+                    (total, item) => total + item.Result());
         });
     }
 }

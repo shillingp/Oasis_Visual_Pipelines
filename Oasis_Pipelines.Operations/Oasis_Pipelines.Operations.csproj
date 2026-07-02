@@ -4,18 +4,22 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        
         <LangVersion>preview</LangVersion>
         <OutputType>Exe</OutputType>
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Others\" />
-      <Folder Include="Sources\DataTables\" />
-      <Folder Include="Transforms\Numbers\" />
+      <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+      <PackageReference Include="ExcelDataReader.DataSet" Version="3.9.0" />
+      <PackageReference Include="OneOf" Version="3.0.271" />
+      <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Oasis_Pipelines\Oasis_Pipelines.csproj" />
+      <Reference Include="Oasis_Visual_Pipelines">
+        <HintPath>..\Oasis_Visual_Pipelines\bin\Debug\net9.0-windows\Oasis_Visual_Pipelines.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

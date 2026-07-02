@@ -1,8 +1,10 @@
-﻿using Oasis_Pipelines.Classes;
+﻿using Oasis_Pipelines.Operations.Attributes;
+using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
 
 namespace Oasis_Pipelines.Operations.Transforms.Strings;
 
-
+[BlockOperationGroup(BlockOperationType.Text, BlockOperationGrouping.Transforms)]
 public sealed class TrimStringOperation : BlockOperation
 {
     public override string OperationTitle => "Trim String";
@@ -15,7 +17,7 @@ public sealed class TrimStringOperation : BlockOperation
                 .Concat(additionalOperations)
                 .FirstOrDefault();
 
-            return firstOperationResult?.CalculateResult() is string text
+            return firstOperationResult?.Result() is string text
                 ? text.Trim() : "";
         });
     }

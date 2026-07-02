@@ -1,25 +1,29 @@
 ﻿using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Data;
-using Oasis_Pipelines.Classes;
-using Oasis_Pipelines.Functions;
+using Oasis_Pipelines.Operations.Attributes;
+using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
+using Oasis_Pipelines.Operations.Functions;
+using PropertyChanged;
 
 namespace Oasis_Pipelines.Operations.Selects.DataTables;
 
-
+[AddINotifyPropertyChangedInterface]
+[BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGrouping.Select)]
 public sealed class SelectColumnOperation : BlockOperation
 {
-
     public override string OperationTitle => "Select Column";
 
-    private string[]? ValidColumns { get; set; } = null;
-    private ImmutableHashSet<object> SelectedColumns { get; set; } = ImmutableHashSet<object>.Empty;
+    [DoNotReflowOnPropertyChanged]
+    public string[]? ValidColumns { get; set; } = null;
+    public ImmutableHashSet<object> SelectedColumns { get; set; } = ImmutableHashSet<object>.Empty;
 
     protected override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
     {
-        BlockOperationResult? dataTableInput = inputOperations.FirstOrDefault(operation => operation.CalculateResult() is DataTable);
+        BlockOperationResult? dataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
 
-        if (dataTableInput?.CalculateResult() is not DataTable dataTable)
+        if (dataTableInput?.Result() is not DataTable dataTable)
         {
             ValidColumns = null;
             return BlockOperationResult.NullOperation;
@@ -27,7 +31,7 @@ public sealed class SelectColumnOperation : BlockOperation
 
         ValidColumns ??= DataTableFunctions.ExtractColumnNamesFromTable(dataTable);
 
-        if (SelectedColumns is null || !SelectedColumns.Any())
+        if (SelectedColumns.IsEmpty)
             return BlockOperationResult.NullOperation;
 
         string[] selectedColumnsRetainingOrder = ValidColumns

@@ -1,6 +1,6 @@
 ﻿using System.Data;
-using Oasis_Pipelines.Classes;
-using Oasis_Pipelines.Functions;
+using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Functions;
 
 namespace Oasis_Pipelines.Operations.Transforms.DataTables;
 
@@ -15,9 +15,9 @@ public sealed class RenameColumnOperation : BlockOperation
 
     protected override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
     {
-        BlockOperationResult? leftDataTableInput = inputOperations.FirstOrDefault(operation => operation.CalculateResult() is DataTable);
+        BlockOperationResult? leftDataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
 
-        if (leftDataTableInput?.CalculateResult() is not DataTable inputDataTable)
+        if (leftDataTableInput?.Result() is not DataTable inputDataTable)
         {
             ValidColumns = [];
             return BlockOperationResult.NullOperation;

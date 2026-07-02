@@ -1,5 +1,5 @@
 ﻿using System.Globalization;
-using Oasis_Pipelines.Classes;
+using Oasis_Pipelines.Operations.Classes;
 
 namespace Oasis_Pipelines.Operations.Transforms.Strings;
 
@@ -13,7 +13,7 @@ public sealed class ChangeCaseOperation : BlockOperation
     {
         return new BlockOperationResult(additionalOperations =>
         {
-            if (inputOperations.Length == 0 || inputOperations[0].CalculateResult() is not string textInput)
+            if (inputOperations.Length == 0 || inputOperations[0].Result() is not string textInput)
                 return null;
 
             return TextCaseChoice switch

@@ -1,5 +1,5 @@
 ﻿using System.Data;
-using Oasis_Pipelines.Classes;
+using Oasis_Pipelines.Operations.Classes;
 
 namespace Oasis_Pipelines.Operations.Transforms.DataTables;
 
@@ -12,10 +12,10 @@ public sealed class InsertColumnOperation : BlockOperation
 
     protected override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
     {
-        BlockOperationResult? dataTableInput = inputOperations.FirstOrDefault(operation => operation.CalculateResult() is DataTable);
+        BlockOperationResult? dataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
         BlockOperationResult? insertValueInput = inputOperations.FirstOrDefault(operation => operation != dataTableInput);
 
-        if (dataTableInput?.CalculateResult() is not DataTable dataTable)
+        if (dataTableInput?.Result() is not DataTable dataTable)
             return BlockOperationResult.NullOperation;
 
         return new BlockOperationResult(additionalOperations =>
@@ -29,7 +29,7 @@ public sealed class InsertColumnOperation : BlockOperation
             if (insertValueInput is null)
                 return inputTable;
 
-            dynamic? insertData = insertValueInput.Value.CalculateResult();
+            dynamic? insertData = insertValueInput.Result();
             Type? insertDataType = insertData?.GetType();
             if (insertDataType is null)
                 return inputTable;

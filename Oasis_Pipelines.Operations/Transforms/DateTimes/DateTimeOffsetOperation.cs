@@ -1,15 +1,15 @@
-﻿using Oasis_Pipelines.Classes;
-using Oasis_Pipelines.Globals;
+﻿using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
 
 namespace Oasis_Pipelines.Operations.Transforms.DateTimes;
 
 
-internal class DateTimeOffsetOperation : BlockOperation
+public class DateTimeOffsetOperation : BlockOperation
 {
     public override string OperationTitle => "Offset DateTime";
 
-    private int OffsetValue { get; set; } = 0;
-    private TimeDateOffset TimeDateOffset { get; set; } = TimeDateOffset.Day;
+    public int OffsetValue { get; set; } = 0;
+    public TimeDateOffset TimeDateOffset { get; set; } = TimeDateOffset.Day;
 
     protected override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
     {
@@ -17,11 +17,11 @@ internal class DateTimeOffsetOperation : BlockOperation
         {
             BlockOperationResult? firstOperation = additionalOperations
                 .Concat(inputOperations)
-                .FirstOrDefault(operation => operation.CalculateResult() is DateTime);
+                .FirstOrDefault(operation => operation.Result() is DateTime);
 
             if (firstOperation is null) return null;
 
-            DateTime inputDateTime = firstOperation.Value.CalculateResult<DateTime>();
+            DateTime inputDateTime = firstOperation.Result();
 
             return TimeDateOffset switch
             {

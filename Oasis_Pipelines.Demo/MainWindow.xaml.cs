@@ -20,10 +20,10 @@ public partial class MainWindow : Window
         SessionManager = App.Host.Services.GetRequiredService<ISessionManager>();
         ISessionContext sessionContext = SessionManager.CreateContext();
 
-        Block blockA = sessionContext.BlockManager.AddBlock("Input A", new NumberSourceOperation(10d));
-        Block blockB = sessionContext.BlockManager.AddBlock("Input B", new NumberSourceOperation(3d));
+        Block blockA = sessionContext.BlockManager.AddBlock("Input A", new NumberSourceOperation { NumberValue = 10d });
+        Block blockB = sessionContext.BlockManager.AddBlock("Input B", new NumberSourceOperation { NumberValue = 3d });
         Block blockC = sessionContext.BlockManager.AddBlock("Middle A", new AddNumberOperation());
-        Block blockD = sessionContext.BlockManager.AddBlock("Input C", new NumberSourceOperation(5d));
+        Block blockD = sessionContext.BlockManager.AddBlock("Input C", new NumberSourceOperation { NumberValue = 5d });
         Block blockE = sessionContext.BlockManager.AddBlock("Output A", new AddNumberOperation());
 
         sessionContext.ConnectionManager.AddConnection(blockA, blockC);

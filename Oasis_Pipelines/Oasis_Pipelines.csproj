@@ -9,19 +9,15 @@
 
     <ItemGroup>
       <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
-      <PackageReference Include="ExcelDataReader" Version="3.7.0" />
-      <PackageReference Include="ExcelDataReader.DataSet" Version="3.7.0" />
       <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.8" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.8" />
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.8" />
       <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.8" />
       <PackageReference Include="OneOf" Version="3.0.271" />
     </ItemGroup>
-
+    
     <ItemGroup>
-      <Folder Include="Operations\Others\" />
-      <Folder Include="Operations\Sources\DataTables\" />
-      <Folder Include="Operations\Transforms\Numbers\" />
+        <ProjectReference Include="../Oasis_Pipelines.Operations/Oasis_Pipelines.Operations.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -32,9 +28,19 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Reference Include="Oasis_Visual_Pipelines">
+        <HintPath>..\Oasis_Visual_Pipelines\bin\Debug\net9.0-windows\Oasis_Visual_Pipelines.dll</HintPath>
+      </Reference>
       <Reference Include="PresentationFramework">
         <HintPath>..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App\9.0.8\PresentationFramework.dll</HintPath>
       </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Classes\" />
+      <Folder Include="Functions\" />
+      <Folder Include="Services\BlockCalculation\" />
+      <Folder Include="Services\BlockManagement\" />
     </ItemGroup>
 
 </Project>

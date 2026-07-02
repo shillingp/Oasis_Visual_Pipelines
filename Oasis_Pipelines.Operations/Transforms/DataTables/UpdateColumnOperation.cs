@@ -1,6 +1,6 @@
 ﻿using System.Data;
-using Oasis_Pipelines.Classes;
-using Oasis_Pipelines.Functions;
+using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Functions;
 
 namespace Oasis_Pipelines.Operations.Transforms.DataTables;
 
@@ -15,10 +15,10 @@ public sealed class UpdateColumnOperation : BlockOperation
 
     protected override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
     {
-        BlockOperationResult? dataTableInput = inputOperations.FirstOrDefault(operation => operation.CalculateResult() is DataTable);
+        BlockOperationResult? dataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
         BlockOperationResult? updateFunctionInput = inputOperations.FirstOrDefault(operation => operation != dataTableInput);
 
-        if (dataTableInput?.CalculateResult() is not DataTable dataTable)
+        if (dataTableInput?.Result() is not DataTable dataTable)
             return BlockOperationResult.NullOperation;
 
         ValidColumns = DataTableFunctions.ExtractColumnNamesFromTable(dataTable);
@@ -43,7 +43,7 @@ public sealed class UpdateColumnOperation : BlockOperation
                         .Cast<dynamic>()
                         .Select(element => new BlockOperationResult(element));
 
-                dynamic? updateFunctionData = updateFunctionInput.Value.CalculateResult(innerBlockOperations.ToArray());
+                dynamic? updateFunctionData = updateFunctionInput.Result(innerBlockOperations.ToArray());
 
                 if (updateFunctionData is null)
                     return dataTable;

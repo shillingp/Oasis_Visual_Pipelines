@@ -1,7 +1,10 @@
-﻿using Oasis_Pipelines.Classes;
+﻿using Oasis_Pipelines.Operations.Attributes;
+using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
 
 namespace Oasis_Pipelines.Operations.Transforms.Arrays;
 
+[BlockOperationGroup(BlockOperationType.Array, BlockOperationGrouping.Transforms)]
 public sealed class MapArrayOperation : BlockOperation
 {
     public override string OperationTitle => "Map Array";
@@ -10,10 +13,10 @@ public sealed class MapArrayOperation : BlockOperation
     {
         return new BlockOperationResult(additionalOperations =>
         {
-            BlockOperationResult? arrayInput = inputOperations.FirstOrDefault(operation => operation.CalculateResult() is Array);
+            BlockOperationResult? arrayInput = inputOperations.FirstOrDefault(operation => operation.Result() is Array);
             BlockOperationResult? updateFunctionInput = inputOperations.FirstOrDefault(operation => operation != arrayInput);
 
-            if (arrayInput?.CalculateResult() is not Array resultantArray)
+            if (arrayInput?.Result() is not Array resultantArray)
                 return null;
 
             if (updateFunctionInput is null)
@@ -21,7 +24,7 @@ public sealed class MapArrayOperation : BlockOperation
 
             return resultantArray
                 .Cast<dynamic>()
-                .Select(arrayItem => updateFunctionInput.Value.CalculateResult(
+                .Select(arrayItem => updateFunctionInput.Result(
                     new BlockOperationResult(arrayItem)))
                 .ToArray();
         });

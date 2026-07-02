@@ -1,4 +1,4 @@
-﻿using Oasis_Pipelines.Classes;
+﻿using Oasis_Pipelines.Operations.Classes;
 
 namespace Oasis_Pipelines.Operations;
 
@@ -17,7 +17,7 @@ public abstract class BlockOperation
     /// <returns></returns>
     protected abstract BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations);
 
-    internal BlockOperationResult ExecuteOperationCached(
+    public BlockOperationResult ExecuteOperationCached(
         Guid calculationId,
         params BlockOperationResult[] inputOperations)
     {

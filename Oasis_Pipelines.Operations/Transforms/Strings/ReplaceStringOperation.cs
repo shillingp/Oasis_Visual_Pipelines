@@ -1,4 +1,4 @@
-﻿using Oasis_Pipelines.Classes;
+﻿using Oasis_Pipelines.Operations.Classes;
 
 namespace Oasis_Pipelines.Operations.Transforms.Strings;
 
@@ -20,7 +20,7 @@ public sealed class ReplaceStringOperation : BlockOperation
                 return null;
 
             if (inputOperations.Concat(additionalOperations)
-                    .FirstOrDefault().CalculateResult() is not string inputText)
+                    .FirstOrDefault()?.Result() is not string inputText)
                 return null;
 
             return inputText.Replace(SearchText, ReplaceText);

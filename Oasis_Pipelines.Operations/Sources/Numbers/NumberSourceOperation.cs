@@ -1,14 +1,15 @@
-﻿using Oasis_Pipelines.Classes;
+﻿using Oasis_Pipelines.Operations.Attributes;
+using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
 
 namespace Oasis_Pipelines.Operations.Sources.Numbers;
 
-
-public sealed class NumberSourceOperation(double numberValue) : BlockOperation
+[BlockOperationGroup(BlockOperationType.Number, BlockOperationGrouping.Sources)]
+public sealed class NumberSourceOperation : BlockOperation
 {
-
     public override string OperationTitle => "Number Source";
 
-    private double NumberValue { get; set; } = numberValue;
+    public double NumberValue { get; set; }
 
     protected override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
     {

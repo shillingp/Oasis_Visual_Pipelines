@@ -1,5 +1,5 @@
-﻿using Oasis_Pipelines.Classes;
-using Oasis_Pipelines.Model;
+﻿using Oasis_Pipelines.Model;
+using Oasis_Pipelines.Operations.Classes;
 
 namespace Oasis_Pipelines.Services.BlockCalculation;
 
