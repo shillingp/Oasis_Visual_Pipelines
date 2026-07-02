@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Text;
 using ExcelDataReader;
-using Oasis_Visual_Pipelines.Classes;
+using Oasis_Pipelines.Operations.Classes;
 using DataTableFilter = Oasis_Pipelines.Operations.Classes.DataTableFilter;
 
 namespace Oasis_Pipelines.Operations.Functions;
@@ -23,7 +23,7 @@ public static class DataTableFunctions
             .ToArray();
     }
 
-    public static DataTable FilterDataTable(DataTable tableObject, Classes.ObservableSet<DataTableFilter> selectedFilters, string sqlJoinStatement = "AND")
+    public static DataTable FilterDataTable(DataTable tableObject, ObservableSet<DataTableFilter> selectedFilters, string sqlJoinStatement = "AND")
     {
         ArgumentNullException.ThrowIfNull(tableObject);
         ArgumentNullException.ThrowIfNull(selectedFilters);

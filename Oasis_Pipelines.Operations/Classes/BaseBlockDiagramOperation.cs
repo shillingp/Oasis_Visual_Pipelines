@@ -1,11 +1,4 @@
-﻿using System.ComponentModel;
-using System.Reflection;
-using CommunityToolkit.Mvvm.Messaging;
-using Oasis_Pipelines.Operations.Attributes;
-using Oasis_Pipelines.Operations.Classes.Messages;
-using Oasis_Pipelines.Operations.Interfaces;
-
-namespace Oasis_Pipelines.Operations.Classes;
+﻿namespace Oasis_Pipelines.Operations.Classes;
 
 // public class BaseBlockDiagramOperation : INotifyPropertyChanged, IBlockDiagramOperation
 // {

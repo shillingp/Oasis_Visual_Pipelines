@@ -1,9 +1,10 @@
 ﻿using Oasis_Pipelines.Operations.Attributes;
 using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
 
 namespace Oasis_Pipelines.Operations.Aggregations.Numbers;
 
-[BlockOperationGroup(Enums.BlockOperationType.Number, Enums.BlockOperationGrouping.Transforms)]
+[BlockOperationGroup(BlockOperationType.Number, BlockOperationGrouping.Transforms)]
 public sealed class DivideNumberOperation : BlockOperation
 {
     public override string OperationTitle => "Divide Numbers";

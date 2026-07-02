@@ -1,7 +1,6 @@
 ﻿using Oasis_Pipelines.Operations.Attributes;
 using Oasis_Pipelines.Operations.Classes;
 using Oasis_Pipelines.Operations.Enums;
-using Oasis_Visual_Pipelines.Models;
 
 namespace Oasis_Pipelines.Operations.Aggregations.Strings;
 

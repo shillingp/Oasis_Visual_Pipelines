@@ -1,7 +1,7 @@
 ﻿using Oasis_Pipelines.Operations.Attributes;
 using Oasis_Pipelines.Operations.Classes;
 using Oasis_Pipelines.Operations.Enums;
-using Oasis_Visual_Pipelines.Functions;
+using Oasis_Pipelines.Operations.Functions;
 
 namespace Oasis_Pipelines.Operations.Aggregations.Booleans;
 

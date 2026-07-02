@@ -1,9 +1,10 @@
 ﻿using Oasis_Pipelines.Operations.Attributes;
 using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
 
 namespace Oasis_Pipelines.Operations.Selects.Arrays;
 
-[BlockOperationGroup(Enums.BlockOperationType.Array, Enums.BlockOperationGrouping.Select)]
+[BlockOperationGroup(BlockOperationType.Array, BlockOperationGrouping.Select)]
 public sealed class TakeArrayElementsOperation : BlockOperation
 {
     public override string OperationTitle => "Take 'N' Elements";
