@@ -24,15 +24,13 @@ public sealed class ExcelDataTableSourceOperation : BlockOperation
 
     public ICommand UpdateExcelSourceCommand => new RelayCommand(() =>
     {
-        OpenFileDialog openFileDialog = new OpenFileDialog
-        {
-            DefaultExt = ".xlsx",
-            Filter = "Excel Documents (.xlsx)|*.xlsx"
-        };
-
-        if (openFileDialog.ShowDialog() != true)
-            return;
-
-        FetchedExcelTable = DataTableFunctions.ImportExcelToDataTable(openFileDialog.FileName);
+        // SelectedFile? selectedFile = SelectFileDialog(
+        //     DefaultExtension: ".xlsx",
+        //     Filter: "Excel Documents (.xlsx)|*.xlsx");
+        //
+        // if (selectedFile is null)
+        //     return;
+        //
+        // FetchedExcelTable = DataTableFunctions.ImportExcelToDataTable(selectedFile);
     });
 }

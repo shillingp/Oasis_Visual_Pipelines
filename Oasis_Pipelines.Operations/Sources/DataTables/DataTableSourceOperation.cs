@@ -33,9 +33,10 @@ public sealed class DataTableSourceOperation : BlockOperation
 
     public ICommand EditResultTableDataManuallyCommand => new RelayCommand(async () =>
     {
-        await DialogHostFunctions.CreateAndShowDialog(
-            content: new EditDataTableDialog(),
-            dataContext: resultDataTable,
-            closeOnClickAway: true);
+        // ShowDialog<EditDataTable>();
+        // await DialogHostFunctions.CreateAndShowDialog(
+        //     content: new EditDataTableDialog(),
+        //     dataContext: resultDataTable,
+        //     closeOnClickAway: true);
     });
 }

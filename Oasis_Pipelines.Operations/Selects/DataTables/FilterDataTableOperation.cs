@@ -9,7 +9,6 @@ namespace Oasis_Pipelines.Operations.Selects.DataTables;
 
 public sealed class FilterDataTableOperation : BlockOperation
 {
-
     public override string OperationTitle => "Filter Table";
 
     public bool FilterAny { get; set; } = false;
@@ -40,10 +39,11 @@ public sealed class FilterDataTableOperation : BlockOperation
 
     public ICommand EditFiltersCommand => new RelayCommand(async () =>
     {
-        await DialogHostFunctions.CreateAndShowDialog(
-            new FilterSelectionDialog(),
-            this,
-            closeOnClickAway: true);
+        // ShowDialog<FilterSelectionDialog>();
+        // await DialogHostFunctions.CreateAndShowDialog(
+        //     new FilterSelectionDialog(),
+        //     this,
+        //     closeOnClickAway: true);
     });
 
     public ICommand AddNewFilterCommand => new RelayCommand(
