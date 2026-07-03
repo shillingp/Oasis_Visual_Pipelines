@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="Oasis_Pipelines.Controls/Oasis_Pipelines.Controls.csproj" />
+  <Project Path="Oasis_Pipelines.Demo/Oasis_Pipelines.Demo.csproj" />
+  <Project Path="Oasis_Pipelines.Operations.Wpf/Oasis_Pipelines.Operations.Wpf.csproj">
+    <BuildType Solution="Release|*" Project="?" />
+    <Platform Solution="Release|*" Project="?" />
+    <Build Solution="Release|*" Project="false" />
+  </Project>
+  <Project Path="Oasis_Pipelines.Operations/Oasis_Pipelines.Operations.csproj" />
+  <Project Path="Oasis_Pipelines/Oasis_Pipelines.csproj" />
+</Solution>
