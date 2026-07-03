@@ -9,7 +9,7 @@
             CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=controls:BlockControl}}"
             Content="Choose Block"
             HorizontalAlignment="Center"
-            Style="{StaticResource MaterialDesignRaisedAccentButton}"
+            Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
             VerticalAlignment="Center" />
     </DataTemplate>
 </ResourceDictionary>

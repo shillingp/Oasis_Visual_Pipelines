@@ -109,11 +109,11 @@
                         <RadioButton
                             Content="{material:PackIcon Kind=SortAscending}"
                             IsChecked="{Binding SortDirection, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Static local:SortDirection.Ascending}}"
-                            Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+                            Style="{StaticResource MaterialDesignChoiceChipSecondaryOutlineRadioButton}" />
                         <RadioButton
                             Content="{material:PackIcon Kind=SortDescending}"
                             IsChecked="{Binding SortDirection, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Static local:SortDirection.Descending}}"
-                            Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
+                            Style="{StaticResource MaterialDesignChoiceChipSecondaryOutlineRadioButton}" />
                     </UniformGrid>
                 </StackPanel>
             </material:Card>
