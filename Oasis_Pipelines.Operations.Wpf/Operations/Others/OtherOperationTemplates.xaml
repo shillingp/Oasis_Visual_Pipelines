@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <DataTemplate DataType="{x:Type operations:DefaultBlockOperation}">
         <Button
-            Command="{Binding ChooseBlockTypeCommand}"
+            Command="{Binding ChooseBlockOperationTypeCommand}"
             CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=controls:BlockControl}}"
             Content="Choose Block"
             HorizontalAlignment="Center"

@@ -10,6 +10,11 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Oasis_Pipelines.Controls\Oasis_Pipelines.Controls.csproj"/>
+        <ProjectReference Include="..\Oasis_Pipelines.Operations.Wpf\Oasis_Pipelines.Operations.Wpf.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MaterialDesignThemes" />
     </ItemGroup>
 
 </Project>

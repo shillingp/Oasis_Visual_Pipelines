@@ -11,20 +11,30 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:interfaces="clr-namespace:Oasis_Pipelines.Interfaces;assembly=Oasis_Pipelines"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:Oasis_Pipelines.Model;assembly=Oasis_Pipelines"
     xmlns:templateSelectors="clr-namespace:Oasis_Pipelines.Controls.Classes.TemplateSelectors"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Resources>
         <converters:ConcatenatePipelineObjectsConverter x:Key="ConcatenateConverter" />
 
-        <DataTemplate x:Key="BlockDataTemplate">
-            <Thumb
-                Background="Red"
-                DragDelta="Thumb_OnDragDelta"
-                Height="100"
-                Width="100" />
+        <!-- <DataTemplate x:Key="BlockDataTemplate"> -->
+        <!--  <Thumb  -->
+        <!--  Background="Red"  -->
+        <!--  DragDelta="Thumb_OnDragDelta"  -->
+        <!--  Height="100"  -->
+        <!--  Width="100" />  -->
+        <!-- </DataTemplate> -->
+
+        <DataTemplate DataType="{x:Type models:Block}">
+            <!--  <Thumb  -->
+            <!--  Background="Red"  -->
+            <!--  DragDelta="Thumb_OnDragDelta"  -->
+            <!--  Height="100"  -->
+            <!--  Width="100" />  -->
+            <controls:BlockControl />
         </DataTemplate>
 
-        <DataTemplate x:Key="ConnectionDataTemplate">
+        <DataTemplate DataType="{x:Type models:Connection}">
             <Thumb
                 Background="Blue"
                 DragDelta="Thumb_OnDragDelta"
@@ -32,17 +42,17 @@
                 Width="50" />
         </DataTemplate>
 
-        <templateSelectors:PipelineObjectTemplateSelector
-            BlockTemplate="{StaticResource BlockDataTemplate}"
-            ConnectionTemplate="{StaticResource ConnectionDataTemplate}"
-            x:Key="PipelineObjectTemplateSelector" />
+        <!--  <templateSelectors:PipelineObjectTemplateSelector  -->
+        <!--  BlockTemplate="{StaticResource BlockDataTemplate}"  -->
+        <!--  ConnectionTemplate="{StaticResource ConnectionDataTemplate}"  -->
+        <!--  x:Key="PipelineObjectTemplateSelector" />  -->
     </UserControl.Resources>
     <Grid x:Name="RootGrid">
         <ItemsControl
             Background="Gray"
             Height="500"
-            ItemTemplateSelector="{StaticResource PipelineObjectTemplateSelector}"
             Width="500">
+            <!--  ItemTemplateSelector="{StaticResource PipelineObjectTemplateSelector}"  -->
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseLeftButtonDown">
                     <b:InvokeCommandAction Command="{Binding AddBlockCommand}" PassEventArgsToCommand="True" />
@@ -52,6 +62,8 @@
                 <MultiBinding Converter="{StaticResource ConcatenateConverter}">
                     <Binding FallbackValue="{x:Null}" Path="SessionContext.BlockManager.AllBlocks" />
                     <Binding FallbackValue="{x:Null}" Path="SessionContext.ConnectionManager.AllConnections" />
+                    <Binding FallbackValue="0" Path="SessionContext.BlockManager.AllBlocks.Count" />
+                    <Binding FallbackValue="0" Path="SessionContext.ConnectionManager.AllConnections.Count" />
                 </MultiBinding>
             </ItemsControl.ItemsSource>
             <ItemsControl.ItemsPanel>

@@ -11,7 +11,7 @@ public class ConcatenatePipelineObjectsConverter : IMultiValueConverter
     /// <inheritdoc />
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
-        if (values is not [IEnumerable<IPipelineObject> blocks, IEnumerable<IPipelineObject> connections])
+        if (values is not [IEnumerable<IPipelineObject> blocks, IEnumerable<IPipelineObject> connections, ..])
             return Array.Empty<IPipelineObject>();
 
         return blocks.Concat(connections);

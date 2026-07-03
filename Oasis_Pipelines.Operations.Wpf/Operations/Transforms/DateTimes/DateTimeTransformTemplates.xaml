@@ -4,6 +4,7 @@
     xmlns:converters="clr-namespace:Oasis_Pipelines.Operations.Wpf.Converters"
     xmlns:globals="clr-namespace:Oasis_Pipelines.Globals;assembly=Oasis_Pipelines"
     xmlns:local="clr-namespace:Oasis_Pipelines.Operations.Operations.Transforms.DateTimes;assembly=Oasis_Pipelines.Operations"
+    xmlns:wpf="clr-namespace:Oasis_Pipelines.Shared.Wpf;assembly=Oasis_Pipelines.Shared.Wpf"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <DataTemplate DataType="{x:Type local:DateTimeOffsetOperation}">
         <DataTemplate.Resources>
@@ -16,7 +17,7 @@
                 TextWrapping="Wrap" />
 
             <UniformGrid Columns="2">
-                <controls:NumericUpDownControl NumberValue="{Binding OffsetValue, Mode=TwoWay}" />
+                <wpf:NumericUpDownControl NumberValue="{Binding OffsetValue, Mode=TwoWay}" />
                 <ComboBox
                     ItemsSource="{Binding Converter={StaticResource EnumValuesItemsSourceConverter}, ConverterParameter={x:Type globals:TimeDateOffset}}"
                     SelectedItem="{Binding TimeDateOffset}"

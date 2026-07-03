@@ -3,6 +3,7 @@
     xmlns:controls="clr-namespace:Oasis_Pipelines.Controls;assembly=Oasis_Pipelines.Controls"
     xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:numbers="clr-namespace:Oasis_Pipelines.Operations.Operations.Sources.Numbers;assembly=Oasis_Pipelines.Operations"
+    xmlns:wpf="clr-namespace:Oasis_Pipelines.Shared.Wpf;assembly=Oasis_Pipelines.Shared.Wpf"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <DataTemplate DataType="{x:Type numbers:NumberSourceOperation}">
         <DockPanel>
@@ -12,7 +13,7 @@
                 TextWrapping="Wrap" />
 
             <material:Card Margin="5" VerticalAlignment="Center">
-                <controls:NumericUpDownControl NumberValue="{Binding NumberValue, Mode=TwoWay}" />
+                <wpf:NumericUpDownControl NumberValue="{Binding NumberValue, Mode=TwoWay}" />
             </material:Card>
         </DockPanel>
     </DataTemplate>

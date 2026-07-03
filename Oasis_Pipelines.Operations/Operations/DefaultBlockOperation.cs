@@ -13,11 +13,11 @@ public class DefaultBlockOperation : BlockOperation
 {
     public override string OperationTitle => "Select Block";
 
-    public ICommand ChooseBlockTypeOperation { get; }
+    public ICommand ChooseBlockOperationTypeCommand { get; }
 
     public DefaultBlockOperation()
     {
-        ChooseBlockTypeOperation = new RelayCommand(ChooseBlockType);
+        ChooseBlockOperationTypeCommand = new RelayCommand(ChooseBlockOperationType);
     }
 
     protected override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
@@ -25,7 +25,7 @@ public class DefaultBlockOperation : BlockOperation
         return new BlockOperationResult(additionalOperations => null);
     }
 
-    private void ChooseBlockType()
+    private void ChooseBlockOperationType()
     {
         throw new NotImplementedException();
     }

@@ -3,7 +3,7 @@ using System.Collections.Immutable;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Oasis_Pipelines.Controls;
+namespace Oasis_Pipelines.Shared.Wpf;
 
 /// <summary>
 /// Interaction logic for MultiSelectControl.xaml

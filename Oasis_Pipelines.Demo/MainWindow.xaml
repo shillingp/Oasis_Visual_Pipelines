@@ -1,5 +1,6 @@
 ﻿<Window
     Height="600"
+    Style="{StaticResource MaterialDesignWindow}"
     Title="MainWindow"
     Width="800"
     d:DataContext="{d:DesignInstance local:MainWindowViewModel}"

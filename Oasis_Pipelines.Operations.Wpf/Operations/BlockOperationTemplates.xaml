@@ -2,7 +2,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Aggregations/AggregationOperationTemplates.xaml" />
         <ResourceDictionary Source="Joins/JoinOperationTemplates.xaml" />
-        <!--<ResourceDictionary Source="Others/OtherOperationTemplates.xaml" />-->
+        <ResourceDictionary Source="Others/OtherOperationTemplates.xaml" />
         <ResourceDictionary Source="Selects/SelectOperationTemplates.xaml" />
         <ResourceDictionary Source="Sources/SourceOperationTemplates.xaml" />
         <ResourceDictionary Source="Transforms/TransformOperationTemplates.xaml" />

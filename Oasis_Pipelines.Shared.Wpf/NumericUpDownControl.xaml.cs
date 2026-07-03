@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 
-namespace Oasis_Pipelines.Controls;
+namespace Oasis_Pipelines.Shared.Wpf;
 
 /// <summary>
 /// Interaction logic for NumericUpDownControl.xaml

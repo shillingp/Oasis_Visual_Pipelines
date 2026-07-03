@@ -3,6 +3,7 @@
     xmlns:arrays="clr-namespace:Oasis_Pipelines.Operations.Operations.Selects.Arrays;assembly=Oasis_Pipelines.Operations"
     xmlns:controls="clr-namespace:Oasis_Pipelines.Controls;assembly=Oasis_Pipelines.Controls"
     xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:wpf="clr-namespace:Oasis_Pipelines.Shared.Wpf;assembly=Oasis_Pipelines.Shared.Wpf"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <DataTemplate DataType="{x:Type arrays:TakeArrayElementsOperation}">
         <DockPanel>
@@ -12,7 +13,7 @@
                 TextWrapping="Wrap" />
 
             <material:Card Margin="5">
-                <controls:NumericUpDownControl Minimum="0" NumberValue="{Binding ElementCount, Mode=TwoWay}" />
+                <wpf:NumericUpDownControl Minimum="0" NumberValue="{Binding ElementCount, Mode=TwoWay}" />
             </material:Card>
         </DockPanel>
     </DataTemplate>
