@@ -16,7 +16,7 @@ public class PipelineObjectTemplateSelector : DataTemplateSelector
         {
             Block => BlockTemplate,
             Connection => ConnectionTemplate,
-            _ => throw new NotImplementedException(),
+            _ => throw new NotSupportedException(),
         };
     }
 }

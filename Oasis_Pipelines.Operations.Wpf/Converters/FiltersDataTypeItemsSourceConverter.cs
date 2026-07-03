@@ -6,7 +6,7 @@ namespace Oasis_Pipelines.Operations.Wpf.Converters;
 
 public sealed class FiltersDataTypeItemsSourceConverter : IValueConverter
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is not Type tableColumnType)
             return Enumerable.Empty<string>();
@@ -14,12 +14,12 @@ public sealed class FiltersDataTypeItemsSourceConverter : IValueConverter
         switch (tableColumnType)
         {
             case not null when tableColumnType == typeof(string):
-                return stringFilters;
+                return _stringFilters;
             case not null when tableColumnType == typeof(int):
             case not null when tableColumnType == typeof(double):
             case not null when tableColumnType == typeof(decimal):
             case not null when tableColumnType == typeof(float):
-                return numericFilters;
+                return _numericFilters;
             case not null when tableColumnType == typeof(DateTime):
                 return dateTimeFilters;
             default:
@@ -27,12 +27,12 @@ public sealed class FiltersDataTypeItemsSourceConverter : IValueConverter
         }
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        throw new NotImplementedException();
+        throw new NotSupportedException();
     }
 
-    private readonly FilterFunctor[] stringFilters =
+    private readonly FilterFunctor[] _stringFilters =
     [
         new FilterFunctor("Equals", "="),
         new FilterFunctor("Not equal", "<>"),
@@ -44,7 +44,7 @@ public sealed class FiltersDataTypeItemsSourceConverter : IValueConverter
         new FilterFunctor("Does not end with", "NOT LIKE '*___REPLACE___'")
     ];
 
-    private readonly FilterFunctor[] numericFilters =
+    private readonly FilterFunctor[] _numericFilters =
     [
         new FilterFunctor("Equals", "="),
         new FilterFunctor("Not equal", "<>"),

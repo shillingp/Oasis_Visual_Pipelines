@@ -5,7 +5,7 @@ namespace Oasis_Pipelines.Operations.Wpf.Converters;
 
 public sealed class EnumValuesItemsSourceConverter : IValueConverter
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (parameter is Type param && param.IsEnum)
             return Enum.GetValues(param);
@@ -13,8 +13,8 @@ public sealed class EnumValuesItemsSourceConverter : IValueConverter
         return Binding.DoNothing;
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        throw new NotImplementedException();
+        throw new NotSupportedException();
     }
 }
