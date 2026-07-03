@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
@@ -8,39 +8,39 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
-      <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.8" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.8" />
-      <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.8" />
-      <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.8" />
-      <PackageReference Include="OneOf" Version="3.0.271" />
+        <PackageReference Include="CommunityToolkit.Mvvm" />
+        <PackageReference Include="Microsoft.Extensions.Caching.Memory" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" />
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
+        <PackageReference Include="OneOf" />
     </ItemGroup>
-    
+
     <ItemGroup>
         <ProjectReference Include="../Oasis_Pipelines.Operations/Oasis_Pipelines.Operations.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Remove="Operations\Selects\DataTables\FilterDataTableOperation.cs" />
-      <Compile Remove="Operations\Sources\DataTables\DataTableSourceOperation.cs" />
-      <Compile Remove="Operations\Sources\DataTables\ExcelDataTableSourceOperation.cs" />
-      <Compile Remove="Operations\Sources\DataTables\SQLDataTableSourceOperation.cs" />
+        <Compile Remove="Operations\Selects\DataTables\FilterDataTableOperation.cs" />
+        <Compile Remove="Operations\Sources\DataTables\DataTableSourceOperation.cs" />
+        <Compile Remove="Operations\Sources\DataTables\ExcelDataTableSourceOperation.cs" />
+        <Compile Remove="Operations\Sources\DataTables\SQLDataTableSourceOperation.cs" />
     </ItemGroup>
 
     <ItemGroup>
-      <Reference Include="Oasis_Visual_Pipelines">
-        <HintPath>..\Oasis_Visual_Pipelines\bin\Debug\net9.0-windows\Oasis_Visual_Pipelines.dll</HintPath>
-      </Reference>
-      <Reference Include="PresentationFramework">
-        <HintPath>..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App\9.0.8\PresentationFramework.dll</HintPath>
-      </Reference>
+        <Reference Include="Oasis_Visual_Pipelines">
+            <HintPath>..\Oasis_Visual_Pipelines\bin\Debug\net9.0-windows\Oasis_Visual_Pipelines.dll</HintPath>
+        </Reference>
+        <Reference Include="PresentationFramework">
+            <HintPath>..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App\9.0.8\PresentationFramework.dll</HintPath>
+        </Reference>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Classes\" />
-      <Folder Include="Functions\" />
-      <Folder Include="Services\BlockCalculation\" />
-      <Folder Include="Services\BlockManagement\" />
+        <Folder Include="Classes\" />
+        <Folder Include="Functions\" />
+        <Folder Include="Services\BlockCalculation\" />
+        <Folder Include="Services\BlockManagement\" />
     </ItemGroup>
 
 </Project>

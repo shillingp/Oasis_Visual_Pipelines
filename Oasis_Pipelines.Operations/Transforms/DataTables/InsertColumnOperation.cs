@@ -3,7 +3,6 @@ using Oasis_Pipelines.Operations.Classes;
 
 namespace Oasis_Pipelines.Operations.Transforms.DataTables;
 
-
 public sealed class InsertColumnOperation : BlockOperation
 {
     public override string OperationTitle => "Insert Column";
@@ -12,8 +11,10 @@ public sealed class InsertColumnOperation : BlockOperation
 
     protected override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
     {
-        BlockOperationResult? dataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
-        BlockOperationResult? insertValueInput = inputOperations.FirstOrDefault(operation => operation != dataTableInput);
+        BlockOperationResult? dataTableInput =
+            inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
+        BlockOperationResult? insertValueInput =
+            inputOperations.FirstOrDefault(operation => operation != dataTableInput);
 
         if (dataTableInput?.Result() is not DataTable dataTable)
             return BlockOperationResult.NullOperation;

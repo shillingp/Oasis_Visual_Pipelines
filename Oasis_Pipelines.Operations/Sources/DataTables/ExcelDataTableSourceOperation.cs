@@ -6,10 +6,8 @@ using Oasis_Pipelines.Operations.Functions;
 
 namespace Oasis_Pipelines.Operations.Sources.DataTables;
 
-
 public sealed class ExcelDataTableSourceOperation : BlockOperation
 {
-
     public override string OperationTitle => "Excel Data Source";
 
     public DataTable? FetchedExcelTable { get; set; } = null;

@@ -3,7 +3,6 @@ using Oasis_Pipelines.Operations.Enums;
 
 namespace Oasis_Pipelines.Operations.Transforms.DateTimes;
 
-
 public class DateTimeOffsetOperation : BlockOperation
 {
     public override string OperationTitle => "Offset DateTime";

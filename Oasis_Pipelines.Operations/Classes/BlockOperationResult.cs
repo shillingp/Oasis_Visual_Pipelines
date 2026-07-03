@@ -7,7 +7,9 @@ public record BlockOperationResult
     public readonly ParamsFunc Result;
 
     public BlockOperationResult(object data)
-        : this(new BlockOperationResult(_ => data)) { }
+        : this(new BlockOperationResult(_ => data))
+    {
+    }
 
     public BlockOperationResult(ParamsFunc executionFunction)
     {
@@ -30,5 +32,7 @@ public record BlockOperationResult
 
 public record struct FailedOperation(Exception Error)
 {
-    public FailedOperation(string errorMessage) : this(new Exception(errorMessage)) { }
+    public FailedOperation(string errorMessage) : this(new Exception(errorMessage))
+    {
+    }
 }

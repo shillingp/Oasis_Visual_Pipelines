@@ -13,8 +13,10 @@ public class ConcatDataTablesOperation : BlockOperation
 
     protected override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
     {
-        BlockOperationResult? leftDataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
-        BlockOperationResult? rightDataTableInput = inputOperations.FirstOrDefault(operation => operation != leftDataTableInput);
+        BlockOperationResult? leftDataTableInput =
+            inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
+        BlockOperationResult? rightDataTableInput =
+            inputOperations.FirstOrDefault(operation => operation != leftDataTableInput);
 
         if (leftDataTableInput?.Result() is not DataTable leftDataTable)
             return BlockOperationResult.NullOperation;

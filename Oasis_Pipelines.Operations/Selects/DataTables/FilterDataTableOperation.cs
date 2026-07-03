@@ -46,9 +46,8 @@ public sealed class FilterDataTableOperation : BlockOperation
         //     closeOnClickAway: true);
     });
 
-    public ICommand AddNewFilterCommand => new RelayCommand(
-        () => SelectedFilters.Add(new DataTableFilter()));
+    public ICommand AddNewFilterCommand => new RelayCommand(() => SelectedFilters.Add(new DataTableFilter()));
 
-    public ICommand RemoveFilterCommand => new RelayCommand<DataTableFilter>(
-        filterToRemove => SelectedFilters.Remove(filterToRemove!));
+    public ICommand RemoveFilterCommand =>
+        new RelayCommand<DataTableFilter>(filterToRemove => SelectedFilters.Remove(filterToRemove!));
 }

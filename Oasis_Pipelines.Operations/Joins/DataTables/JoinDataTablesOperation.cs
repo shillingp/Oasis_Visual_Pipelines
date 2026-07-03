@@ -4,7 +4,6 @@ using Oasis_Pipelines.Operations.Functions;
 
 namespace Oasis_Pipelines.Operations.Joins.DataTables;
 
-
 public sealed class JoinDataTablesOperation : BlockOperation
 {
     public override string OperationTitle => "Join Tables";
@@ -17,8 +16,10 @@ public sealed class JoinDataTablesOperation : BlockOperation
 
     protected override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
     {
-        BlockOperationResult? leftDataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
-        BlockOperationResult? rightDataTableInput = inputOperations.FirstOrDefault(operation => operation != leftDataTableInput);
+        BlockOperationResult? leftDataTableInput =
+            inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
+        BlockOperationResult? rightDataTableInput =
+            inputOperations.FirstOrDefault(operation => operation != leftDataTableInput);
 
         if (leftDataTableInput?.Result() is not DataTable leftDataTable)
             return BlockOperationResult.NullOperation;
@@ -35,7 +36,8 @@ public sealed class JoinDataTablesOperation : BlockOperation
             if (SelectedLeftColumn is null || SelectedRightColumn is null)
                 return BlockOperationResult.NullOperation;
 
-            if (leftDataTable.Columns[SelectedLeftColumn]?.DataType != rightDataTable.Columns[SelectedRightColumn]?.DataType)
+            if (leftDataTable.Columns[SelectedLeftColumn]?.DataType !=
+                rightDataTable.Columns[SelectedRightColumn]?.DataType)
                 return new FailedOperationException("Column data types must match!");
 
             return DataTableFunctions.JoinDataTables(

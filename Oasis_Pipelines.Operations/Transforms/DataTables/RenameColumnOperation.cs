@@ -15,7 +15,8 @@ public sealed class RenameColumnOperation : BlockOperation
 
     protected override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
     {
-        BlockOperationResult? leftDataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
+        BlockOperationResult? leftDataTableInput =
+            inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
 
         if (leftDataTableInput?.Result() is not DataTable inputDataTable)
         {

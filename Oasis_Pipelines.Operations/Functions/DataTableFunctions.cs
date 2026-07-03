@@ -23,7 +23,8 @@ public static class DataTableFunctions
             .ToArray();
     }
 
-    public static DataTable FilterDataTable(DataTable tableObject, ObservableSet<DataTableFilter> selectedFilters, string sqlJoinStatement = "AND")
+    public static DataTable FilterDataTable(DataTable tableObject, ObservableSet<DataTableFilter> selectedFilters,
+        string sqlJoinStatement = "AND")
     {
         ArgumentNullException.ThrowIfNull(tableObject);
         ArgumentNullException.ThrowIfNull(selectedFilters);

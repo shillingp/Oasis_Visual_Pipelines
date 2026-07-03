@@ -34,7 +34,7 @@ public partial class MainWindow : Window
         // object result = sessionContext.BlockCalculation
         //     .CalculateFlowPath(blockE)
         //     .CalculateResult();
-        
+
         InitializeComponent();
 
         DataContext = this;

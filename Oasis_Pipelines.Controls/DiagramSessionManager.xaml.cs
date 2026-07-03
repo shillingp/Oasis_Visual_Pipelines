@@ -22,6 +22,7 @@ public partial class DiagramSessionManager : UserControl
             typeof(DiagramSessionManager),
             new FrameworkPropertyMetadata(null,
                 (d, e) => (d as DiagramSessionManager)?.SessionManager = (ISessionManager)e.NewValue));
+
     public DiagramSessionManager()
     {
         InitializeComponent();

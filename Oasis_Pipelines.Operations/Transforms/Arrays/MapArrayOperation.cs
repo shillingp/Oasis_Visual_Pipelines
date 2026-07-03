@@ -14,7 +14,8 @@ public sealed class MapArrayOperation : BlockOperation
         return new BlockOperationResult(additionalOperations =>
         {
             BlockOperationResult? arrayInput = inputOperations.FirstOrDefault(operation => operation.Result() is Array);
-            BlockOperationResult? updateFunctionInput = inputOperations.FirstOrDefault(operation => operation != arrayInput);
+            BlockOperationResult? updateFunctionInput =
+                inputOperations.FirstOrDefault(operation => operation != arrayInput);
 
             if (arrayInput?.Result() is not Array resultantArray)
                 return null;

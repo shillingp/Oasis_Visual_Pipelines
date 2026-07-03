@@ -18,7 +18,8 @@ public sealed class TrimStringOperation : BlockOperation
                 .FirstOrDefault();
 
             return firstOperationResult?.Result() is string text
-                ? text.Trim() : "";
+                ? text.Trim()
+                : "";
         });
     }
 }

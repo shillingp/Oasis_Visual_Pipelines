@@ -1,0 +1,9 @@
+<Project>
+    <ItemGroup>
+        <PackageReference Include="Fody">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="PropertyChanged.Fody"/>
+    </ItemGroup>
+</Project>

@@ -10,12 +10,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Oasis_Pipelines.Controls\Oasis_Pipelines.Controls.csproj" />
-      <ProjectReference Include="..\Oasis_Pipelines\Oasis_Pipelines.csproj" />
-      <ProjectReference Include="..\Oasis_Pipelines.Operations\Oasis_Pipelines.Operations.csproj" />
+        <ProjectReference Include="..\Oasis_Pipelines.Controls\Oasis_Pipelines.Controls.csproj"/>
+        <ProjectReference Include="..\Oasis_Pipelines\Oasis_Pipelines.csproj"/>
+        <ProjectReference Include="..\Oasis_Pipelines.Operations\Oasis_Pipelines.Operations.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="MaterialDesignThemes" Version="5.3.2" />
+        <PackageReference Include="MaterialDesignThemes"/>
     </ItemGroup>
 </Project>

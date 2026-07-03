@@ -18,7 +18,7 @@ public class SessionManager : ISessionManager
 
     public ISessionContext CreateContext()
     {
-        ISessionContext newSession =  _sessionContextFactory
+        ISessionContext newSession = _sessionContextFactory
             .WithSessionTitle("Default Session")
             .Create();
 

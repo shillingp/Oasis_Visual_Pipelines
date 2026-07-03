@@ -32,7 +32,8 @@ public sealed class FiltersDataTypeItemsSourceConverter : IValueConverter
         throw new NotImplementedException();
     }
 
-    private readonly FilterFunctor[] stringFilters = [
+    private readonly FilterFunctor[] stringFilters =
+    [
         new FilterFunctor("Equals", "="),
         new FilterFunctor("Not equal", "<>"),
         new FilterFunctor("Contains", "LIKE '*___REPLACE___*'"),
@@ -43,7 +44,8 @@ public sealed class FiltersDataTypeItemsSourceConverter : IValueConverter
         new FilterFunctor("Does not end with", "NOT LIKE '*___REPLACE___'")
     ];
 
-    private readonly FilterFunctor[] numericFilters = [
+    private readonly FilterFunctor[] numericFilters =
+    [
         new FilterFunctor("Equals", "="),
         new FilterFunctor("Not equal", "<>"),
         new FilterFunctor("Less than", "<"),
@@ -52,7 +54,8 @@ public sealed class FiltersDataTypeItemsSourceConverter : IValueConverter
         new FilterFunctor("Greater than or equal", ">="),
     ];
 
-    private readonly FilterFunctor[] dateTimeFilters = [
+    private readonly FilterFunctor[] dateTimeFilters =
+    [
         new FilterFunctor("Equals", "= #___REPLACE___#"),
         new FilterFunctor("Not equal", "<> #___REPLACE___#"),
         new FilterFunctor("Less than", "< #___REPLACE___#"),

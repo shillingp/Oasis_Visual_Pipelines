@@ -14,13 +14,13 @@ public sealed class SelectColumnOperation : BlockOperation
 {
     public override string OperationTitle => "Select Column";
 
-    [DoNotReflowOnPropertyChanged]
-    public string[]? ValidColumns { get; set; } = null;
+    [DoNotReflowOnPropertyChanged] public string[]? ValidColumns { get; set; } = null;
     public ImmutableHashSet<object> SelectedColumns { get; set; } = ImmutableHashSet<object>.Empty;
 
     protected override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
     {
-        BlockOperationResult? dataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
+        BlockOperationResult? dataTableInput =
+            inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
 
         if (dataTableInput?.Result() is not DataTable dataTable)
         {

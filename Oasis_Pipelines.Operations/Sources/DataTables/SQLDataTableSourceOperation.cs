@@ -5,10 +5,8 @@ using Oasis_Pipelines.Operations.Classes;
 
 namespace Oasis_Pipelines.Operations.Sources.DataTables;
 
-
 public sealed class SQLDataTableSourceOperation : BlockOperation
 {
-
     public override string OperationTitle => "SQL Connection";
 
     // private readonly SQLConnectionSettingsDialog settingsDialog = new SQLConnectionSettingsDialog();

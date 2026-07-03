@@ -2,7 +2,6 @@
 
 namespace Oasis_Pipelines.Operations.Transforms.Strings;
 
-
 public sealed class ReplaceStringOperation : BlockOperation
 {
     public override string OperationTitle => "Replace String";

@@ -15,11 +15,13 @@ public sealed class StringContainsOperation : BlockOperation
         {
             IEnumerable<BlockOperationResult> allOperations = additionalOperations.Concat(inputOperations);
 
-            BlockOperationResult? textInputOperation = allOperations.FirstOrDefault(operation => operation.Result() is string);
+            BlockOperationResult? textInputOperation =
+                allOperations.FirstOrDefault(operation => operation.Result() is string);
             if (textInputOperation?.Result() is not string inputText)
                 return BlockOperationResult.NullOperation;
 
-            BlockOperationResult? searchTextOperation = allOperations.FirstOrDefault(operation => operation != textInputOperation);
+            BlockOperationResult? searchTextOperation =
+                allOperations.FirstOrDefault(operation => operation != textInputOperation);
             if (searchTextOperation?.Result() is not string searchText)
                 return inputText;
 

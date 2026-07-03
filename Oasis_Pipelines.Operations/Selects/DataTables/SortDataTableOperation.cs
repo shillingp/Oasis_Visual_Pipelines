@@ -4,7 +4,6 @@ using Oasis_Pipelines.Operations.Functions;
 
 namespace Oasis_Pipelines.Operations.Selects.DataTables;
 
-
 public sealed class SortDataTableOperation : BlockOperation
 {
     public override string OperationTitle => "Sort Table";
@@ -16,7 +15,8 @@ public sealed class SortDataTableOperation : BlockOperation
 
     protected override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
     {
-        BlockOperationResult? dataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
+        BlockOperationResult? dataTableInput =
+            inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
 
         if (dataTableInput?.Result() is not DataTable dataTable)
         {

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Oasis_Pipelines.Controls\Oasis_Pipelines.Controls.csproj" />
+        <ProjectReference Include="..\Oasis_Pipelines.Controls\Oasis_Pipelines.Controls.csproj"/>
     </ItemGroup>
 
 </Project>

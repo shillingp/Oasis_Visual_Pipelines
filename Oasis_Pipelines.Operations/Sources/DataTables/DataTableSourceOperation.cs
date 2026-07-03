@@ -5,10 +5,8 @@ using Oasis_Pipelines.Operations.Classes;
 
 namespace Oasis_Pipelines.Operations.Sources.DataTables;
 
-
 public sealed class DataTableSourceOperation : BlockOperation
 {
-
     public override string OperationTitle => "Table Source";
 
     public DataTable resultDataTable = new DataTable();

@@ -8,7 +8,7 @@ public class PipelineObjectTemplateSelector : DataTemplateSelector
 {
     public DataTemplate BlockTemplate { get; set; }
     public DataTemplate ConnectionTemplate { get; set; }
-    
+
     /// <inheritdoc />
     public override DataTemplate? SelectTemplate(object? item, DependencyObject container)
     {

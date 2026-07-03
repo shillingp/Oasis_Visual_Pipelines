@@ -19,11 +19,13 @@ public class GreaterThanOperation : BlockOperation
                 .Where(HelperFunctions.IsNumeric);
 
             BlockOperationResult? firstNumericResult = numbers.ElementAtOrDefault(0);
-            if (firstNumericResult is null || HelperFunctions.ConvertNumeric(firstNumericResult.Result()) is not double firstNumber)
+            if (firstNumericResult is null ||
+                HelperFunctions.ConvertNumeric(firstNumericResult.Result()) is not double firstNumber)
                 return BlockOperationResult.NullOperation;
 
             BlockOperationResult? secondNumericResult = numbers.ElementAtOrDefault(1);
-            if (secondNumericResult is null || HelperFunctions.ConvertNumeric(secondNumericResult.Result()) is not double secondNumber)
+            if (secondNumericResult is null ||
+                HelperFunctions.ConvertNumeric(secondNumericResult.Result()) is not double secondNumber)
                 return new BlockOperationResult(firstNumber);
 
             return firstNumber > secondNumber;

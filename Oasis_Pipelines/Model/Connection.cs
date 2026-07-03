@@ -1,9 +1,11 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using Oasis_Pipelines.Interfaces;
+using PropertyChanged;
 
 namespace Oasis_Pipelines.Model;
 
+[AddINotifyPropertyChangedInterface]
 public class Connection : IPipelineObject
 {
     [field: MaybeNull]
@@ -12,8 +14,10 @@ public class Connection : IPipelineObject
         get => field ?? LeftBlock.BlockTitle + "->" + RightBlock.BlockTitle;
         init;
     }
+
     public Block LeftBlock { get; set; }
     public Block RightBlock { get; set; }
+
     /// <inheritdoc />
     public PointF Position { get; set; }
 
@@ -28,5 +32,4 @@ public class Connection : IPipelineObject
     {
         ConnectionTitle = connectionTitle;
     }
-
 }

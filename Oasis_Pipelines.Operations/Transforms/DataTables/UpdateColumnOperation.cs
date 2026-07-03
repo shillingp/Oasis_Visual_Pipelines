@@ -4,7 +4,6 @@ using Oasis_Pipelines.Operations.Functions;
 
 namespace Oasis_Pipelines.Operations.Transforms.DataTables;
 
-
 public sealed class UpdateColumnOperation : BlockOperation
 {
     public override string OperationTitle => "Update Column";
@@ -15,8 +14,10 @@ public sealed class UpdateColumnOperation : BlockOperation
 
     protected override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
     {
-        BlockOperationResult? dataTableInput = inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
-        BlockOperationResult? updateFunctionInput = inputOperations.FirstOrDefault(operation => operation != dataTableInput);
+        BlockOperationResult? dataTableInput =
+            inputOperations.FirstOrDefault(operation => operation.Result() is DataTable);
+        BlockOperationResult? updateFunctionInput =
+            inputOperations.FirstOrDefault(operation => operation != dataTableInput);
 
         if (dataTableInput?.Result() is not DataTable dataTable)
             return BlockOperationResult.NullOperation;

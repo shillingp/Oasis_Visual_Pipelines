@@ -11,7 +11,9 @@ public sealed class DataTableFilter
 
     public string Value { get; set; } = string.Empty;
 
-    public DataTableFilter() { }
+    public DataTableFilter()
+    {
+    }
 
     public override string ToString()
     {
