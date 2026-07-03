@@ -29,7 +29,7 @@
             <ListView.ItemContainerStyle>
                 <Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    <Setter Property="Background" Value="{StaticResource MaterialDesignBackground}" />
+                    <Setter Property="Background" Value="{DynamicResource MaterialDesign.Brush.Card.Background}" />
                 </Style>
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>

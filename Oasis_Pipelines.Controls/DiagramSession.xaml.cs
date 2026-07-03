@@ -15,7 +15,7 @@ public partial class DiagramSession : UserControl
 
     public ISessionContext? SessionContext
     {
-        get => (ISessionContext)GetValue(SessionContextProperty);
+        get => (ISessionContext?)GetValue(SessionContextProperty);
         set => SetValue(SessionContextProperty, value);
     }
 
@@ -41,15 +41,5 @@ public partial class DiagramSession : UserControl
             return;
         
         diagramSession._viewModel.SessionContext = sessionContext;
-    }
-
-    private void Thumb_OnDragDelta(object sender, DragDeltaEventArgs e)
-    {
-        IPipelineObject? pipelineObject = (sender as Thumb)?.DataContext as IPipelineObject;
-        pipelineObject?.Position = new PointF
-        {
-            X = pipelineObject.Position.X + (float)e.HorizontalChange,
-            Y = pipelineObject.Position.Y + (float)e.VerticalChange
-        };
     }
 }

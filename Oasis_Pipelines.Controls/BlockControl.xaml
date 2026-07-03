@@ -1,24 +1,139 @@
 ﻿<UserControl
-    d:DataContext="{d:DesignInstance model:Block}"
-    d:DesignHeight="300"
-    d:DesignWidth="300"
-    mc:Ignorable="d"
     x:Class="Oasis_Pipelines.Controls.BlockControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Oasis_Pipelines.Controls"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:model="clr-namespace:Oasis_Pipelines.Model;assembly=Oasis_Pipelines"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    Width="200"
+    MinHeight="80"
+    MaxHeight="120"
+    d:DataContext="{d:DesignInstance local:BlockControlViewModel}"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary />
     </UserControl.Resources>
     <Grid
-        Height="40"
+        x:Name="RootGrid"
         Width="100"
-        x:Name="RootGrid">
+        Height="40">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="30" />
+        </Grid.ColumnDefinitions>
 
-        <ContentPresenter Content="{Binding Operation}" Margin="10,0" />
+        <materialDesign:Card
+            x:Name="TopLevelCard"
+            Grid.ColumnSpan="3"
+            Margin="15,0"
+            PreviewMouseDown="TopLevelCard_PreviewMouseDown"
+            SnapsToDevicePixels="True">
+            <materialDesign:Card.Style>
+                <Style TargetType="materialDesign:Card">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                            <Setter Property="materialDesign:ElevationAssist.Elevation" Value="Dp0" />
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect
+                                        BlurRadius="5"
+                                        Direction="270"
+                                        Opacity=".42"
+                                        RenderingBias="Performance"
+                                        ShadowDepth="1"
+                                        Color="Red" />
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </materialDesign:Card.Style>
+            <DockPanel>
+                <Border
+                    Background="{DynamicResource MaterialDesignPaper}"
+                    BorderBrush="LightGray"
+                    BorderThickness="0,0,0,1"
+                    CornerRadius="3,3,0,0"
+                    DockPanel.Dock="Top">
+                    <DockPanel>
+                        <Grid DockPanel.Dock="Left">
+                            <materialDesign:PackIcon
+                                VerticalAlignment="Center"
+                                Foreground="Gray"
+                                Kind="Drag" />
+                            <Thumb
+                                Grid.RowSpan="2"
+                                Cursor="SizeAll"
+                                DragDelta="Thumb_OnDragDelta" />
+                        </Grid>
+
+                        <Button
+                            VerticalAlignment="Center"
+                            Command="{Binding RemoveBlockCommand}"
+                            Content="{materialDesign:PackIcon Kind=Close}"
+                            DockPanel.Dock="Right"
+                            Style="{StaticResource MaterialDesignToolButton}" />
+
+                        <!--  <controls:EditableTextBox  -->
+                        <!--  Height="24"  -->
+                        <!--  VerticalAlignment="Center"  -->
+                        <!--  materialDesign:TextFieldAssist.UnderlineBrush="Transparent"  -->
+                        <!--  EditingStyle="{StaticResource MaterialDesignTextBoxBase}"  -->
+                        <!--  ReadOnlyStyle="{StaticResource NonEditableTextBox}"  -->
+                        <!--  Text="{Binding Title}" />  -->
+                    </DockPanel>
+                </Border>
+
+                <Button
+                    Height="12"
+                    Command="{Binding ToggleBlockHeightCommand}"
+                    Cursor="Hand"
+                    DockPanel.Dock="Bottom"
+                    Style="{x:Null}"
+                    Visibility="Collapsed">
+                    <!-- <Button.Visibility> -->
+                    <!--     <MultiBinding Converter="{StaticResource HeightExpanderButtonVisibilityConverter}"> -->
+                    <!--         <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType=local:BlockControl}" /> -->
+                    <!--         <Binding Path="MaxHeight" RelativeSource="{RelativeSource AncestorType=local:BlockControl}" /> -->
+                    <!--         <Binding Path="IsExpanded" RelativeSource="{RelativeSource AncestorType=local:BlockControl}" /> -->
+                    <!--     </MultiBinding> -->
+                    <!-- </Button.Visibility> -->
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border
+                                Background="{DynamicResource MaterialDesignPaper}"
+                                BorderBrush="LightGray"
+                                BorderThickness="0,1,0,0"
+                                CornerRadius="0,0,3,3">
+                                <Grid HorizontalAlignment="Center">
+                                    <materialDesign:PackIcon VerticalAlignment="Center">
+                                        <materialDesign:PackIcon.Style>
+                                            <Style TargetType="materialDesign:PackIcon">
+                                                <Setter Property="Kind" Value="TriangleSmallDown" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsExpanded}" Value="True">
+                                                        <Setter Property="Kind" Value="TriangleSmallUp" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </materialDesign:PackIcon.Style>
+                                    </materialDesign:PackIcon>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <ContentPresenter
+                    Margin="10,0"
+                    Content="{Binding Block.Operation, FallbackValue={x:Null}}"
+                    DockPanel.Dock="Bottom" />
+            </DockPanel>
+        </materialDesign:Card>
     </Grid>
     <!--   <UserControl.Resources> -->
     <!--       <ResourceDictionary> -->
@@ -61,113 +176,7 @@
     <!--       </Grid.ColumnDefinitions> -->
     <!--    -->
     <!--    -->
-    <!--  <material:Card  -->
-    <!--  x:Name="TopLevelCard"  -->
-    <!--  Grid.ColumnSpan="3"  -->
-    <!--  Margin="15,0"  -->
-    <!--  PreviewMouseDown="TopLevelCard_PreviewMouseDown"  -->
-    <!--  SnapsToDevicePixels="True">  -->
-    <!--           <material:Card.Style> -->
-    <!--               <Style TargetType="material:Card"> -->
-    <!--                   <Style.Triggers> -->
-    <!--                       <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=local:BlockControl}}" Value="True"> -->
-    <!--                           <Setter Property="material:ElevationAssist.Elevation" Value="Dp0" /> -->
-    <!--                           <Setter Property="Effect"> -->
-    <!--                               <Setter.Value> -->
-    <!--  <DropShadowEffect  -->
-    <!--  BlurRadius="5"  -->
-    <!--  Direction="270"  -->
-    <!--  Opacity=".42"  -->
-    <!--  RenderingBias="Performance"  -->
-    <!--  ShadowDepth="1"  -->
-    <!--  Color="Red" />  -->
-    <!--                               </Setter.Value> -->
-    <!--                           </Setter> -->
-    <!--                       </DataTrigger> -->
-    <!--                   </Style.Triggers> -->
-    <!--               </Style> -->
-    <!--           </material:Card.Style> -->
-    <!--           <DockPanel> -->
-    <!--  <Border  -->
-    <!--  Background="{DynamicResource MaterialDesignPaper}"  -->
-    <!--  BorderBrush="LightGray"  -->
-    <!--  BorderThickness="0,0,0,1"  -->
-    <!--  CornerRadius="3,3,0,0"  -->
-    <!--  DockPanel.Dock="Top">  -->
-    <!--                   <DockPanel> -->
-    <!--                       <Grid DockPanel.Dock="Left"> -->
-    <!--  <material:PackIcon  -->
-    <!--  VerticalAlignment="Center"  -->
-    <!--  Foreground="Gray"  -->
-    <!--  Kind="Drag" />  -->
-    <!--  <Thumb  -->
-    <!--  Grid.RowSpan="2"  -->
-    <!--  Cursor="SizeAll"  -->
-    <!--  Thumb.DragDelta="Thumb_DragDelta" />  -->
-    <!--                       </Grid> -->
-    <!--    -->
-    <!--  <Button  -->
-    <!--  VerticalAlignment="Center"  -->
-    <!--  Command="{Binding RemoveBlockCommand}"  -->
-    <!--  Content="{material:PackIcon Kind=Close}"  -->
-    <!--  DockPanel.Dock="Right"  -->
-    <!--  Style="{StaticResource MaterialDesignToolButton}" />  -->
-    <!--    -->
-    <!--  <controls:EditableTextBox  -->
-    <!--  Height="24"  -->
-    <!--  VerticalAlignment="Center"  -->
-    <!--  material:TextFieldAssist.UnderlineBrush="Transparent"  -->
-    <!--  EditingStyle="{StaticResource MaterialDesignTextBoxBase}"  -->
-    <!--  ReadOnlyStyle="{StaticResource NonEditableTextBox}"  -->
-    <!--  Text="{Binding Title}" />  -->
-    <!--                   </DockPanel> -->
-    <!--               </Border> -->
-    <!--    -->
-    <!--  <Button  -->
-    <!--  Height="12"  -->
-    <!--  Command="{Binding ToggleBlockHeightCommand, RelativeSource={RelativeSource AncestorType=local:BlockControl}}"  -->
-    <!--  Cursor="Hand"  -->
-    <!--  DockPanel.Dock="Bottom"  -->
-    <!--  Style="{x:Null}">  -->
-    <!--                   <Button.Visibility> -->
-    <!--                       <MultiBinding Converter="{StaticResource HeightExpanderButtonVisibilityConverter}"> -->
-    <!--                           <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType=local:BlockControl}" /> -->
-    <!--                           <Binding Path="MaxHeight" RelativeSource="{RelativeSource AncestorType=local:BlockControl}" /> -->
-    <!--                           <Binding Path="IsExpanded" RelativeSource="{RelativeSource AncestorType=local:BlockControl}" /> -->
-    <!--                       </MultiBinding> -->
-    <!--                   </Button.Visibility> -->
-    <!--                   <Button.Template> -->
-    <!--                       <ControlTemplate> -->
-    <!--  <Border  -->
-    <!--  Background="{DynamicResource MaterialDesignPaper}"  -->
-    <!--  BorderBrush="LightGray"  -->
-    <!--  BorderThickness="0,1,0,0"  -->
-    <!--  CornerRadius="0,0,3,3">  -->
-    <!--                               <Grid HorizontalAlignment="Center"> -->
-    <!--                                   <material:PackIcon VerticalAlignment="Center"> -->
-    <!--                                       <material:PackIcon.Style> -->
-    <!--                                           <Style TargetType="material:PackIcon"> -->
-    <!--                                               <Setter Property="Kind" Value="TriangleSmallDown" /> -->
-    <!--                                               <Style.Triggers> -->
-    <!--                                                   <DataTrigger Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=local:BlockControl}}" Value="True"> -->
-    <!--                                                       <Setter Property="Kind" Value="TriangleSmallUp" /> -->
-    <!--                                                   </DataTrigger> -->
-    <!--                                               </Style.Triggers> -->
-    <!--                                           </Style> -->
-    <!--                                       </material:PackIcon.Style> -->
-    <!--                                   </material:PackIcon> -->
-    <!--                               </Grid> -->
-    <!--                           </Border> -->
-    <!--                       </ControlTemplate> -->
-    <!--                   </Button.Template> -->
-    <!--               </Button> -->
-    <!--    -->
-    <!--  <ContentPresenter  -->
-    <!--  Grid.Row="1"  -->
-    <!--  Margin="10,0"  -->
-    <!--  Content="{Binding Data}" />  -->
-    <!--           </DockPanel> -->
-    <!--       </material:Card> -->
+
     <!--    -->
     <!--  <ItemsControl  -->
     <!--  x:Name="LeftConnectorsControl"  -->

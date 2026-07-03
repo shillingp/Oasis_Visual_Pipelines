@@ -17,29 +17,15 @@
     <UserControl.Resources>
         <converters:ConcatenatePipelineObjectsConverter x:Key="ConcatenateConverter" />
 
-        <!-- <DataTemplate x:Key="BlockDataTemplate"> -->
-        <!--  <Thumb  -->
-        <!--  Background="Red"  -->
-        <!--  DragDelta="Thumb_OnDragDelta"  -->
-        <!--  Height="100"  -->
-        <!--  Width="100" />  -->
-        <!-- </DataTemplate> -->
-
         <DataTemplate DataType="{x:Type models:Block}">
-            <!--  <Thumb  -->
-            <!--  Background="Red"  -->
-            <!--  DragDelta="Thumb_OnDragDelta"  -->
-            <!--  Height="100"  -->
-            <!--  Width="100" />  -->
-            <controls:BlockControl />
+            <controls:BlockControl Block="{Binding}" />
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type models:Connection}">
             <Thumb
                 Background="Blue"
-                DragDelta="Thumb_OnDragDelta"
-                Height="50"
-                Width="50" />
+                Height="5"
+                Width="5" />
         </DataTemplate>
 
         <!--  <templateSelectors:PipelineObjectTemplateSelector  -->

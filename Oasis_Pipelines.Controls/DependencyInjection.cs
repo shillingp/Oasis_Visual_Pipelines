@@ -8,6 +8,7 @@ public static class DependencyInjection
     {
         public IServiceCollection AddControls()
         {
+            services.AddTransient<BlockControlViewModel>();
             services.AddTransient<DiagramSessionManagerViewModel>();
             services.AddTransient<DiagramSessionViewModel>();
 
