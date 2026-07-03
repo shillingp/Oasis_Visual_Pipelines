@@ -7,7 +7,7 @@ public sealed class EnumValuesItemsSourceConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (parameter is Type param && param.IsEnum)
+        if (parameter is Type { IsEnum: true } param)
             return Enum.GetValues(param);
 
         return Binding.DoNothing;
