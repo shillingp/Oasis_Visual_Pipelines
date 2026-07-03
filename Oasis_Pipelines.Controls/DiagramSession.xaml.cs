@@ -33,7 +33,7 @@ public partial class DiagramSession : UserControl
         pipelineObject?.Position = new PointF
         {
             X = pipelineObject.Position.X + (float)e.HorizontalChange,
-            Y = pipelineObject.Position.Y - (float)e.VerticalChange
+            Y = pipelineObject.Position.Y + (float)e.VerticalChange
         };
     }
 }

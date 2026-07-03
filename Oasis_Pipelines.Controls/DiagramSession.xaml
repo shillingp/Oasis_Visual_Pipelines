@@ -15,7 +15,7 @@
     <UserControl.Resources>
         <converters:ConcatenatePipelineObjectsConverter x:Key="ConcatenateConverter" />
 
-        <DataTemplate x:Key="Thing1">
+        <DataTemplate x:Key="BlockDataTemplate">
             <Thumb
                 Background="Red"
                 DragDelta="Thumb_OnDragDelta"
@@ -23,7 +23,7 @@
                 Width="100" />
         </DataTemplate>
 
-        <DataTemplate x:Key="Thing2">
+        <DataTemplate x:Key="ConnectionDataTemplate">
             <Thumb
                 Background="Blue"
                 DragDelta="Thumb_OnDragDelta"
@@ -32,12 +32,17 @@
         </DataTemplate>
 
         <templateSelectors:PipelineObjectTemplateSelector
-            BlockTemplate="{StaticResource Thing1}"
-            ConnectionTemplate="{StaticResource Thing2}"
+            BlockTemplate="{StaticResource BlockDataTemplate}"
+            ConnectionTemplate="{StaticResource ConnectionDataTemplate}"
             x:Key="PipelineObjectTemplateSelector" />
     </UserControl.Resources>
     <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=controls:DiagramSession}}">
-        <ItemsControl DataContext="{Binding SessionContext}" ItemTemplateSelector="{StaticResource PipelineObjectTemplateSelector}">
+        <ItemsControl
+            Background="Gray"
+            DataContext="{Binding SessionContext}"
+            Height="500"
+            ItemTemplateSelector="{StaticResource PipelineObjectTemplateSelector}"
+            Width="500">
             <ItemsControl.ItemsSource>
                 <MultiBinding Converter="{StaticResource ConcatenateConverter}">
                     <Binding Path="BlockManager.AllBlocks" />
