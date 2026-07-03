@@ -22,17 +22,11 @@
             <XamlRuntime>Wpf</XamlRuntime>
             <SubType>Designer</SubType>
         </Page>
-        <Page Update="PipelineDiagram.xaml">
-            <Generator>MSBuild:Compile</Generator>
-            <XamlRuntime>Wpf</XamlRuntime>
-            <SubType>Designer</SubType>
-        </Page>
     </ItemGroup>
 
     <ItemGroup>
-        <Reference Include="Oasis_Visual_Pipelines.Operations">
-            <HintPath>..\Oasis_Visual_Pipelines.Operations\bin\Debug\net9.0-windows\Oasis_Visual_Pipelines.Operations.dll</HintPath>
-        </Reference>
+        <Compile Update="**\*ViewModel.cs">
+            <DependentUpon>$([System.String]::Copy('%(Filename)').Replace('ViewModel', '.xaml'))</DependentUpon>
+        </Compile>
     </ItemGroup>
-
 </Project>

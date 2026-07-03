@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:booleans="clr-namespace:Oasis_Pipelines.Operations.Aggregations.Booleans;assembly=Oasis_Pipelines.Operations"
+    xmlns:booleans="clr-namespace:Oasis_Pipelines.Operations.Operations.Aggregations.Booleans;assembly=Oasis_Pipelines.Operations"
     xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <DataTemplate DataType="{x:Type booleans:EqualToOperation}">

@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using Oasis_Pipelines.Controls.Classes;
 using Oasis_Pipelines.Services.SessionManagement;
 
 namespace Oasis_Pipelines.Controls;
@@ -9,22 +10,13 @@ namespace Oasis_Pipelines.Controls;
 /// </summary>
 public partial class DiagramSessionManager : UserControl
 {
-    public ISessionManager SessionManager
-    {
-        get { return (ISessionManager)GetValue(SessionManagerProperty); }
-        set { SetValue(SessionManagerProperty, value); }
-    }
-
-    public static readonly DependencyProperty SessionManagerProperty =
-        DependencyProperty.Register(
-            nameof(SessionManager),
-            typeof(ISessionManager),
-            typeof(DiagramSessionManager),
-            new FrameworkPropertyMetadata(null,
-                (d, e) => (d as DiagramSessionManager)?.SessionManager = (ISessionManager)e.NewValue));
+    private readonly DiagramSessionManagerViewModel _viewModel;
 
     public DiagramSessionManager()
     {
         InitializeComponent();
+        
+        _viewModel = ControlServiceProvider.GetRequiredService<DiagramSessionManagerViewModel>();
+        RootGrid.DataContext = _viewModel;
     }
 }

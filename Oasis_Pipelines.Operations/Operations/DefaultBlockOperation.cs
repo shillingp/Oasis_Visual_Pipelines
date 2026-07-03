@@ -1,0 +1,139 @@
+﻿using System.Linq.Expressions;
+using System.Reflection;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
+using Oasis_Pipelines.Operations.Attributes;
+using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
+
+namespace Oasis_Pipelines.Operations.Operations;
+
+[BlockOperationGroup(BlockOperationType.None, BlockOperationGrouping.Other)]
+public class DefaultBlockOperation : BlockOperation
+{
+    public override string OperationTitle => "Select Block";
+
+    public ICommand ChooseBlockTypeOperation { get; }
+
+    public DefaultBlockOperation()
+    {
+        ChooseBlockTypeOperation = new RelayCommand(ChooseBlockType);
+    }
+
+    protected override BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations)
+    {
+        return new BlockOperationResult(additionalOperations => null);
+    }
+
+    private void ChooseBlockType()
+    {
+        throw new NotImplementedException();
+    }
+
+    // private delegate T ObjectActivator<T>(params object[] args);
+    //
+    // private static ObjectActivator<T> GetActivator<T>(ConstructorInfo ctor)
+    // {
+    //     Type? type = ctor.DeclaringType;
+    //     ParameterInfo[] paramsInfo = ctor.GetParameters();
+    //
+    //     //create a single param of type object[]
+    //     ParameterExpression param =
+    //         Expression.Parameter(typeof(object[]), "args");
+    //
+    //     Expression[] argsExp =
+    //         new Expression[paramsInfo.Length];
+    //
+    //     //pick each arg from the params array 
+    //     //and create a typed expression of them
+    //     for (int i = 0; i < paramsInfo.Length; i++)
+    //     {
+    //         Expression index = Expression.Constant(i);
+    //         Type paramType = paramsInfo[i].ParameterType;
+    //
+    //         Expression paramAccessorExp =
+    //             Expression.ArrayIndex(param, index);
+    //
+    //         Expression paramCastExp =
+    //             Expression.Convert(paramAccessorExp, paramType);
+    //
+    //         argsExp[i] = paramCastExp;
+    //     }
+    //
+    //     //make a NewExpression that calls the
+    //     //ctor with the args we just created
+    //     NewExpression newExp = Expression.New(ctor, argsExp);
+    //
+    //     //create a lambda with the New
+    //     //Expression as body and our param object[] as arg
+    //     LambdaExpression lambda =
+    //         Expression.Lambda(typeof(ObjectActivator<T>), newExp, param);
+    //
+    //     //compile it
+    //     ObjectActivator<T> compiled = (ObjectActivator<T>)lambda.Compile();
+    //     return compiled;
+    // }
+    //
+    // private static IEnumerable<BlockControl> GenerateBlockControlInstancesForClassesDerivedFromTypeFaster(
+    //     Type blockOperationInterface)
+    // {
+    //     return AppDomain.CurrentDomain.GetAssemblies()
+    //         .SelectMany(assembly => assembly.GetTypes())
+    //         .Where(assemblyType => blockOperationInterface.IsAssignableFrom(assemblyType))
+    //         .Where(assemblyType => assemblyType.IsClass)
+    //         .Where(assemblyType => assemblyType != typeof(DefaultBlockDiagramOperation))
+    //         .Where(assemblyType => assemblyType != typeof(BaseBlockDiagramOperation))
+    //         .Select(operationType =>
+    //         {
+    //             Type genericBlockType = typeof(Block<>).MakeGenericType(operationType);
+    //             object? operationTypeInstance = Activator.CreateInstance(operationType);
+    //             if (operationTypeInstance is null) return null;
+    //
+    //             ConstructorInfo ctor = genericBlockType.GetConstructors().First();
+    //             ObjectActivator<object> createdActivator = GetActivator<object>(ctor);
+    //
+    //             return createdActivator(operationTypeInstance)!;
+    //         })
+    //         .Select(genericBlockOperationInstance =>
+    //         {
+    //             ConstructorInfo ctor = typeof(BlockControl).GetConstructors().First();
+    //             ObjectActivator<BlockControl> createdActivator = GetActivator<BlockControl>(ctor);
+    //
+    //             return createdActivator(genericBlockOperationInstance!);
+    //         });
+    // }
+
+    // private static object?[] GenerateBlockControlInstancesForClassesDerivedFromType(Type blockOperationInterface)
+    // {
+    //     if (blockOperationInterface is null) throw new ArgumentNullException(nameof(blockOperationInterface));
+    //
+    //     return AppDomain.CurrentDomain.GetAssemblies()
+    //         .SelectMany(assembly => assembly.GetTypes())
+    //         .Where(assemblyType => blockOperationInterface.IsAssignableFrom(assemblyType))
+    //         .Where(assemblyType => assemblyType.IsClass)
+    //         .Where(assemblyType => assemblyType != typeof(DefaultBlockDiagramOperation))
+    //         .Where(assemblyType => assemblyType != typeof(BaseBlockDiagramOperation))
+    //         .Select(operationType =>
+    //         {
+    //             Type genericBlockType = typeof(Block<>).MakeGenericType(operationType);
+    //             object? operationTypeInstance = Activator.CreateInstance(operationType);
+    //             if (operationTypeInstance is null) return null;
+    //
+    //             BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
+    //             object? genericBlockInstance = Activator.CreateInstance(
+    //                 type: genericBlockType,
+    //                 bindingAttr: flags,
+    //                 binder: null,
+    //                 args: [operationTypeInstance],
+    //                 culture: CultureInfo.CurrentCulture);
+    //             if (genericBlockInstance is null) return null;
+    //
+    //             ((Block)genericBlockInstance).Title = "Block";
+    //
+    //             return genericBlockInstance;
+    //         })
+    //         .Select(genericBlockOperationInstance =>
+    //             Activator.CreateInstance(typeof(BlockControl), genericBlockOperationInstance))
+    //         .ToArray();
+    // }
+}

@@ -10,6 +10,7 @@
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
         <PackageReference Include="ExcelDataReader.DataSet"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
         <PackageReference Include="OneOf"/>
     </ItemGroup>
 

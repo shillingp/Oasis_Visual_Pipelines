@@ -3,7 +3,7 @@
     xmlns:controls="clr-namespace:Oasis_Pipelines.Controls;assembly=Oasis_Pipelines.Controls"
     xmlns:converters="clr-namespace:Oasis_Pipelines.Operations.Wpf.Converters"
     xmlns:globals="clr-namespace:Oasis_Pipelines.Globals;assembly=Oasis_Pipelines"
-    xmlns:local="clr-namespace:Oasis_Pipelines.Operations.Transforms.DateTimes;assembly=Oasis_Pipelines.Operations"
+    xmlns:local="clr-namespace:Oasis_Pipelines.Operations.Operations.Transforms.DateTimes;assembly=Oasis_Pipelines.Operations"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <DataTemplate DataType="{x:Type local:DateTimeOffsetOperation}">
         <DataTemplate.Resources>

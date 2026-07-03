@@ -1,5 +1,4 @@
 ﻿<Application
-    StartupUri="MainWindow.xaml"
     x:Class="Oasis_Pipelines.Demo.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:local="clr-namespace:Oasis_Pipelines.Demo"

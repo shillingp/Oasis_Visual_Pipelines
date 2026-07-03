@@ -9,7 +9,7 @@ public class SessionManager : ISessionManager
     public ICollection<ISessionContext> ActiveSessions { get; set; } = [];
 
     /// <inheritdoc />
-    public ISessionContext CurrentSession { get; set; }
+    public ISessionContext? CurrentSession { get; set; }
 
     public SessionManager(ISessionContextFactory sessionContextFactory)
     {
@@ -23,6 +23,7 @@ public class SessionManager : ISessionManager
             .Create();
 
         ActiveSessions.Add(newSession);
+        CurrentSession ??= newSession;
 
         return newSession;
     }

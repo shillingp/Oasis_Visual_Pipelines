@@ -1,0 +1,15 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:controls="clr-namespace:Oasis_Pipelines.Controls;assembly=Oasis_Pipelines.Controls"
+    xmlns:operations="clr-namespace:Oasis_Pipelines.Operations.Operations;assembly=Oasis_Pipelines.Operations"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataTemplate DataType="{x:Type operations:DefaultBlockOperation}">
+        <Button
+            Command="{Binding ChooseBlockTypeCommand}"
+            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=controls:BlockControl}}"
+            Content="Choose Block"
+            HorizontalAlignment="Center"
+            Style="{StaticResource MaterialDesignRaisedAccentButton}"
+            VerticalAlignment="Center" />
+    </DataTemplate>
+</ResourceDictionary>

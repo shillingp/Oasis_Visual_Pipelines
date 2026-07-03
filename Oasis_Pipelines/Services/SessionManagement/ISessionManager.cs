@@ -4,7 +4,7 @@ public interface ISessionManager
 {
     ICollection<ISessionContext> ActiveSessions { get; set; }
 
-    public ISessionContext CurrentSession { get; set; }
+    public ISessionContext? CurrentSession { get; set; }
 
     ISessionContext CreateContext();
 

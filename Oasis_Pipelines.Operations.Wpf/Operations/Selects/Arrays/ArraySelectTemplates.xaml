@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:arrays="clr-namespace:Oasis_Pipelines.Operations.Selects.Arrays;assembly=Oasis_Pipelines.Operations"
+    xmlns:arrays="clr-namespace:Oasis_Pipelines.Operations.Operations.Selects.Arrays;assembly=Oasis_Pipelines.Operations"
     xmlns:controls="clr-namespace:Oasis_Pipelines.Controls;assembly=Oasis_Pipelines.Controls"
     xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">

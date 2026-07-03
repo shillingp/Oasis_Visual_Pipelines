@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:dataTables="clr-namespace:Oasis_Pipelines.Operations.Joins.DataTables;assembly=Oasis_Pipelines.Operations"
+    xmlns:dataTables="clr-namespace:Oasis_Pipelines.Operations.Operations.Joins.DataTables;assembly=Oasis_Pipelines.Operations"
     xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <DataTemplate DataType="{x:Type dataTables:ConcatDataTablesOperation}">
