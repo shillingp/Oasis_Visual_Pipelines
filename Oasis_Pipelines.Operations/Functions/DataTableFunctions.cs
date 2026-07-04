@@ -110,9 +110,9 @@ public static class DataTableFunctions
 
         using FileStream stream = File.Open(sourceFilePath, FileMode.Open, FileAccess.Read);
         using IExcelDataReader reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-        DataSet dataset = reader.AsDataSet(new ExcelDataSetConfiguration()
+        DataSet dataset = reader.AsDataSet(new ExcelDataSetConfiguration
         {
-            ConfigureDataTable = _ => new ExcelDataTableConfiguration()
+            ConfigureDataTable = _ => new ExcelDataTableConfiguration
             {
                 UseHeaderRow = true,
             }

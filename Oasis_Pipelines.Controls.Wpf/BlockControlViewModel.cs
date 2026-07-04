@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Oasis_Pipelines.Model;
 using Oasis_Pipelines.Services.SessionManagement;
 
-namespace Oasis_Pipelines.Controls;
+namespace Oasis_Pipelines.Controls.Wpf;
 
 public class BlockControlViewModel
 {

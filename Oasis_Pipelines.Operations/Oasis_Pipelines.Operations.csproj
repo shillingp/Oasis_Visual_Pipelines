@@ -10,14 +10,16 @@
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
         <PackageReference Include="ExcelDataReader.DataSet"/>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
         <PackageReference Include="OneOf"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Reference Include="Oasis_Visual_Pipelines">
-            <HintPath>..\Oasis_Visual_Pipelines\bin\Debug\net9.0-windows\Oasis_Visual_Pipelines.dll</HintPath>
-        </Reference>
+        <Reference Include="Oasis_Visual_Pipelines"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Oasis_Pipelines.Shared\Oasis_Pipelines.Shared.csproj" />
     </ItemGroup>
 
 </Project>

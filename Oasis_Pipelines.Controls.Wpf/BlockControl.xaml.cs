@@ -3,10 +3,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using Oasis_Pipelines.Controls.Classes;
+using Oasis_Pipelines.Controls.Wpf.Classes;
 using Oasis_Pipelines.Model;
 
-namespace Oasis_Pipelines.Controls;
+namespace Oasis_Pipelines.Controls.Wpf;
 
 public partial class BlockControl : UserControl
 {

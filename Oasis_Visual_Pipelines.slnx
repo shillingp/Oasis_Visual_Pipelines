@@ -4,10 +4,12 @@
         <File Path="Directory.Packages.props" />
         <File Path="Directory.Build.props" />
     </Folder>
-    <Project Path="Oasis_Pipelines.Shared.Wpf/Oasis_Pipelines.Shared.Wpf.csproj" />
     <Project Path="Oasis_Pipelines/Oasis_Pipelines.csproj" />
-    <Project Path="Oasis_Pipelines.Controls/Oasis_Pipelines.Controls.csproj" />
+    <Project Path="Oasis_Pipelines.Controls.Wpf/Oasis_Pipelines.Controls.Wpf.csproj" />
     <Project Path="Oasis_Pipelines.Demo/Oasis_Pipelines.Demo.csproj" />
+    <Project Path="Oasis_Pipelines.Dialogs.Wpf/Oasis_Pipelines.Dialogs.Wpf.csproj" />
     <Project Path="Oasis_Pipelines.Operations.Wpf/Oasis_Pipelines.Operations.Wpf.csproj" />
     <Project Path="Oasis_Pipelines.Operations/Oasis_Pipelines.Operations.csproj" />
+    <Project Path="Oasis_Pipelines.Shared/Oasis_Pipelines.Shared.csproj" />
+    <Project Path="Oasis_Pipelines.Shared.Wpf/Oasis_Pipelines.Shared.Wpf.csproj" />
 </Solution>

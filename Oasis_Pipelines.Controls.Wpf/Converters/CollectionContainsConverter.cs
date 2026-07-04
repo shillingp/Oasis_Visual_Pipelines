@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows.Data;
 
-namespace Oasis_Pipelines.Controls.Converters;
+namespace Oasis_Pipelines.Controls.Wpf.Converters;
 
 public sealed class CollectionContainsConverter : IMultiValueConverter
 {

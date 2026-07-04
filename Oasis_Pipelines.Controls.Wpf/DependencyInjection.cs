@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Oasis_Pipelines.Controls;
+namespace Oasis_Pipelines.Controls.Wpf;
 
 public static class DependencyInjection
 {

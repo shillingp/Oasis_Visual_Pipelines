@@ -23,12 +23,17 @@
     <ItemGroup>
       <PackageReference Include="CommunityToolkit.Mvvm" />
       <PackageReference Include="MaterialDesignThemes" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
     </ItemGroup>
 
     <ItemGroup>
       <Reference Include="MaterialDesignThemes.Wpf">
         <HintPath>..\..\..\..\.nuget\packages\materialdesignthemes\5.3.2\lib\net10.0-windows7.0\MaterialDesignThemes.Wpf.dll</HintPath>
       </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Oasis_Pipelines.Shared\Oasis_Pipelines.Shared.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,12 +1,13 @@
 ﻿using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Oasis_Pipelines.Controls;
+using Oasis_Pipelines.Controls.Wpf;
 using Oasis_Pipelines.Operations;
 using Oasis_Pipelines.Services.BlockCalculation;
 using Oasis_Pipelines.Services.BlockManagement;
 using Oasis_Pipelines.Services.ConnectionManagement;
 using Oasis_Pipelines.Services.SessionManagement;
+using Oasis_Pipelines.Shared.Wpf;
 
 namespace Oasis_Pipelines.Demo;
 
@@ -29,6 +30,7 @@ public partial class App : Application
 
             services.AddBlockOperations();
             services.AddControls();
+            services.AddSharedWpf();
 
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<MainWindow>();

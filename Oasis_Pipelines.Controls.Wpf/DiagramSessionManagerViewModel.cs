@@ -1,7 +1,7 @@
 ﻿using Oasis_Pipelines.Services.SessionManagement;
 using PropertyChanged;
 
-namespace Oasis_Pipelines.Controls;
+namespace Oasis_Pipelines.Controls.Wpf;
 
 [AddINotifyPropertyChangedInterface]
 public class DiagramSessionManagerViewModel

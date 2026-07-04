@@ -1,10 +1,10 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:controls="clr-namespace:Oasis_Pipelines.Controls;assembly=Oasis_Pipelines.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Oasis_Pipelines.Controls.Wpf;assembly=Oasis_Pipelines.Controls.Wpf"
     xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:numbers="clr-namespace:Oasis_Pipelines.Operations.Operations.Sources.Numbers;assembly=Oasis_Pipelines.Operations"
-    xmlns:wpf="clr-namespace:Oasis_Pipelines.Shared.Wpf;assembly=Oasis_Pipelines.Shared.Wpf"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:wpf="clr-namespace:Oasis_Pipelines.Shared.Wpf;assembly=Oasis_Pipelines.Shared.Wpf">
     <DataTemplate DataType="{x:Type numbers:NumberSourceOperation}">
         <DockPanel>
             <TextBlock

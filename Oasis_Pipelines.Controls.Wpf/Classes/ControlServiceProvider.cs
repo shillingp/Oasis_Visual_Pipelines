@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Oasis_Pipelines.Controls.Classes;
+namespace Oasis_Pipelines.Controls.Wpf.Classes;
 
 internal static class ControlServiceProvider
 {

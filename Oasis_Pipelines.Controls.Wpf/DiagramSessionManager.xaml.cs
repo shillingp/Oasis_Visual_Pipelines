@@ -1,9 +1,9 @@
 using System.Windows;
 using System.Windows.Controls;
-using Oasis_Pipelines.Controls.Classes;
+using Oasis_Pipelines.Controls.Wpf.Classes;
 using Oasis_Pipelines.Services.SessionManagement;
 
-namespace Oasis_Pipelines.Controls;
+namespace Oasis_Pipelines.Controls.Wpf;
 
 /// <summary>
 /// Interaction logic for UserControl1.xaml

@@ -3,7 +3,7 @@ using System.Windows.Data;
 using Oasis_Pipelines.Interfaces;
 using Oasis_Pipelines.Model;
 
-namespace Oasis_Pipelines.Controls.Converters;
+namespace Oasis_Pipelines.Controls.Wpf.Converters;
 
 [ValueConversion(typeof(object[]), typeof(IPipelineObject))]
 public class ConcatenatePipelineObjectsConverter : IMultiValueConverter

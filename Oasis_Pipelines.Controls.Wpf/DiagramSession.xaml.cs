@@ -3,11 +3,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using Oasis_Pipelines.Controls.Classes;
+using Oasis_Pipelines.Controls.Wpf.Classes;
 using Oasis_Pipelines.Interfaces;
 using Oasis_Pipelines.Services.SessionManagement;
 
-namespace Oasis_Pipelines.Controls;
+namespace Oasis_Pipelines.Controls.Wpf;
 
 public partial class DiagramSession : UserControl
 {

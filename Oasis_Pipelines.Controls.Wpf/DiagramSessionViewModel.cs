@@ -1,37 +1,33 @@
 ﻿using System.Reflection;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
 using Oasis_Pipelines.Operations;
 using Oasis_Pipelines.Operations.Attributes;
 using Oasis_Pipelines.Operations.Enums;
 using Oasis_Pipelines.Services.SessionManagement;
 using PropertyChanged;
 
-namespace Oasis_Pipelines.Controls;
+namespace Oasis_Pipelines.Controls.Wpf;
 
 [AddINotifyPropertyChangedInterface]
 public class DiagramSessionViewModel
 {
-    private readonly IEnumerable<BlockOperation> _blockOperations;
+    private readonly BlockOperation _defaultBlockOperation;
 
     public ISessionContext? SessionContext { get; set; }
     public ICommand AddBlockCommand { get; }
 
-    public DiagramSessionViewModel(IEnumerable<BlockOperation> blockOperations)
+    public DiagramSessionViewModel(
+        [FromKeyedServices(BlockOperationGrouping.Other)] BlockOperation defaultBlockOperation)
     {
-        _blockOperations = blockOperations;
+        _defaultBlockOperation = defaultBlockOperation;
 
         AddBlockCommand = new RelayCommand<MouseButtonEventArgs>(AddBlock);
     }
 
     private void AddBlock(MouseButtonEventArgs? e)
     {
-        BlockOperation defaultBlockOperation = _blockOperations.First(block =>
-            block.GetType().GetCustomAttribute<BlockOperationGroupAttribute>() is
-            {
-                TypeGroup: BlockOperationType.None,
-                OperationGroup: BlockOperationGrouping.Other
-            });
-        SessionContext?.BlockManager.AddBlock(defaultBlockOperation);
+        SessionContext?.BlockManager.AddBlock(_defaultBlockOperation);
     }
 }
