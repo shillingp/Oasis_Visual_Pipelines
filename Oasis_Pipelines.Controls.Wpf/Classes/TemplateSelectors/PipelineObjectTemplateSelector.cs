@@ -6,8 +6,8 @@ namespace Oasis_Pipelines.Controls.Wpf.Classes.TemplateSelectors;
 
 public class PipelineObjectTemplateSelector : DataTemplateSelector
 {
-    public DataTemplate BlockTemplate { get; set; }
-    public DataTemplate ConnectionTemplate { get; set; }
+    public DataTemplate? BlockTemplate { get; set; }
+    public DataTemplate? ConnectionTemplate { get; set; }
 
     /// <inheritdoc />
     public override DataTemplate? SelectTemplate(object? item, DependencyObject container)

@@ -21,7 +21,7 @@ public sealed class FiltersDataTypeItemsSourceConverter : IValueConverter
             case not null when tableColumnType == typeof(float):
                 return _numericFilters;
             case not null when tableColumnType == typeof(DateTime):
-                return dateTimeFilters;
+                return _dateTimeFilters;
             default:
                 return Array.Empty<FilterFunctor>();
         }
@@ -54,7 +54,7 @@ public sealed class FiltersDataTypeItemsSourceConverter : IValueConverter
         new FilterFunctor("Greater than or equal", ">="),
     ];
 
-    private readonly FilterFunctor[] dateTimeFilters =
+    private readonly FilterFunctor[] _dateTimeFilters =
     [
         new FilterFunctor("Equals", "= #___REPLACE___#"),
         new FilterFunctor("Not equal", "<> #___REPLACE___#"),

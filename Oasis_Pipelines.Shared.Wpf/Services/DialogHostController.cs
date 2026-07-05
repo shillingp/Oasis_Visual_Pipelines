@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.DependencyInjection;
+using Oasis_Pipelines.Shared.Interfaces;
 using Oasis_Pipelines.Shared.Wpf.Extensions;
 
 namespace Oasis_Pipelines.Shared.Wpf.Services;
@@ -16,13 +17,23 @@ public class DialogHostController : IDialogHostController
     }
 
     public async Task<object?> CreateAndShowDialog<TDialogViewModel>()
-        where TDialogViewModel : IDialogViewModel
+        where TDialogViewModel : IDialog
     {
-        Type viewType = typeof(IDialogViewModel<TDialogViewModel>).GetGenericArguments()[0];
+        try
+        {
+            IDialog dialog = _serviceProvider.GetRequiredService<TDialogViewModel>();
 
-        FrameworkElement dialogView = (FrameworkElement)ActivatorUtilities.CreateInstance(_serviceProvider, viewType)!;
+            if (dialog is not FrameworkElement dialogView)
+                throw new InvalidOperationException(
+                    $"Dialog type '{typeof(IDialog).FullName}' must resolve to a WPF FrameworkElement.");
 
-        return await CreateDialog(dialogView).ShowDialog(dialogView);
+            return await CreateDialog(dialogView).ShowDialog(dialogView);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
     private static DialogHost CreateDialog<TView>(

@@ -12,7 +12,6 @@ public abstract class BlockOperation
     /// <summary>
     /// Execute the operation using <paramref name="inputOperations"/> to generate an aggregate result
     /// </summary>
-    /// <param name="calculationId"></param>
     /// <param name="inputOperations"></param>
     /// <returns></returns>
     protected abstract BlockOperationResult ExecuteOperation(params BlockOperationResult[] inputOperations);

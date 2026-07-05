@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Oasis_Pipelines.Controls.Wpf;
+using Oasis_Pipelines.Dialogs.Wpf;
 using Oasis_Pipelines.Operations;
 using Oasis_Pipelines.Services.BlockCalculation;
 using Oasis_Pipelines.Services.BlockManagement;
@@ -16,7 +17,7 @@ namespace Oasis_Pipelines.Demo;
 /// </summary>
 public partial class App : Application
 {
-    public static readonly IHost Host = Microsoft.Extensions.Hosting.Host
+    private readonly IHost _host = Host
         .CreateDefaultBuilder()
         .ConfigureServices((_, services) =>
         {
@@ -28,9 +29,11 @@ public partial class App : Application
             services.AddSingleton<ISessionManager, SessionManager>();
             services.AddSingleton<ISessionContextFactory, SessionContextFactory>();
 
-            services.AddBlockOperations();
             services.AddControls();
+            services.AddDialogs();
+            services.AddOperations();
             services.AddSharedWpf();
+
 
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<MainWindow>();
@@ -42,18 +45,18 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
-        Host.Start();
+        _host.Start();
 
-        Resources["Services"] = Host.Services;
+        Resources["Services"] = _host.Services;
         
-        MainWindow mainWindow = Host.Services.GetRequiredService<MainWindow>();
+        MainWindow mainWindow = _host.Services.GetRequiredService<MainWindow>();
         mainWindow.Show();
     }
 
     /// <inheritdoc />
     protected override void OnExit(ExitEventArgs e)
     {
-        Host.Dispose();
+        _host.Dispose();
 
         base.OnExit(e);
     }

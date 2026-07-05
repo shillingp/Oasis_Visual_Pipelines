@@ -9,7 +9,6 @@
     xmlns:interfaces="clr-namespace:Oasis_Pipelines.Interfaces;assembly=Oasis_Pipelines"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:Oasis_Pipelines.Model;assembly=Oasis_Pipelines"
-    xmlns:templateSelectors="clr-namespace:Oasis_Pipelines.Controls.Wpf.Classes.TemplateSelectors"
     d:DataContext="{d:DesignInstance controls:DiagramSessionViewModel}"
     d:Height="450"
     d:Width="800"

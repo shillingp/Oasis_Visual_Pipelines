@@ -11,6 +11,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Oasis_Pipelines.Controls.Wpf\Oasis_Pipelines.Controls.Wpf.csproj" />
+        <ProjectReference Include="..\Oasis_Pipelines.Dialogs.Wpf\Oasis_Pipelines.Dialogs.Wpf.csproj" />
         <ProjectReference Include="..\Oasis_Pipelines.Shared.Wpf\Oasis_Pipelines.Shared.Wpf.csproj" />
         <ProjectReference Include="..\Oasis_Pipelines\Oasis_Pipelines.csproj"/>
         <ProjectReference Include="..\Oasis_Pipelines.Operations\Oasis_Pipelines.Operations.csproj"/>

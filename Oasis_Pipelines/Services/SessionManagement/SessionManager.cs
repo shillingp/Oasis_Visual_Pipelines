@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-namespace Oasis_Pipelines.Services.SessionManagement;
+﻿namespace Oasis_Pipelines.Services.SessionManagement;
 
 public class SessionManager : ISessionManager
 {

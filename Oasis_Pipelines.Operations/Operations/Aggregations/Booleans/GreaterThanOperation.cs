@@ -14,9 +14,10 @@ public class GreaterThanOperation : BlockOperation
     {
         return new BlockOperationResult(additionalOperations =>
         {
-            IEnumerable<BlockOperationResult> numbers = additionalOperations
+            BlockOperationResult[] numbers = additionalOperations
                 .Concat(inputOperations)
-                .Where(HelperFunctions.IsNumeric);
+                .Where(HelperFunctions.IsNumeric)
+                .ToArray();
 
             BlockOperationResult? firstNumericResult = numbers.ElementAtOrDefault(0);
             if (firstNumericResult is null ||

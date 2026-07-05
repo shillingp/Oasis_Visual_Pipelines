@@ -1,12 +1,8 @@
-﻿using Oasis_Pipelines.Dialogs.Wpf;
-using Oasis_Pipelines.Shared;
+﻿namespace Oasis_Pipelines.Dialogs.Wpf;
 
-namespace Oasis_Pipelines.Dialogs;
-
-public class BlockPickerViewModel : IDialogViewModel<BlockPicker>
+public class BlockPickerViewModel
 {
     public BlockPickerViewModel()
     {
-        
     }
 }

@@ -5,9 +5,12 @@
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
         <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>Oasis_Pipelines.Dialogs.Wpf</RootNamespace>
+        <AssemblyName>Oasis_Pipelines.Dialogs.Wpf</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Oasis_Pipelines.Operations\Oasis_Pipelines.Operations.csproj" />
       <ProjectReference Include="..\Oasis_Pipelines.Shared\Oasis_Pipelines.Shared.csproj" />
     </ItemGroup>
 
@@ -15,6 +18,10 @@
         <Compile Update="**\*ViewModel.cs">
             <DependentUpon>$([System.String]::Copy('%(Filename)').Replace('ViewModel', '.xaml'))</DependentUpon>
         </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
     </ItemGroup>
 
 </Project>

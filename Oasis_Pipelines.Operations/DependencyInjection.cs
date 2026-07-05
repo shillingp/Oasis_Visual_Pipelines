@@ -9,7 +9,7 @@ public static class DependencyInjection
 {
     extension(IServiceCollection services)
     {
-        public IServiceCollection AddBlockOperations()
+        public IServiceCollection AddOperations()
         {
             IEnumerable<Type> blockOperationTypes = Assembly
                 .GetAssembly(typeof(BlockOperation))!
@@ -23,7 +23,7 @@ public static class DependencyInjection
                 services.AddTransient<BlockOperation>(serviceProvider =>
                     (BlockOperation)ActivatorUtilities.CreateInstance(serviceProvider, blockOperationType));
 
-            services.AddKeyedTransient<BlockOperation>(BlockOperationGrouping.Other, (serviceProvider, key) =>
+            services.AddKeyedTransient<BlockOperation>(BlockOperationGrouping.Other, (serviceProvider, _) =>
                 ActivatorUtilities.CreateInstance<DefaultBlockOperation>(serviceProvider));
 
             return services;

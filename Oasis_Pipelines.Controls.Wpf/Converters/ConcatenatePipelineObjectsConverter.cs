@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using System.Windows.Data;
 using Oasis_Pipelines.Interfaces;
-using Oasis_Pipelines.Model;
 
 namespace Oasis_Pipelines.Controls.Wpf.Converters;
 

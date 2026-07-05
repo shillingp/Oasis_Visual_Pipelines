@@ -13,7 +13,9 @@ public sealed class StringContainsOperation : BlockOperation
     {
         return new BlockOperationResult(additionalOperations =>
         {
-            IEnumerable<BlockOperationResult> allOperations = additionalOperations.Concat(inputOperations);
+            BlockOperationResult[] allOperations = additionalOperations
+                .Concat(inputOperations)
+                .ToArray();
 
             BlockOperationResult? textInputOperation =
                 allOperations.FirstOrDefault(operation => operation.Result() is string);

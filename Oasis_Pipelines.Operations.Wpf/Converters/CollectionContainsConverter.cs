@@ -7,7 +7,7 @@ public sealed class CollectionContainsConverter : IMultiValueConverter
 {
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
-        if (values[0] is not IEnumerable<object> collection || values[1] is not object item)
+        if (values[0] is not IEnumerable<object> collection || values[1] is not { } item)
             return false;
 
         return collection.Contains(item);

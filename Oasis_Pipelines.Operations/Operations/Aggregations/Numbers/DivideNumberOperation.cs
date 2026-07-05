@@ -13,13 +13,14 @@ public sealed class DivideNumberOperation : BlockOperation
     {
         return new BlockOperationResult((additionalOperations) =>
         {
-            IEnumerable<BlockOperationResult> allOperations = additionalOperations
-                .Concat(inputOperations);
+            BlockOperationResult[] allOperations = additionalOperations
+                .Concat(inputOperations)
+                .ToArray();
 
             return allOperations
                 .Skip(1)
                 .Aggregate(
-                    (double)allOperations.First().Result(),
+                    allOperations[0].Result() is double seed ? seed : 0,
                     (total, item) => total + item.Result());
         });
     }
