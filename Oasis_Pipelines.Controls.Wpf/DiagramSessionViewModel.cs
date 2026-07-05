@@ -17,7 +17,8 @@ public class DiagramSessionViewModel
     public ICommand AddBlockCommand { get; }
 
     public DiagramSessionViewModel(
-        [FromKeyedServices(BlockOperationGrouping.Other)] BlockOperation defaultBlockOperation)
+        [FromKeyedServices(BlockOperationGrouping.Other)]
+        BlockOperation defaultBlockOperation)
     {
         _defaultBlockOperation = defaultBlockOperation;
 

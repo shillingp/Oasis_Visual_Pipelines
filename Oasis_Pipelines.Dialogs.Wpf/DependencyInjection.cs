@@ -11,7 +11,7 @@ public static class DependencyInjection
         {
             services.AddTransient<IBlockPicker, BlockPicker>();
             services.AddTransient<BlockPickerViewModel>();
-            
+
             return services;
         }
     }

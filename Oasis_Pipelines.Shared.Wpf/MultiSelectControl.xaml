@@ -1,31 +1,31 @@
 ﻿<UserControl
-    d:Background="White"
-    d:DesignHeight="80"
-    d:DesignWidth="180"
-    mc:Ignorable="d"
     x:Class="Oasis_Pipelines.Shared.Wpf.MultiSelectControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="clr-namespace:Oasis_Pipelines.Shared.Wpf.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wpf="clr-namespace:Oasis_Pipelines.Shared.Wpf"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    d:Background="White"
+    d:DesignHeight="80"
+    d:DesignWidth="180"
+    mc:Ignorable="d">
     <UserControl.Resources>
         <converters:CollectionContainsConverter x:Key="CollectionContainsConverter" />
     </UserControl.Resources>
     <Grid MinHeight="30">
         <TextBlock
             HorizontalAlignment="Center"
+            VerticalAlignment="Center"
             Style="{StaticResource MaterialDesignCharacterCounterTextBlock}"
-            Text="No Table Input"
-            VerticalAlignment="Center" />
+            Text="No Table Input" />
         <ListView
-            ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=wpf:MultiSelectControl}, Path=ItemsSource}"
+            x:Name="ItemSelectionListView"
             MaxHeight="100"
-            ScrollViewer.CanContentScroll="False"
-            SelectionMode="Extended"
             d:ItemsSource="{d:SampleData ItemCount=5}"
-            x:Name="ItemSelectionListView">
+            ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=wpf:MultiSelectControl}, Path=ItemsSource}"
+            ScrollViewer.CanContentScroll="False"
+            SelectionMode="Extended">
             <ListView.ItemContainerStyle>
                 <Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -35,10 +35,10 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <CheckBox
+                        VerticalAlignment="Center"
                         Checked="CheckBox_Checked"
                         Content="{Binding}"
-                        Unchecked="CheckBox_Unchecked"
-                        VerticalAlignment="Center">
+                        Unchecked="CheckBox_Unchecked">
                         <CheckBox.IsChecked>
                             <MultiBinding Converter="{StaticResource CollectionContainsConverter}" Mode="OneWay">
                                 <Binding Path="SelectedItems" RelativeSource="{RelativeSource AncestorType=wpf:MultiSelectControl}" />

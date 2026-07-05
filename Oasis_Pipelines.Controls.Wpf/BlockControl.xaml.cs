@@ -11,7 +11,7 @@ namespace Oasis_Pipelines.Controls.Wpf;
 public partial class BlockControl : UserControl
 {
     private readonly BlockControlViewModel _viewModel;
-    
+
     public Block? Block
     {
         get => (Block?)GetValue(BlockProperty);
@@ -37,7 +37,7 @@ public partial class BlockControl : UserControl
     {
         if (d is not BlockControl blockControl || e.NewValue is not Block block)
             return;
-        
+
         blockControl._viewModel.Block = block;
     }
 

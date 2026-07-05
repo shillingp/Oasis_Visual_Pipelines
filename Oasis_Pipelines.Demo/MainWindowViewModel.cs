@@ -12,7 +12,7 @@ public class MainWindowViewModel
     public MainWindowViewModel(ISessionManager sessionManager)
     {
         ISessionContext sessionContext = sessionManager.CreateContext();
-        
+
         Block blockA = sessionContext.BlockManager.AddBlock("Input A", new NumberSourceOperation { NumberValue = 10d });
         Block blockB = sessionContext.BlockManager.AddBlock("Input B", new NumberSourceOperation { NumberValue = 3d });
         Block blockC = sessionContext.BlockManager.AddBlock("Middle A", new AddNumberOperation());

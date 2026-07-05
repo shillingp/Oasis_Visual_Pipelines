@@ -25,17 +25,17 @@ public partial class DiagramSession : UserControl
     public DiagramSession()
     {
         InitializeComponent();
-        
+
         _viewModel = ControlServiceProvider.GetRequiredService<DiagramSessionViewModel>();
         RootGrid.DataContext = _viewModel;
     }
-    
+
     private static void OnSessionContextChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
     {
         if (dependencyObject is not DiagramSession diagramSession
             || e.NewValue is not ISessionContext sessionContext)
             return;
-        
+
         diagramSession._viewModel.SessionContext = sessionContext;
     }
 }

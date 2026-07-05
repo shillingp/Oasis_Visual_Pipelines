@@ -48,7 +48,7 @@ public partial class App : Application
         _host.Start();
 
         Resources["Services"] = _host.Services;
-        
+
         MainWindow mainWindow = _host.Services.GetRequiredService<MainWindow>();
         mainWindow.Show();
     }
