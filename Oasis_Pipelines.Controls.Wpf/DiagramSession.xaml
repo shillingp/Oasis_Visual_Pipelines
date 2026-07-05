@@ -33,10 +33,7 @@
         <!--  x:Key="PipelineObjectTemplateSelector" />  -->
     </UserControl.Resources>
     <Grid x:Name="RootGrid">
-        <ItemsControl
-            Width="500"
-            Height="500"
-            Background="Gray">
+        <ItemsControl Background="Gray">
             <!--  ItemTemplateSelector="{StaticResource PipelineObjectTemplateSelector}"  -->
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseLeftButtonDown">

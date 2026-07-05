@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Oasis_Pipelines.Shared.Wpf\Oasis_Pipelines.Shared.Wpf.csproj" />
         <ProjectReference Include="..\Oasis_Pipelines\Oasis_Pipelines.csproj"/>
     </ItemGroup>
 

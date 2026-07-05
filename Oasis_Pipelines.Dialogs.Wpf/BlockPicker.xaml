@@ -59,7 +59,7 @@
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <ContentPresenter />
+                                    <ContentPresenter IsEnabled="False" />
                                     <Button
                                         Grid.Row="1"
                                         Margin="14,10"
