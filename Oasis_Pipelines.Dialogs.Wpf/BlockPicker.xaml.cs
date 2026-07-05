@@ -8,7 +8,7 @@ public partial class BlockPicker : UserControl, IBlockPicker
     public BlockPicker(BlockPickerViewModel viewModel)
     {
         InitializeComponent();
-        
+
         DataContext = viewModel;
     }
 }

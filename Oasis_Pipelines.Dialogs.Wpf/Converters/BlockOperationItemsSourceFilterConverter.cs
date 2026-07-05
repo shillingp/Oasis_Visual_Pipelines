@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Data;
-using Oasis_Pipelines.Controls.Wpf;
 using Oasis_Pipelines.Operations;
 
 namespace Oasis_Pipelines.Dialogs.Wpf.Converters;

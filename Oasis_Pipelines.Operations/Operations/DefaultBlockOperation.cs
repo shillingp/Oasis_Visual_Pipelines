@@ -4,7 +4,6 @@ using Oasis_Pipelines.Operations.Attributes;
 using Oasis_Pipelines.Operations.Classes;
 using Oasis_Pipelines.Operations.Enums;
 using Oasis_Pipelines.Operations.Interfaces;
-using Oasis_Pipelines.Shared;
 using Oasis_Pipelines.Shared.Interfaces;
 
 namespace Oasis_Pipelines.Operations.Operations;
