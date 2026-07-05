@@ -1,9 +1,12 @@
 ﻿using System.Data;
+using Oasis_Pipelines.Operations.Attributes;
 using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
 using Oasis_Pipelines.Operations.Functions;
 
 namespace Oasis_Pipelines.Operations.Operations.Selects.DataTables;
 
+[BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGrouping.Select)]
 public sealed class SortDataTableOperation : BlockOperation
 {
     public override string OperationTitle => "Sort Table";

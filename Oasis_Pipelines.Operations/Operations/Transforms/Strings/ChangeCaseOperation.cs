@@ -1,8 +1,11 @@
 ﻿using System.Globalization;
+using Oasis_Pipelines.Operations.Attributes;
 using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
 
 namespace Oasis_Pipelines.Operations.Operations.Transforms.Strings;
 
+[BlockOperationGroup(BlockOperationType.Text, BlockOperationGrouping.Transforms)]
 public sealed class ChangeCaseOperation : BlockOperation
 {
     public override string OperationTitle => "Change Text Case";

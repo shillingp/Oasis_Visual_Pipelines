@@ -1,9 +1,12 @@
 ﻿using System.Data;
+using Oasis_Pipelines.Operations.Attributes;
 using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
 using Oasis_Pipelines.Operations.Functions;
 
 namespace Oasis_Pipelines.Operations.Operations.Transforms.DataTables;
 
+[BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGrouping.Transforms)]
 public sealed class UpdateColumnOperation : BlockOperation
 {
     public override string OperationTitle => "Update Column";

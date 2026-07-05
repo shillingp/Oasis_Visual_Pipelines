@@ -1,7 +1,10 @@
-﻿using Oasis_Pipelines.Operations.Classes;
+﻿using Oasis_Pipelines.Operations.Attributes;
+using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
 
 namespace Oasis_Pipelines.Operations.Operations.Transforms.Strings;
 
+[BlockOperationGroup(BlockOperationType.Text, BlockOperationGrouping.Transforms)]
 public sealed class ReplaceStringOperation : BlockOperation
 {
     public override string OperationTitle => "Replace String";
@@ -13,13 +16,10 @@ public sealed class ReplaceStringOperation : BlockOperation
     {
         return new BlockOperationResult(additionalOperations =>
         {
-            if (SearchText is null
-                || string.IsNullOrEmpty(SearchText)
-                || ReplaceText is null)
+            if (string.IsNullOrEmpty(SearchText))
                 return null;
 
-            if (inputOperations.Concat(additionalOperations)
-                    .FirstOrDefault()?.Result() is not string inputText)
+            if (inputOperations.Concat(additionalOperations).FirstOrDefault()?.Result() is not string inputText)
                 return null;
 
             return inputText.Replace(SearchText, ReplaceText);

@@ -1,8 +1,10 @@
-﻿using Oasis_Pipelines.Operations.Classes;
+﻿using Oasis_Pipelines.Operations.Attributes;
+using Oasis_Pipelines.Operations.Classes;
 using Oasis_Pipelines.Operations.Enums;
 
 namespace Oasis_Pipelines.Operations.Operations.Transforms.DateTimes;
 
+[BlockOperationGroup(BlockOperationType.DateTime, BlockOperationGrouping.Transforms)]
 public class DateTimeOffsetOperation : BlockOperation
 {
     public override string OperationTitle => "Offset DateTime";

@@ -1,9 +1,12 @@
 ﻿using System.Data;
+using Oasis_Pipelines.Operations.Attributes;
 using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
 using Oasis_Pipelines.Operations.Functions;
 
 namespace Oasis_Pipelines.Operations.Operations.Joins.DataTables;
 
+[BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGrouping.Join)]
 public sealed class JoinDataTablesOperation : BlockOperation
 {
     public override string OperationTitle => "Join Tables";

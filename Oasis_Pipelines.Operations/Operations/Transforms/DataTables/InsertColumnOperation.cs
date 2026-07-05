@@ -1,8 +1,11 @@
 ﻿using System.Data;
+using Oasis_Pipelines.Operations.Attributes;
 using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
 
 namespace Oasis_Pipelines.Operations.Operations.Transforms.DataTables;
 
+[BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGrouping.Transforms)]
 public sealed class InsertColumnOperation : BlockOperation
 {
     public override string OperationTitle => "Insert Column";

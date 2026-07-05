@@ -13,9 +13,6 @@
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">
-    <UserControl.Resources>
-        <ResourceDictionary />
-    </UserControl.Resources>
     <Grid
         x:Name="RootGrid"
         Width="100"

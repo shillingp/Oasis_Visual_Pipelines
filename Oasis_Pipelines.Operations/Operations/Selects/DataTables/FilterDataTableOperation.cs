@@ -1,12 +1,15 @@
 ﻿using System.Data;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
+using Oasis_Pipelines.Operations.Attributes;
 using Oasis_Pipelines.Operations.Classes;
+using Oasis_Pipelines.Operations.Enums;
 using Oasis_Pipelines.Operations.Functions;
 using DataTableFilter = Oasis_Pipelines.Operations.Classes.DataTableFilter;
 
 namespace Oasis_Pipelines.Operations.Operations.Selects.DataTables;
 
+[BlockOperationGroup(BlockOperationType.DataTable, BlockOperationGrouping.Select)]
 public sealed class FilterDataTableOperation : BlockOperation
 {
     public override string OperationTitle => "Filter Table";
