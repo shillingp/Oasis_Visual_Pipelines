@@ -21,19 +21,11 @@ public partial class App : Application
         .CreateDefaultBuilder()
         .ConfigureServices((_, services) =>
         {
-            services.AddTransient<IConnectionManager, ConnectionManager>();
-            services.AddTransient<IBlockManager, BlockManager>();
-
-            services.AddTransient<IBlockCalculation, BlockCalculation>();
-
-            services.AddSingleton<ISessionManager, SessionManager>();
-            services.AddSingleton<ISessionContextFactory, SessionContextFactory>();
-
+            services.AddPipelines();
             services.AddControls();
             services.AddDialogs();
             services.AddOperations();
             services.AddSharedWpf();
-
 
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<MainWindow>();

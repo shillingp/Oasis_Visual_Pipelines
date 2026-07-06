@@ -6,6 +6,7 @@ using Oasis_Pipelines.Model;
 using Oasis_Pipelines.Shared.Wpf.Enums;
 using Oasis_Pipelines.Shared.Wpf.Extensions;
 using Oasis_Pipelines.Shared.Wpf.Interfaces;
+using Oasis_Pipelines.Shared.Wpf.Interfaces.Dragging;
 
 namespace Oasis_Pipelines.Controls.Wpf;
 

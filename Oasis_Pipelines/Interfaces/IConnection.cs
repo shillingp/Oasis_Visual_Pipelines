@@ -1,3 +1,6 @@
-﻿namespace Oasis_Pipelines.Model;
+﻿namespace Oasis_Pipelines.Interfaces;
 
-public interface IConnection;
+public interface IConnection
+{
+    public void Disconnect();
+}

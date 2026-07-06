@@ -1,38 +1,48 @@
 ﻿using System.Drawing;
 using System.Windows;
 using System.Windows.Controls.Primitives;
+using Oasis_Pipelines.Interfaces;
 using Oasis_Pipelines.Model;
 using Oasis_Pipelines.Services.ConnectionManagement;
 using Oasis_Pipelines.Services.SessionManagement;
 using Oasis_Pipelines.Shared.Wpf.Interfaces;
+using Oasis_Pipelines.Shared.Wpf.Interfaces.Dragging;
 
 namespace Oasis_Pipelines.Controls.Wpf.Services;
 
-public class ConnectorDragController : IDragController
+public class ConnectorDragController : IConnectionDragController
 {
-    private readonly IConnectionManager _connectionManager;
     private readonly ISessionManager _sessionManager;
 
+    private Connection? _existingConnection;
     private LooseConnection? _drawingLooseConnection;
 
-    public ConnectorDragController(
-        IConnectionManager connectionManager,
-        ISessionManager sessionManager)
+    public ConnectorDragController(ISessionManager sessionManager)
     {
-        _connectionManager = connectionManager;
         _sessionManager = sessionManager;
+    }
+
+    public void SetConnection(Connection? connection)
+    {
+        _existingConnection = connection;
     }
 
     public void StartDrag(PointF startingPosition, DragStartedEventArgs dragStartedEventArgs)
     {
-        _drawingLooseConnection = new LooseConnection(startingPosition);
+        if (_existingConnection is not null)
+            _sessionManager.CurrentSession?.ConnectionManager.RemoveConnection(_existingConnection);
+
+        _drawingLooseConnection = _existingConnection is not null
+            // TODO: Fix this to work with actual location of attachment point
+            ? new LooseConnection(startingPosition, _existingConnection.RightBlock.Position)
+            : new LooseConnection(startingPosition);
+
         _sessionManager.CurrentSession?.ConnectionManager.AddConnection(_drawingLooseConnection);
     }
 
     public void UpdateDrag(DragDeltaEventArgs dragDeltaEventArgs)
     {
         if (_drawingLooseConnection is null) return;
-
     }
 
     public void StopDrag(DragCompletedEventArgs dragCompletedEventArgs)

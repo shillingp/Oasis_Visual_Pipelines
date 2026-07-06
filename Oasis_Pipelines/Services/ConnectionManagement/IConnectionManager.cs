@@ -1,4 +1,5 @@
-﻿using Oasis_Pipelines.Model;
+﻿using Oasis_Pipelines.Interfaces;
+using Oasis_Pipelines.Model;
 
 namespace Oasis_Pipelines.Services.ConnectionManagement;
 
@@ -9,9 +10,7 @@ public interface IConnectionManager
     /// </summary>
     ICollection<IConnection> AllConnections { get; }
 
-    Connection AddConnection(Block leftSide, Block rightSide);
-
-    void AddConnection(LooseConnection looseConnection);
+    void AddConnection(IConnection looseConnection);
 
     bool RemoveConnection(IConnection connection);
 }

@@ -32,4 +32,10 @@ public class Connection : IPipelineObject, IConnection
     {
         ConnectionTitle = connectionTitle;
     }
+
+    public void Disconnect()
+    {
+        LeftBlock = null;
+        RightBlock = null;
+    }
 }

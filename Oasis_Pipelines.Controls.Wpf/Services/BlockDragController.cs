@@ -2,12 +2,16 @@
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using Oasis_Pipelines.Model;
-using Oasis_Pipelines.Shared.Wpf.Interfaces;
+using Oasis_Pipelines.Shared.Wpf.Interfaces.Dragging;
 
 namespace Oasis_Pipelines.Controls.Wpf.Services;
 
-public class BlockDragController : IDragController
+public class BlockDragController : IBlockDragController
 {
+    private Block? _block;
+    
+    public void SetBlock(Block block) => _block = block;
+
     public void StartDrag(PointF startingPosition, DragStartedEventArgs dragStartedEventArgs)
     {
         throw new NotImplementedException();

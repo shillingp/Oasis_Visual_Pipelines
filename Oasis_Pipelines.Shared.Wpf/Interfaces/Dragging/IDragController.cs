@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Controls.Primitives;
 
-namespace Oasis_Pipelines.Shared.Wpf.Interfaces;
+namespace Oasis_Pipelines.Shared.Wpf.Interfaces.Dragging;
 
 public interface IDragController
 {
