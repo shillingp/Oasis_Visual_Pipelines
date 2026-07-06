@@ -11,7 +11,7 @@ public interface IBlockManager
     /// <summary>
     /// A collection containing all active <see cref="Block"/> objects
     /// </summary>
-    ICollection<Block> AllBlocks { get; set; }
+    ICollection<Block> AllBlocks { get; }
 
     /// <summary>
     /// Adds a new block with the specified block operation to the block manager.

@@ -7,10 +7,10 @@
     xmlns:local="clr-namespace:Oasis_Pipelines.Controls.Wpf"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:Oasis_Pipelines.Model;assembly=Oasis_Pipelines"
     Width="200"
     MinHeight="80"
     MaxHeight="120"
-    d:DataContext="{d:DesignInstance local:BlockControlViewModel}"
     d:DesignHeight="120"
     d:DesignWidth="200"
     mc:Ignorable="d">
@@ -30,7 +30,7 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <Grid x:Name="RootGrid">
+    <Grid x:Name="RootGrid" d:DataContext="{d:DesignInstance local:BlockControlViewModel}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30" />
             <ColumnDefinition />
@@ -152,7 +152,7 @@
             x:Name="RightConnectorsControl"
             Grid.Column="2"
             VerticalAlignment="Center"
-            d:ItemsSource="{d:SampleData ItemCount=2}">
+            d:ItemsSource="{d:DesignInstance model:Connection}">
             <ItemsControl.ItemsSource>
                 <MultiBinding Converter="{StaticResource AppendExtraConnectionConverter}">
                     <Binding FallbackValue="{x:Null}" Path="Block.DownstreamConnections" />
@@ -163,9 +163,9 @@
                 <DataTemplate>
                     <local:ConnectorNode
                         Height="20"
+                        Block="{Binding Path=Block, RelativeSource={RelativeSource AncestorType=local:BlockControl}}"
                         Connection="{Binding}"
-                        ConnectionSide="Right"
-                        DragController="{Binding ConnectorDragController}" />
+                        ConnectionSide="Right" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

@@ -6,7 +6,7 @@ namespace Oasis_Pipelines.Services.ConnectionManagement;
 public sealed class ConnectionManager : IConnectionManager
 {
     /// <inheritdoc />
-    public ICollection<Connection> AllConnections { get; set; } = new ObservableCollection<Connection>();
+    public ICollection<IConnection> AllConnections { get; } = new ObservableCollection<IConnection>();
 
     public Connection AddConnection(Block leftSide, Block rightSide)
     {
@@ -19,10 +19,23 @@ public sealed class ConnectionManager : IConnectionManager
         return newConnection;
     }
 
+    public void AddConnection(LooseConnection looseConnection)
+    {
+        AllConnections.Add(looseConnection);
+    }
+
     public bool RemoveConnection(Connection connection)
     {
-        connection.LeftBlock.DownstreamConnections.Remove(connection);
-        connection.RightBlock.UpstreamConnections.Remove(connection);
+        throw new NotImplementedException();
+    }
+
+    public bool RemoveConnection(IConnection connection)
+    {
+        if (connection is Connection realConnection)
+        {
+            realConnection.LeftBlock.DownstreamConnections.Remove(realConnection);
+            realConnection.RightBlock.UpstreamConnections.Remove(realConnection);
+        }
 
         return AllConnections.Remove(connection);
     }

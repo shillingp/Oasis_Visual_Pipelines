@@ -6,7 +6,7 @@ using PropertyChanged;
 namespace Oasis_Pipelines.Model;
 
 [AddINotifyPropertyChangedInterface]
-public class Connection : IPipelineObject
+public class Connection : IPipelineObject, IConnection
 {
     [field: MaybeNull]
     public string ConnectionTitle

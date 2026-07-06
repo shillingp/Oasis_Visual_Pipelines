@@ -7,9 +7,11 @@ public interface IConnectionManager
     /// <summary>
     /// A collection containing all active <see cref="Connection"/> objects
     /// </summary>
-    ICollection<Connection> AllConnections { get; set; }
+    ICollection<IConnection> AllConnections { get; }
 
     Connection AddConnection(Block leftSide, Block rightSide);
 
-    bool RemoveConnection(Connection connection);
+    void AddConnection(LooseConnection looseConnection);
+
+    bool RemoveConnection(IConnection connection);
 }

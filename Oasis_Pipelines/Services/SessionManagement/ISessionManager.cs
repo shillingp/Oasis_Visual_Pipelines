@@ -2,7 +2,7 @@
 
 public interface ISessionManager
 {
-    ICollection<ISessionContext> ActiveSessions { get; set; }
+    ICollection<ISessionContext> ActiveSessions { get; }
 
     public ISessionContext? CurrentSession { get; set; }
 

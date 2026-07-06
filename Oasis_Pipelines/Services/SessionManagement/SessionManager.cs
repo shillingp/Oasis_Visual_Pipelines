@@ -4,7 +4,7 @@ public class SessionManager : ISessionManager
 {
     private readonly ISessionContextFactory _sessionContextFactory;
 
-    public ICollection<ISessionContext> ActiveSessions { get; set; } = [];
+    public ICollection<ISessionContext> ActiveSessions { get; } = [];
 
     /// <inheritdoc />
     public ISessionContext? CurrentSession { get; set; }
@@ -28,6 +28,8 @@ public class SessionManager : ISessionManager
 
     public bool CloseContext(ISessionContext sessionContext)
     {
+        if (CurrentSession == sessionContext) CurrentSession = null;
+
         return ActiveSessions.Remove(sessionContext);
     }
 }

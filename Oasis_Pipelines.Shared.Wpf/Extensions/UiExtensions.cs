@@ -60,7 +60,7 @@ public static class UiExtensions
 
     extension(FrameworkElement element)
     {
-        public Point GetFrameworkElementCenter()
+        public PointF GetFrameworkElementCenter()
         {
             Point position = element.TranslatePoint(
                 new Point(0, 0), element.FindAncestor<Canvas>());
@@ -68,7 +68,7 @@ public static class UiExtensions
             position.X += element.ActualWidth / 2;
             position.Y += element.ActualHeight / 2;
 
-            return position;
+            return position.ToPointF();
         }
 
         public PointF ClipFrameworkElementPointWithinCanvas(PointF position)

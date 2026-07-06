@@ -14,15 +14,12 @@ public class BlockControlViewModel
 
     public bool IsExpanded { get; set; }
     public bool IsSelected { get; set; }
-    public object ConnectorDragController { get; }
 
     public ICommand RemoveBlockCommand { get; }
     public ICommand ToggleBlockHeightCommand { get; }
 
-    public BlockControlViewModel([FromKeyedServices(DragControllerType.Connector)] IDragController connectorDragController)
+    public BlockControlViewModel()
     {
-        ConnectorDragController = connectorDragController;
-
         RemoveBlockCommand = new RelayCommand(RemoveBlock);
         ToggleBlockHeightCommand = new RelayCommand(ToggleBlockHeight);
     }

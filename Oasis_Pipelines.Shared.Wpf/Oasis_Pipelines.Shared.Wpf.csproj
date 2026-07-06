@@ -34,6 +34,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Oasis_Pipelines.Shared\Oasis_Pipelines.Shared.csproj" />
+      <ProjectReference Include="..\Oasis_Pipelines\Oasis_Pipelines.csproj" />
     </ItemGroup>
 
 </Project>

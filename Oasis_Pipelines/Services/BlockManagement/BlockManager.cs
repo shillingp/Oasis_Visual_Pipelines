@@ -11,7 +11,7 @@ namespace Oasis_Pipelines.Services.BlockManagement;
 public sealed class BlockManager : IBlockManager
 {
     /// <inheritdoc />
-    public ICollection<Block> AllBlocks { get; set; } = new ObservableCollection<Block>();
+    public ICollection<Block> AllBlocks { get; } = new ObservableCollection<Block>();
 
     /// <inheritdoc />
     public Block AddBlock(BlockOperation blockOperation) => AddBlock(blockOperation.OperationTitle, blockOperation);
@@ -25,8 +25,5 @@ public sealed class BlockManager : IBlockManager
     }
 
     /// <inheritdoc />
-    public bool RemoveBlock(Block block)
-    {
-        return AllBlocks.Remove(block);
-    }
+    public bool RemoveBlock(Block block) => AllBlocks.Remove(block);
 }

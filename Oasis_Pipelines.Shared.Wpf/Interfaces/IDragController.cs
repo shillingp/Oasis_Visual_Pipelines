@@ -1,13 +1,11 @@
-﻿using System.Windows;
+﻿using System.Drawing;
 using System.Windows.Controls.Primitives;
 
 namespace Oasis_Pipelines.Shared.Wpf.Interfaces;
 
 public interface IDragController
 {
-    public void StartDrag(FrameworkElement element, DragStartedEventArgs dragStartedEventArgs);
-    
-    public void Drag(FrameworkElement element, DragDeltaEventArgs dragDeltaEventArgs);
-    
-    public void StopDrag(FrameworkElement element, DragCompletedEventArgs dragCompletedEventArgs);
+    void StartDrag(PointF startingPosition, DragStartedEventArgs dragStartedEventArgs);
+    void UpdateDrag(DragDeltaEventArgs dragDeltaEventArgs);
+    void StopDrag(DragCompletedEventArgs dragCompletedEventArgs);
 }

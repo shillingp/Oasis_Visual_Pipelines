@@ -1,9 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
+using Oasis_Pipelines.Controls.Wpf.Classes;
 using Oasis_Pipelines.Model;
 using Oasis_Pipelines.Operations.Enums;
-using Oasis_Pipelines.Shared.Wpf.Interfaces;
 using Oasis_Pipelines.Shared.Wpf.Services;
 
 namespace Oasis_Pipelines.Controls.Wpf;
@@ -11,6 +10,8 @@ namespace Oasis_Pipelines.Controls.Wpf;
 public partial class ConnectorNode : UserControl
 {
     public static readonly int ConnectorNodeSize = 10;
+
+    private readonly ConnectorNodeViewModel _viewModel;
 
     #region Dependancy Properties
 
@@ -25,7 +26,7 @@ public partial class ConnectorNode : UserControl
             nameof(Connection),
             typeof(Connection),
             typeof(ConnectorNode),
-            new PropertyMetadata(null));
+            new PropertyMetadata(null, OnConnectionChanged));
 
     public ConnectionSide ConnectionSide
     {
@@ -40,28 +41,41 @@ public partial class ConnectorNode : UserControl
             typeof(ConnectorNode),
             new PropertyMetadata(null));
 
-    public IDragController? DragController
+    public Block? Block
     {
-        get { return (IDragController?)GetValue(DragControllerProperty); }
-        set { SetValue(DragControllerProperty, value); }
+        get => (Block?)GetValue(BlockProperty);
+        set => SetValue(BlockProperty, value);
     }
 
-    public static readonly DependencyProperty DragControllerProperty =
+    public static readonly DependencyProperty BlockProperty =
         DependencyProperty.Register(
-            nameof(DragController),
-            typeof(IDragController),
+            nameof(Block),
+            typeof(Block),
             typeof(ConnectorNode),
-            new PropertyMetadata(null));
+            new PropertyMetadata(null, OnBlockChanged));
+
     #endregion
 
     public ConnectorNode()
     {
         InitializeComponent();
+
+        _viewModel = ControlServiceProvider.GetRequiredService<ConnectorNodeViewModel>();
+        _viewModel.ConnectorNode = this;
+        RootGrid.DataContext = _viewModel;
     }
 
-    #region Events
-    private void ConnectorThumb_DragStarted(object sender, DragStartedEventArgs e) => DragController?.StartDrag(this, e);
-    private void ConnectorThumb_DragDelta(object sender, DragDeltaEventArgs e) => DragController?.Drag(this, e);
-    private void ConnectorThumb_DragCompleted(object sender, DragCompletedEventArgs e) => DragController?.StopDrag(this, e);
-    #endregion
+    private static void OnConnectionChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+    {
+        if (dependencyObject is not ConnectorNode connectorNode || e.NewValue is not Connection connection)
+            return;
+        connectorNode._viewModel.Connection = connection;
+    }
+
+    private static void OnBlockChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+    {
+        if (dependencyObject is not ConnectorNode connectorNode || e.NewValue is not Block block)
+            return;
+        connectorNode._viewModel.Block = block;
+    }
 }
