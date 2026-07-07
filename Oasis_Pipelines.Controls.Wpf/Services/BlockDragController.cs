@@ -6,7 +6,7 @@ using Oasis_Pipelines.Shared.Wpf.Interfaces.Dragging;
 
 namespace Oasis_Pipelines.Controls.Wpf.Services;
 
-public class BlockDragController : IBlockDragController
+public class BlockDragController
 {
     private Block? _block;
     

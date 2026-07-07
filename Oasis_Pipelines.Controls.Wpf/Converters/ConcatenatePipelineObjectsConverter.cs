@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows.Data;
 using Oasis_Pipelines.Interfaces;
+using Oasis_Pipelines.Model;
 
 namespace Oasis_Pipelines.Controls.Wpf.Converters;
 
@@ -10,13 +11,13 @@ public class ConcatenatePipelineObjectsConverter : IMultiValueConverter
     /// <inheritdoc />
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
-        if (values is not [IEnumerable<IPipelineObject> blocks, IEnumerable<IPipelineObject> connections, ..])
+        if (values is not [IEnumerable<Block> blocks, IEnumerable<IConnection> connections, ..])
             return Array.Empty<IPipelineObject>();
 
-        return blocks.Concat(connections);
-        // return blocks
-        //     .OfType<IPipelineObject>()
-        //     .Concat(connections);
+        return blocks
+            .OfType<object>()
+            .Concat(connections)
+            .ToArray();
     }
 
     /// <inheritdoc />

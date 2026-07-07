@@ -46,13 +46,13 @@
                 <Thumb>
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="DragStarted">
-                            <b:InvokeCommandAction Command="{Binding StartDragCommand}" PassEventArgsToCommand="False" />
+                            <b:InvokeCommandAction Command="{Binding StartDragCommand}" PassEventArgsToCommand="True" />
                         </b:EventTrigger>
                         <b:EventTrigger EventName="ConnectorThumb_DragDelta">
                             <b:InvokeCommandAction Command="{Binding UpdateDragCommand}" PassEventArgsToCommand="True" />
                         </b:EventTrigger>
                         <b:EventTrigger EventName="ConnectorThumb_DragCompleted">
-                            <b:InvokeCommandAction Command="{Binding StopDragCommand}" PassEventArgsToCommand="False" />
+                            <b:InvokeCommandAction Command="{Binding StopDragCommand}" PassEventArgsToCommand="True" />
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </Thumb>

@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using Oasis_Pipelines.Controls.Wpf.Classes;
+using Oasis_Pipelines.Controls.Wpf.Interfaces;
 using Oasis_Pipelines.Model;
 using Oasis_Pipelines.Operations.Enums;
-using Oasis_Pipelines.Shared.Wpf.Services;
 
 namespace Oasis_Pipelines.Controls.Wpf;
 
@@ -11,6 +11,7 @@ public partial class ConnectorNode : UserControl
 {
     public static readonly int ConnectorNodeSize = 10;
 
+    private readonly IConnectorVisualRegistry _connectorVisualRegistry;
     private readonly ConnectorNodeViewModel _viewModel;
 
     #region Dependancy Properties
@@ -60,10 +61,17 @@ public partial class ConnectorNode : UserControl
     {
         InitializeComponent();
 
+        _connectorVisualRegistry = ControlServiceProvider.GetRequiredService<IConnectorVisualRegistry>();
         _viewModel = ControlServiceProvider.GetRequiredService<ConnectorNodeViewModel>();
-        _viewModel.ConnectorNode = this;
         RootGrid.DataContext = _viewModel;
+
+        Loaded += OnLoaded;
+        Unloaded += OnUnloaded;
     }
+
+    private void OnLoaded(object sender, RoutedEventArgs e) => _connectorVisualRegistry.Register(Connection, ConnectionSide, this);
+
+    private void OnUnloaded(object sender, RoutedEventArgs e) => _connectorVisualRegistry.Unregister(Connection, ConnectionSide, this);
 
     private static void OnConnectionChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
     {

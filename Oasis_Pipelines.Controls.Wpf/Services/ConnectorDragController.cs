@@ -1,10 +1,13 @@
 ﻿using System.Drawing;
 using System.Windows;
 using System.Windows.Controls.Primitives;
+using Oasis_Pipelines.Controls.Wpf.Interfaces;
 using Oasis_Pipelines.Interfaces;
 using Oasis_Pipelines.Model;
+using Oasis_Pipelines.Operations.Enums;
 using Oasis_Pipelines.Services.ConnectionManagement;
 using Oasis_Pipelines.Services.SessionManagement;
+using Oasis_Pipelines.Shared.Wpf.Extensions;
 using Oasis_Pipelines.Shared.Wpf.Interfaces;
 using Oasis_Pipelines.Shared.Wpf.Interfaces.Dragging;
 
@@ -13,30 +16,42 @@ namespace Oasis_Pipelines.Controls.Wpf.Services;
 public class ConnectorDragController : IConnectionDragController
 {
     private readonly ISessionManager _sessionManager;
+    private readonly IConnectorVisualRegistry _connectorVisualRegistry;
 
     private Connection? _existingConnection;
     private LooseConnection? _drawingLooseConnection;
 
-    public ConnectorDragController(ISessionManager sessionManager)
+    public ConnectorDragController(
+        ISessionManager sessionManager,
+        IConnectorVisualRegistry connectorVisualRegistry)
     {
         _sessionManager = sessionManager;
+        _connectorVisualRegistry = connectorVisualRegistry;
     }
 
-    public void SetConnection(Connection? connection)
+    public void StartDrag(
+        PointF startingPosition,
+        ConnectionSide dragSide,
+        DragStartedEventArgs dragStartedEventArgs)
     {
-        _existingConnection = connection;
+        _drawingLooseConnection = new LooseConnection(startingPosition);
+        _sessionManager.CurrentSession?.ConnectionManager.AddConnection(_drawingLooseConnection);
     }
 
-    public void StartDrag(PointF startingPosition, DragStartedEventArgs dragStartedEventArgs)
+    public void StartDrag(
+        Connection connector,
+        ConnectionSide dragSide,
+        DragStartedEventArgs dragStartedEventArgs)
     {
-        if (_existingConnection is not null)
-            _sessionManager.CurrentSession?.ConnectionManager.RemoveConnection(_existingConnection);
+        _connectorVisualRegistry.TryGetConnectorNode(connector, ConnectionSide.Left, out ConnectorNode? leftNode);
+        _connectorVisualRegistry.TryGetConnectorNode(connector, ConnectionSide.Right, out ConnectorNode? rightNode);
+        if (leftNode is null || rightNode is null) return;
+    
+        _drawingLooseConnection = new LooseConnection(
+            leftNode.GetFrameworkElementCenter(),
+            rightNode.GetFrameworkElementCenter());
 
-        _drawingLooseConnection = _existingConnection is not null
-            // TODO: Fix this to work with actual location of attachment point
-            ? new LooseConnection(startingPosition, _existingConnection.RightBlock.Position)
-            : new LooseConnection(startingPosition);
-
+        _sessionManager.CurrentSession?.ConnectionManager.RemoveConnection(connector);
         _sessionManager.CurrentSession?.ConnectionManager.AddConnection(_drawingLooseConnection);
     }
 

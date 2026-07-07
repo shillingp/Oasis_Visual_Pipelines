@@ -9,6 +9,7 @@ using Oasis_Pipelines.Services.BlockManagement;
 using Oasis_Pipelines.Services.ConnectionManagement;
 using Oasis_Pipelines.Services.SessionManagement;
 using Oasis_Pipelines.Shared.Wpf;
+using Oasis_Pipelines.Shared.Wpf.Interfaces.Dragging;
 
 namespace Oasis_Pipelines.Demo;
 
@@ -19,6 +20,7 @@ public partial class App : Application
 {
     private readonly IHost _host = Host
         .CreateDefaultBuilder()
+        .ConfigureHostOptions(options => options.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.StopHost)
         .ConfigureServices((_, services) =>
         {
             services.AddPipelines();

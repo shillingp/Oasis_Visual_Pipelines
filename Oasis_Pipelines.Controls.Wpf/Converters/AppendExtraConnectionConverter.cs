@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Globalization;
+using System.Windows.Data;
 using Oasis_Pipelines.Model;
 
 namespace Oasis_Pipelines.Controls.Wpf.Converters;
 
-public class AppendExtraConnectionConverter
+public class AppendExtraConnectionConverter : IMultiValueConverter
 {
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
