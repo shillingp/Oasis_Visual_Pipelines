@@ -9,7 +9,7 @@ public sealed class ConnectionManager : IConnectionManager
     /// <inheritdoc />
     public ICollection<IConnection> AllConnections { get; } = new ObservableCollection<IConnection>();
 
-    public void AddConnection(IConnection looseConnection) => AllConnections.Add(looseConnection);
+    public void AddConnection(IConnection connection) => AllConnections.Add(connection);
 
     public bool RemoveConnection(IConnection connection)
     {

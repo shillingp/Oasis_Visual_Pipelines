@@ -14,17 +14,47 @@
     d:Width="800"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <converters:ConcatenatePipelineObjectsConverter x:Key="ConcatenateConverter" />
+        <converters:ConcatenatePipelineObjectsConverter x:Key="CombinePipelineObjectsConverter" />
+        <converters:GeneratePathGeometryConverter x:Key="GeneratePathGeometryConverter" />
 
         <DataTemplate DataType="{x:Type models:Block}">
             <controls:BlockControl Block="{Binding}" />
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type models:Connection}">
-            <Thumb
-                Width="5"
-                Height="5"
-                Background="Blue" />
+            <Path Stroke="Blue" StrokeThickness="5">
+                <Path.Data>
+                    <MultiBinding Converter="{StaticResource GeneratePathGeometryConverter}">
+                        <Binding Path="." />
+                        <Binding Path="LeftBlock.Position" />
+                        <Binding Path="RightBlock.Position" />
+                        <Binding IsAsync="True" Path="LeftBlock.UpstreamConnections.Count" />
+                        <Binding IsAsync="True" Path="LeftBlock.DownstreamConnections.Count" />
+                        <Binding IsAsync="True" Path="RightBlock.UpstreamConnections.Count" />
+                        <Binding IsAsync="True" Path="RightBlock.DownstreamConnections.Count" />
+                    </MultiBinding>
+                </Path.Data>
+            </Path>
+            <!--  <Thumb  -->
+            <!--  Width="5"  -->
+            <!--  Height="5"  -->
+            <!--  Background="Blue" />  -->
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type models:LooseConnection}">
+            <Grid>
+                <StackPanel>
+                    <TextBlock Foreground="Black" Text="{Binding EndPosition.X}" />
+                    <TextBlock Foreground="Black" Text="{Binding EndPosition.Y}" />
+                </StackPanel>
+                <Line
+                    Stroke="Green"
+                    StrokeThickness="5"
+                    X1="0"
+                    X2="{Binding EndPosition.X}"
+                    Y1="0"
+                    Y2="{Binding EndPosition.Y}" />
+            </Grid>
         </DataTemplate>
 
         <!--  <templateSelectors:PipelineObjectTemplateSelector  -->
@@ -41,11 +71,12 @@
                 </b:EventTrigger>
             </b:Interaction.Triggers>
             <ItemsControl.ItemsSource>
-                <MultiBinding Converter="{StaticResource ConcatenateConverter}">
+                <MultiBinding Converter="{StaticResource CombinePipelineObjectsConverter}">
                     <Binding FallbackValue="{x:Null}" Path="SessionContext.BlockManager.AllBlocks" />
                     <Binding FallbackValue="{x:Null}" Path="SessionContext.ConnectionManager.AllConnections" />
                     <Binding FallbackValue="0" Path="SessionContext.BlockManager.AllBlocks.Count" />
                     <Binding FallbackValue="0" Path="SessionContext.ConnectionManager.AllConnections.Count" />
+                    <Binding RelativeSource="{RelativeSource PreviousData}" />
                 </MultiBinding>
             </ItemsControl.ItemsSource>
             <ItemsControl.ItemsPanel>

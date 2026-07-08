@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using Point = System.Windows.Point;
 
@@ -69,6 +70,18 @@ public static class UiExtensions
             position.Y += element.ActualHeight / 2;
 
             return position.ToPointF();
+        }
+        
+        public bool CursorOverlapsWithFrameworkElement()
+        {
+            PointF mousePosition = Mouse.GetPosition(element.FindAncestor<Canvas>()).ToPointF();
+            PointF frameworkElementCenter = element.GetFrameworkElementCenter();
+            double halfWidth = element.ActualWidth / 2;
+            double halfHeight = element.ActualHeight / 2;
+            return mousePosition.X >= frameworkElementCenter.X - halfWidth
+                   && mousePosition.X <= frameworkElementCenter.X + halfWidth
+                   && mousePosition.Y >= frameworkElementCenter.Y - halfHeight
+                   && mousePosition.Y <= frameworkElementCenter.Y + halfHeight;
         }
 
         public PointF ClipFrameworkElementPointWithinCanvas(PointF position)

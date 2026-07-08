@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using Oasis_Pipelines.Model;
 using Oasis_Pipelines.Operations;
+using Oasis_Pipelines.Services.ConnectionManagement;
 
 namespace Oasis_Pipelines.Services.BlockManagement;
 
@@ -10,6 +11,13 @@ namespace Oasis_Pipelines.Services.BlockManagement;
 /// </summary>
 public sealed class BlockManager : IBlockManager
 {
+    private readonly IConnectionManager _connectionManager;
+
+    public BlockManager(IConnectionManager connectionManager)
+    {
+        _connectionManager = connectionManager;
+    }
+    
     /// <inheritdoc />
     public ICollection<Block> AllBlocks { get; } = new ObservableCollection<Block>();
 
@@ -25,5 +33,12 @@ public sealed class BlockManager : IBlockManager
     }
 
     /// <inheritdoc />
-    public bool RemoveBlock(Block block) => AllBlocks.Remove(block);
+    public bool RemoveBlock(Block block)
+    {
+        Connection[] allConnections = [.. block.UpstreamConnections, .. block.DownstreamConnections];
+        foreach (Connection connection in allConnections)
+            _connectionManager.RemoveConnection(connection);
+        
+        return AllBlocks.Remove(block);
+    }
 }

@@ -10,7 +10,7 @@ public interface IConnectionManager
     /// </summary>
     ICollection<IConnection> AllConnections { get; }
 
-    void AddConnection(IConnection looseConnection);
+    void AddConnection(IConnection connection);
 
     bool RemoveConnection(IConnection connection);
 }

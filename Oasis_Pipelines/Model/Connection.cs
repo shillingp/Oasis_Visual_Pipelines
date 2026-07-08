@@ -6,7 +6,7 @@ using PropertyChanged;
 namespace Oasis_Pipelines.Model;
 
 [AddINotifyPropertyChangedInterface]
-public class Connection : IPipelineObject, IConnection
+public class Connection : IConnection
 {
     [field: MaybeNull]
     public string ConnectionTitle
@@ -35,7 +35,9 @@ public class Connection : IPipelineObject, IConnection
 
     public void Disconnect()
     {
-        LeftBlock = null;
-        RightBlock = null;
+        LeftBlock.DownstreamConnections.Remove(this);
+        RightBlock.UpstreamConnections.Remove(this);
+        // LeftBlock = null;
+        // RightBlock = null;
     }
 }

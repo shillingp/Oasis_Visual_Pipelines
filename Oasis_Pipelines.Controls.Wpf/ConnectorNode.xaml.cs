@@ -16,9 +16,9 @@ public partial class ConnectorNode : UserControl
 
     #region Dependancy Properties
 
-    public Connection Connection
+    public Connection? Connection
     {
-        get { return (Connection)GetValue(ConnectionProperty); }
+        get { return (Connection?)GetValue(ConnectionProperty); }
         set { SetValue(ConnectionProperty, value); }
     }
 
@@ -69,9 +69,17 @@ public partial class ConnectorNode : UserControl
         Unloaded += OnUnloaded;
     }
 
-    private void OnLoaded(object sender, RoutedEventArgs e) => _connectorVisualRegistry.Register(Connection, ConnectionSide, this);
+    private void OnLoaded(object sender, RoutedEventArgs e)
+    {
+        if (Block is not null)
+            _connectorVisualRegistry.Register(this);
+    }
 
-    private void OnUnloaded(object sender, RoutedEventArgs e) => _connectorVisualRegistry.Unregister(Connection, ConnectionSide, this);
+    private void OnUnloaded(object sender, RoutedEventArgs e)
+    {
+        if (Block is not null)
+            _connectorVisualRegistry.Unregister(this);
+    }
 
     private static void OnConnectionChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
     {

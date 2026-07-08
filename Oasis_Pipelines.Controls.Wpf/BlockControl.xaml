@@ -15,7 +15,7 @@
     d:DesignWidth="200"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <converters:AppendExtraConnectionConverter x:Key="AppendExtraConnectionConverter" />
+        <!-- <converters:AppendExtraConnectionConverter x:Key="AppendExtraConnectionConverter" /> -->
 
         <Style x:Key="NonEditableTextBox" TargetType="TextBox">
             <Setter Property="Template">
@@ -147,6 +147,30 @@
             </DockPanel>
         </materialDesign:Card>
 
+        <ItemsControl
+            x:Name="LeftConnectorsControl"
+            Grid.Column="0"
+            VerticalAlignment="Center"
+            d:ItemsSource="{d:SampleData ItemCount=3}">
+            <ItemsControl.ItemsSource>
+                <MultiBinding>
+                    <MultiBinding.Converter>
+                        <converters:AppendExtraConnectionConverter />
+                    </MultiBinding.Converter>
+                    <Binding FallbackValue="{x:Null}" Path="Block.UpstreamConnections" />
+                    <Binding FallbackValue="0" Path="Block.UpstreamConnections.Count" />
+                </MultiBinding>
+            </ItemsControl.ItemsSource>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <local:ConnectorNode
+                        Height="20"
+                        Block="{Binding Path=Block, RelativeSource={RelativeSource AncestorType=local:BlockControl}}"
+                        Connection="{Binding}"
+                        ConnectionSide="Left" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
         <ItemsControl
             x:Name="RightConnectorsControl"
@@ -154,7 +178,10 @@
             VerticalAlignment="Center"
             d:ItemsSource="{d:DesignInstance model:Connection}">
             <ItemsControl.ItemsSource>
-                <MultiBinding Converter="{StaticResource AppendExtraConnectionConverter}">
+                <MultiBinding>
+                    <MultiBinding.Converter>
+                        <converters:AppendExtraConnectionConverter />
+                    </MultiBinding.Converter>
                     <Binding FallbackValue="{x:Null}" Path="Block.DownstreamConnections" />
                     <Binding FallbackValue="0" Path="Block.DownstreamConnections.Count" />
                 </MultiBinding>

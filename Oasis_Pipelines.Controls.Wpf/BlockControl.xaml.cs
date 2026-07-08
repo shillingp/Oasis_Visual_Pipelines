@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Oasis_Pipelines.Controls.Wpf.Classes;
+using Oasis_Pipelines.Controls.Wpf.Interfaces;
 using Oasis_Pipelines.Model;
 
 namespace Oasis_Pipelines.Controls.Wpf;
@@ -11,6 +12,7 @@ namespace Oasis_Pipelines.Controls.Wpf;
 public partial class BlockControl : UserControl
 {
     private readonly BlockControlViewModel _viewModel;
+    private readonly IConnectorVisualRegistry _connectorVisualRegistry;
 
     public Block? Block
     {
@@ -29,6 +31,7 @@ public partial class BlockControl : UserControl
     {
         InitializeComponent();
 
+        _connectorVisualRegistry = ControlServiceProvider.GetRequiredService<IConnectorVisualRegistry>();
         _viewModel = ControlServiceProvider.GetRequiredService<BlockControlViewModel>();
         RootGrid.DataContext = _viewModel;
     }

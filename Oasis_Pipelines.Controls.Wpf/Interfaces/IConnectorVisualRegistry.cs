@@ -5,11 +5,13 @@ namespace Oasis_Pipelines.Controls.Wpf.Interfaces;
 
 public interface IConnectorVisualRegistry
 {
-    void Register(Connection connection, ConnectionSide side, ConnectorNode connectorNode);
-    void Unregister(Connection connection, ConnectionSide side, ConnectorNode connectorNode);
+    void Register(ConnectorNode connectorNode);
+    void Unregister(ConnectorNode connectorNode);
 
     bool TryGetConnectorNode(
-        Connection connection,
+        Connection? connection,
         ConnectionSide side,
         out ConnectorNode? connectorNode);
+
+    bool TryGetConnectorNodeAtMousePosition(out ConnectorNode? connectorNode);
 }

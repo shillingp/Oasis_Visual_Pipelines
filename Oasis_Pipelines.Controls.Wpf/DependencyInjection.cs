@@ -11,7 +11,7 @@ public static class DependencyInjection
     {
         public IServiceCollection AddControls()
         {
-            services.AddTransient<IConnectorVisualRegistry, ConnectorVisualRegistry>();
+            services.AddSingleton<IConnectorVisualRegistry, ConnectorVisualRegistry>();
 
             services.AddTransient<BlockDragController>();
             services.AddTransient<IConnectionDragController, ConnectorDragController>();

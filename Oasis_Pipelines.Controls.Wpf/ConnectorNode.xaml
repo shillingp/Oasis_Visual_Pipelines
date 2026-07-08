@@ -48,10 +48,10 @@
                         <b:EventTrigger EventName="DragStarted">
                             <b:InvokeCommandAction Command="{Binding StartDragCommand}" PassEventArgsToCommand="True" />
                         </b:EventTrigger>
-                        <b:EventTrigger EventName="ConnectorThumb_DragDelta">
+                        <b:EventTrigger EventName="DragDelta">
                             <b:InvokeCommandAction Command="{Binding UpdateDragCommand}" PassEventArgsToCommand="True" />
                         </b:EventTrigger>
-                        <b:EventTrigger EventName="ConnectorThumb_DragCompleted">
+                        <b:EventTrigger EventName="DragCompleted">
                             <b:InvokeCommandAction Command="{Binding StopDragCommand}" PassEventArgsToCommand="True" />
                         </b:EventTrigger>
                     </b:Interaction.Triggers>

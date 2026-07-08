@@ -7,8 +7,8 @@ namespace Oasis_Pipelines.Shared.Wpf.Interfaces.Dragging;
 
 public interface IConnectionDragController
 {
-    void StartDrag(PointF startPoint, ConnectionSide dragSide, DragStartedEventArgs dragStartedEventArgs);
-    void StartDrag(Connection connector, ConnectionSide dragSide, DragStartedEventArgs dragStartedEventArgs);
-    void UpdateDrag(DragDeltaEventArgs dragDeltaEventArgs);
-    void StopDrag(DragCompletedEventArgs dragCompletedEventArgs);
+    void StartDrag(PointF startPoint, ConnectionSide dragSide);
+    void StartDrag(Connection connector, ConnectionSide dragSide, PointF mousePosition);
+    void UpdateDrag(PointF mousePosition);
+    void StopDrag(PointF mousePosition);
 }

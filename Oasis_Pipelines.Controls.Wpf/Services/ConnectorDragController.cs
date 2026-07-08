@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using Oasis_Pipelines.Controls.Wpf.Interfaces;
 using Oasis_Pipelines.Interfaces;
 using Oasis_Pipelines.Model;
@@ -10,6 +11,7 @@ using Oasis_Pipelines.Services.SessionManagement;
 using Oasis_Pipelines.Shared.Wpf.Extensions;
 using Oasis_Pipelines.Shared.Wpf.Interfaces;
 using Oasis_Pipelines.Shared.Wpf.Interfaces.Dragging;
+using Point = System.Windows.Point;
 
 namespace Oasis_Pipelines.Controls.Wpf.Services;
 
@@ -19,6 +21,8 @@ public class ConnectorDragController : IConnectionDragController
     private readonly IConnectorVisualRegistry _connectorVisualRegistry;
 
     private Connection? _existingConnection;
+    private ConnectorNode? _startingNode;
+    private ConnectorNode? _targetConnectorNode;
     private LooseConnection? _drawingLooseConnection;
 
     public ConnectorDragController(
@@ -31,9 +35,10 @@ public class ConnectorDragController : IConnectionDragController
 
     public void StartDrag(
         PointF startingPosition,
-        ConnectionSide dragSide,
-        DragStartedEventArgs dragStartedEventArgs)
+        ConnectionSide dragSide)
     {
+        _connectorVisualRegistry.TryGetConnectorNodeAtMousePosition(out _startingNode);
+
         _drawingLooseConnection = new LooseConnection(startingPosition);
         _sessionManager.CurrentSession?.ConnectionManager.AddConnection(_drawingLooseConnection);
     }
@@ -41,28 +46,52 @@ public class ConnectorDragController : IConnectionDragController
     public void StartDrag(
         Connection connector,
         ConnectionSide dragSide,
-        DragStartedEventArgs dragStartedEventArgs)
+        PointF mousePosition)
     {
-        _connectorVisualRegistry.TryGetConnectorNode(connector, ConnectionSide.Left, out ConnectorNode? leftNode);
-        _connectorVisualRegistry.TryGetConnectorNode(connector, ConnectionSide.Right, out ConnectorNode? rightNode);
-        if (leftNode is null || rightNode is null) return;
-    
-        _drawingLooseConnection = new LooseConnection(
-            leftNode.GetFrameworkElementCenter(),
-            rightNode.GetFrameworkElementCenter());
-
         _sessionManager.CurrentSession?.ConnectionManager.RemoveConnection(connector);
-        _sessionManager.CurrentSession?.ConnectionManager.AddConnection(_drawingLooseConnection);
     }
 
-    public void UpdateDrag(DragDeltaEventArgs dragDeltaEventArgs)
+    public void UpdateDrag(PointF mousePosition)
     {
         if (_drawingLooseConnection is null) return;
+
+        bool mouseIsHoveringOverConnectorNode =
+            _connectorVisualRegistry.TryGetConnectorNodeAtMousePosition(out _targetConnectorNode);
+        if (mouseIsHoveringOverConnectorNode && _targetConnectorNode != _startingNode)
+        {
+            _drawingLooseConnection.EndPosition =
+                _targetConnectorNode!.GetFrameworkElementCenter() - _drawingLooseConnection.Position.ToSizeF();
+            return;
+        }
+
+        _drawingLooseConnection.EndPosition = mousePosition;
     }
 
-    public void StopDrag(DragCompletedEventArgs dragCompletedEventArgs)
+    public void StopDrag(PointF mousePosition)
     {
         if (_drawingLooseConnection is null) return;
+
+        if (_startingNode?.Block is { } startBlock
+            && _targetConnectorNode?.Block is { } targetBlock
+            && startBlock != targetBlock)
+        {
+            Connection newConnection = new Connection(startBlock, targetBlock);
+            _startingNode.Connection = newConnection;
+            _targetConnectorNode.Connection = newConnection;
+            startBlock.DownstreamConnections.Add(newConnection);
+            targetBlock.UpstreamConnections.Add(newConnection);
+            _sessionManager.CurrentSession?.ConnectionManager.AddConnection(newConnection);
+        }
+
+        // Connection? newConnection = (_startingNode, _targetConnectorNode) switch
+        // {
+        //     ({ Block:  }, { ConnectionSide: ConnectionSide.Right }) => 
+        // };
+
+        // if (_startingNode is { Block: {} leftBlock, Block: {} rightBlock } && _targetConnectorNode is not null)
+        //     _sessionManager.CurrentSession?.ConnectionManager.AddConnection(
+        //         _startingNode.Connection);
+
         _sessionManager.CurrentSession?.ConnectionManager.RemoveConnection(_drawingLooseConnection);
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System.Drawing;
 using Oasis_Pipelines.Interfaces;
+using PropertyChanged;
 
 namespace Oasis_Pipelines.Model;
 
-public class LooseConnection : IPipelineObject, IConnection
+[AddINotifyPropertyChangedInterface]
+public class LooseConnection : IConnection
 {
     public PointF Position { get; set; }
     public PointF EndPosition { get; set; }
@@ -11,7 +13,7 @@ public class LooseConnection : IPipelineObject, IConnection
     public LooseConnection(PointF startingPosition)
     {
         Position = startingPosition;
-        EndPosition = startingPosition;
+        // EndPosition = startingPosition;
     }
 
     public LooseConnection(PointF position, PointF endPosition)
