@@ -1,9 +1,14 @@
-﻿using System.Windows.Input;
+﻿using System.Drawing;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
+using Oasis_Pipelines.Model;
 using Oasis_Pipelines.Operations;
 using Oasis_Pipelines.Operations.Enums;
 using Oasis_Pipelines.Services.SessionManagement;
+using Oasis_Pipelines.Shared.Wpf.Extensions;
 using PropertyChanged;
 
 namespace Oasis_Pipelines.Controls.Wpf;
@@ -27,6 +32,7 @@ public class DiagramSessionViewModel
 
     private void AddBlock(MouseButtonEventArgs? e)
     {
-        SessionContext?.BlockManager.AddBlock(_defaultBlockOperation);
+        Block? newBlock = SessionContext?.BlockManager.AddBlock(_defaultBlockOperation);
+        newBlock?.Position = Mouse.GetPosition((e.Source as FrameworkElement).FindAncestor<Canvas>()).ToPointF();
     }
 }
