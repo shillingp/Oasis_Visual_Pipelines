@@ -8,63 +8,23 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:interfaces="clr-namespace:Oasis_Pipelines.Interfaces;assembly=Oasis_Pipelines"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="clr-namespace:Oasis_Pipelines.Model;assembly=Oasis_Pipelines"
     d:DataContext="{d:DesignInstance controls:DiagramSessionViewModel}"
     d:Height="450"
     d:Width="800"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <converters:ConcatenatePipelineObjectsConverter x:Key="CombinePipelineObjectsConverter" />
-        <converters:GeneratePathGeometryConverter x:Key="GeneratePathGeometryConverter" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="DataTemplates/Block.xaml" />
+                <ResourceDictionary Source="DataTemplates/Connection.xaml" />
+                <ResourceDictionary Source="DataTemplates/LooseConnection.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
-        <DataTemplate DataType="{x:Type models:Block}">
-            <controls:BlockControl Block="{Binding}" />
-        </DataTemplate>
-
-        <DataTemplate DataType="{x:Type models:Connection}">
-            <Path Stroke="Blue" StrokeThickness="5">
-                <Path.Data>
-                    <MultiBinding Converter="{StaticResource GeneratePathGeometryConverter}">
-                        <Binding Path="." />
-                        <Binding Path="LeftBlock.Position" />
-                        <Binding Path="RightBlock.Position" />
-                        <Binding IsAsync="True" Path="LeftBlock.UpstreamConnections.Count" />
-                        <Binding IsAsync="True" Path="LeftBlock.DownstreamConnections.Count" />
-                        <Binding IsAsync="True" Path="RightBlock.UpstreamConnections.Count" />
-                        <Binding IsAsync="True" Path="RightBlock.DownstreamConnections.Count" />
-                    </MultiBinding>
-                </Path.Data>
-            </Path>
-            <!--  <Thumb  -->
-            <!--  Width="5"  -->
-            <!--  Height="5"  -->
-            <!--  Background="Blue" />  -->
-        </DataTemplate>
-
-        <DataTemplate DataType="{x:Type models:LooseConnection}">
-            <Grid>
-                <StackPanel>
-                    <TextBlock Foreground="Black" Text="{Binding EndPosition.X}" />
-                    <TextBlock Foreground="Black" Text="{Binding EndPosition.Y}" />
-                </StackPanel>
-                <Line
-                    Stroke="Green"
-                    StrokeThickness="5"
-                    X1="0"
-                    X2="{Binding EndPosition.X}"
-                    Y1="0"
-                    Y2="{Binding EndPosition.Y}" />
-            </Grid>
-        </DataTemplate>
-
-        <!--  <templateSelectors:PipelineObjectTemplateSelector  -->
-        <!--  BlockTemplate="{StaticResource BlockDataTemplate}"  -->
-        <!--  ConnectionTemplate="{StaticResource ConnectionDataTemplate}"  -->
-        <!--  x:Key="PipelineObjectTemplateSelector" />  -->
+            <converters:ConcatenatePipelineObjectsConverter x:Key="CombinePipelineObjectsConverter" />
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid x:Name="RootGrid">
         <ItemsControl Background="Gray">
-            <!--  ItemTemplateSelector="{StaticResource PipelineObjectTemplateSelector}"  -->
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseLeftButtonDown">
                     <b:InvokeCommandAction Command="{Binding AddBlockCommand}" PassEventArgsToCommand="True" />

@@ -1,0 +1,9 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:models="clr-namespace:Oasis_Pipelines.Model;assembly=Oasis_Pipelines"
+    xmlns:wpf="clr-namespace:Oasis_Pipelines.Controls.Wpf">
+    <DataTemplate DataType="{x:Type models:Block}">
+        <wpf:BlockControl Block="{Binding}" />
+    </DataTemplate>
+</ResourceDictionary>

@@ -1,0 +1,23 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:Oasis_Pipelines.Controls.Wpf.Converters"
+    xmlns:models="clr-namespace:Oasis_Pipelines.Model;assembly=Oasis_Pipelines">
+    <converters:GeneratePathGeometryConverter x:Key="GeneratePathGeometryConverter" GeometryPathMethod="Bezier" />
+
+    <DataTemplate DataType="{x:Type models:Connection}">
+        <Path Stroke="DodgerBlue" StrokeThickness="5">
+            <Path.Data>
+                <MultiBinding Converter="{StaticResource GeneratePathGeometryConverter}">
+                    <Binding Path="." />
+                    <Binding Path="LeftBlock.Position" />
+                    <Binding Path="RightBlock.Position" />
+                    <Binding IsAsync="True" Path="LeftBlock.UpstreamConnections.Count" />
+                    <Binding IsAsync="True" Path="LeftBlock.DownstreamConnections.Count" />
+                    <Binding IsAsync="True" Path="RightBlock.UpstreamConnections.Count" />
+                    <Binding IsAsync="True" Path="RightBlock.DownstreamConnections.Count" />
+                </MultiBinding>
+            </Path.Data>
+        </Path>
+    </DataTemplate>
+</ResourceDictionary>

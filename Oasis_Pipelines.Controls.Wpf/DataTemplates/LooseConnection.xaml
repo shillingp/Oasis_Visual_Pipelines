@@ -1,0 +1,14 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:models="clr-namespace:Oasis_Pipelines.Model;assembly=Oasis_Pipelines">
+    <DataTemplate DataType="{x:Type models:LooseConnection}">
+        <Line
+            Stroke="Green"
+            StrokeThickness="5"
+            X1="0"
+            X2="{Binding EndPosition.X}"
+            Y1="0"
+            Y2="{Binding EndPosition.Y}" />
+    </DataTemplate>
+</ResourceDictionary>
