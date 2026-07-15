@@ -57,7 +57,8 @@ public class ConnectorDragController : IConnectionDragController
 
         bool mouseIsHoveringOverConnectorNode =
             _connectorVisualRegistry.TryGetConnectorNodeAtMousePosition(out _targetConnectorNode);
-        if (mouseIsHoveringOverConnectorNode && _targetConnectorNode != _startingNode)
+        if (mouseIsHoveringOverConnectorNode
+            && TryGetValidConnectionEndpoints() is not null)
         {
             _drawingLooseConnection.EndPosition =
                 _targetConnectorNode!.GetFrameworkElementCenter() - _drawingLooseConnection.Position.ToSizeF();
@@ -71,29 +72,37 @@ public class ConnectorDragController : IConnectionDragController
     {
         if (_drawingLooseConnection is null) return;
 
-        if (_startingNode?.Block is { } startBlock
-            && _targetConnectorNode?.Block is { } targetBlock
-            && startBlock != targetBlock)
+        // if (_startingNode?.Block is { } startBlock
+        //     && _targetConnectorNode?.Block is { } targetBlock
+        //     && startBlock != targetBlock)
+        if (_startingNode is not null
+            && _targetConnectorNode is not null
+            && TryGetValidConnectionEndpoints() is { Start: { } startBlock, Target: { } targetBlock })
         {
-            Connection newConnection = new Connection(startBlock, targetBlock);
+            Connection? newConnection =
+                _sessionManager.CurrentSession?.ConnectionManager.AddConnection(startBlock, targetBlock);
             _startingNode.Connection = newConnection;
             _targetConnectorNode.Connection = newConnection;
-            startBlock.DownstreamConnections.Add(newConnection);
-            targetBlock.UpstreamConnections.Add(newConnection);
-            _sessionManager.CurrentSession?.ConnectionManager.AddConnection(newConnection);
         }
-
-        // Connection? newConnection = (_startingNode, _targetConnectorNode) switch
-        // {
-        //     ({ Block:  }, { ConnectionSide: ConnectionSide.Right }) => 
-        // };
-
-        // if (_startingNode is { Block: {} leftBlock, Block: {} rightBlock } && _targetConnectorNode is not null)
-        //     _sessionManager.CurrentSession?.ConnectionManager.AddConnection(
-        //         _startingNode.Connection);
 
         _sessionManager.CurrentSession?.ConnectionManager.RemoveConnection(_drawingLooseConnection);
     }
+
+    private (Block Start, Block Target)? TryGetValidConnectionEndpoints()
+    {
+        if (_startingNode?.Block is not { } startBlock) return null;
+        if (_targetConnectorNode?.Block is not { } targetBlock) return null;
+        if (startBlock == targetBlock) return null;
+        if (AreBlocksAlreadyConnected(targetBlock, startBlock)) return null;
+
+        return (startBlock, targetBlock);
+    }
+
+    private static bool AreBlocksAlreadyConnected(Block block, Block otherBlock) =>
+        block.DownstreamConnections
+            .Concat(block.UpstreamConnections)
+            .Any(connection => connection.LeftBlock == otherBlock
+                               || connection.RightBlock == otherBlock);
 }
 
 

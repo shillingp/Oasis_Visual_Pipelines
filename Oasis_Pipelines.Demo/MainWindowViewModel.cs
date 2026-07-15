@@ -19,9 +19,9 @@ public class MainWindowViewModel
         Block blockD = sessionContext.BlockManager.AddBlock("Input C", new NumberSourceOperation { NumberValue = 5d });
         Block blockE = sessionContext.BlockManager.AddBlock("Output A", new AddNumberOperation());
         
-        sessionContext.ConnectionManager.AddConnection(new Connection(blockA, blockC));
-        sessionContext.ConnectionManager.AddConnection(new Connection(blockB, blockC));
-        sessionContext.ConnectionManager.AddConnection(new Connection(blockC, blockE));
-        sessionContext.ConnectionManager.AddConnection(new Connection(blockD, blockE));
+        sessionContext.ConnectionManager.AddConnection(blockA, blockC);
+        sessionContext.ConnectionManager.AddConnection(blockB, blockC);
+        sessionContext.ConnectionManager.AddConnection(blockC, blockE);
+        sessionContext.ConnectionManager.AddConnection(blockD, blockE);
     }
 }

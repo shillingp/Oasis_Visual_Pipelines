@@ -9,7 +9,16 @@ public sealed class ConnectionManager : IConnectionManager
     /// <inheritdoc />
     public ICollection<IConnection> AllConnections { get; } = new ObservableCollection<IConnection>();
 
-    public void AddConnection(IConnection connection) => AllConnections.Add(connection);
+    public void AddConnection(LooseConnection connection) => AllConnections.Add(connection);
+
+    public Connection AddConnection(Block leftBlock, Block rightBlock)
+    {
+        Connection newConnection = new Connection(leftBlock, rightBlock);
+        leftBlock.DownstreamConnections.Add(newConnection);
+        rightBlock.UpstreamConnections.Add(newConnection);
+        AllConnections.Add(newConnection);
+        return newConnection;
+    }
 
     public bool RemoveConnection(IConnection connection)
     {
